@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
@@ -16,10 +17,14 @@ import javax.ws.rs.Produces;
  */
 
 
-@Path("editorials")
+@Path("citaMedica")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class CitaMedicaResource {
+public class CitaMedicaResource 
+{
+    
+        private static final Logger LOGGER = Logger.getLogger(CitaMedicaResource.class.getName());
+
     
 }
