@@ -53,13 +53,13 @@ public class UsuarioDTO {
      *
      * @param usuarioEntity: Es la entidad que se va a convertir a DTO
      */
-    public UsuarioDTO(UsuarioEntity usuarioEntity){
-        if(usuarioEntity != null){
-            this.login = usuarioEntity.getLogin();
-            this.contrasena = usuarioEntity.getContrasena();
-            this.tipoUsuario = usuarioEntity.getTipoUsuario();
-        }
-    }
+//    public UsuarioDTO(UsuarioEntity usuarioEntity){
+//        if(usuarioEntity != null){
+//            this.login = usuarioEntity.getLogin();
+//            this.contrasena = usuarioEntity.getContrasena();
+//            this.tipoUsuario = usuarioEntity.getTipoUsuario();
+//        }
+//    }
 
     /**
      * @return the login
@@ -108,13 +108,13 @@ public class UsuarioDTO {
      *
      * @return Un Entity con los valores del DTO
      */
-    public UsuarioEntity toEntity(){
-        UsuarioEntity entity = new UsuarioEntity();
-        entity.setLogin(this.login);
-        entity.setContrasena(this.contrasena);
-        entity.setTipoUsuario(this.tipoUsuario);
-        return entity;
-    }
+//    public UsuarioEntity toEntity(){
+//        UsuarioEntity entity = new UsuarioEntity();
+//        entity.setLogin(this.login);
+//        entity.setContrasena(this.contrasena);
+//        entity.setTipoUsuario(this.tipoUsuario);
+//        return entity;
+//    }
     
     @Override
     public String toString(){

@@ -24,7 +24,7 @@ import javax.ws.rs.PathParam;
 public class TarjetaCreditoResource {
     
     @Inject
-    TarjetaCreditoLogic tarjetaCreditoLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+//    TarjetaCreditoLogic tarjetaCreditoLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
      * Crea una nueva tarjeta de credito con la informacion que se recibe en el cuerpo de
@@ -40,9 +40,10 @@ public class TarjetaCreditoResource {
      */
     @POST
     public TarjetaCreditoDTO createTarjetaCredito(TarjetaCreditoDTO tarjetaCredito){
-        TarjetaCreditoEntity entity = tarjetaCredito.toEntity();
-        TarjetaCreditoEntity nuevaEntity = tarjetaCreditoLogic.createTarjetaCredito(entity);
-        return new TarjetaCreditoDTO(nuevaEntity);
+//        TarjetaCreditoEntity entity = tarjetaCredito.toEntity();
+//        TarjetaCreditoEntity nuevaEntity = tarjetaCreditoLogic.createTarjetaCredito(entity);
+//        return new TarjetaCreditoDTO(nuevaEntity);
+        return null;
     }
     
     /**
@@ -54,7 +55,7 @@ public class TarjetaCreditoResource {
     @DELETE
     @Path("{tarjetascreditoId: \\d+}")
     public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-        tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
+//        tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
     }
     
      /**
@@ -65,17 +66,19 @@ public class TarjetaCreditoResource {
     @GET
     @Path("{tarjetascreditoId: \\d+}")
     public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-        TarjetaCreditoEntity entity = tarjetaCreditoLogic.findPaciente(tarjetaCreditoLogic);
-        return new TarjetaCreditoDTO(entity);
+//        TarjetaCreditoEntity entity = tarjetaCreditoLogic.findPaciente(tarjetaCreditoLogic);
+//        return new TarjetaCreditoDTO(entity);
+
+        return null;
     }
     
     public List<TarjetaCreditoDTO> getTarjetasCredito(){
         List<TarjetaCreditoDTO> rta = new LinkedList<>();
-        List<TarjetaCreditoEntity> listaEntity = tarjetaCreditoLogic.getAll();
-        Iterator ite = listaEntity.iterator();
-        while(ite.hasNext()){
-            rta.add(new TarjetaCreditoDTO(ite.next()));
-        }
+//        List<TarjetaCreditoEntity> listaEntity = tarjetaCreditoLogic.getAll();
+//        Iterator ite = listaEntity.iterator();
+//        while(ite.hasNext()){
+//            rta.add(new TarjetaCreditoDTO(ite.next()));
+//        }
         return rta;
     }
 }

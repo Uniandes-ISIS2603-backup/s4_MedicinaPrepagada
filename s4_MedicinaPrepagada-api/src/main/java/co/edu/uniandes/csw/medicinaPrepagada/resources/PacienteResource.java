@@ -26,7 +26,7 @@ import javax.ws.rs.PathParam;
 public class PacienteResource {
     
     @Inject
-    PacienteLogic pacienteLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    //PacienteLogic pacienteLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     /**
      * Crea una nuevo paciente con la informacion que se recibe en el cuerpo de
@@ -43,10 +43,11 @@ public class PacienteResource {
     @POST
     public PacienteDTO createPaciente(PacienteDTO paciente)
     {
-       PacienteEntity entity = paciente.toEntity();
-       PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
-       PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
-       return nuevoDTO;
+      // PacienteEntity entity = paciente.toEntity();
+      // PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
+      // PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
+      // return nuevoDTO;
+        return null;
     }
     
     /**
@@ -58,7 +59,7 @@ public class PacienteResource {
     @DELETE
     @Path("{pacientesId: \\d+}")
     public void deletePaciente(@PathParam("pacientesId") Long pacientesId){
-        pacienteLogic.deletePaciente(pacientesId);
+        //pacienteLogic.deletePaciente(pacientesId);
     }
     
     /**
@@ -69,8 +70,9 @@ public class PacienteResource {
     @GET
     @Path("{pacientesId: \\d+}")
     public PacienteDTO getPaciente(@PathParam("PacientesId") Long pacientesId){
-        PacienteEntity entity = pacienteLogic.findPaciente(pacientesId);
-        return new PacienteDTO(entity);
+        //PacienteEntity entity = pacienteLogic.findPaciente(pacientesId);
+        //return new PacienteDTO(entity);
+        return null;
     }
     
     /**
@@ -80,9 +82,10 @@ public class PacienteResource {
      */
     @PUT
     public PacienteDTO actualizarPaciente(PacienteDTO paciente){
-        PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
-        PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
-        return nuevoDTO;
+        //PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
+        //PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
+        //return nuevoDTO;
+        return null;
     }
     
 }
