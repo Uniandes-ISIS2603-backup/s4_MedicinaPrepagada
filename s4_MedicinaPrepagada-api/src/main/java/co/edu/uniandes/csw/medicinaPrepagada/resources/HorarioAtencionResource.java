@@ -38,7 +38,18 @@ public class HorarioAtencionResource
        
        
        
-       
+     /**
+     * Crea un nuevo  horarios de atencion con la informacion que se recibe en el cuerpo de
+     * la petición y se regresa un objeto identico con un id auto-generado por
+     * la base de datos.
+     *
+     * @param pHorarioAtencion {@link HorarioAtencionDTO} - el  horarios de atencion que se desea
+     * guardar.
+     * @return JSON {@link HorarioAtencionDTO} - el  horarios de atencion guardado con el atributo
+     * id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe el  horario de atencion.
+     */   
        
     @POST
     public HorarioAtencionDTO createHorarioAtencion(HorarioAtencionDTO pHorarioAtencion) throws BusinessLogicException 
