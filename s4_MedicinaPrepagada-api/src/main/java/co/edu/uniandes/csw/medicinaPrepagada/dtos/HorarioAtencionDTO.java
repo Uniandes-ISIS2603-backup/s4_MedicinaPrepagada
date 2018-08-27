@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -13,5 +16,66 @@ import java.io.Serializable;
  */
 public class HorarioAtencionDTO implements Serializable
 {
+    
+    private Long id;
+    
+    
+    private Date fechaInicio;
+    
+    
+    private Date fechaFin;
+    
+    
+    
+    
+    
+    public HorarioAtencionDTO ()
+    {
+        
+    }
+    
+    
+       
+   public void setId (long pId)
+   {
+       this.id = pId;
+   }
+   
+   public Long getId  ()
+   {
+        return this.id;
+   }
+   
+       
+   public void setFechaInicio (Date pFechaInicio)
+   {
+       this.fechaInicio = pFechaInicio;
+   }
+   
+   public Date getFechaInicio  ()
+   {
+        return this.fechaInicio;
+   }
+   
+   public void setFechaFin (Date pFechaFin)
+   {
+       this.fechaFin = pFechaFin;
+   }
+   
+   public Date getFechaFin  ()
+   {
+        return this.fechaFin;
+   }
+   
+   
+   
+   
+   
+      
+    @Override
+    public String toString() 
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
     
 }
