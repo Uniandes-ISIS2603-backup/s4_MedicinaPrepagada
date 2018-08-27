@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDetail;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,7 +75,7 @@ public class ConsultorioResource
     public List<ConsultorioDTO> getConsultorios()
     {
         LOGGER.info("ConsultorioResource getConsultorios: input: void");
-        List<ConsultorioDTO> listaConsultorios = null;
+        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO();
                 //listEntity2DetailDTO(consultoriosLogic.getConsultorios());
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorios: output: {0}", listaConsultorios.toString());
         return listaConsultorios;
@@ -176,7 +177,7 @@ public class ConsultorioResource
      * que vamos a convertir a DTO.
      * @return la lista de consultorio en forma DTO (json)
      */
-    private List<ConsultorioDTO> listEntity2DetailDTO(List<Object> entityList) 
+    private List<ConsultorioDTO> listEntity2DetailDTO() 
     {
         List<ConsultorioDTO> list = new ArrayList<>();
      //   for (ConsultorioEntity entity : entityList) {
