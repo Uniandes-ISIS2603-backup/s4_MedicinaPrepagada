@@ -74,7 +74,7 @@ public class FacturaDTO {
         this.concepto = pConcepto;
     }
     
-    public int getConcepto ()
+    public String getConcepto ()
     {
         return this.concepto;
     }
