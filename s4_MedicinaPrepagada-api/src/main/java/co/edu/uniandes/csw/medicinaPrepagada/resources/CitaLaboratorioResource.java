@@ -72,7 +72,7 @@ public class CitaLaboratorioResource {
     }
 
     @DELETE
-    @Path("{CitaLaboratorio: \\d+}")
+    @Path("{CitaLaboratorioId: \\d+}")
     public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CitaLaboratorioResource deleteCitaLaboratorio: input:(0)", CitaLaboratorioId);
@@ -80,7 +80,7 @@ public class CitaLaboratorioResource {
     }
     
     @PUT
-    @Path("(CitaLaboratorio:\\d+)")
+    @Path("(CitaLaboratorioId:\\d+)")
     public CitaLaboratorioDTO modificarCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CitaLaboratorioResource modificarCitaLaboratorio: input:(0)", CitaLaboratorioId);
