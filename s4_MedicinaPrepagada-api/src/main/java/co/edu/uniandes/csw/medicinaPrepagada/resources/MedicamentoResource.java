@@ -66,10 +66,10 @@ public class MedicamentoResource {
       return pMedicamento;
     }
     
-     @GET
-    public MedicamentoDTO consultarMedicamento(){
-        return new MedicamentoDTO();
-    }
+ //    @GET
+ //   public MedicamentoDTO consultarMedicamento(){
+ //       return new MedicamentoDTO();
+ //   }
     /**
      * Busca y devuelve todos los medicamentos que existen en la aplicacion.
      *

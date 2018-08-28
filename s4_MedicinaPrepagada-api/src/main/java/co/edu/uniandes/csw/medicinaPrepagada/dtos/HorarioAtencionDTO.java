@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author Simon guzman
  */
 public class HorarioAtencionDTO implements Serializable
 {
@@ -25,7 +25,9 @@ public class HorarioAtencionDTO implements Serializable
     
     private Date fechaFin;
     
+    private ConsultorioDTO consultorio;
     
+    private MedicoDTO medico;
     
     
     
@@ -67,9 +69,27 @@ public class HorarioAtencionDTO implements Serializable
         return this.fechaFin;
    }
    
+   public void setConsultorio (ConsultorioDTO pConsultorio)
+   {
+       this.consultorio = pConsultorio;
+   }
+   
+   public ConsultorioDTO getConsultorio ()
+   {
+       return this.consultorio;
+   }
    
    
    
+   public void setMedico (MedicoDTO pMedico)
+   {
+       this.medico = pMedico;
+   }
+   
+   public MedicoDTO getMedico ()
+   {
+       return this.medico;
+   }
    
       
     @Override

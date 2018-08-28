@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDetail;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class SedeResource
       //  {
       //      throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
       //  }
-        SedeDetail detailDTO = new SedeDetail();
+        SedeDetailDTO detailDTO = new SedeDetailDTO();
         LOGGER.log(Level.INFO, "SedeResource getSede: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -129,14 +129,14 @@ public class SedeResource
      */
     @PUT
     @Path("{sedeId: \\d+}")
-    public SedeDTO updateSede(@PathParam("sedeId") Long pSedeId, SedeDetail pSede) throws WebApplicationException 
+    public SedeDTO updateSede(@PathParam("sedeId") Long pSedeId, SedeDetailDTO pSede) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "SedeResource updateSede: input: id:{0} , sede: {1}", new Object[]{pSedeId, pSede.toString()});
         pSede.setId(pSedeId);
       //  if (logic.get(pSedeId) == null) {
       //      throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
       //  }
-        SedeDetail detailDTO = new SedeDetail();
+        SedeDetailDTO detailDTO = new SedeDetailDTO();
         LOGGER.log(Level.INFO, "SedeResource updateSede: output: {0}", detailDTO.toString());
         return detailDTO;
 

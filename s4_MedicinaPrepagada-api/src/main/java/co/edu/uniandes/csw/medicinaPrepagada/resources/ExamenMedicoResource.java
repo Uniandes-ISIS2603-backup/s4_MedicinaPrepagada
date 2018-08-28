@@ -39,7 +39,7 @@ import javax.ws.rs.WebApplicationException;
 public class ExamenMedicoResource {
     private static final Logger LOGGER = Logger.getLogger(ExamenMedicoResource.class.getName());
 
-    @Inject
+  //  @Inject
   //  ExamenMedicoLogic examenMedicoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
@@ -56,7 +56,7 @@ public class ExamenMedicoResource {
      */
     @POST
     public ExamenMedicoDTO createExamenMedicoDTO(ExamenMedicoDTO examenMedico) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: input: {0}", examenMedico.toString());
+//        LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: input: {0}", examenMedico.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
        // ExamenMedicoEntity examenMedicoEntity = examenMedico.toEntity();
         // Invoca la lógica para crear el nuevo ExamenMedico
@@ -68,10 +68,10 @@ public class ExamenMedicoResource {
       return new ExamenMedicoDTO();
     }
     
-     @GET
-    public ExamenMedicoDTO consultarExamenMedico(){
-        return new ExamenMedicoDTO();
-    }
+   //  @GET
+   // public ExamenMedicoDTO consultarExamenMedico(){
+     //   return new ExamenMedicoDTO();
+   // }
     /**
      * Busca y devuelve todos los examenes medicos que existen en la aplicacion.
      *

@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDetail;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -102,7 +102,7 @@ public class ConsultorioResource
       //  {
       //      throw new WebApplicationException("El recurso /consultorios/" + pConsultorioId + " no existe.", 404);
       //  }
-        ConsultorioDetail detailDTO = new ConsultorioDetail();
+        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO();
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorio: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -126,14 +126,14 @@ public class ConsultorioResource
      */
     @PUT
     @Path("{consultorioId: \\d+}")
-    public ConsultorioDTO updateConsultorio(@PathParam("consultorioId") Long pConsultorioId, ConsultorioDetail pConsultorio) throws WebApplicationException 
+    public ConsultorioDTO updateConsultorio(@PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: input: id:{0} , consultorio: {1}", new Object[]{pConsultorioId, pConsultorio.toString()});
         pConsultorio.setId(pConsultorioId);
       //  if (logic.get(pConsultorioId) == null) {
       //      throw new WebApplicationException("El recurso /consultorios/" + pConsultorioId + " no existe.", 404);
       //  }
-        ConsultorioDetail detailDTO = new ConsultorioDetail();
+        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO();
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: output: {0}", detailDTO.toString());
         return detailDTO;
 
