@@ -78,13 +78,13 @@ public class ExamenMedicoResource {
      * @return JSONArray {@link ExamenMedicoDTO} - Los examenes medicos encontrados en
      * la aplicación. Si no hay ninguno retorna una lista vacía.
      */
-  //  @GET
-  //  public List<ExamenMedicoDTO> getExamenesMedicos() {
-    //    LOGGER.info("ExamenMedicoResource getExamenesMedicos: input: void");
-      //  List<ExamenMedicoDTO> listaExamenesMedicos = listEntity2DetailDTO(examenMedicoLogic.getExamenesMedicos());
-     //   LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenesMedicos: output: {0}", listaExamenesMedicos.toString());
-      //  return listaExamenesMedicos;
-   // }
+    @GET
+    public List<ExamenMedicoDTO> getExamenesMedicos() {
+        LOGGER.info("ExamenMedicoResource getExamenesMedicos: input: void");
+        List<ExamenMedicoDTO> listaExamenesMedicos = listEntity2DetailDTO();
+        LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenesMedicos: output: {0}", listaExamenesMedicos.toString());
+        return listaExamenesMedicos;
+    }
 
     /**
      * Busca el ExamenMedico con el id asociado recibido en la URL y lo devuelve.
@@ -95,18 +95,18 @@ public class ExamenMedicoResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el ExamenMedico.
      */
-    //@GET
-   // @Path("{examenesMedicosId: \\d+}")
-  //  public ExamenMedicoDTO getExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId) throws WebApplicationException {
-     //   LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenMedico: input: {0}", examenesMedicosId);
+    @GET
+    @Path("{examenesMedicosId: \\d+}")
+    public ExamenMedicoDTO getExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenMedico: input: {0}", examenesMedicosId);
        // ExamenMedicoEntity examenMedicoEntity = examenMedicoLogic.getExamenMedico(examenesMedicosId);
      //   if (examenMedicoEntity == null) {
    //         throw new WebApplicationException("El recurso /examenesMedicos/" + examenesMedicosId + " no existe.", 404);
  //       }
-    //    ExamenMedicoDTO detailDTO = new ExamenMedicoDTO(examenMedicoEntity);
-   //     LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenMedico: output: {0}", detailDTO.toString());
-    //    return detailDTO;
-   // }
+        ExamenMedicoDTO detailDTO = new ExamenMedicoDTO();
+        LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenMedico: output: {0}", detailDTO.toString());
+        return detailDTO;
+    }
 
     /**
      * Actualiza el ExamenMedico con el id recibido en la URL con la informacion
@@ -120,18 +120,19 @@ public class ExamenMedicoResource {
      * Error de lógica que se genera cuando no se encuentra el ExamenMedico a
      * actualizar.
      */
-    //@PUT
-   // @Path("{examenesMedicosId: \\d+}")
- //   public ExamenMedicoDTO updateExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId, ExamenMedicoDTO examenMedico) throws WebApplicationException {
-      //  LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: input: id:{0} , editorial: {1}", new Object[]{examenesMedicosId, examenMedico.toString()});
-     //   examenMedico.setId(examenesMedicosId);
+    @PUT
+    @Path("{examenesMedicosId: \\d+}")
+    public ExamenMedicoDTO updateExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId, ExamenMedicoDTO examenMedico) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: input: id:{0} , editorial: {1}", new Object[]{examenesMedicosId, examenMedico.toString()});
+        examenMedico.setId(examenesMedicosId);
      //   if (examenMedicoLogic.getExamenMedico(examenesMedicosId) == null) {
    //         throw new WebApplicationException("El recurso /examenesMedicos/" + examenesMedicosId + " no existe.", 404);
     //    }
-    //    ExamenMedicoDTO detailDTO = new ExamenMedicoDTO(examenMedicoLogic.updateExamenMedico(examenesMedicosId, examenMedico.toEntity()));
-    //    LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: output: {0}", detailDTO.toString());
-   //     return detailDTO;
+        ExamenMedicoDTO detailDTO = new ExamenMedicoDTO();
+        LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: output: {0}", detailDTO.toString());
+    return detailDTO;
     }
+    
 
     /**
      * Borra el ExamenMedico con el id asociado recibido en la URL.
@@ -143,16 +144,16 @@ public class ExamenMedicoResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el ExamenMedico.
      */
-   // @DELETE
-   // @Path("{examenesMedicosId: \\d+}")
-   // public void deleteExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId) throws BusinessLogicException {
-     //   LOGGER.log(Level.INFO, "ExamenMedicoResource deleteExamenMedico: input: {0}", examenesMedicosId);
+    @DELETE
+    @Path("{examenesMedicosId: \\d+}")
+    public void deleteExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ExamenMedicoResource deleteExamenMedico: input: {0}", examenesMedicosId);
       //  if (examenMedicoLogic.getExamenMedico(examenesMedicosId) == null) {
         //    throw new WebApplicationException("El recurso /examenesMedicos/" + examenesMedicosId + " no existe.", 404);
        // }
        // examenMedicoLogic.deleteExamenMedico(examenesMedicosId);
-       // LOGGER.info("ExamenMedicoResource deleteExamenMedico: output: void");
-   // }
+        LOGGER.info("ExamenMedicoResource deleteExamenMedico: output: void");
+    }
 
     /**
      * Convierte una lista de entidades a DTO.
@@ -164,12 +165,13 @@ public class ExamenMedicoResource {
      * que vamos a convertir a DTO.
      * @return la lista de editoriales en forma DTO (json)
      */
-    //private List<EditorialDTO> listEntity2DetailDTO(List<EditorialEntity> entityList) {
-      //  List<EditorialDTO> list = new ArrayList<>();
+    private List<ExamenMedicoDTO> listEntity2DetailDTO() {
+        List<ExamenMedicoDTO> list = new ArrayList<>();
        // for (EditorialEntity entity : entityList) {
          //   list.add(new EditorialDTO(entity));
         //}
-        //return list;
-    //}
+        return list;
+    }
+}
 
 

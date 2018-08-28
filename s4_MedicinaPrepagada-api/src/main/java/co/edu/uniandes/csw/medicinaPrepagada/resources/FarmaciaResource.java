@@ -1,3 +1,5 @@
+package co.edu.uniandes.csw.medicinaPrepagada.resources;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,7 +25,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
-
 /**
  * Clase que implementa el recurso "farmacias".
  *
@@ -52,9 +53,9 @@ public class FarmaciaResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando ya existe la farmacia.
      */
-  //  @POST
-//    public FarmaciaDTO createFarmacia(FarmaciaDTO farmacia) throws BusinessLogicException {
-    //    LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: input: {0}", farmacia.toString());
+    @POST
+    public FarmaciaDTO createFarmacia(FarmaciaDTO pFarmacia) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: input: {0}", pFarmacia.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
   //      FarmaciaEntity farmaciaEntity = farmacia.toEntity();
         // Invoca la lógica para crear la farmacia nueva
@@ -62,8 +63,8 @@ public class FarmaciaResource {
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
        // FarmaciaDTO nuevoFarmaciaDTO = new FarmaciaDTO(nuevoFarmaciaEntity);
      //   LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: output: {0}", nuevoFarmaciaDTO.toString());
-   //     return nuevoFarmaciaDTO;
- //   }
+        return pFarmacia;
+    }
     
     @GET
     public FarmaciaDTO consultarFarmacia(){
@@ -76,13 +77,13 @@ public class FarmaciaResource {
      * @return JSONArray {@link FarmaciaDTO} - Las farmacias encontradas en
      * la aplicación. Si no hay ninguna retorna una lista vacía.
      */
-  //  @GET
-//    public List<FarmaciaDTO> getFarmacias() {
-        //LOGGER.info("FarmaciaResource getFarmacias: input: void");
-      //  List<FarmaciaDTO> listaFarmacias = listEntity2DetailDTO(farmaciaLogic.getFarmacias());
-    //    LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias.toString());
-  //      return listaFarmacias;
-//    }
+    @GET
+    public List<FarmaciaDTO> getFarmacias() {
+        LOGGER.info("FarmaciaResource getFarmacias: input: void");
+        List<FarmaciaDTO> listaFarmacias = listEntity2DetailDTO();
+        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias.toString());
+        return listaFarmacias;
+    }
 
     /**
      * Busca la farmacia con el id asociado recibido en la URL y la devuelve.
@@ -93,18 +94,18 @@ public class FarmaciaResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la farmacia.
      */
-    //@GET
-  //  @Path("{farmaciasId: \\d+}")
-//    public FarmaciaDTO getFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws WebApplicationException {
-      //  LOGGER.log(Level.INFO, "FarmaciaResource getEditorial: input: {0}", farmaciasId);
+    @GET
+    @Path("{farmaciasId: \\d+}")
+    public FarmaciaDTO getFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: input: {0}", farmaciasId);
     //    FarmaciaEntity farmaciaEntity = farmaciaLogic.getFarmacia(farmaciasId);
   //      if (farmaciaEntity == null) {
 //            throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
         //}
-      //  FarmaciaDTO detailDTO = new FarmaciaDTO(farmaciaEntity);
+        FarmaciaDTO detailDTO = new FarmaciaDTO();
     //    LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO.toString());
-  //      return detailDTO;
-//    }
+        return detailDTO;
+    }
 
     /**
      * Actualiza la farmacia con el id recibido en la URL con la informacion
@@ -118,18 +119,18 @@ public class FarmaciaResource {
      * Error de lógica que se genera cuando no se encuentra la farmacia a
      * actualizar.
      */
-//    @PUT
-  //  @Path("{farmaciasId: \\d+}")
-    //public FarmaciaDTO updateFarmacia(@PathParam("farmaciasId") Long farmaciasId, FarmaciaDTO farmacia) throws WebApplicationException {
-    //    LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: input: id:{0} , farmacia: {1}", new Object[]{farmaciasId, farmacia.toString()});
-  //      farmacia.setId(farmaciasId);
+    @PUT
+    @Path("{farmaciasId: \\d+}")
+    public FarmaciaDTO updateFarmacia(@PathParam("farmaciasId") Long farmaciasId, FarmaciaDTO farmacia) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: input: id:{0} , farmacia: {1}", new Object[]{farmaciasId, farmacia.toString()});
+        farmacia.setId(farmaciasId);
 //        if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
         //    throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
       //  }
-    //    FarmaciaDTO detailDTO = new FarmaciaDTO(farmaciaLogic.updateFarmacia(farmaciasId, farmacia.toEntity()));
-  //      LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: output: {0}", detailDTO.toString());
-//        return detailDTO;
-    //}
+        FarmaciaDTO detailDTO = new FarmaciaDTO();
+        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: output: {0}", detailDTO.toString());
+        return detailDTO;
+    }
 
     /**
      * Borra la farmacia con el id asociado recibido en la URL.
@@ -141,16 +142,16 @@ public class FarmaciaResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la farmacia.
      */
-    //@DELETE
-  //  @Path("{farmaciasId: \\d+}")
-//    public void deleteFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws BusinessLogicException {
-  //      LOGGER.log(Level.INFO, "FarmaciaResource deleteFarmacia: input: {0}", farmaciasId);
+    @DELETE
+    @Path("{farmaciasId: \\d+}")
+    public void deleteFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "FarmaciaResource deleteFarmacia: input: {0}", farmaciasId);
 //        if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
         //    throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
       //  }
     //    farmaciaLogic.deleteFarmacia(farmaciasId);
-  //      LOGGER.info("FarmaciaResource deleteFarmacia: output: void");
-//    }
+        LOGGER.info("FarmaciaResource deleteFarmacia: output: void");
+    }
 
     /**
      * Convierte una lista de entidades a DTO.
@@ -162,12 +163,12 @@ public class FarmaciaResource {
      * que vamos a convertir a DTO.
      * @return la lista de editoriales en forma DTO (json)
      */
-  //  private List<EditorialDTO> listEntity2DetailDTO(List<EditorialEntity> entityList) {
-//        List<EditorialDTO> list = new ArrayList<>();
+    private List<FarmaciaDTO> listEntity2DetailDTO() {
+        List<FarmaciaDTO> list = new ArrayList<>();
       //  for (EditorialEntity entity : entityList) {
     //        list.add(new EditorialDTO(entity));
   //      }
-//        return list;
-  //  }
+        return list;
+    }
     
 }
