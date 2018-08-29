@@ -90,7 +90,7 @@ public class PacienteResource {
         //PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
         //PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
         //return nuevoDTO;
-        return null;
+        return paciente;
     }
     
 //    /**
