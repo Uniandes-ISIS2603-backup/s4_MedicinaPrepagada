@@ -63,7 +63,7 @@ public class MedicamentoResource {
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO();
         LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO.toString());
-        return nuevoMedicamentoDTO;
+        return pMedicamento;
     }
     
  //    @GET
