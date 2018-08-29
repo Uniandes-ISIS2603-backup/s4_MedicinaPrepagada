@@ -29,7 +29,7 @@ public class ConsultorioDetailDTO extends ConsultorioDTO implements Serializable
     }
     
     
-    
+  
     
     public List<HorarioAtencionDTO> getHorariosAtencion ()
     {
