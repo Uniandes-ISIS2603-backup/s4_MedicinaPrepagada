@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ExamenMedicoDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.ExamenMedicoDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class ExamenMedicoResource {
+    
     private static final Logger LOGGER = Logger.getLogger(ExamenMedicoResource.class.getName());
 
   //  @Inject
@@ -56,16 +58,16 @@ public class ExamenMedicoResource {
      */
     @POST
     public ExamenMedicoDTO createExamenMedicoDTO(ExamenMedicoDTO examenMedico) throws BusinessLogicException {
-//        LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: input: {0}", examenMedico.toString());
+        LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: input: {0}", examenMedico.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
        // ExamenMedicoEntity examenMedicoEntity = examenMedico.toEntity();
         // Invoca la lógica para crear el nuevo ExamenMedico
        // ExamenMedicoEntity nuevoExamenMedicoEntity = examenMedicoLogic.createExamenMedico(examenMedicoEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-       // ExamenMedicoDTO nuevoExamenMedicoDTO = new ExamenMedicoDTO(nuevoExamenMedicoEntity);
-     //   LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: output: {0}", nuevoExamenMedicoDTO.toString());
-      //  return nuevoExamenMedicoDTO;
-      return new ExamenMedicoDTO();
+        ExamenMedicoDTO nuevoExamenMedicoDTO = new ExamenMedicoDTO();
+        LOGGER.log(Level.INFO, "ExamenMedicoResource createExamenMedico: output: {0}", nuevoExamenMedicoDTO.toString());
+        return nuevoExamenMedicoDTO;
+      
     }
     
    //  @GET
@@ -103,7 +105,7 @@ public class ExamenMedicoResource {
      //   if (examenMedicoEntity == null) {
    //         throw new WebApplicationException("El recurso /examenesMedicos/" + examenesMedicosId + " no existe.", 404);
  //       }
-        ExamenMedicoDTO detailDTO = new ExamenMedicoDTO();
+        ExamenMedicoDetailDTO detailDTO = new ExamenMedicoDetailDTO();
         LOGGER.log(Level.INFO, "ExamenMedicoResource getExamenMedico: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -122,13 +124,13 @@ public class ExamenMedicoResource {
      */
     @PUT
     @Path("{examenesMedicosId: \\d+}")
-    public ExamenMedicoDTO updateExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId, ExamenMedicoDTO examenMedico) throws WebApplicationException {
+    public ExamenMedicoDTO updateExamenMedico(@PathParam("examenesMedicosId") Long examenesMedicosId, ExamenMedicoDetailDTO examenMedico) throws WebApplicationException {
         LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: input: id:{0} , editorial: {1}", new Object[]{examenesMedicosId, examenMedico.toString()});
         examenMedico.setId(examenesMedicosId);
      //   if (examenMedicoLogic.getExamenMedico(examenesMedicosId) == null) {
    //         throw new WebApplicationException("El recurso /examenesMedicos/" + examenesMedicosId + " no existe.", 404);
     //    }
-        ExamenMedicoDTO detailDTO = new ExamenMedicoDTO();
+        ExamenMedicoDetailDTO detailDTO = new ExamenMedicoDetailDTO();
         LOGGER.log(Level.INFO, "ExamenMedicoResource updateExamenMedico: output: {0}", detailDTO.toString());
     return detailDTO;
     }

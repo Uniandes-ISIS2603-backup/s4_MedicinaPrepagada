@@ -61,9 +61,9 @@ public class FarmaciaResource {
         // Invoca la lógica para crear la farmacia nueva
 //        FarmaciaEntity nuevoFarmaciaEntity = farmaciaLogic.createFarmacia(farmaciaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-       // FarmaciaDTO nuevoFarmaciaDTO = new FarmaciaDTO(nuevoFarmaciaEntity);
-     //   LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: output: {0}", nuevoFarmaciaDTO.toString());
-        return pFarmacia;
+        FarmaciaDTO nuevoFarmaciaDTO = new FarmaciaDTO();
+        LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: output: {0}", nuevoFarmaciaDTO.toString());
+        return nuevoFarmaciaDTO;
     }
     
    // @GET
@@ -103,7 +103,7 @@ public class FarmaciaResource {
 //            throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
         //}
         FarmaciaDTO detailDTO = new FarmaciaDTO();
-    //    LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO.toString());
         return detailDTO;
     }
 
