@@ -14,6 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ni.ramirez10
  */
+
 public class HistoriaClinicaDTO implements Serializable  
 {
     private Long id; 
