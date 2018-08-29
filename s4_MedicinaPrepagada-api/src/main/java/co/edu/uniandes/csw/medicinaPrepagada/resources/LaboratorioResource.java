@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.LaboratorioDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.LaboratorioDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +61,12 @@ public class LaboratorioResource {
     }
     
     @GET
-    @Path("(LaboratorioID://d+)")
+    @Path("(LaboratorioId://d+)")
     public LaboratorioDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
          LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input: (0)", LaboratorioId);
         
-        LaboratorioDTO nuevoDetailDTO = new LaboratorioDTO();
+        LaboratorioDetailDTO nuevoDetailDTO = new LaboratorioDetailDTO();
         
         LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: output: {0}", nuevoDetailDTO.toString());
         return nuevoDetailDTO;
