@@ -13,35 +13,36 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class ExamenMedicoDTO implements Serializable {
+public class FarmaciaDTO implements Serializable {
     
     private Long id;
     private String name;
-    private String costo;
-    private String recomendaciones;
+    private String ubicacion;
+    private String telefono;
+    
     
     
     /**
      * Constructor por defecto
      */
-    public ExamenMedicoDTO() {
+    public FarmaciaDTO() {
     }
     
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
-     * @param examenMedicoEntity: Es la entidad que se va a convertir a DTO
+     * @param farmaciaEntity: Es la entidad que se va a convertir a DTO
      */
-   // public ExamenMedicoDTO(ExamenMedicoEntity examenMedicoEntity) {
-     //   if (examenMedicoEntity != null) {
-       //     this.id = examenMedicontity.getId();
-         //   this.name = examenMedicoEntity.getName();
+   // public FarmaciaDTO(FarmaciaEntity farmaciaEntity) {
+     //   if (farmaciaEntity != null) {
+       //     this.id = farmaciaEntity.getId();
+         //   this.name = farmaciaEntity.getName();
        // }
    // }
     
     /**
-     * Devuelve el ID del examen medico.
+     * Devuelve el ID de la farmacia.
      *
      * @return the id
      */
@@ -50,7 +51,7 @@ public class ExamenMedicoDTO implements Serializable {
     }
 
     /**
-     * Modifica el ID del examen medico.
+     * Modifica el ID de la farmacia.
      *
      * @param id the id to set
      */
@@ -59,7 +60,7 @@ public class ExamenMedicoDTO implements Serializable {
     }
 
     /**
-     * Devuelve el nombre del examen medico.
+     * Devuelve el nombre de la farmacia.
      *
      * @return the name
      */
@@ -68,7 +69,7 @@ public class ExamenMedicoDTO implements Serializable {
     }
 
     /**
-     * Modifica el nombre del examen medico.
+     * Modifica el nombre de la farmacia.
      *
      * @param name the name to set
      */
@@ -76,42 +77,40 @@ public class ExamenMedicoDTO implements Serializable {
         this.name = name;
     }
     
-    
-    
     /**
-     * Devuelve el costo del examen medico.
+     * Devuelve la ubicacion de la farmacia.
      *
-     * @return the costo
+     * @return cantidad
      */
-    public String getCosto() {
-        return costo;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
     /**
-     * Modifica el costo del examen medico.
+     * Modifica la ubicacion de la farmacia.
      *
-     * @param costo the costo set
+     * @param pUbicacion the cantidad to set
      */
-    public void setCosto(String costo) {
-        this.costo = costo;
+    public void setUbicacion(String pUbicacion) {
+        this.ubicacion = pUbicacion;
     }
     
     /**
-     * Devuelve las recomendaciones del examen medico.
+     * Devuelve el telefono de la farmacia.
      *
-     * @return the Recomendaciones
+     * @return telefono
      */
-    public String getRecomendaciones() {
-        return recomendaciones;
+    public String getTelefono() {
+        return telefono;
     }
 
     /**
-     * Modifica las recomendaciones del examen medico.
+     * Modifica el telefono de la farmacia.
      *
-     * @param recomendaciones the recomendaciones set
+     * @param telefono the descripcion to set
      */
-    public void setRecomendaciones(String recomendaciones) {
-        this.recomendaciones = recomendaciones;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
     
@@ -120,11 +119,11 @@ public class ExamenMedicoDTO implements Serializable {
      *
      * @return Un Entity con los valores del DTO
      */
-   // public ExamenMedicoEntity toEntity() {
-     //   ExamenMedicoEntity examenMedicoEntity = new ExamenMedicoEntity();
-       // examenMedicoEntity.setId(this.id);
-       // examenMedicoEntity.setName(this.name);
-       // return examenMedicoEntity;
+   // public FarmaciaEntity toEntity() {
+     //   FarmaciaEntity farmaciaEntity = new FarmaciaEntity();
+       // farmaciaEntity.setId(this.id);
+       // farmaciaEntity.setName(this.name);
+       // return farmaciaEntity;
    // }
      @Override
     public String toString() {
