@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  *
  * @author estudiante
@@ -30,6 +33,9 @@ public class EspecialidadDTO {
         this.nombre = nombre;
     }
     
-    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
             
 }
