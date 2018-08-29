@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "medicamentos".
  *
- * @author ISIS2603
+ * @author n.cobos
  * @version 1.0
  */
 @Path("medicamentos")
@@ -60,10 +61,9 @@ public class MedicamentoResource {
         // Invoca la lógica para crear el nuevo medicamento
        // MedicamentoEntity nuevoMedicamentoEntity = medicamentoLogic.createMedicamento(medicamentoEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-       // MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO(nuevoMedicamentoEntity);
-     //   LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO.toString());
-      //  return nuevoMedicamentoDTO;
-      return pMedicamento;
+        MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO();
+        LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO.toString());
+        return nuevoMedicamentoDTO;
     }
     
  //    @GET
@@ -78,11 +78,10 @@ public class MedicamentoResource {
      */
     @GET
     public List<MedicamentoDTO> getMedicamentos() {
-    //    LOGGER.info("MedicamentoResource getMedicamentos: input: void");
-      //  List<MedicamentoDTO> listaMedicamentos = listEntity2DetailDTO(medicamentoLogic.getMedicamentos());
-     //   LOGGER.log(Level.INFO, "MedicamentoResource getMedicamentos: output: {0}", listaMedicamentos.toString());
-     List<MedicamentoDTO> lista =listEntity2DetailDTO();
-        return lista;
+        LOGGER.info("MedicamentoResource getMedicamentos: input: void");
+        List<MedicamentoDTO> listaMedicamentos = listEntity2DetailDTO();
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamentos: output: {0}", listaMedicamentos.toString());
+        return listaMedicamentos;
    }
 
     /**
@@ -97,16 +96,15 @@ public class MedicamentoResource {
     @GET
     @Path("{medicamentosId: \\d+}")
     public MedicamentoDTO getMedicamento(@PathParam("medicamentosId") Long pMedicamentosId) throws WebApplicationException 
-            {
-     //   LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", medicamentosId);
+    {
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", pMedicamentosId);
        // MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(medicamentosId);
      //   if (medicamentoEntity == null) {
    //         throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
  //       }
-    //    MedicamentoDTO detailDTO = new MedicamentoDTO(medicamentoEntity);
-   //     LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO.toString());
-    //    return detailDTO;
-  return new MedicamentoDTO();
+        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO();
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO.toString());
+        return detailDTO;
     }
 
     /**
@@ -123,13 +121,13 @@ public class MedicamentoResource {
      */
     @PUT
     @Path("{medicamentosId: \\d+}")
-   public MedicamentoDTO updateMedicamento(@PathParam("medicamentosId") Long medicamentosId, MedicamentoDTO medicamento) throws WebApplicationException {
-        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: input: id:{0} , medicamento: {1}", new Object[]{medicamentosId, medicamento.toString()});
-        medicamento.setId(medicamentosId);
+   public MedicamentoDTO updateMedicamento(@PathParam("medicamentosId") Long medicamentosId, MedicamentoDetailDTO pMedicamento) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: input: id:{0} , medicamento: {1}", new Object[]{medicamentosId, pMedicamento.toString()});
+        pMedicamento.setId(medicamentosId);
      //   if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
    //         throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
     //    }
-        MedicamentoDTO detailDTO = new MedicamentoDTO();
+        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO();
         LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: output: {0}", detailDTO.toString());
         return detailDTO;
    }
