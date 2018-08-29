@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,19 +14,28 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class SedeDetail extends SedeDTO implements Serializable
+public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
 {
-    
-    
-    public SedeDetail ()
+    public LaboratorioDetailDTO()
     {
         super();
     }
     
+    private List<LaboratorioDTO> citasLaboratorio;
     
-     @Override
-    public String toString() 
-    {
+         @Override
+    public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+    
+    public List <LaboratorioDTO> getCitasLab()
+    {
+        return this.citasLaboratorio;
+    }
+    
+    public void setCitas (List<LaboratorioDTO> pCitas)
+    {
+        this.citasLaboratorio = pCitas;
+    }
+    
 }

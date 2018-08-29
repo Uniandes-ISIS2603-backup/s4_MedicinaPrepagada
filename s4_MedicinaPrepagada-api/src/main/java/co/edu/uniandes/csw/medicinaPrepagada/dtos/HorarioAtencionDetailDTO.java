@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,16 +14,33 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class HorarioAtencionDetail extends HorarioAtencionDTO implements Serializable
+public class HorarioAtencionDetailDTO extends HorarioAtencionDTO implements Serializable
 {
 
-    public HorarioAtencionDetail() 
+    
+    
+    
+    private List<CitaMedicaDTO> citasMedicas;
+    
+    
+    
+    
+    public HorarioAtencionDetailDTO() 
     {
         super();
     }
     
     
+    public void setCitasMedicas(List<CitaMedicaDTO> pCitasMedicas)
+    {
+        this.citasMedicas = pCitasMedicas;
+    }
     
+    
+    public List<CitaMedicaDTO> getCitasMedicas ()
+    {
+        return this.citasMedicas;
+    }
     
     
         @Override

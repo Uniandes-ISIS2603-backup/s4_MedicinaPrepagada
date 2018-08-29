@@ -24,6 +24,9 @@ public class ConsultorioDTO  implements Serializable
     
     private int nOficina;
     
+    private SedeDTO sede;
+    
+    private EspecialidadDTO especialidad;
     
     
     public ConsultorioDTO ( )
@@ -66,7 +69,29 @@ public class ConsultorioDTO  implements Serializable
        return this.nOficina;
    }
     
-    
+   
+   
+   
+      public void getSede (SedeDTO pSede)
+   {
+       this.sede = pSede;
+   }
+   
+   public SedeDTO getSede ()
+   {
+       return this.sede;
+   }
+   
+   
+   public void setEspecialidad (EspecialidadDTO pEspecialidad)
+   {
+       this.especialidad = pEspecialidad;
+   }
+   
+   public EspecialidadDTO getEspecialidad ()
+   {
+       return this.especialidad;
+   }
    
    
     @Override

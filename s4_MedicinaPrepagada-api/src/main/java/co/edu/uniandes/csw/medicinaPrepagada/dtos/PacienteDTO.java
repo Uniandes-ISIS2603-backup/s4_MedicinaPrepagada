@@ -44,7 +44,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author MIGUELHOYOS
  */
-public class PacienteDTO implements Serializable{
+public class PacienteDTO extends UsuarioDTO implements Serializable{
     
     private Long cedula;
     private String nombre;

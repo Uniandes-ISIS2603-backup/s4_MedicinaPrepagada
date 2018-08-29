@@ -9,21 +9,28 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *Clase que implementa el recurso "tarjetascredito"
  * 
  * @author MIGUELHOYOS
  */
+@Path("tarjetascredito")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class TarjetaCreditoResource {
     
-    @Inject
+//    @Inject
 //    TarjetaCreditoLogic tarjetaCreditoLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
@@ -43,7 +50,7 @@ public class TarjetaCreditoResource {
 //        TarjetaCreditoEntity entity = tarjetaCredito.toEntity();
 //        TarjetaCreditoEntity nuevaEntity = tarjetaCreditoLogic.createTarjetaCredito(entity);
 //        return new TarjetaCreditoDTO(nuevaEntity);
-        return null;
+        return tarjetaCredito;
     }
     
     /**
@@ -72,6 +79,7 @@ public class TarjetaCreditoResource {
         return null;
     }
     
+    @GET
     public List<TarjetaCreditoDTO> getTarjetasCredito(){
         List<TarjetaCreditoDTO> rta = new LinkedList<>();
 //        List<TarjetaCreditoEntity> listaEntity = tarjetaCreditoLogic.getAll();
