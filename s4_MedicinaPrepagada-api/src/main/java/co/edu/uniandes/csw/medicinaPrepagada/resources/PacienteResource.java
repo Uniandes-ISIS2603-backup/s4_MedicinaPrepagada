@@ -6,8 +6,12 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
+import java.util.LinkedList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,10 +26,11 @@ import javax.ws.rs.PathParam;
  */
 @Path("pacientes")
 @Produces("application/json")
+@Consumes("application/json")
 @RequestScoped
 public class PacienteResource {
     
-    @Inject
+//    @Inject
     //PacienteLogic pacienteLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     /**
@@ -47,7 +52,7 @@ public class PacienteResource {
       // PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
       // PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
       // return nuevoDTO;
-        return null;
+        return paciente;
     }
     
     /**
@@ -69,7 +74,7 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacientesId: \\d+}")
-    public PacienteDTO getPaciente(@PathParam("PacientesId") Long pacientesId){
+    public PacienteDTO getPaciente(@PathParam("pacientesId") Long pacientesId){
         //PacienteEntity entity = pacienteLogic.findPaciente(pacientesId);
         //return new PacienteDTO(entity);
         return null;
@@ -88,4 +93,48 @@ public class PacienteResource {
         return null;
     }
     
+//    /**
+//     * Crea una tarjeta de credito al paciente con el id dado por param
+//     * @param tarjetaCredito el dto de la tarjeta de credito que se quiere crear
+//     * @return la tarjeta de credito creada
+//     */
+//    @POST
+//    @Path("{pacientesId: \\d+}")
+//    public TarjetaCreditoDTO crearTarjetaCredito(TarjetaCreditoDTO tarjetaCredito){
+//        return tarjetaCredito;
+//    }
+//    
+//    /**
+//     * obtiene todas las tarjetas de credito de un paciente
+//     * @return una lista con todos los DTOs tipo tarjetaCredito del paciente
+//     */
+//    @GET
+//    @Path("{pacientesId: \\d+}")
+//    public List<TarjetaCreditoDTO> getTarjetasCredito(@PathParam("PacientesId") Long pacientesId){
+//        return new LinkedList<>();
+//    }
+//    
+//    /**
+//     * retorna una tarjeta de credito de un paciente
+//     * @param pacientesId id del paciente propietario de la tarjeta
+//     * @param TarjetaId id de la tarjeta buscada
+//     * @return tarjeta de credito buscada
+//     */
+//    @GET
+//    @Path("{pacientesId: \\d+}/tarjetascredito/{tarjetaId: \\d+}")
+//    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("PacientesId") Long pacientesId, @PathParam("tarjetaId") Long TarjetaId){
+//        return new TarjetaCreditoDTO();
+//    }
+//    
+//    /**
+//     * elimina tarjeta credito de un paciente
+//     * @param pacientesId id del paciente propietario de la tarjeta
+//     * @param TarjetaId id de la tarjeta que se desa eliminar
+//     */
+//    @DELETE
+//    @Path("{pacientesId: \\d+}/tarjetascredito/{tarjetaId: \\d+}")
+//    public void eliminarTarjetaCredito(@PathParam("PacientesId") Long pacientesId, @PathParam("tarjetaId") Long TarjetaId){
+//        
+//    }
+//    
 }
