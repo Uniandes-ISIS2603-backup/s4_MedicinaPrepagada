@@ -5,19 +5,93 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
+*Clase que extiende de {@link PacienteDTO} para manejar las relaciones entre los
+ * AuthorDTO y otros DTOs. Para conocer el contenido de un Autor vaya a la
+ * documentacion de {@link PacienteDTO}
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "cedula":number,
+ *      "nombre":string,
+ *      "fechaNacimiento":string,
+ *      "direccion":string,
+ *      "numeroContacto":number,
+ *      "mail":string,
+ *      "eps": string,
+ *      "citasLaboratorio: [{@link CitasLaboratorioDTO}],
+ *      "facturas":[{@link FacturasDTO}],
+ *      "tarjetascredito":[{@link TarjetaCreditoDTO}],
+ *      "citasmedicas":[{@link CitasMedicaDTO}],
+ *      "historiasclinicas":[{@link HistoriaClinicaDTO}]
+ *  }
+ *   }
+ * </pre> Por ejemplo un paciente se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "cedula":1029849123,
+ *      "nombre":"Pepito Perez",
+ *      "fechaNacimiento":"19/02/1982",
+ *      "direccion":"Av. 19 # 97 - 49",
+ *      "numeroContacto":1234567890,
+ *      "mail":"pepito@mail.com",
+ *      "eps": "la menos mala"},
+ *      "citaslaboratorio":[],
+ *      "facturas":[],
+ *      "tarjetascredito":[],
+ *      "citasmedicas":[],
+ *      "historiasclinicas":[]
+ *   }
+ *
+ * </pre>
  *
  * @author MIGUELHOYOS
  */
-public class PacienteDetailDTO extends PacienteDTO{
+public class PacienteDetailDTO extends PacienteDTO implements Serializable{
     
 //    private List<CitasLaboratorioDTO> citasLaboratorio;
 //    private List<FacturaDTO> facturas;
     private List<TarjetaCreditoDTO> tarjetasCredito;
     private List<CitaMedicaDTO> citasMedicas;
 //    private List<HistoriaClinicaDTO> historiasClinicas;
+    
+    /**
+     * constructor por defecto
+     */
+    public PacienteDetailDTO()
+    {
+        super();
+    }
+    
+//    /**
+//     *  Crea un objeto PacienteDetailDTO a partir de un objeto PacienteEntity
+//     * incluyendo los atributos de PacienteDTO.
+//     *
+//     * @param PacienteEntity Entidad PacienteEntity desde la cual se va a crear el
+//     * nuevo objeto.
+//     *
+//     */
+//    public PacienteDetailDTO(PacienteEntity pacienteEntity){
+//        super(pacienteEntity);
+//    }
+//    
+//    /**
+//     * Convierte un objeto AuthorDetailDTO a AuthorEntity incluyendo los
+//     * atributos de AuthorDTO.
+//     *
+//     * @return Nueva objeto AuthorEntity.
+//     *
+//     */
+//    @Override
+//    public PacienteEntity toEntity(){
+//        
+//    }
 
     /**
      * @return the citasLaboratorio
