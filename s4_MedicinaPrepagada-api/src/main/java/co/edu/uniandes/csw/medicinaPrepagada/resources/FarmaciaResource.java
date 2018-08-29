@@ -66,10 +66,10 @@ public class FarmaciaResource {
         return pFarmacia;
     }
     
-    @GET
-    public FarmaciaDTO consultarFarmacia(){
-        return new FarmaciaDTO();
-    }
+   // @GET
+ //   public FarmaciaDTO consultarFarmacia(){
+  //      return new FarmaciaDTO();
+//    }
 
     /**
      * Busca y devuelve todas las farmacias que existen en la aplicacion.

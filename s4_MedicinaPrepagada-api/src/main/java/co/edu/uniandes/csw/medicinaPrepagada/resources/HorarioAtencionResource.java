@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetail;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +104,7 @@ public class HorarioAtencionResource
       //  {
       //      throw new WebApplicationException("El recurso /horariosAtencion/" + pHorarioAtencionId + " no existe.", 404);
       //  }
-        HorarioAtencionDetail detailDTO = new HorarioAtencionDetail();
+        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO();
         LOGGER.log(Level.INFO, "HorarioAtencionResource getHorarioAtencion: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -128,14 +128,14 @@ public class HorarioAtencionResource
      */
     @PUT
     @Path("{horarioAtencionId: \\d+}")
-    public HorarioAtencionDTO updateHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId, HorarioAtencionDetail pHorarioAtencion) throws WebApplicationException 
+    public HorarioAtencionDTO updateHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId, HorarioAtencionDetailDTO pHorarioAtencion) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource updateHorarioAtencion: input: id:{0} , horarioAtencion: {1}", new Object[]{pHorarioAtencionId, pHorarioAtencion.toString()});
         pHorarioAtencion.setId(pHorarioAtencionId);
       //  if (logic.get(pHorarioAtencionId) == null) {
       //      throw new WebApplicationException("El recurso /horariosAtencion/" + pHorarioAtencionId + " no existe.", 404);
       //  }
-        HorarioAtencionDetail detailDTO = new HorarioAtencionDetail();
+        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO();
         LOGGER.log(Level.INFO, "HorarioAtencionResource updateHorarioAtencion: output: {0}", detailDTO.toString());
         return detailDTO;
 
