@@ -13,8 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,7 +24,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author estudiante
+ * @author ni.ramirez10
  */
 
 @Path("administrador")
@@ -73,7 +75,7 @@ public class AdministradorResource
     @Path("{AdministradorId: \\d+}")
     public AdministradorDTO getAdministrador(@PathParam("administradorId") Long administradorId) 
     {
-        LOGGER.log(Level.INFO, "BookResource getAdministrador: input: {0}", administradorId);
+        LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: input: {0}", administradorId);
         /**AdministradorEntity admiEntity = administradorLogic.getAdministrador(administradorId);
         
         if (admiEntity == null) 
@@ -85,11 +87,45 @@ public class AdministradorResource
         return admiDetailDTO;
     }
     
-    private List<AdministradorDTO> listEntity2DetailDTO() { //paramtero: List<CitaMedicaEntity> entityList
+    /**
+     * Elimina el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el adminsitrador.
+     */
+    
+    @DELETE
+    @Path("{AdministradorId: \\d+}")
+    public void deleteAdministrador(@PathParam ("administradorId") Long administradorId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "AdministradorResource deleteAdministrador: input:(0)", administradorId);
+        /**if (AdministradorLogic.getAdministrador(administradorId) == null) 
+        {
+           throw new WebApplicationException("El recurso /administradores/" + administradorId + " no existe.", 404);
+        }
+        AdministradorLogic.deleteAdministrador(administradorId); */
+        LOGGER.info("AdministradorResource deleteAdministrador: output: void");
+    }
+    
+    /**
+     * Modifica el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el administrador.
+     */
+    
+    @PUT
+    @Path("(AdministradorId:\\d+)")
+    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
+        AdministradorDTO modificarDetailDto = new AdministradorDTO ();        
+        LOGGER.log(Level.INFO,"AdministradorResource modificarAdministrador: output: (0)", modificarDetailDto.toString());
+        return modificarDetailDto;
+    }
+    
+    private List<AdministradorDTO> listEntity2DetailDTO() 
+    { 
         List<AdministradorDTO> list = new ArrayList<>();
-//        for (CitaMedicaEntity entity : entityList) {
-//            list.add(new CitaMedicaDTO(entity));
-//        }
+        
         return list;
     }
 }
