@@ -24,7 +24,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author estudiante
+ * @author Daniel Ivan Romero
  */
 
 @Path("especialidad")
