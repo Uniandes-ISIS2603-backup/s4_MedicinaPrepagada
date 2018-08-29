@@ -24,7 +24,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *Clase que implementa el recurso CitaMedica
- * @author Simon Guzman
+ * @author Daniel Ivan Romero
  */
 
 
