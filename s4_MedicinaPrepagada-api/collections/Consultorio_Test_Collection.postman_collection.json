@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "ebe06f24-08a9-4ccb-a230-cd5adbe0ca6d",
+		"name": "Consultorio_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Consultorios All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2179db34-129f-4979-b0ed-5f3aa1acc00d",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "620680c7-b80b-4b97-9a42-821087569873",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET \"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"1"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6dc5aba-72c0-4eed-a0fd-9c83e8a54a18",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"NOficina\":3}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "21f01102-9097-4bff-afe9-7637d75174e7",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"NOficina\":4}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"1"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "762e5e0f-f252-4d4e-a253-635774711850",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"1"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		}
+	]
+}
