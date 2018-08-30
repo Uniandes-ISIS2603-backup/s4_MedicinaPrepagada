@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import java.io.Serializable;
 import java.util.List;
 
@@ -55,11 +56,11 @@ import java.util.List;
  */
 public class PacienteDetailDTO extends PacienteDTO implements Serializable{
     
-//    private List<CitasLaboratorioDTO> citasLaboratorio;
-//    private List<FacturaDTO> facturas;
+    private List<CitaLaboratorioDTO> citasLaboratorio;
+    private List<FacturaDTO> facturas;
     private List<TarjetaCreditoDTO> tarjetasCredito;
     private List<CitaMedicaDTO> citasMedicas;
-//    private List<HistoriaClinicaDTO> historiasClinicas;
+    private List<HistoriaClinicaDTO> historiasClinicas;
     
     /**
      * constructor por defecto
@@ -69,57 +70,58 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
         super();
     }
     
-//    /**
-//     *  Crea un objeto PacienteDetailDTO a partir de un objeto PacienteEntity
-//     * incluyendo los atributos de PacienteDTO.
-//     *
-//     * @param PacienteEntity Entidad PacienteEntity desde la cual se va a crear el
-//     * nuevo objeto.
-//     *
-//     */
-//    public PacienteDetailDTO(PacienteEntity pacienteEntity){
-//        super(pacienteEntity);
-//    }
-//    
-//    /**
-//     * Convierte un objeto AuthorDetailDTO a AuthorEntity incluyendo los
-//     * atributos de AuthorDTO.
-//     *
-//     * @return Nueva objeto AuthorEntity.
-//     *
-//     */
-//    @Override
-//    public PacienteEntity toEntity(){
-//        
-//    }
+    /**
+     *  Crea un objeto PacienteDetailDTO a partir de un objeto PacienteEntity
+     * incluyendo los atributos de PacienteDTO.
+     *
+     * @param pacienteEntityEntidad PacienteEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
+    public PacienteDetailDTO(PacienteEntity pacienteEntity){
+        super(pacienteEntity);
+    }
+    
+    /**
+     * Convierte un objeto AuthorDetailDTO a AuthorEntity incluyendo los
+     * atributos de AuthorDTO.
+     *
+     * @return Nueva objeto AuthorEntity.
+     *
+     */
+    @Override
+    public PacienteEntity toEntity(){
+        return null;
+
+    }
 
     /**
      * @return the citasLaboratorio
      */
-//    public List<CitasLaboratorioDTO> getCitasLaboratorio() {
-//        return citasLaboratorio;
-//    }
+    public List<CitaLaboratorioDTO> getCitasLaboratorio() {
+        return citasLaboratorio;
+    }
 
     /**
      * @param citasLaboratorio the citasLaboratorio to set
      */
-//    public void setCitasLaboratorio(List<CitasLaboratorioDTO> citasLaboratorio) {
-//        this.citasLaboratorio = citasLaboratorio;
-//    }
+    public void setCitasLaboratorio(List<CitaLaboratorioDTO> citasLaboratorio) {
+        this.citasLaboratorio = citasLaboratorio;
+    }
 
     /**
      * @return the facturas
      */
-//    public List<FacturaDTO> getFacturas() {
-//        return facturas;
-//    }
+    public List<FacturaDTO> getFacturas() {
+        return facturas;
+    }
 
     /**
      * @param facturas the facturas to set
      */
-//    public void setFacturas(List<FacturaDTO> facturas) {
-//        this.facturas = facturas;
-//    }
+    public void setFacturas(List<FacturaDTO> facturas) {
+        this.facturas = facturas;
+    }
 
     /**
      * @return the tarjetasCredito
@@ -152,15 +154,15 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
     /**
      * @return the historiasClinicas
      */
-//    public List<HistoriaClinicaDTO> getHistoriasClinicas() {
-//        return historiasClinicas;
-//    }
+    public List<HistoriaClinicaDTO> getHistoriasClinicas() {
+        return historiasClinicas;
+    }
 
     /**
      * @param historiasClinicas the historiasClinicas to set
      */
-//    public void setHistoriasClinicas(List<HistoriaClinicaDTO> historiasClinicas) {
-//        this.historiasClinicas = historiasClinicas;
-//    }
+    public void setHistoriasClinicas(List<HistoriaClinicaDTO> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
+    }
     
 }
