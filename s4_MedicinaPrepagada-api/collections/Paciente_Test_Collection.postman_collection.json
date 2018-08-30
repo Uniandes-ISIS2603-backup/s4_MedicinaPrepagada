@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "1ce19d66-3ceb-4ddd-8fe9-aa220f71ccd9",
+		"name": "PruebasPaciente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crearPaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58e01528-f455-414e-886d-8813ab30c19e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_nombre_e\", data.nombre);",
+							"postman.setGlobalVariable(\"new_fechanacimiento_e\", data.fechanacimiento);",
+							"postman.setGlobalVariable(\"new_direccion_e\", data.direccion);",
+							"postman.setGlobalVariable(\"new_numerocontacto_e\", data.numerocontacto);",
+							"postman.setGlobalVariable(\"new_mail_e\", data.mail);",
+							"postman.setGlobalVariable(\"new_eps_e\", data.eps);",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cedula\":102879457,\n\t\"nombre\" : \"holoo\",\n\t\"fechanacimiento\":\"21/09/87\",\n\t\"direccion\":\"cra 7 # 134 - 80\",\n\t\"numerocontacto\":2012407869,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"la menos peor\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9a18050-bcc7-4f8d-b272-e1801d3542de",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPacientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "beda770f-aa34-4d55-8b02-63de1feffd4a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d5ae01a-73e0-47f9-8199-ced1df15780b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc273413-edaf-4aba-8a7f-2f2fc378b846",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
