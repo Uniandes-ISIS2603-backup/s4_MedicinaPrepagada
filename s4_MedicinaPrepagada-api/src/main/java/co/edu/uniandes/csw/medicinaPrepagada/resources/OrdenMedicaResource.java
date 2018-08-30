@@ -114,7 +114,7 @@ public class OrdenMedicaResource
      */
     
     @PUT
-    @Path("(OrdenMedicaId:\\d+)")
+    @Path("(OrdenMedicaId: \\d+)")
     public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource modificarOrdenMedica: input:(0)", ordenMedicaid);
