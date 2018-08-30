@@ -5,18 +5,25 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import java.io.Serializable;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author ni.ramirez10
  */
-public class CitaMedicaDetail {
-    public CitaMedicaDetail(){
+public class AdministradorDetailDTO extends AdministradorDTO implements Serializable 
+{
+    /**
+     * constructor por defecto
+     */
+    
+    public AdministradorDetailDTO()
+    {
         super();
     }
-    
     
      @Override
     public String toString(){

@@ -32,7 +32,7 @@ public class AdministradorDTO implements Serializable
     
     /**public AdministradorDTO(AdministradorEntity administradorEntity) 
     {
-        if (ordenMedicaEntity != null) 
+        if (AdministradorEntity != null) 
         {
             
         }
