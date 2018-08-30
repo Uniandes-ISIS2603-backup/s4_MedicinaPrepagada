@@ -5,11 +5,16 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  *
  * @author estudiante
  */
-public class LaboratorioDTO {
+public class LaboratorioDTO implements Serializable
+{
     
     
     private String nombre;
@@ -65,7 +70,11 @@ public class LaboratorioDTO {
         return this.horarioDeAtencion;
     }
             
-    
+    @Override
+    public String toString() 
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
     
     
     

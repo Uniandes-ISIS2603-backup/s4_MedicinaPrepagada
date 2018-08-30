@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "63f8bc59-17af-4c27-a00c-0268eee5327a",
+		"name": "PruebasRecursos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET LAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a73ed37-da86-46b3-a60d-130cae652ebd",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST LAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8508d3e3-b375-4e62-bcce-6c0e315755a1",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST FACTURAS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83fd8798-a395-4fff-8594-f30374842795",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET FACTURAS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d554350-965d-45c7-b3bd-469e236dcdb6",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CITALAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fe99e02-8cb3-40ee-922e-b3bdde170233",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaLaboratorio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaLaboratorio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET CITALAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29f0475c-4c80-4139-b7b2-9cb229cd8562",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaLaboratorio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaLaboratorio"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

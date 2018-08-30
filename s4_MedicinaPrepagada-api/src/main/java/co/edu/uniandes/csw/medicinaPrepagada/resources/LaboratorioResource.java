@@ -12,20 +12,30 @@ import java.util.List;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *
  * @author Santiago Rojas
  */
+
+@Path("/laboratorios")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
+
 public class LaboratorioResource {
  
-    public static final Logger LOGGER = Logger.getLogger(LaboratorioResource.class.getName());
+    
+    private static final Logger LOGGER = Logger.getLogger(LaboratorioResource.class.getName());
     
     
     @POST
@@ -34,14 +44,14 @@ public class LaboratorioResource {
         LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: input: (0)", Laboratorio.toString());
         
         LaboratorioDTO nuevoLab = new LaboratorioDTO();
-        
+       
         LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: output: (0)", nuevoLab.toString());
         
         return nuevoLab;
     }
     
     @DELETE
-    @Path("(LaboratorioId://d+)")
+    @Path("(LaboratorioId:\\d+)")
     public void deleteLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "LaboratorioDTO deleteLaboratorio: input : (0)", LaboratorioId);
@@ -49,7 +59,7 @@ public class LaboratorioResource {
     }
     
     @PUT
-    @Path("(LaboratorioId://d+)")
+    @Path("(LaboratorioId:\\d+)")
     public LaboratorioDTO modificarLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
         LOGGER.log(Level.INFO, "LaboratorioResource modificarLaboratorio: input:(0)", LaboratorioId);
@@ -61,7 +71,7 @@ public class LaboratorioResource {
     }
     
     @GET
-    @Path("(LaboratorioId://d+)")
+    @Path("(LaboratorioId:\\d+)")
     public LaboratorioDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
          LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input: (0)", LaboratorioId);
