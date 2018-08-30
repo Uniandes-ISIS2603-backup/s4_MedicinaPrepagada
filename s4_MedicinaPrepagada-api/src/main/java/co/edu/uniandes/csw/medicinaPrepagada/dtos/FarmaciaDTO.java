@@ -19,6 +19,9 @@ public class FarmaciaDTO implements Serializable {
     private String name;
     private String ubicacion;
     private String telefono;
+    private Long lat;
+    private Long lon;
+    private String correo;
     
     
     
@@ -113,6 +116,59 @@ public class FarmaciaDTO implements Serializable {
         this.telefono = telefono;
     }
     
+    /**
+     * Devuelve el correo de la farmacia.
+     *
+     * @return correo
+     */
+    public String getCorreo(){
+        return correo;
+    }
+   
+    /**
+     * Modifica el telefono de la farmacia.
+     *
+     * @param pCorreo the descripcion to set
+     */
+    public void setCorreo(String pCorreo) {
+        this.correo = pCorreo;
+    }
+    
+    /**
+     * Devuelve la latitud de la farmacia.
+     *
+     * @return latitud
+     */
+    public Long getLat() {
+        return lat;
+    }
+
+    /**
+     * Modifica la latitud de la farmacia.
+     *
+     * @param pLat the lat to set
+     */
+    public void setLat(Long pLat) {
+        this.lat = pLat;
+    }
+    
+    /**
+     * Devuelve la longitud de la farmacia.
+     *
+     * @return longitud
+     */
+    public Long getLon() {
+        return lon;
+    }
+
+    /**
+     * Modifica la longitud de la farmacia.
+     *
+     * @param pLon the lon to set
+     */
+    public void setLon(Long pLon) {
+        this.lon = pLon;
+    }
     
     /**
      * Convertir DTO a Entity
