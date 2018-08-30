@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "e3642d25-016a-4eaf-bdd7-cb752a1cf508",
+		"name": "Pruebas-Api-Citamedica",
+		"description": "Estas son las pruebas iniciales para el rescurso citaMedica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80fc055d-2aff-4d5f-8d90-581504c15c78",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"1"
+					]
+				},
+				"description": "Consulta todas las citas medicas "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc98b5e6-1c62-4bdf-8dca-a3f4900d5c63",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"1"
+					]
+				},
+				"description": "Consulta una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "904fef4a-7961-4dd5-a7c2-7cc396190638",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"1"
+					]
+				},
+				"description": "Actualiza una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35b4e7b3-a167-47a4-9a80-db7a9262ae7d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						""
+					]
+				},
+				"description": "Agrega una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59aa873e-0c43-4af7-a062-bc4050f40659",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"1"
+					]
+				},
+				"description": "Elimina una cita medica"
+			},
+			"response": []
+		}
+	]
+}
