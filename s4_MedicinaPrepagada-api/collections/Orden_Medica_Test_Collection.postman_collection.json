@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "266da736-051e-44a3-abdf-37d7f7ee30d2",
+		"name": "Orden_Medica_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Orden Medica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a4885d6-18b6-4fd9-8ec1-a05fc0dd2df9",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody); ",
+							"postman.setGlobalVariable(\"new_id_e\", data.id); ",
+							"postman.setGlobalVariable(\"new_firma_medico_e\", data.firmaMedico); ",
+							"postman.setGlobalVariable(\"new_fecha_expedicion_e\", data.fechaExpedicion);",
+							"postman.setGlobalVariable(\"new_comentarios_e\", data.comentarios);",
+							"postman.setGlobalVariable(\"new_valida_hasta_e\", data.validaHasta);",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 45, \"firmaMedico\": \"Nestor Ivan\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"ordenMedica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orden Medica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f27ad70b-7e51-4db8-afba-dcfb66d1713d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el get\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"ordenMedica",
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Orden Medica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5acb5050-197c-4dc7-8610-09dc234446cd",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el delete\"] = responseCode.code == 204; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"ordenMedica",
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Orden Medica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6bd36db4-220a-49dd-b7a3-c7b259efd0a5",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el put\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"ordenMedica",
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ordenes Medicas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bbc2d1f3-d781-4817-9aaf-d7bcfd5416b6",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el get\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"ordenMedica"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

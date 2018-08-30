@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "97271892-9232-4370-b3cf-8a6f0d574dfc",
+		"name": "Historia_Clinica_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf99ae93-98e5-42bb-ac15-130d14b2c86c",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody); ",
+							"postman.setGlobalVariable(\"new_id_e\", data.id); ",
+							"postman.setGlobalVariable(\"new_fecha_e\", data.fecha); ",
+							"postman.setGlobalVariable(\"new_descripcion_diagnostico_e\", data.descripcionDiagnostico);",
+							"postman.setGlobalVariable(\"new_alergias_e\", data.alergias);",
+							"postman.setGlobalVariable(\"new_peso_e\", data.peso);",
+							"postman.setGlobalVariable(\"new_estatura_e\", data.estatura);",
+							"postman.setGlobalVariable(\"new_fuma_e\", data.fuma);",
+							"postman.setGlobalVariable(\"new_bebe_e\", data.bebe);",
+							"postman.setGlobalVariable(\"new_operaciones_e\", data.operaciones);",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 15, \"fecha\": \"20/08/1995\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"historiaClinica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a46dc620-2c19-40a2-83aa-2827df5f5872",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el get\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"historiaClinica",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "398dbea8-1ceb-44db-a1b4-a278b22dd82d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el delete\"] = responseCode.code == 204; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"historiaClinica",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6d1fe46-a9b1-483c-a8d9-6f968ba2c70e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el put\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"historiaClinica",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Historias Clinicas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ccc1692-677c-4a78-af25-3da4b17c45be",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el get\"] = responseCode.code == 200; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"historiaClinica"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
