@@ -93,6 +93,15 @@ public class PacienteResource {
         return paciente;
     }
     
+    /**
+     * Retorna todos los Pacientes en el sistema
+     * 
+     */
+    @GET
+    public List<PacienteDTO> getAll(){
+        return new LinkedList<PacienteDTO>();
+    }
+    
 //    /**
 //     * Crea una tarjeta de credito al paciente con el id dado por param
 //     * @param tarjetaCredito el dto de la tarjeta de credito que se quiere crear
