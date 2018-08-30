@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,10 +114,11 @@ public class HistoriaClinicaResource
     
     @PUT
     @Path("(HistoriaClinicaId: \\d+)")
-    public HistoriaClinicaDTO modificarHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId) throws BusinessLogicException
+    public HistoriaClinicaDTO modificarHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
-        HistoriaClinicaDTO modificarDetailDto = new HistoriaClinicaDTO ();        
+        pHistoria.setId(histClinicaId);
+        HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO ();        
         LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto.toString());
         return modificarDetailDto;
     }

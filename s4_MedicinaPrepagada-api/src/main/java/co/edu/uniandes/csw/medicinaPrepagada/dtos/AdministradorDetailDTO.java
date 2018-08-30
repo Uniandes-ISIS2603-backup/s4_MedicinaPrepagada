@@ -16,6 +16,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class AdministradorDetailDTO extends AdministradorDTO implements Serializable 
 {
+    
+    private Long id; 
+    
     /**
      * constructor por defecto
      */
@@ -23,6 +26,26 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     public AdministradorDetailDTO()
     {
         super();
+    }
+    
+    /**
+     * Obtiene el atributo id.
+     * @return atributo id.
+     */
+    
+    public Long getId() 
+    {
+        return id;
+    }
+
+    /**
+     * Establece el valor del atributo id.
+     * @param id nuevo valor del atributo
+     */
+    
+    public void setId(Long id) 
+    {
+        this.id = id;
     }
     
      @Override

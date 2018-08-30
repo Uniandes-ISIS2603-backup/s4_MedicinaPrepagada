@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,10 +115,11 @@ public class AdministradorResource
     
     @PUT
     @Path("(AdministradorId: \\d+)")
-    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId) throws BusinessLogicException
+    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
-        AdministradorDTO modificarDetailDto = new AdministradorDTO ();        
+        pAdmi.setId(administradorId);
+        AdministradorDetailDTO modificarDetailDto = new AdministradorDetailDTO ();        
         LOGGER.log(Level.INFO,"AdministradorResource modificarAdministrador: output: (0)", modificarDetailDto.toString());
         return modificarDetailDto;
     }

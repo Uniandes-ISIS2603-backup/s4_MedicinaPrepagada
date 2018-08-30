@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.OrdenMedicaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.OrdenMedicaDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,11 +115,12 @@ public class OrdenMedicaResource
      */
     
     @PUT
-    @Path("(OrdenMedicaId: \\d+)")
-    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
+    @Path("(ordenMedicaId: \\d+)")
+    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid, OrdenMedicaDetailDTO pOrden) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource modificarOrdenMedica: input:(0)", ordenMedicaid);
-        OrdenMedicaDTO modificarDetailDto = new OrdenMedicaDTO ();        
+        pOrden.setId(ordenMedicaid);
+        OrdenMedicaDetailDTO modificarDetailDto = new OrdenMedicaDetailDTO();        
         LOGGER.log(Level.INFO,"OrdenMedicaResource modificarOrdenMedica: output: (0)", modificarDetailDto.toString());
         return modificarDetailDto;
     }
