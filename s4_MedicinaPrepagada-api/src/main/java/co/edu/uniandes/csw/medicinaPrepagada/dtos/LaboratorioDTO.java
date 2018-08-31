@@ -16,6 +16,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class LaboratorioDTO implements Serializable
 {
     
+    private Long id;
     
     private String nombre;
     
@@ -25,9 +26,22 @@ public class LaboratorioDTO implements Serializable
     
     private String horarioDeAtencion;
     
+    private double latitud;
+    
+    private double longitud;
+    
     public LaboratorioDTO()
     {
         
+    }
+    public void setId(Long pId)
+    {
+        this.id = pId;
+    }
+    
+    public Long getId ()
+    {
+        return this.id;
     }
     
     public void setNombre (String pNombre)
@@ -68,6 +82,26 @@ public class LaboratorioDTO implements Serializable
     public String getHorario ()
     {
         return this.horarioDeAtencion;
+    }
+    
+        public void setLatitud(double pLatitud)
+    {
+        this.latitud = pLatitud;
+    }
+    
+    public double getLatitud ()
+    {
+        return this.latitud;
+    }
+    
+    public void setLongitud(double pLongitud)
+    {
+        this.latitud = pLongitud;
+    }
+    
+    public double getLongitud ()
+    {
+        return this.longitud;
     }
             
     @Override

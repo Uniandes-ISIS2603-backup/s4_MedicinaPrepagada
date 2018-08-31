@@ -25,6 +25,8 @@ public class FacturaDTO {
     
     private String concepto;
     
+    private boolean pagada;
+    
     public FacturaDTO ()
     {
         
@@ -79,6 +81,15 @@ public class FacturaDTO {
         return this.concepto;
     }
     
+    public void setPagada(boolean pPagada)
+    {
+        this.pagada=pPagada;
+    }
+    
+    public boolean getPagada ()
+    {
+        return pagada;
+    }
       @Override
     public String toString() 
     {
