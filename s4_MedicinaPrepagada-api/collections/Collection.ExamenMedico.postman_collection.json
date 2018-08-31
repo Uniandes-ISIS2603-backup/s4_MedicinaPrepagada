@@ -100,10 +100,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"name\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
+					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +113,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"examenesMedicos",
-						"1"
+						""
 					]
 				},
 				"description": "Modifica la información de una farmacia"
@@ -126,11 +126,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "18fc4044-974e-4807-a929-b2e979fa0df1",
+						"id": "3bf84f18-2019-49a9-a8e2-f058632660ff",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_name_e\", data.name);",
+							"postman.setGlobalVariable(\"new_nombre_e\", data.nombre);",
 							"postman.setGlobalVariable(\"new_telefono_e\", data.telefono);",
 							"postman.setGlobalVariable(\"new_id_e\", data.id);",
 							"postman.setGlobalVariable(\"new_ubicacion_e\", data.ubicacion);",
@@ -149,7 +149,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"name\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
+					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos",

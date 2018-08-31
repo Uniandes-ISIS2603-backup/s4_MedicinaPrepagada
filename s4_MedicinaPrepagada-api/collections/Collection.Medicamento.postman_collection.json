@@ -11,11 +11,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4f79b257-2ded-42d5-b01a-3d9c4be03df8",
+						"id": "cd2431d9-d045-4e8e-8f34-317386d17859",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_name_e\", data.name);",
+							"postman.setGlobalVariable(\"new_nombre_e\", data.nombre);",
 							"postman.setGlobalVariable(\"new_costo_e\", data.costo);",
 							"postman.setGlobalVariable(\"new_descripcion_e\", data.descripcion);",
 							"postman.setGlobalVariable(\"new_elaboradoPor_e\", data.elaboradoPor);",
@@ -37,7 +37,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"name\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos",
@@ -152,7 +152,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"name\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",

@@ -16,11 +16,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class FarmaciaDTO implements Serializable {
     
     private Long id;
-    private String name;
+    private String nombre;
     private String ubicacion;
     private String telefono;
-    private Long lat;
-    private Long lon;
+    private double latitud;
+    private double longitud;
     private String correo;
     
     
@@ -67,8 +67,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
@@ -76,8 +76,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String pNombre) {
+        this.nombre = pNombre;
     }
     
     /**
@@ -139,8 +139,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @return latitud
      */
-    public Long getLat() {
-        return lat;
+    public double getLatitud() {
+        return latitud;
     }
 
     /**
@@ -148,8 +148,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @param pLat the lat to set
      */
-    public void setLat(Long pLat) {
-        this.lat = pLat;
+    public void setLatitud(double pLat) {
+        this.latitud = pLat;
     }
     
     /**
@@ -157,8 +157,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @return longitud
      */
-    public Long getLon() {
-        return lon;
+    public double getLongitud() {
+        return longitud;
     }
 
     /**
@@ -166,8 +166,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @param pLon the lon to set
      */
-    public void setLon(Long pLon) {
-        this.lon = pLon;
+    public void setLongitud(double pLon) {
+        this.longitud = pLon;
     }
     
     /**
