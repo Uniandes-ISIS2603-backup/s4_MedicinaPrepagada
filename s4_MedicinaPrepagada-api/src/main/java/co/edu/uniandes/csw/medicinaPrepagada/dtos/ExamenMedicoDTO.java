@@ -16,8 +16,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ExamenMedicoDTO implements Serializable {
     
     private Long id;
-    private String name;
-    private String costo;
+    private String nombre;
+    private double costo;
     private String recomendaciones;
     
     
@@ -63,8 +63,8 @@ public class ExamenMedicoDTO implements Serializable {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
@@ -72,8 +72,8 @@ public class ExamenMedicoDTO implements Serializable {
      *
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String pNombre) {
+        this.nombre = pNombre;
     }
     
     
@@ -83,7 +83,7 @@ public class ExamenMedicoDTO implements Serializable {
      *
      * @return the costo
      */
-    public String getCosto() {
+    public double getCosto() {
         return costo;
     }
 
@@ -92,7 +92,7 @@ public class ExamenMedicoDTO implements Serializable {
      *
      * @param costo the costo set
      */
-    public void setCosto(String costo) {
+    public void setCosto(double pCosto) {
         this.costo = costo;
     }
     
