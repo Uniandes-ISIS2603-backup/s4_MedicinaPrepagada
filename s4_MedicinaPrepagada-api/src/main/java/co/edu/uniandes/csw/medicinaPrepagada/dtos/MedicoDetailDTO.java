@@ -16,7 +16,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class MedicoDetailDTO extends MedicoDTO implements Serializable{
     
-    private List<HorarioAtencionDTO> horariosReservados;
+    private List<HorarioAtencionDTO> horariosAtencion;
     
     public MedicoDetailDTO (){
         super();
@@ -28,16 +28,16 @@ public class MedicoDetailDTO extends MedicoDTO implements Serializable{
     }
 
     /**
-     * @return the horariosReservados
+     * @return the horariosAtencion
      */
     public List<HorarioAtencionDTO> getHorariosReservados() {
-        return horariosReservados;
+        return horariosAtencion;
     }
 
     /**
-     * @param horariosReservados the horariosReservados to set
+     * @param horariosAtencion the horariosAtencion to set
      */
-    public void setHorariosReservados(List<HorarioAtencionDTO> horariosReservados) {
-        this.horariosReservados = horariosReservados;
+    public void setHorariosReservados(List<HorarioAtencionDTO> horariosAtencion) {
+        this.horariosAtencion = horariosAtencion;
     }
 }
