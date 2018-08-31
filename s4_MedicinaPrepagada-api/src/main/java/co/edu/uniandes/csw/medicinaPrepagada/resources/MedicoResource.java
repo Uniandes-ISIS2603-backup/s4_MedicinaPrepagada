@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicoDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicoDetail;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicoDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;

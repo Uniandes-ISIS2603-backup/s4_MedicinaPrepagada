@@ -26,7 +26,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Santiago Rojas
  */
-@Path ("cita laboratorio")
+@Path ("/citaLaboratorio")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

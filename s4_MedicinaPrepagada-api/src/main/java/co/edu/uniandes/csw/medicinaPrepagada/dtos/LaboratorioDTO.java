@@ -5,12 +5,18 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  *
  * @author estudiante
  */
-public class LaboratorioDTO {
+public class LaboratorioDTO implements Serializable
+{
     
+    private Long id;
     
     private String nombre;
     
@@ -20,9 +26,22 @@ public class LaboratorioDTO {
     
     private String horarioDeAtencion;
     
+    private double latitud;
+    
+    private double longitud;
+    
     public LaboratorioDTO()
     {
         
+    }
+    public void setId(Long pId)
+    {
+        this.id = pId;
+    }
+    
+    public Long getId ()
+    {
+        return this.id;
     }
     
     public void setNombre (String pNombre)
@@ -64,8 +83,32 @@ public class LaboratorioDTO {
     {
         return this.horarioDeAtencion;
     }
-            
     
+        public void setLatitud(double pLatitud)
+    {
+        this.latitud = pLatitud;
+    }
+    
+    public double getLatitud ()
+    {
+        return this.latitud;
+    }
+    
+    public void setLongitud(double pLongitud)
+    {
+        this.latitud = pLongitud;
+    }
+    
+    public double getLongitud ()
+    {
+        return this.longitud;
+    }
+            
+    @Override
+    public String toString() 
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
     
     
     

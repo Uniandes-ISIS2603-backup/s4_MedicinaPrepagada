@@ -16,10 +16,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class MedicamentoDTO implements Serializable {
     
     private Long id;
-    private String name;
+    private String nombre;
     private String cantidad;
     private String descripcion;
-    private String costo;
+    private double costo;
     private String elaboradoPor;
     
     
@@ -56,8 +56,8 @@ public class MedicamentoDTO implements Serializable {
      *
      * @param id the id to set
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long pId) {
+        this.id = pId;
     }
 
     /**
@@ -65,17 +65,17 @@ public class MedicamentoDTO implements Serializable {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
      * Modifica el nombre del medicamento.
      *
-     * @param name the name to set
+     * @param pNombre the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String pNombre) {
+        this.nombre = pNombre;
     }
     
     /**
@@ -92,8 +92,8 @@ public class MedicamentoDTO implements Serializable {
      *
      * @param cantidad the cantidad to set
      */
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
+    public void setCantidad(String pCantidad) {
+        this.cantidad = pCantidad;
     }
     
     /**
@@ -108,10 +108,10 @@ public class MedicamentoDTO implements Serializable {
     /**
      * Modifica la descripcion del medicamento.
      *
-     * @param descripcion the descripcion to set
+     * @param pDescripcion the descripcion to set
      */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String pDescripcion) {
+        this.descripcion = pDescripcion;
     }
     
     
@@ -120,17 +120,17 @@ public class MedicamentoDTO implements Serializable {
      *
      * @return the costo
      */
-    public String getCosto() {
+    public double getCosto() {
         return costo;
     }
 
     /**
      * Modifica el costo del medicamento.
      *
-     * @param costo the costo set
+     * @param pCosto the costo set
      */
-    public void setCosto(String costo) {
-        this.costo = costo;
+    public void setCosto(double pCosto) {
+        this.costo = pCosto;
     }
     
     /**
@@ -145,10 +145,10 @@ public class MedicamentoDTO implements Serializable {
     /**
      * Modifica el elaborado por del medicamento.
      *
-     * @param elaboradoPor the elaboradoPor set
+     * @param pElaboradoPor the elaboradoPor set
      */
-    public void setElaboradoPor(String elaboradoPor) {
-        this.elaboradoPor = elaboradoPor;
+    public void setElaboradoPor(String pElaboradoPor) {
+        this.elaboradoPor = pElaboradoPor;
     }
     
     

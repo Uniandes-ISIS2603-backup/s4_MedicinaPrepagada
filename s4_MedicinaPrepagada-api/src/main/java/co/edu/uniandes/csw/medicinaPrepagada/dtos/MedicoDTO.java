@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class MedicoDTO {
+public class MedicoDTO extends UsuarioDTO{
     
     private long idMedico;
     
@@ -22,8 +22,10 @@ public class MedicoDTO {
     
     private String correo;
     
+    private EspecialidadDTO especialidad;
+    
     public MedicoDTO(){
-        
+        super();
     }
 
     /**
@@ -86,4 +88,20 @@ public class MedicoDTO {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
+    /**
+     * @return the especialidad
+     */
+    public EspecialidadDTO getEspecialidad() {
+        return especialidad;
+    }
+
+    /**
+     * @param especialidad the especialidad to set
+     */
+    public void setEspecialidad(EspecialidadDTO especialidad) {
+        this.especialidad = especialidad;
+    }
+    
+    
 }
