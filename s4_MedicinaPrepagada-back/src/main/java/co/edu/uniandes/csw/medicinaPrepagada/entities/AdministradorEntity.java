@@ -5,10 +5,36 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+
 /**
  *
- * @author estudiante
+ * @author ni.ramirez10
  */
-public class AdministradorEntity {
+
+@Entity 
+public class AdministradorEntity extends BaseEntity implements Serializable 
+{
+    private Long id; 
     
+    /**
+     * Devuelve el identificador del administrador.
+     * @return El id
+     */
+    
+    public Long getId() 
+    {
+        return id;
+    }
+
+    /**
+     * Modifica el identificador del administrador.
+     * @param pId El id a poner
+     */
+    
+    public void setId(Long pId) 
+    {
+        this.id = pId;
+    }
 }
