@@ -109,12 +109,15 @@ public class AdministradorResource
     
     /**
      * Modifica el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
+     * @param pAdmi
+     * @return 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el administrador.
      */
     
     @PUT
-    @Path("(AdministradorId: \\d+)")
+    @Path("(administradorId: \\d+)")
     public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
