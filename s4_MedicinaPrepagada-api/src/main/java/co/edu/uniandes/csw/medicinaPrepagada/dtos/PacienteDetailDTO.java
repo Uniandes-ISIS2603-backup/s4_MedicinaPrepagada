@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -80,6 +81,9 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
      */
     public PacienteDetailDTO(PacienteEntity pacienteEntity){
         super(pacienteEntity);
+        if(pacienteEntity!=null){
+           
+        }
     }
     
     /**
