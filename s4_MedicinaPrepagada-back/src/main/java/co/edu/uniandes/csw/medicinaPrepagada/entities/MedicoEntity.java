@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -21,6 +23,10 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     private int telefono;
     private String correo;
     private EspecialidadEntity especialidad;
+    
+//    @PodamExclude
+//    @OneToMany Duda!
+//    private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {
         return especialidad;
@@ -61,6 +67,14 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+//    public HorarioAtencionEntity getHorariosAtencion() {
+//        return horariosAtencion;
+//    }
+//
+//    public void setHorariosAtencion(HorarioAtencionEntity horariosAtencion) {
+//        this.horariosAtencion = horariosAtencion;
+//    }
     
     
 }

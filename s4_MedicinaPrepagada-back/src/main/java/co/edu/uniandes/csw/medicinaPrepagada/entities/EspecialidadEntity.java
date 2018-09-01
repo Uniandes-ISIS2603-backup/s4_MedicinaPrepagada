@@ -5,12 +5,17 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Daniel Ivan Romero
  */
+@Entity
 public class EspecialidadEntity {
     
+    @Id
     private long id;
     private String nombre;
 
