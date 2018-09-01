@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.persistence.Entity;
 @Entity 
 public class AdministradorEntity extends BaseEntity implements Serializable 
 {
+    @Id
     private Long id; 
     
     /**
