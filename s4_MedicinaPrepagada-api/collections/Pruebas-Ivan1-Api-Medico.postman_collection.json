@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "55b16076-67a7-4765-b280-c9303343e1a5",
+		"name": "Pruebas-Ivan1-Api-Medico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"1"
+					]
+				},
+				"description": "Elimina un medico del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ba09d121-0f38-4ea5-9192-0b2fcd69cdd8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "Agrega un medico al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56af3466-05e8-40ff-87f9-d4fd70216e41",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"1"
+					]
+				},
+				"description": "Actualiza un medico del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "248133d5-efa4-4dbf-b89f-89c30302b899",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"1"
+					]
+				},
+				"description": "Consulta un medico del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d85f0750-d732-48fb-8f40-4107308c85c3",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "Consulta todos los medicos del sistema"
+			},
+			"response": []
+		}
+	]
+}

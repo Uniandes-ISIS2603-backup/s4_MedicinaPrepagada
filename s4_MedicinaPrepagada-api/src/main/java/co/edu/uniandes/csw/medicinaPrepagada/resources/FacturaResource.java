@@ -11,17 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *
  * @author Santiago Rojas
  */
+@Path("/facturas")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class FacturaResource {
+    
+    
     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
     
     @POST
@@ -37,7 +46,7 @@ public class FacturaResource {
     }
     
     @GET
-    @Path("(FacturaId://d+)")
+    @Path("(FacturaId:\\d+)")
     public FacturaDTO getFactura (@PathParam ("FacturaId") int FacturaId)
     {
          LOGGER.log(Level.INFO, "FacturaResource getFactura: input: (0)", FacturaId);

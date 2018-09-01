@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,16 +109,20 @@ public class AdministradorResource
     
     /**
      * Modifica el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
+     * @param pAdmi
+     * @return 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el administrador.
      */
     
     @PUT
-    @Path("(AdministradorId:\\d+)")
-    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId) throws BusinessLogicException
+    @Path("(administradorId: \\d+)")
+    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
-        AdministradorDTO modificarDetailDto = new AdministradorDTO ();        
+        pAdmi.setId(administradorId);
+        AdministradorDetailDTO modificarDetailDto = new AdministradorDetailDTO ();        
         LOGGER.log(Level.INFO,"AdministradorResource modificarAdministrador: output: (0)", modificarDetailDto.toString());
         return modificarDetailDto;
     }

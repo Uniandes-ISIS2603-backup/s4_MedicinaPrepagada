@@ -16,9 +16,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class FarmaciaDTO implements Serializable {
     
     private Long id;
-    private String name;
+    private String nombre;
     private String ubicacion;
     private String telefono;
+    private double latitud;
+    private double longitud;
+    private String correo;
     
     
     
@@ -64,8 +67,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
@@ -73,8 +76,8 @@ public class FarmaciaDTO implements Serializable {
      *
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String pNombre) {
+        this.nombre = pNombre;
     }
     
     /**
@@ -113,6 +116,59 @@ public class FarmaciaDTO implements Serializable {
         this.telefono = telefono;
     }
     
+    /**
+     * Devuelve el correo de la farmacia.
+     *
+     * @return correo
+     */
+    public String getCorreo(){
+        return correo;
+    }
+   
+    /**
+     * Modifica el telefono de la farmacia.
+     *
+     * @param pCorreo the descripcion to set
+     */
+    public void setCorreo(String pCorreo) {
+        this.correo = pCorreo;
+    }
+    
+    /**
+     * Devuelve la latitud de la farmacia.
+     *
+     * @return latitud
+     */
+    public double getLatitud() {
+        return latitud;
+    }
+
+    /**
+     * Modifica la latitud de la farmacia.
+     *
+     * @param pLat the lat to set
+     */
+    public void setLatitud(double pLat) {
+        this.latitud = pLat;
+    }
+    
+    /**
+     * Devuelve la longitud de la farmacia.
+     *
+     * @return longitud
+     */
+    public double getLongitud() {
+        return longitud;
+    }
+
+    /**
+     * Modifica la longitud de la farmacia.
+     *
+     * @param pLon the lon to set
+     */
+    public void setLongitud(double pLon) {
+        this.longitud = pLon;
+    }
     
     /**
      * Convertir DTO a Entity
