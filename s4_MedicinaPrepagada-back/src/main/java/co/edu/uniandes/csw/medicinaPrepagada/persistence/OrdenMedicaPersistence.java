@@ -24,7 +24,7 @@ public class OrdenMedicaPersistence
 {
     private static final Logger LOGGER = Logger.getLogger(OrdenMedicaPersistence.class.getName());
     
-    @PersistenceContext(unitName = "OrdenMedicaPU")
+    @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;
     
     /**

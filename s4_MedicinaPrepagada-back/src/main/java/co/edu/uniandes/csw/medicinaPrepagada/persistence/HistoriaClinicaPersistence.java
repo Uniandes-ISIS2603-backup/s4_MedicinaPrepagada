@@ -24,7 +24,7 @@ public class HistoriaClinicaPersistence
 {
     private static final Logger LOGGER = Logger.getLogger(HistoriaClinicaPersistence.class.getName());
     
-    @PersistenceContext(unitName = "HistoriaClinicaPU")
+    @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;
     
     /**
