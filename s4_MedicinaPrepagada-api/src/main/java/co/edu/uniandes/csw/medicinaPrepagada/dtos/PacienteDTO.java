@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -67,17 +68,17 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      * 
      * @param pacienteEntity: es la entidad para convertir en DTO
      */
-    //public PacienteDTO(PacienteEntity pacienteEntity){
-      //  if(pacienteEntity != null){
-        //    this.cedula = pacienteEntity.getCedula();
-         //   this.nombre = pacienteEntity.getNombre();
-         //   this.fechaNacimiento = pacienteEntity.getFechaNacimiento();
-         //   this.direccion = pacienteEntity.getDireccion();
-         //   this.numeroContacto = pacienteEntity.getNumeroContacto();
-         //   this.mail = pacienteEntity.getMail();
-         //   this.eps = pacienteEntity.getEps();
-       // }
-   // }
+    public PacienteDTO(PacienteEntity pacienteEntity){
+        if(pacienteEntity != null){
+            this.cedula = pacienteEntity.getCedula();
+            this.nombre = pacienteEntity.getNombre();
+            this.fechaNacimiento = pacienteEntity.getFechaNacimiento();
+            this.direccion = pacienteEntity.getDireccion();
+            this.numeroContacto = pacienteEntity.getNumeroContacto();
+            this.mail = pacienteEntity.getMail();
+            this.eps = pacienteEntity.getEps();
+        }
+    }
 
     /**
      * @return the cedula
@@ -181,17 +182,17 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      * convierte DTO a entity
      * @return un entity con los valores del dto
      */
-    //public PacienteEntity toEntity(){
-      //  PacienteEntity pacienteEntity = new PacienteEntity();
-        //pacienteEntity.setCedula(this.cedula);
-        //pacienteEntity.setNombre(this.nombre);
-        //pacienteEntity.setFechaNacimiento(this.fechaNacimiento);
-        //pacienteEntity.setMail(this.mail);
-        //pacienteEntity.setDireccion(this.direccion);
-        //pacienteEntity.setNumeroContacto(this.numeroContacto);
-       // pacienteEntity.setEps(this.eps);
-       // return pacienteEntity;
-   // }
+    public PacienteEntity toEntity(){
+        PacienteEntity pacienteEntity = new PacienteEntity();
+        pacienteEntity.setCedula(this.cedula);
+        pacienteEntity.setNombre(this.nombre);
+        pacienteEntity.setFechaNacimiento(this.fechaNacimiento);
+        pacienteEntity.setMail(this.mail);
+        pacienteEntity.setDireccion(this.direccion);
+        pacienteEntity.setNumeroContacto(this.numeroContacto);
+        pacienteEntity.setEps(this.eps);
+        return pacienteEntity;
+    }
     
     @Override
     public String toString(){
