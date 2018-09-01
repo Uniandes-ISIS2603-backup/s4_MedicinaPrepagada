@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -24,6 +25,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
+    @Id
     private Long id; 
     @Temporal(TemporalType.DATE)
     private Date fecha; 
@@ -35,9 +37,9 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private boolean bebe; 
     private String operaciones; 
     
-    @PodamExclude
-    @ManyToOne
-    private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
+   // @PodamExclude
+   // @ManyToOne
+   // private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
     
     /**
      * Obtiene el atributo id.
@@ -224,20 +226,20 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @return Lista de ordenes medicas
      */
     
-    public List<OrdenMedicaEntity> getOrdenesMedicas()
-    {
-        return ordenesMedicas;
-    }
-    
-    /**
-     * Modifica las ordenes medicas de la historia clinica.
-     * @param pOrdenesMedicas Las nuevas ordenes medicas.
-     */
-    
-    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
-    {
-        this.ordenesMedicas = pOrdenesMedicas;
-    }
+//    public List<OrdenMedicaEntity> getOrdenesMedicas()
+//    {
+//        return ordenesMedicas;
+//    }
+//    
+//    /**
+//     * Modifica las ordenes medicas de la historia clinica.
+//     * @param pOrdenesMedicas Las nuevas ordenes medicas.
+//     */
+//    
+//    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
+//    {
+//        this.ordenesMedicas = pOrdenesMedicas;
+//    }
     
     
     
