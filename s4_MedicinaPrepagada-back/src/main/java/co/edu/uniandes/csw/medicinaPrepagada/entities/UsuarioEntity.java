@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author MIGUELHOYOS
  */
 @Entity
-public class UsuarioEntity extends BaseEntity{
+public class UsuarioEntity{
     
     private String login;
     private String contrasena;

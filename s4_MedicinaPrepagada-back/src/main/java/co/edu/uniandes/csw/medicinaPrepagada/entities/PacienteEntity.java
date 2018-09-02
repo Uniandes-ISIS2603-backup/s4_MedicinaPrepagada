@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *clase que representa un Paciente
@@ -18,21 +20,26 @@ import javax.persistence.OneToMany;
 @Entity
 public class PacienteEntity extends UsuarioEntity  implements Serializable{
     
+//    @PodamExclude    
 //    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
 //    private List<CitaLaboratorioEntity> citasLaboratorio;
 //    
+//    @PodamExclude  
 //    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
 //    private List<FacturaEntity> facturas;
     
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<TarjetaCreditoEntity> tarjetasCredito;
     
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<CitaMedicaEntity> citasMedicas;
-//    
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<HistoriaClinicaEntity> historiasClinicas;
+    @PodamExclude    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<CitaMedicaEntity> citasMedicas;
     
+    @PodamExclude    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<HistoriaClinicaEntity> historiasClinicas;
+    
+    @Id
     private Long cedula;
     private String nombre;
     private String fechaNacimiento;
@@ -86,30 +93,30 @@ public class PacienteEntity extends UsuarioEntity  implements Serializable{
     /**
      * @return the citasMedicas
      */
-//    public List<CitaMedicaEntity> getCitasMedicas() {
-//        return citasMedicas;
-//    }
+    public List<CitaMedicaEntity> getCitasMedicas() {
+        return citasMedicas;
+    }
 
     /**
      * @param citasMedicas the citasMedicas to set
      */
-//    public void setCitasMedicas(List<CitaMedicaEntity> citasMedicas) {
-//        this.citasMedicas = citasMedicas;
-//    }
+    public void setCitasMedicas(List<CitaMedicaEntity> citasMedicas) {
+        this.citasMedicas = citasMedicas;
+    }
 
     /**
      * @return the historiasClinicas
      */
-//    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
-//        return historiasClinicas;
-//    }
+    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
+        return historiasClinicas;
+    }
 
     /**
      * @param historiasClinicas the historiasClinicas to set
      */
-//    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
-//        this.historiasClinicas = historiasClinicas;
-//    }
+    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
+    }
 
     /**
      * @return the cedula
