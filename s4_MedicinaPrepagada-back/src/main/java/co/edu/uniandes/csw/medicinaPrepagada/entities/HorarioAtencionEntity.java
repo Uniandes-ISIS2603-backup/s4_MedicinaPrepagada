@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -33,12 +35,12 @@ public class HorarioAtencionEntity implements Serializable
     private Long id;
 
     @Temporal(TemporalType.DATE)
-    //@PodamStrategyValue(DateStrategy.class)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaInicio;
     
     
      @Temporal(TemporalType.DATE)
-    //@PodamStrategyValue(DateStrategy.class)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaFin;
      
      
