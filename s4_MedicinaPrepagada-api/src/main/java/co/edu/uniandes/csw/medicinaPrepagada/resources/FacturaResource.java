@@ -46,7 +46,7 @@ public class FacturaResource {
     }
     
     @GET
-    @Path("(FacturaId:\\d+)")
+    @Path("{FacturaId:\\d+}")
     public FacturaDTO getFactura (@PathParam ("FacturaId") int FacturaId)
     {
          LOGGER.log(Level.INFO, "FacturaResource getFactura: input: (0)", FacturaId);
