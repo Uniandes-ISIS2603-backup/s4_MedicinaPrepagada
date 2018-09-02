@@ -19,8 +19,8 @@ import javax.persistence.Query;
  * @author Daniel Ivan Romero
  */
 @Stateless
-public class EspecialidadPersistance {
-    private static final Logger LOGGER = Logger.getLogger(EspecialidadPersistance.class.getName());
+public class EspecialidadPersistence {
+    private static final Logger LOGGER = Logger.getLogger(EspecialidadPersistence.class.getName());
     
     @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;
