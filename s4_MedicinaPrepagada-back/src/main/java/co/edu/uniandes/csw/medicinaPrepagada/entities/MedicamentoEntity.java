@@ -3,49 +3,80 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.medicinaPrepagada.dtos;
+package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
 import java.io.Serializable;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
+ * Clase que representa un medicamento en la persistencia y permite su
+ * serialización.
  *
- * @author estudiante
+ * @author ncobos
  */
-public class MedicamentoDTO implements Serializable {
+@Entity
+public class MedicamentoEntity extends BaseEntity implements Serializable {
     
-    private Long id;
-    private String nombre;
+   private String nombre;
     private String cantidad;
     private String descripcion;
     private double costo;
     private String elaboradoPor;
     
+    @javax.persistence.Id
+    private Long id;
+    
+    
+    
+    @PodamExclude
+    @OneToMany(
+            mappedBy ="medicamento",     
+            fetch = javax.persistence.FetchType.LAZY)
+            Collection<FarmaciaEntity> farmacias;
+    
+    @PodamExclude
+    @ManyToOne
+    private OrdenMedicaEntity ordenMedica;
     
     /**
-     * Constructor por defecto
+     * Devuelve las farmacias del medicamento.
+     *
+     * @return farmacias
      */
-    public MedicamentoDTO() {
+    public Collection<FarmaciaEntity> getFarmacias() {
+        return farmacias;
+    }
+
+    /**
+     * Modifica las farmacias del medicamento.
+     *
+     * @param pFarmacias the farmacias to set
+     */
+    public void setFarmacias(Collection<FarmaciaEntity> pFarmacias) {
+        this.farmacias = pFarmacias;
     }
     
-    /**
-     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-     * la entidad que viene de argumento.
+     /**
+     * Devuelve la orden medica del medicamento.
      *
-     * @param medicamentoEntity: Es la entidad que se va a convertir a DTO
+     * @return ordenMedica
      */
-    public MedicamentoDTO(MedicamentoEntity medicamentoEntity) {
-        if (medicamentoEntity != null) {
-            this.id = medicamentoEntity.getId();
-            this.nombre = medicamentoEntity.getNombre();
-            this.cantidad = medicamentoEntity.getCantidad();
-            this.descripcion = medicamentoEntity.getDescripcion();
-            this.costo = medicamentoEntity.getCosto();
-            this.elaboradoPor = medicamentoEntity.getElaboradoPor();
+    public OrdenMedicaEntity getOrdenMedica() {
+        return ordenMedica;
+    }
 
-        }
+    /**
+     * Modifica la orden medica del medicamento.
+     *
+     * @param pOrden the orden medica to set
+     */
+    public void setOrdenMedica(OrdenMedicaEntity pOrden) {
+        this.ordenMedica = pOrden;
     }
     
     /**
@@ -96,7 +127,7 @@ public class MedicamentoDTO implements Serializable {
     /**
      * Modifica la cantidad del medicamento.
      *
-     * @param pCantidad the cantidad to set
+     * @param cantidad the cantidad to set
      */
     public void setCantidad(String pCantidad) {
         this.cantidad = pCantidad;
@@ -157,25 +188,4 @@ public class MedicamentoDTO implements Serializable {
         this.elaboradoPor = pElaboradoPor;
     }
     
-    
-    /**
-     * Convertir DTO a Entity
-     *
-     * @return Un Entity con los valores del DTO
-     */
-    public MedicamentoEntity toEntity() {
-        MedicamentoEntity medicamentoEntity = new MedicamentoEntity();
-        medicamentoEntity.setId(this.id);
-        medicamentoEntity.setNombre(this.nombre);
-        medicamentoEntity.setCantidad(this.cantidad );
-        medicamentoEntity.setDescripcion(this.descripcion);
-        medicamentoEntity.setCosto(this.costo);
-        medicamentoEntity.setElaboradoPor(this.elaboradoPor);
-        return medicamentoEntity;
-    }
-     @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
 }
-
