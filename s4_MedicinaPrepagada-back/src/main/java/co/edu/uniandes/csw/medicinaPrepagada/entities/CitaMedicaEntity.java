@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.util.Date;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -15,6 +16,7 @@ import javax.persistence.TemporalType;
  *
  * @author Daniel Ivan Romero
  */
+@Entity
 public class CitaMedicaEntity {
     
     @Id
@@ -23,10 +25,10 @@ public class CitaMedicaEntity {
     private Date fecha;
     private String comentarios;
     
-//    @ManyToOne
+//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
 //    private PacitenteEntity pacienteAAtender;
 //    
-//    @ManyToOne
+//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
 //    private HorarioAtencionEntity horarioAtencionAsignado;
 
     public long getId() {

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -22,10 +23,11 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     private String nombre;
     private int telefono;
     private String correo;
+    
     private EspecialidadEntity especialidad;
     
 //    @PodamExclude
-//    @OneToMany Duda!
+//    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch=FetchType.LAZY)
 //    private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {
