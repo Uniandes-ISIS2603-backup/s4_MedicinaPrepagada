@@ -18,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author MIGUELHOYOS
  */
 @Entity
-public class PacienteEntity extends UsuarioEntity  implements Serializable{
+public class PacienteEntity  implements Serializable{
     
 //    @PodamExclude    
 //    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)

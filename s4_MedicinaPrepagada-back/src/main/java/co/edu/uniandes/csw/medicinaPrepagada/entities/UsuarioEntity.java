@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *clase que representa un usuario
@@ -14,6 +15,7 @@ import javax.persistence.Entity;
 @Entity
 public class UsuarioEntity{
     
+    @Id
     private String login;
     private String contrasena;
     private String tipoUsuario;
