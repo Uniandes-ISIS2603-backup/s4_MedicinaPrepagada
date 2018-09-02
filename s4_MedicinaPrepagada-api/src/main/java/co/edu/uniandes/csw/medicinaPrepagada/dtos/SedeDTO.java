@@ -70,7 +70,7 @@ public class SedeDTO implements Serializable
    
    public String getDireccion  ()
    {
-       return this.descripcion;
+       return this.direccion;
    }
     
     public void setTipoSede (int pTipoSede)
@@ -81,6 +81,16 @@ public class SedeDTO implements Serializable
    public int getTipoSede  ()
    {
        return this.tipoSede;
+   }
+   
+      public void setDescripcion (String pDirreccion)
+   {
+       this.descripcion = pDirreccion;
+   }
+   
+   public String getDescripcion  ()
+   {
+       return this.descripcion;
    }
    
    public void setLatitud (double pLatitud)
