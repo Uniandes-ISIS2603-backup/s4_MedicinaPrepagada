@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.medicinaPrepagada.dtos;
+package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.FarmaciaEntity;
 import java.io.Serializable;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
+ * Clase que representa una farmacia en la persistencia y permite su
+ * serialización.
  *
- * @author estudiante
+ * @author ncobos
  */
-public class FarmaciaDTO implements Serializable {
+@Entity
+public class FarmaciaEntity extends BaseEntity implements Serializable  {
     
-    private Long id;
     private String nombre;
     private String ubicacion;
     private String telefono;
@@ -24,33 +27,33 @@ public class FarmaciaDTO implements Serializable {
     private double longitud;
     private String correo;
     
+    @javax.persistence.Id
+    private Long id;
+    
+    @PodamExclude
+    @ManyToOne
+    private MedicamentoEntity medicamento;
     
     
     /**
-     * Constructor por defecto
-     */
-    public FarmaciaDTO() {
-    }
-    
-    /**
-     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-     * la entidad que viene de argumento.
+     * Devuelve el medicamento de la farmacia.
      *
-     * @param farmaciaEntity: Es la entidad que se va a convertir a DTO
+     * @return the medicamento
      */
-    public FarmaciaDTO(FarmaciaEntity farmaciaEntity) {
-        if (farmaciaEntity != null) {
-            this.id = farmaciaEntity.getId();
-            this.nombre = farmaciaEntity.getNombre();
-            this.ubicacion = farmaciaEntity.getUbicacion();
-            this.telefono = farmaciaEntity.getTelefono();
-            this.latitud = farmaciaEntity.getLatitud();
-            this.longitud = farmaciaEntity.getLongitud();
-            this.correo = farmaciaEntity.getCorreo();
-        }
+    public MedicamentoEntity getMedicamento() {
+        return medicamento;
+    }
+
+    /**
+     * Modifica el medicamento de la farmacia.
+     *
+     * @param pMedicamento the medicamento to set
+     */
+    public void setMedicamento(MedicamentoEntity pMedicamento) {
+        this.medicamento = pMedicamento;
     }
     
-    /**
+     /**
      * Devuelve el ID de la farmacia.
      *
      * @return the id
@@ -62,10 +65,10 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica el ID de la farmacia.
      *
-     * @param pId the id to set
+     * @param id the id to set
      */
-    public void setId(Long pId) {
-        this.id = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -80,7 +83,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica el nombre de la farmacia.
      *
-     * @param pNombre the name to set
+     * @param name the name to set
      */
     public void setNombre(String pNombre) {
         this.nombre = pNombre;
@@ -174,27 +177,5 @@ public class FarmaciaDTO implements Serializable {
      */
     public void setLongitud(double pLon) {
         this.longitud = pLon;
-    }
-    
-    /**
-     * Convertir DTO a Entity
-     *
-     * @return Un Entity con los valores del DTO
-     */
-    public FarmaciaEntity toEntity() {
-        FarmaciaEntity farmaciaEntity = new FarmaciaEntity();
-        farmaciaEntity.setId(this.id);
-        farmaciaEntity.setNombre(this.nombre);
-        farmaciaEntity.setUbicacion(this.ubicacion);
-        farmaciaEntity.setTelefono(this.telefono);
-        farmaciaEntity.setLatitud(this.latitud);
-        farmaciaEntity.setLongitud(this.longitud);
-        farmaciaEntity.setCorreo(this.correo);
-
-        return farmaciaEntity;
-    }
-     @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

@@ -19,8 +19,8 @@ import javax.persistence.Query;
  * @author Daniel Ivan Romero
  */
 @Stateless
-public class CitaMedicaPersistance {
-    private static final Logger LOGGER = Logger.getLogger(CitaMedicaPersistance.class.getName());
+public class CitaMedicaPersistence {
+    private static final Logger LOGGER = Logger.getLogger(CitaMedicaPersistence.class.getName());
     
     @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;

@@ -51,7 +51,7 @@ public class LaboratorioResource {
     }
     
     @DELETE
-    @Path("(LaboratorioId:\\d+)")
+    @Path("{LaboratorioId:\\d+}")
     public void deleteLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "LaboratorioDTO deleteLaboratorio: input : (0)", LaboratorioId);
@@ -59,7 +59,7 @@ public class LaboratorioResource {
     }
     
     @PUT
-    @Path("(LaboratorioId:\\d+)")
+    @Path("{LaboratorioId:\\d+}")
     public LaboratorioDTO modificarLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
         LOGGER.log(Level.INFO, "LaboratorioResource modificarLaboratorio: input:(0)", LaboratorioId);
@@ -71,7 +71,7 @@ public class LaboratorioResource {
     }
     
     @GET
-    @Path("(LaboratorioId:\\d+)")
+    @Path("{LaboratorioId:\\d+}")
     public LaboratorioDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
          LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input: (0)", LaboratorioId);

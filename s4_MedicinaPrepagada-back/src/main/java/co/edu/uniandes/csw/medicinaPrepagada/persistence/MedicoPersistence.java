@@ -20,8 +20,8 @@ import javax.persistence.Query;
  * @author Daniel Ivan Romero
  */
 @Stateless
-public class MedicoPersistance {
-    private static final Logger LOGGER = Logger.getLogger(MedicoPersistance.class.getName());
+public class MedicoPersistence {
+    private static final Logger LOGGER = Logger.getLogger(MedicoPersistence.class.getName());
     
     @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;

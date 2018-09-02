@@ -19,8 +19,8 @@ import javax.persistence.Query;
  * @author Daniel Ivan Romero
  */
 @Stateless
-public class EspecialidadPersistance {
-    private static final Logger LOGGER = Logger.getLogger(EspecialidadPersistance.class.getName());
+public class EspecialidadPersistence {
+    private static final Logger LOGGER = Logger.getLogger(EspecialidadPersistence.class.getName());
     
     @PersistenceContext(unitName = "MedisistemasPU")
     protected EntityManager em;
@@ -47,7 +47,7 @@ public class EspecialidadPersistance {
     public List<EspecialidadEntity> findAll() 
     {
         LOGGER.log(Level.INFO, "Consultando todas las especialides");
-        Query q = em.createQuery("select * from EspecialidadEntity");
+        Query q = em.createQuery("select u from EspecialidadEntity u");
         return q.getResultList();
     }
     
@@ -57,7 +57,7 @@ public class EspecialidadPersistance {
      * @return un Especialidad. 
      */
     
-    public EspecialidadEntity find(Long especialidadId) 
+    public EspecialidadEntity find(String especialidadId) 
     {
         LOGGER.log(Level.INFO, "Consultando la Especialidad con id={0}", especialidadId);
         return em.find(EspecialidadEntity.class, especialidadId);
@@ -71,7 +71,7 @@ public class EspecialidadPersistance {
     
     public EspecialidadEntity update(EspecialidadEntity especialidadEntity) 
     {
-        LOGGER.log(Level.INFO, "Actualizando la Especialidad con id={0}", especialidadEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando la Especialidad con id={0}", especialidadEntity.getNombre());
         return em.merge(especialidadEntity);
     }
     
@@ -80,7 +80,7 @@ public class EspecialidadPersistance {
      * @param especialidadId: id correspondiente al especialidadnsitrador a borrar.
      */
     
-    public void delete(Long especialidadId) 
+    public void delete(String especialidadId) 
     {
         LOGGER.log(Level.INFO, "Borrando la Especialidad con id={0}", especialidadId);
         EspecialidadEntity especialidadEntity = em.find(EspecialidadEntity.class, especialidadId);
