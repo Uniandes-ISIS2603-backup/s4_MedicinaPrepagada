@@ -151,7 +151,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return Los medicamentos
      */
     
-    /**public List<MedicamentoEntity> getMedicamentos() 
+    public List<MedicamentoEntity> getMedicamentos() 
     {
         return medicamentos;
     }
@@ -161,9 +161,9 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pMedicamentos Los medicamentos a poner
      */
     
-    /**public void setMedicamentos(List<MedicamentoEntity> pMedicamentos) 
+    public void setMedicamentos(List<MedicamentoEntity> pMedicamentos) 
     {
-       // this.medicamentos = pMedicamentos;
+       this.medicamentos = pMedicamentos;
     }
     
     /**
@@ -171,7 +171,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return Los examenes medicos.
      */
     
-    /**public List<ExamenesMedicosEntity> getExamenesMedicos() 
+    public List<ExamenMedicoEntity> getExamenesMedicos() 
     {
         return examenesMedicos;
     }
@@ -181,8 +181,8 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pExamenesMedicos Los examenes medicos a poner.
      */
     
-    /**public void setExamenesMedicos(List<ExamenesMedicosEntity> pExamenesMedicos) 
+    public void setExamenesMedicos(List<ExamenMedicoEntity> pExamenesMedicos) 
     {
         this.examenesMedicos = pExamenesMedicos;
-    }*/
+    }
 }

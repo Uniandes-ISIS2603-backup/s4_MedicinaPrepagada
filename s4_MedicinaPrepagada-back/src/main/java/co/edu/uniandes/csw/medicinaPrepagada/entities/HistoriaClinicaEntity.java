@@ -226,20 +226,20 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @return Lista de ordenes medicas
      */
     
-//    public List<OrdenMedicaEntity> getOrdenesMedicas()
-//    {
-//        return ordenesMedicas;
-//    }
-//    
-//    /**
-//     * Modifica las ordenes medicas de la historia clinica.
-//     * @param pOrdenesMedicas Las nuevas ordenes medicas.
-//     */
-//    
-//    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
-//    {
-//        this.ordenesMedicas = pOrdenesMedicas;
-//    }
+    public List<OrdenMedicaEntity> getOrdenesMedicas()
+    {
+        return ordenesMedicas;
+    }
+    
+    /**
+     * Modifica las ordenes medicas de la historia clinica.
+     * @param pOrdenesMedicas Las nuevas ordenes medicas.
+     */
+    
+    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
+    {
+        this.ordenesMedicas = pOrdenesMedicas;
+    }
     
     
     
