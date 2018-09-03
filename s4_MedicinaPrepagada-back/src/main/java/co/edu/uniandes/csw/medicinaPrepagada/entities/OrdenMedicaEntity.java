@@ -38,13 +38,13 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @OneToMany
     private HistoriaClinicaEntity historias; 
     
-    //@PodamExclude
-    //@ManyToOne
-    //private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
+    @PodamExclude
+    @ManyToOne
+    private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
     
-    //@PodamExclude
-    //@ManyToOne
-    //private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
+    @PodamExclude
+    @ManyToOne
+    private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
     
     /**
      * Obtiene el atributo id.
