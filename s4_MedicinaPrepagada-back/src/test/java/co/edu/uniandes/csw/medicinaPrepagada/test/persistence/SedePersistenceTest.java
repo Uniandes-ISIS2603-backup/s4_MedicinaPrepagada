@@ -126,12 +126,117 @@ public class SedePersistenceTest
         Assert.assertNotNull(result);
 
         SedeEntity entity = em.find(SedeEntity.class, result.getId());
-
+        //Test Atributos
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
+        Assert.assertEquals(newEntity.getTipoSede(), entity.getTipoSede());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(), 0);
+        Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
+        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), entity.getCorreo());
+        //Test relaciones
+        Assert.assertEquals(newEntity.getConsultorios().size(), entity.getConsultorios().size());
+        for (int i=0;i<newEntity.getConsultorios().size();i++)
+        {
+            Assert.assertEquals(newEntity.getConsultorios().get(i), entity.getConsultorios().get(i));
+        }
+
     }
     
     
+        /**
+     * Prueba para consultar la lista de Sedes.
+     */
+    @Test
+    public void getSedesTest() 
+    {
+        List<SedeEntity> list = sedePersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (SedeEntity ent : list)
+        {
+            boolean found = false;
+            for (SedeEntity entity : data) 
+            {
+                if (ent.getId().equals(entity.getId())) 
+                
+                {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
+    
+     /**
+     * Prueba para consultar un Sede.
+     */
+    @Test
+    public void getSedeTest()
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity newEntity = sedePersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        //Test Atributos
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
+        Assert.assertEquals(newEntity.getTipoSede(), entity.getTipoSede());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(), 0);
+        Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
+        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), entity.getCorreo());
+        //Test Relaciones
+        Assert.assertEquals(newEntity.getConsultorios().size(), entity.getConsultorios().size());
+        for (int i=0;i<newEntity.getConsultorios().size();i++)
+        {
+            Assert.assertEquals(newEntity.getConsultorios().get(i), entity.getConsultorios().get(i));
+        }
+
+    }
+    
+    
+        /**
+     * Prueba para actualizar un Sede.
+     */
+    @Test
+    public void updateSedeTest()
+    {
+        SedeEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+        newEntity.setId(entity.getId());
+        sedePersistence.update(newEntity);
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), resp.getDireccion());
+        Assert.assertEquals(newEntity.getTipoSede(), resp.getTipoSede());
+        Assert.assertEquals(newEntity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(newEntity.getLatitud(), resp.getLatitud(), 0);
+        Assert.assertEquals(newEntity.getLongitud(), resp.getLongitud(),0);
+        Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
+        //Test Relaciones
+        Assert.assertEquals(newEntity.getConsultorios().size(), resp.getConsultorios().size());
+        for (int i=0;i<newEntity.getConsultorios().size();i++)
+        {
+            Assert.assertEquals(newEntity.getConsultorios().get(i), resp.getConsultorios().get(i));
+        }
+        
+    }
+    
+     /**
+     * Prueba para eliminar un Sede.
+     */
+    @Test
+    public void deleteSedeTest() 
+    {
+        SedeEntity entity = data.get(0);
+        sedePersistence.delete(entity.getId());
+        SedeEntity deleted = em.find(SedeEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
     
     
 }
