@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -35,15 +34,15 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @Temporal(TemporalType.DATE)
     private Date validaHasta; 
     
-    @OneToMany
+    @ManyToOne
     private HistoriaClinicaEntity historias; 
     
     @PodamExclude
-    @ManyToOne
+    @OneToMany
     private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
     
     @PodamExclude
-    @ManyToOne
+    @OneToMany
     private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
     
     /**
@@ -184,5 +183,19 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     public void setExamenesMedicos(List<ExamenMedicoEntity> pExamenesMedicos) 
     {
         this.examenesMedicos = pExamenesMedicos;
+    }
+
+    /**
+     * @return the historias
+     */
+    public HistoriaClinicaEntity getHistorias() {
+        return historias;
+    }
+
+    /**
+     * @param historias the historias to set
+     */
+    public void setHistorias(HistoriaClinicaEntity historias) {
+        this.historias = historias;
     }
 }
