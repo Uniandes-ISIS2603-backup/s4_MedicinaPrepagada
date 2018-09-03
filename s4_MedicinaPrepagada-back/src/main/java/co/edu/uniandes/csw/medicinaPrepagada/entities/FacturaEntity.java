@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import javax.persistence.OneToOne;
  *
  * @author Santiago Rojas
  */
+@Entity
 public class FacturaEntity {
     
     @Id
