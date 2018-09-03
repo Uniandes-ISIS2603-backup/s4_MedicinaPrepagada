@@ -28,10 +28,10 @@ public class CitaMedicaEntity {
     private Date fecha;
     private String comentarios;
     
-//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
+//    @OneToMany@
 //    private PacitenteEntity pacienteAAtender;
 //    
-//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
+//    @OneToMany@
 //    private HorarioAtencionEntity horarioAtencionAsignado;
 
     public long getId() {
