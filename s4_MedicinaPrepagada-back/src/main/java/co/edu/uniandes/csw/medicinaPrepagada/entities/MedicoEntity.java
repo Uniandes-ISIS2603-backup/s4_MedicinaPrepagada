@@ -25,9 +25,9 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class MedicoEntity extends BaseEntity implements Serializable{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idMedico;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long idMedico;
     private String nombre;
     private int telefono;
     private String correo;
@@ -46,13 +46,13 @@ public class MedicoEntity extends BaseEntity implements Serializable{
         this.especialidad = especialidad;
     }
     
-    public long getIdMedico() {
-        return idMedico;
-    }
-
-    public void setIdMedico(long idMedico) {
-        this.idMedico = idMedico;
-    }
+//    public long getIdMedico() {
+//        return idMedico;
+//    }
+//
+//    public void setIdMedico(long idMedico) {
+//        this.idMedico = idMedico;
+//    }
 
     public String getNombre() {
         return nombre;
