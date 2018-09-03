@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author Simon Guzman
  */
+@Entity
 public class SedeEntity implements Serializable
 {
     

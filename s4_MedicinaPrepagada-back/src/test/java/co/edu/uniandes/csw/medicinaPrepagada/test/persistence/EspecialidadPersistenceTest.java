@@ -117,7 +117,7 @@ public class EspecialidadPersistenceTest {
      * Prueba para consultar la lista de Especialidads.
      */
     @Test
-    public void getEspecialidadsTest() {
+    public void getEspecialidadesTest() {
         List<EspecialidadEntity> list = especialidadPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (EspecialidadEntity ent : list) {
