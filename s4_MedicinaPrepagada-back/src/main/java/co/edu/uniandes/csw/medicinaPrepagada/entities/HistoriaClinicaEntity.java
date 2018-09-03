@@ -37,9 +37,12 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private boolean bebe; 
     private String operaciones; 
     
-   @PodamExclude
-   @ManyToOne
-   private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
+    @ManyToOne
+    private PacienteEntity paciente; 
+    
+    @PodamExclude
+    @ManyToOne
+    private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
     
     /**
      * Obtiene el atributo id.
@@ -240,6 +243,24 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     {
         this.ordenesMedicas = pOrdenesMedicas;
     }
+
+    /**
+     * @return the paciente
+     */
+    public PacienteEntity getPaciente() 
+    {
+        return paciente;
+    }
+
+    /**
+     * @param paciente the paciente to set
+     */
+    public void setPaciente(PacienteEntity paciente) 
+    {
+        this.paciente = paciente;
+    }
+    
+    
     
     
     
