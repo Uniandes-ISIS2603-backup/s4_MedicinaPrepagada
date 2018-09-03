@@ -37,9 +37,9 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private boolean bebe; 
     private String operaciones; 
     
-   // @PodamExclude
-   // @ManyToOne
-   // private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
+   @PodamExclude
+   @ManyToOne
+   private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
     
     /**
      * Obtiene el atributo id.

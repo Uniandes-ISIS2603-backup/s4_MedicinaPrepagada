@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 
 @Entity 
-public class AdministradorEntity extends BaseEntity implements Serializable 
+public class AdministradorEntity extends UsuarioEntity implements Serializable 
 {
     @Id
     private Long id; 
