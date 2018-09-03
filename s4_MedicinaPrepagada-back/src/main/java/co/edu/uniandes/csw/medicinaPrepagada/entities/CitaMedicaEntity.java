@@ -28,10 +28,10 @@ public class CitaMedicaEntity {
     private Date fecha;
     private String comentarios;
     
-//    @OneToMany@
+//    @ManyToOne@
 //    private PacitenteEntity pacienteAAtender;
 //    
-//    @OneToMany@
+//    @ManyToOne@
 //    private HorarioAtencionEntity horarioAtencionAsignado;
 
     public long getId() {
