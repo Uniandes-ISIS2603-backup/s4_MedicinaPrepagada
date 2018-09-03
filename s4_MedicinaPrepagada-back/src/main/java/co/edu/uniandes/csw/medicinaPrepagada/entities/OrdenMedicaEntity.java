@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,6 +26,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class OrdenMedicaEntity extends BaseEntity implements Serializable
 {
+    @Id
     private Long id; 
     private String firmaMedico; 
     @Temporal(TemporalType.DATE)

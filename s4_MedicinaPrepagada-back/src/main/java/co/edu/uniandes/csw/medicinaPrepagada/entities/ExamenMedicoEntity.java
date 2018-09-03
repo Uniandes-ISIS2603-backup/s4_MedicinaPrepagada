@@ -3,48 +3,82 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.medicinaPrepagada.dtos;
+package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import java.io.Serializable;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
+ * Clase que representa un examen medico en la persistencia y permite su
+ * serialización.
  *
- * @author estudiante
+ * @author ncobos
  */
-public class ExamenMedicoDTO implements Serializable {
+@Entity
+public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     
-    private Long id;
+    
     private String nombre;
     private double costo;
     private String recomendaciones;
     
+    @javax.persistence.Id
+    private Long id;
+    
+    
+    //@PodamExclude
+    //@OneToMany(
+      //      mappedBy ="examenMedico",     
+        //    fetch = javax.persistence.FetchType.LAZY)
+          //  Collection<LaboratorioEntity> laboratorios;
+    
+    @PodamExclude
+    @ManyToOne
+    private OrdenMedicaEntity ordenMedica;
     
     /**
-     * Constructor por defecto
-     */
-    public ExamenMedicoDTO() {
-    }
-    
-    /**
-     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-     * la entidad que viene de argumento.
+     * Devuelve los laboratorios del examen medico.
      *
-     * @param examenMedicoEntity: Es la entidad que se va a convertir a DTO
+     * @return laboratorios
      */
-    public ExamenMedicoDTO(ExamenMedicoEntity examenMedicoEntity) {
-        if (examenMedicoEntity != null) {
-            this.id = examenMedicoEntity.getId();
-            this.nombre = examenMedicoEntity.getNombre();
-            this.costo = examenMedicoEntity.getCosto();
-            this.recomendaciones = examenMedicoEntity.getRecomendaciones();
+    //public Collection<LaboratorioEntity> getLaboratorios() {
+      //  return laboratorios;
+    //}
 
-        }
+    /**
+     * Modifica los laboratorios del examen medico.
+     *
+     * @param pLaboratorios the laboratorios to set
+     */
+    //public void setLaboratorios(Collection<LaboratorioEntity> pLaboratorios) {
+      //  this.laboratorios = pLaboratorios;
+    //}
+    
+     /**
+     * Devuelve la orden medica del medicamento.
+     *
+     * @return ordenMedica
+     */
+    public OrdenMedicaEntity getOrdenMedica() {
+        return ordenMedica;
+    }
+
+    /**
+     * Modifica la orden medica del medicamento.
+     *
+     * @param pOrden the orden medica to set
+     */
+    public void setOrdenMedica(OrdenMedicaEntity pOrden) {
+        this.ordenMedica = pOrden;
     }
     
-    /**
+    
+      /**
      * Devuelve el ID del examen medico.
      *
      * @return the id
@@ -56,10 +90,10 @@ public class ExamenMedicoDTO implements Serializable {
     /**
      * Modifica el ID del examen medico.
      *
-     * @param pId the id to set
+     * @param id the id to set
      */
-    public void setId(Long pId) {
-        this.id = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -116,24 +150,5 @@ public class ExamenMedicoDTO implements Serializable {
      */
     public void setRecomendaciones(String pRecomendaciones) {
         this.recomendaciones = pRecomendaciones;
-    }
-    
-    
-    /**
-     * Convertir DTO a Entity
-     *
-     * @return Un Entity con los valores del DTO
-     */
-    public ExamenMedicoEntity toEntity() {
-        ExamenMedicoEntity examenMedicoEntity = new ExamenMedicoEntity();
-        examenMedicoEntity.setId(this.id);
-        examenMedicoEntity.setNombre(this.nombre);
-        examenMedicoEntity.setCosto(this.costo);
-        examenMedicoEntity.setRecomendaciones(this.recomendaciones);
-        return examenMedicoEntity;
-    }
-     @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }
