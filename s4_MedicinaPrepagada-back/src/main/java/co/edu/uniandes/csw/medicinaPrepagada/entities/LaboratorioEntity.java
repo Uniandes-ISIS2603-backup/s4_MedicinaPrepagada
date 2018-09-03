@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author Santiago Rojas
  */
+@Entity
 public class LaboratorioEntity 
 {
 
@@ -31,9 +33,9 @@ public class LaboratorioEntity
     @OneToMany(mappedBy = "laboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CitaLaboratorioEntity> citasLaboratorio = new ArrayList<>();
     
-  //  @PodamExclude
-  //  @OneToMany(mappedBy = "laboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
-  //  private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<>();
+    @PodamExclude
+    @OneToMany(mappedBy = "laboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<>();
     
     private String nombre;
     private String direccion;
@@ -119,10 +121,10 @@ public class LaboratorioEntity
         return this.citasLaboratorio;
     }
     
-    //public List<ExamenMedicoEntity> getExamenes ()
-    //{
-    //    return this.examenMedico;
-    //}
+    public List<ExamenMedicoEntity> getExamenes ()
+    {
+        return this.examenesMedicos;
+    }
     
     @Override
     public boolean equals(Object obj) {

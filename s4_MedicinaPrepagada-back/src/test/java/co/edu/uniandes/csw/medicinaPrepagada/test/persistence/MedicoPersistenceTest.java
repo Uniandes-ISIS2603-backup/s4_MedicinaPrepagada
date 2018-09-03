@@ -110,7 +110,7 @@ public class MedicoPersistenceTest {
 
         MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
 
     /**

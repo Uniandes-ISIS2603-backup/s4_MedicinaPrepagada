@@ -6,7 +6,13 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -19,16 +25,18 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class MedicoEntity extends BaseEntity implements Serializable{
     
-    private long idMedico;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long idMedico;
     private String nombre;
     private int telefono;
     private String correo;
     
     private EspecialidadEntity especialidad;
     
-//    @PodamExclude
-//    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch=FetchType.LAZY)
-//    private List<HorarioAtencionEntity> horariosAtencion;
+    @PodamExclude
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch=FetchType.LAZY)
+    private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {
         return especialidad;
@@ -38,13 +46,13 @@ public class MedicoEntity extends BaseEntity implements Serializable{
         this.especialidad = especialidad;
     }
     
-    public long getIdMedico() {
-        return idMedico;
-    }
-
-    public void setIdMedico(long idMedico) {
-        this.idMedico = idMedico;
-    }
+//    public long getIdMedico() {
+//        return idMedico;
+//    }
+//
+//    public void setIdMedico(long idMedico) {
+//        this.idMedico = idMedico;
+//    }
 
     public String getNombre() {
         return nombre;
@@ -70,13 +78,13 @@ public class MedicoEntity extends BaseEntity implements Serializable{
         this.correo = correo;
     }
 
-//    public HorarioAtencionEntity getHorariosAtencion() {
-//        return horariosAtencion;
-//    }
-//
-//    public void setHorariosAtencion(HorarioAtencionEntity horariosAtencion) {
-//        this.horariosAtencion = horariosAtencion;
-//    }
+    public List<HorarioAtencionEntity> getHorariosAtencion() {
+        return horariosAtencion;
+    }
+
+    public void setHorariosAtencion(List<HorarioAtencionEntity> horariosAtencion) {
+        this.horariosAtencion = horariosAtencion;
+    }
     
     
 }

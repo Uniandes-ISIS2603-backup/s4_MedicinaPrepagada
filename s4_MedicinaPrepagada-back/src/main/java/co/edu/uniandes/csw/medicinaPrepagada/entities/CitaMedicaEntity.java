@@ -7,8 +7,15 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.util.Date;
 import javax.persistence.Entity;
+
+import javax.persistence.FetchType;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,16 +27,19 @@ import javax.persistence.TemporalType;
 public class CitaMedicaEntity {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Temporal(TemporalType.DATE)
     private Date fecha;
     private String comentarios;
     
-//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
+//    @ManyToOne@
 //    private PacitenteEntity pacienteAAtender;
 //    
-//    @OneToMany@(mappedBy = "citaMedica", fetch=FetchType.EAGER)
-//    private HorarioAtencionEntity horarioAtencionAsignado;
+
+    @ManyToOne//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
+    private HorarioAtencionEntity horarioAtencionAsignado;
+
 
     public long getId() {
         return id;
@@ -63,13 +73,13 @@ public class CitaMedicaEntity {
 //        this.pacienteAAtender = pacienteAAtender;
 //    }
 //
-//    public HorarioAtencionEntity getHorarioAtencionAsignado() {
-//        return horarioAtencionAsignado;
-//    }
-//
-//    public void setHorarioAtencionAsignado(HorarioAtencionEntity horarioAtencionAsignado) {
-//        this.horarioAtencionAsignado = horarioAtencionAsignado;
-//    }
+    public HorarioAtencionEntity getHorarioAtencionAsignado() {
+        return horarioAtencionAsignado;
+    }
+
+    public void setHorarioAtencionAsignado(HorarioAtencionEntity horarioAtencionAsignado) {
+        this.horarioAtencionAsignado = horarioAtencionAsignado;
+    }
     
     
     
