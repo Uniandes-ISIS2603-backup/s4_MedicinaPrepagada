@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author Santiago Rojas
  */
+@Entity
 public class CitaLaboratorioEntity 
 {
     @Id
