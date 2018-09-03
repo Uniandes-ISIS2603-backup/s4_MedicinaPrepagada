@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 
@@ -24,11 +25,8 @@ import javax.persistence.TemporalType;
  * @author Daniel Ivan Romero
  */
 @Entity
-public class CitaMedicaEntity {
+public class CitaMedicaEntity extends BaseEntity implements Serializable{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @Temporal(TemporalType.DATE)
     private Date fecha;
     private String comentarios;
@@ -40,14 +38,6 @@ public class CitaMedicaEntity {
     @ManyToOne//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
     private HorarioAtencionEntity horarioAtencionAsignado;
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Date getFecha() {
         return fecha;
