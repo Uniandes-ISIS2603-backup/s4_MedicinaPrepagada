@@ -30,10 +30,11 @@ public class MedicoEntity extends UsuarioEntity implements Serializable{
     private int telefono;
     private String correo;
     
+    @PodamExclude
     private EspecialidadEntity especialidad;
     
     @PodamExclude
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
     private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {

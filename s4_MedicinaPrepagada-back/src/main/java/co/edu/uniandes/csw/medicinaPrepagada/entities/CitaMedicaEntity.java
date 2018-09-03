@@ -19,22 +19,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author Daniel Ivan Romero
  */
 @Entity
-public class CitaMedicaEntity extends BaseEntity implements Serializable{
+public class CitaMedicaEntity implements Serializable{
     
-    @Temporal(TemporalType.DATE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     private String comentarios;
     
-//    @ManyToOne@
-//    private PacitenteEntity pacienteAAtender;
-//    
-
+    @PodamExclude
+    @ManyToOne
+    private PacienteEntity pacienteAAtender;
+    
+    @PodamExclude
     @ManyToOne//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
     private HorarioAtencionEntity horarioAtencionAsignado;
 
@@ -55,20 +61,28 @@ public class CitaMedicaEntity extends BaseEntity implements Serializable{
         this.comentarios = comentarios;
     }
 
-//    public PacitenteEntity getPacienteAAtender() {
-//        return pacienteAAtender;
-//    }
-//
-//    public void setPacienteAAtender(PacitenteEntity pacienteAAtender) {
-//        this.pacienteAAtender = pacienteAAtender;
-//    }
-//
+    public PacienteEntity getPacienteAAtender() {
+        return pacienteAAtender;
+    }
+
+    public void setPacienteAAtender(PacienteEntity pacienteAAtender) {
+        this.pacienteAAtender = pacienteAAtender;
+    }
+
     public HorarioAtencionEntity getHorarioAtencionAsignado() {
         return horarioAtencionAsignado;
     }
 
     public void setHorarioAtencionAsignado(HorarioAtencionEntity horarioAtencionAsignado) {
         this.horarioAtencionAsignado = horarioAtencionAsignado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     
