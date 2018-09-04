@@ -23,19 +23,18 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 
 @Entity
-public class MedicoEntity extends BaseEntity implements Serializable{
+public class MedicoEntity extends UsuarioEntity implements Serializable{
     
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long idMedico;
+
     private String nombre;
     private int telefono;
     private String correo;
     
+    @PodamExclude
     private EspecialidadEntity especialidad;
     
     @PodamExclude
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
     private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {
@@ -45,14 +44,6 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     public void setEspecialidad(EspecialidadEntity especialidad) {
         this.especialidad = especialidad;
     }
-    
-//    public long getIdMedico() {
-//        return idMedico;
-//    }
-//
-//    public void setIdMedico(long idMedico) {
-//        this.idMedico = idMedico;
-//    }
 
     public String getNombre() {
         return nombre;

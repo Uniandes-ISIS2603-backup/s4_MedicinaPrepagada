@@ -139,7 +139,7 @@ public class MedicoPersistenceTest {
         MedicoEntity entity = data.get(0);
         MedicoEntity newEntity = medicoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
         Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
     }
 
