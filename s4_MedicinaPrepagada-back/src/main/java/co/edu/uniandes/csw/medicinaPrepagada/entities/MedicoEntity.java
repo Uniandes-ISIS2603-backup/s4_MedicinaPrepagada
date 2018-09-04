@@ -10,9 +10,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -23,14 +20,14 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 
 @Entity
-public class MedicoEntity extends BaseEntity implements Serializable{
+public class MedicoEntity extends UsuarioEntity implements Serializable{
     
-
     private String nombre;
     private int telefono;
     private String correo;
     
     @PodamExclude
+    @ManyToOne
     private EspecialidadEntity especialidad;
     
     @PodamExclude
