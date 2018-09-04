@@ -37,10 +37,10 @@ public class PacienteEntity  implements Serializable{
     @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY)
     private List<CitaMedicaEntity> citasMedicas;
     
-    @PodamExclude    
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<HistoriaClinicaEntity> historiasClinicas;
-    
+//    @PodamExclude    
+//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+//    private List<HistoriaClinicaEntity> historiasClinicas;
+//    
     @Id
     private Long cedula;
     private String nombre;
@@ -106,19 +106,19 @@ public class PacienteEntity  implements Serializable{
         this.citasMedicas = citasMedicas;
     }
 
-    /**
-     * @return the historiasClinicas
-     */
-    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
-        return historiasClinicas;
-    }
-
-    /**
-     * @param historiasClinicas the historiasClinicas to set
-     */
-    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
-        this.historiasClinicas = historiasClinicas;
-    }
+//    /**
+//     * @return the historiasClinicas
+//     */
+//    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
+//        return historiasClinicas;
+//    }
+//
+//    /**
+//     * @param historiasClinicas the historiasClinicas to set
+//     */
+//    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
+//        this.historiasClinicas = historiasClinicas;
+//    }
 
     /**
      * @return the cedula
