@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -30,7 +31,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CitaLaboratorioPersistenceTest {
-     @Inject
+    
+    @Inject
     private CitaLaboratorioPersistence citaLaboratorioPersistence;
 
     @PersistenceContext
@@ -74,7 +76,7 @@ public class CitaLaboratorioPersistenceTest {
     }
     
     private void clearData() {
-        em.createQuery("borra la informacion de CitaLaboratorioEntity").executeUpdate();
+        em.createQuery("delete from CitaLaboratorioEntity").executeUpdate();
     }
     
     private void insertData() {
@@ -96,16 +98,18 @@ public class CitaLaboratorioPersistenceTest {
         Assert.assertNotNull(result);
 
         CitaLaboratorioEntity entity = em.find(CitaLaboratorioEntity.class, result.getId());
+        
+        Assert.assertEquals(newEntity.getEspecialidad(), entity.getEspecialidad());
     }
     
     @Test
-    public void getCitaLaboratorioTest() {
+    public void getAllCitaLaboratorioTest() {
         List<CitaLaboratorioEntity> list = citaLaboratorioPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (CitaLaboratorioEntity ent : list) {
+        for (CitaLaboratorioEntity e : list) {
             boolean found = false;
             for (CitaLaboratorioEntity entity : data) {
-                if (ent.getId()==entity.getId()) {
+                if (e.getId()==entity.getId()) {
                     found = true;
                 }
             }
@@ -114,16 +118,16 @@ public class CitaLaboratorioPersistenceTest {
     }
     
      @Test
-    public void getCitaMedicaTest() {
+    public void getCitaLaboratorioTest() {
         CitaLaboratorioEntity entity = data.get(0);
         CitaLaboratorioEntity newEntity = citaLaboratorioPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getDate(), newEntity.getDate());
-        Assert.assertEquals(entity.getComentarios(), newEntity.getComentarios());
+        //Assert.assertEquals(entity.getDate(), newEntity.getDate());
+        Assert.assertEquals(entity.getEspecialidad(), newEntity.getEspecialidad());
     }
     
     @Test
-    public void updateCitaMedicaTest() {
+    public void updateCitaLaboratorioTest() {
         CitaLaboratorioEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         CitaLaboratorioEntity newEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);

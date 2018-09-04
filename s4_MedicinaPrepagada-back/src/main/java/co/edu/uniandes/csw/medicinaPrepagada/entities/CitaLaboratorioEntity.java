@@ -5,16 +5,18 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -22,50 +24,64 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Santiago Rojas
  */
 @Entity
-public class CitaLaboratorioEntity 
+public class CitaLaboratorioEntity implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne //(mappedBy = "citaLaboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @PodamExclude
+    @OneToOne 
+    //(mappedBy = "citaLaboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private LaboratorioEntity laboratorio;
     
     @PodamExclude
     @ManyToOne
     private PacienteEntity paciente;
     
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
     private String especialidad;
     private String comentarios;
     private String recomendaciones;
     
     
-    public PacienteEntity getPaciente ()
-    {
-        return this.paciente;
-    }
     public void setPaciente (PacienteEntity pPaciente)
     {
         this.paciente = pPaciente;
     }
-    public Long getId ()
+    
+    public PacienteEntity getPaciente ()
     {
-        return this.id;
+        return this.paciente;
     }
+    
+    
     public void setId (Long pId)
     {
         this.id= pId;
     }
     
+    public Long getId ()
+    {
+        return this.id;
+    }
+    
+     public void setLaboratorio (LaboratorioEntity pLab)
+    {
+        this.laboratorio = pLab;
+    }
     public LaboratorioEntity getLaboratorio ()
     {
         return this.laboratorio;
     }
     
-    public void setLaboratorio (LaboratorioEntity pLab)
+   
+    
+    public void setDate (Date pDate)
     {
-        this.laboratorio = pLab;
+        this.fecha = pDate;
     }
     
     public Date getDate()
@@ -73,9 +89,9 @@ public class CitaLaboratorioEntity
         return this.fecha;
     }
     
-    public void setDate (Date pDate)
+     public void setEspecialidad (String pEspecialidad)
     {
-        this.fecha = pDate;
+        this.especialidad = pEspecialidad;
     }
     
     public String getEspecialidad()
@@ -83,9 +99,9 @@ public class CitaLaboratorioEntity
         return this.especialidad;
     }
     
-    public void setEspecialidad (String pEspecialidad)
+     public void setComentarios (String pComentarios)
     {
-        this.especialidad = pEspecialidad;
+        this.comentarios = pComentarios;
     }
     
     public String getComentarios()
@@ -93,9 +109,9 @@ public class CitaLaboratorioEntity
         return this.comentarios;
     }
     
-    public void setComentarios (String pComentarios)
+    public void setRecomendaciones (String pRecomendaciones)
     {
-        this.comentarios = pComentarios;
+        this.recomendaciones = pRecomendaciones;
     }
     
     public String getRecomendaciones()
@@ -103,10 +119,7 @@ public class CitaLaboratorioEntity
         return this.recomendaciones;
     }
     
-    public void setRecomendaciones (String pRecomendaciones)
-    {
-        this.recomendaciones = pRecomendaciones;
-    }
+    
     
     @Override
     public boolean equals(Object obj) {

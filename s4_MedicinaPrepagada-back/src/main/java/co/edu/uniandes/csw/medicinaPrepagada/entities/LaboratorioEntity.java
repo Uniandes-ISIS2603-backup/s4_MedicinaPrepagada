@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 //import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -23,7 +25,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Santiago Rojas
  */
 @Entity
-public class LaboratorioEntity 
+public class LaboratorioEntity implements Serializable
 {
 
     @Id
@@ -34,9 +36,9 @@ public class LaboratorioEntity
     @OneToMany(mappedBy = "laboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CitaLaboratorioEntity> citasLaboratorio = new ArrayList<>();
     
-  //  @PodamExclude
-   // @ManyToOne
-   // private ExamenMedicoEntity examenMedico;
+    @PodamExclude
+    @ManyToOne
+    private ExamenMedicoEntity examenMedico;
     
     private String nombre;
     private String direccion;
@@ -117,15 +119,20 @@ public class LaboratorioEntity
         this.longitud = pLongitud;
     }
     
+    public void setCitasLab(List<CitaLaboratorioEntity> citasLab)
+    {
+        this.citasLaboratorio = citasLab;
+    }
+    
     public List<CitaLaboratorioEntity> getCitasLab ()
     {
         return this.citasLaboratorio;
     }
     
-   // public ExamenMedicoEntity getExamen ()
-    //{
-    //    return this.examenMedico;
-   // }
+    public ExamenMedicoEntity getExamen ()
+   {
+       return this.examenMedico;
+   }
     
     @Override
     public boolean equals(Object obj) {

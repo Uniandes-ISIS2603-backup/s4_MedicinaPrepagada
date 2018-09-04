@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,6 +18,8 @@ import javax.persistence.TypedQuery;
  *
  * @author Santiago Rojas
  */
+
+@Stateless
 public class LaboratorioPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(LaboratorioPersistence.class.getName());

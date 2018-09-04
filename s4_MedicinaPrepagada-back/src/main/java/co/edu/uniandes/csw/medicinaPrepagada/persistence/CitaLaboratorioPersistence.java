@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 //import javax.persistence.Query;
@@ -18,6 +19,7 @@ import javax.persistence.TypedQuery;
  *
  * @author Santiago Rojas
  */
+@Stateless
 public class CitaLaboratorioPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(CitaLaboratorioPersistence.class.getName());
