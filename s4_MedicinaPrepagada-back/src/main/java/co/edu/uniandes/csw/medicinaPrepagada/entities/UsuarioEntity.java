@@ -14,12 +14,28 @@ import javax.persistence.Id;
  */
 @Entity
 public class UsuarioEntity{
+
+
     
     @Id
     private Long cedula;
     private String login;
     private String contrasena;
     private String tipoUsuario;
+    
+        /**
+     * @return the cedula
+     */
+    public Long getCedula() {
+        return cedula;
+    }
+
+    /**
+     * @param cedula the cedula to set
+     */
+    public void setCedula(Long cedula) {
+        this.cedula = cedula;
+    }
 
     /**
      * @return the login
