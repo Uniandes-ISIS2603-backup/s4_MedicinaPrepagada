@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -19,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author MIGUELHOYOS
  */
 @Entity
-public class PacienteEntity  implements Serializable{
+public class PacienteEntity extends UsuarioEntity implements Serializable{
     
     @PodamExclude    
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
@@ -41,8 +40,7 @@ public class PacienteEntity  implements Serializable{
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<HistoriaClinicaEntity> historiasClinicas;
     
-    @Id
-    private Long cedula;
+    
     private String nombre;
     private String fechaNacimiento;
     private String direccion;
@@ -120,19 +118,6 @@ public class PacienteEntity  implements Serializable{
         this.historiasClinicas = historiasClinicas;
     }
 
-    /**
-     * @return the cedula
-     */
-    public Long getCedula() {
-        return cedula;
-    }
-
-    /**
-     * @param cedula the cedula to set
-     */
-    public void setCedula(Long cedula) {
-        this.cedula = cedula;
-    }
 
     /**
      * @return the nombre
