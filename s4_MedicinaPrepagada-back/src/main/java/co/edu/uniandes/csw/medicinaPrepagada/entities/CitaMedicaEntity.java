@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 
@@ -18,36 +19,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author Daniel Ivan Romero
  */
 @Entity
-public class CitaMedicaEntity {
+public class CitaMedicaEntity implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Temporal(TemporalType.DATE)
+    private Long id;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     private String comentarios;
     
-//    @ManyToOne@
-//    private PacitenteEntity pacienteAAtender;
-//    
-
+    @PodamExclude
+    @ManyToOne
+    private PacienteEntity pacienteAAtender;
+    
+    @PodamExclude
     @ManyToOne//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
     private HorarioAtencionEntity horarioAtencionAsignado;
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Date getFecha() {
         return fecha;
@@ -65,20 +61,28 @@ public class CitaMedicaEntity {
         this.comentarios = comentarios;
     }
 
-//    public PacitenteEntity getPacienteAAtender() {
-//        return pacienteAAtender;
-//    }
-//
-//    public void setPacienteAAtender(PacitenteEntity pacienteAAtender) {
-//        this.pacienteAAtender = pacienteAAtender;
-//    }
-//
+    public PacienteEntity getPacienteAAtender() {
+        return pacienteAAtender;
+    }
+
+    public void setPacienteAAtender(PacienteEntity pacienteAAtender) {
+        this.pacienteAAtender = pacienteAAtender;
+    }
+
     public HorarioAtencionEntity getHorarioAtencionAsignado() {
         return horarioAtencionAsignado;
     }
 
     public void setHorarioAtencionAsignado(HorarioAtencionEntity horarioAtencionAsignado) {
         this.horarioAtencionAsignado = horarioAtencionAsignado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     
