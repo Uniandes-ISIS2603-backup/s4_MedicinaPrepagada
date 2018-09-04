@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.persistence;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -72,7 +72,7 @@ public class MedicoPersistence {
     
     public MedicoEntity update(MedicoEntity medicoEntity) 
     {
-        LOGGER.log(Level.INFO, "Actualizando el Medico con id={0}", medicoEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando el Medico con id={0}", medicoEntity.getCedula());
         return em.merge(medicoEntity);
     }
     

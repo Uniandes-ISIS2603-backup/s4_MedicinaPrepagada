@@ -108,9 +108,9 @@ public class MedicoPersistenceTest {
 
         Assert.assertNotNull(result);
 
-        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getCedula());
 
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getCedula(), entity.getCedula());
     }
 
     /**
@@ -123,7 +123,7 @@ public class MedicoPersistenceTest {
         for (MedicoEntity ent : list) {
             boolean found = false;
             for (MedicoEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
+                if (ent.getCedula().equals(entity.getCedula())) {
                     found = true;
                 }
             }
@@ -137,9 +137,9 @@ public class MedicoPersistenceTest {
     @Test
     public void getMedicoTest() {
         MedicoEntity entity = data.get(0);
-        MedicoEntity newEntity = medicoPersistence.find(entity.getId());
+        MedicoEntity newEntity = medicoPersistence.find(entity.getCedula());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
+        Assert.assertEquals(entity.getCedula(), newEntity.getCedula());
         Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
     }
 
@@ -152,11 +152,11 @@ public class MedicoPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
 
-        newEntity.setId(entity.getId());
+        newEntity.setCedula(entity.getCedula());
 
         medicoPersistence.update(newEntity);
 
-        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getCedula());
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
     }
@@ -167,8 +167,8 @@ public class MedicoPersistenceTest {
     @Test
     public void deleteMedicoTest() {
         MedicoEntity entity = data.get(0);
-        medicoPersistence.delete(entity.getId());
-        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        medicoPersistence.delete(entity.getCedula());
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getCedula());
         Assert.assertNull(deleted);
     }
 }
