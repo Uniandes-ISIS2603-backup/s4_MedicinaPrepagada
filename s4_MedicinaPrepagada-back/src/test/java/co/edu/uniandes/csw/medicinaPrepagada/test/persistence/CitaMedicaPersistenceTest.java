@@ -158,7 +158,7 @@ public class CitaMedicaPersistenceTest {
 
         CitaMedicaEntity resp = em.find(CitaMedicaEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
 
     /**

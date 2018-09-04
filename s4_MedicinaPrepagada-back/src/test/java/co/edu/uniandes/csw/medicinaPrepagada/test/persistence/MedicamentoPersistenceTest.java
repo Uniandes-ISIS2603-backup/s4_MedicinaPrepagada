@@ -5,33 +5,35 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.junit.runner.RunWith;
+import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicamentoPersistence;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+
 /**
  *
- * @author Daniel Ivan Romero
+ * @author ncobos
  */
 @RunWith(Arquillian.class)
-public class MedicoPersistenceTest {
+public class MedicamentoPersistenceTest {
+
     @Inject
-    private MedicoPersistence medicoPersistence;
+    private MedicamentoPersistence medicamentoPersistence;
 
     @PersistenceContext
     private EntityManager em;
@@ -39,9 +41,9 @@ public class MedicoPersistenceTest {
     @Inject
     UserTransaction utx;
 
-    private List<MedicoEntity> data = new ArrayList<>();
-
-    /**
+    private List<MedicamentoEntity> data = new ArrayList<MedicamentoEntity>();
+    
+     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
@@ -49,8 +51,8 @@ public class MedicoPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(MedicoEntity.class.getPackage())
-                .addPackage(MedicoPersistence.class.getPackage())
+                .addPackage(MedicamentoEntity.class.getPackage())
+                .addPackage(MedicamentoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -80,7 +82,7 @@ public class MedicoPersistenceTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from MedicoEntity").executeUpdate();
+        em.createQuery("delete from MedicamentoEntity").executeUpdate();
     }
 
     /**
@@ -90,39 +92,41 @@ public class MedicoPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
+
+            MedicamentoEntity entity = factory.manufacturePojo(MedicamentoEntity.class);
 
             em.persist(entity);
+
             data.add(entity);
         }
     }
 
     /**
-     * Prueba para crear un Medico.
+     * Prueba para crear una Medicamento.
      */
     @Test
-    public void createMedicoTest() {
+    public void createMedicamentoTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
-        MedicoEntity result = medicoPersistence.create(newEntity);
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        MedicamentoEntity result = medicamentoPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        MedicamentoEntity entity = em.find(MedicamentoEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
 
     /**
-     * Prueba para consultar la lista de Medicos.
+     * Prueba para consultar la lista de Medicamentos.
      */
     @Test
-    public void getMedicosTest() {
-        List<MedicoEntity> list = medicoPersistence.findAll();
+    public void getMedicamentosTest() {
+        List<MedicamentoEntity> list = medicamentoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (MedicoEntity ent : list) {
+        for (MedicamentoEntity ent : list) {
             boolean found = false;
-            for (MedicoEntity entity : data) {
+            for (MedicamentoEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -132,43 +136,56 @@ public class MedicoPersistenceTest {
     }
 
     /**
-     * Prueba para consultar un Medico.
+     * Prueba para consultar un Medicamento.
      */
     @Test
-    public void getMedicoTest() {
-        MedicoEntity entity = data.get(0);
-        MedicoEntity newEntity = medicoPersistence.find(entity.getId());
+    public void getMedicamentoTest() {
+        MedicamentoEntity entity = data.get(0);
+        MedicamentoEntity newEntity = medicamentoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
-        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }
 
     /**
-     * Prueba para actualizar un Medico.
+     * Prueba para eliminar un Medicamento.
      */
     @Test
-    public void updateMedicoTest() {
-        MedicoEntity entity = data.get(0);
+    public void deleteMedicamentoTest() {
+        MedicamentoEntity entity = data.get(0);
+        medicamentoPersistence.delete(entity.getId());
+        MedicamentoEntity deleted = em.find(MedicamentoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+    /**
+     * Prueba para actualizar una Medicamento.
+     */
+    @Test
+    public void updateMedicamentoTest() {
+        MedicamentoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
 
         newEntity.setId(entity.getId());
 
-        medicoPersistence.update(newEntity);
+        medicamentoPersistence.update(newEntity);
 
-        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+        MedicamentoEntity resp = em.find(MedicamentoEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
     }
 
     /**
-     * Prueba para eliminar un Medico.
+     * Prueba para consultar una Medicamento por nombre.
      */
     @Test
-    public void deleteMedicoTest() {
-        MedicoEntity entity = data.get(0);
-        medicoPersistence.delete(entity.getId());
-        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+    public void findMedicamentoByNombreTest() {
+        MedicamentoEntity entity = data.get(0);
+        MedicamentoEntity newEntity = medicamentoPersistence.findByNombre(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+
+        newEntity = medicamentoPersistence.findByNombre(null);
+        Assert.assertNull(newEntity);
     }
 }

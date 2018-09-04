@@ -47,7 +47,7 @@ public class CitaMedicaPersistence {
     public List<CitaMedicaEntity> findAll() 
     {
         LOGGER.log(Level.INFO, "Consultando todas las CitaaMedicaes");
-        Query q = em.createQuery("select * from CitaMedicaEntity");
+        Query q = em.createQuery("select u from CitaMedicaEntity u", CitaMedicaEntity.class);
         return q.getResultList();
     }
     

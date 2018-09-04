@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,7 +14,7 @@ import javax.persistence.Id;
  * @author Daniel Ivan Romero
  */
 @Entity
-public class EspecialidadEntity {
+public class EspecialidadEntity implements Serializable{
     
     @Id
     private String nombre;

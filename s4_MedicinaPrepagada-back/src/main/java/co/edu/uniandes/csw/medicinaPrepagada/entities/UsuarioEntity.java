@@ -6,14 +6,17 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *clase que representa un usuario
  * @author MIGUELHOYOS
  */
 @Entity
-public class UsuarioEntity extends BaseEntity{
+public class UsuarioEntity{
     
+    @Id
+    private Long cedula;
     private String login;
     private String contrasena;
     private String tipoUsuario;

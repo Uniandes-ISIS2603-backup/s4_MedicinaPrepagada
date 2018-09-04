@@ -27,8 +27,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
-    @Id
-    private Long id; 
+//    @Id
+//    private Long id; 
     @Temporal(TemporalType.DATE)
     private Date fecha; 
     private String descripcionDiagnostico; 
@@ -51,20 +51,20 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @return atributo id.
      */
     
-    public Long getId() 
-    {
-        return id;
-    }
-
-    /**
-     * Establece el valor del atributo id.
-     * @param id nuevo valor del atributo
-     */
-    
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+//    public Long getId() 
+//    {
+//        return id;
+//    }
+//
+//    /**
+//     * Establece el valor del atributo id.
+//     * @param id nuevo valor del atributo
+//     */
+//    
+//    public void setId(Long id) 
+//    {
+//        this.id = id;
+//    }
     
      /**
      * Obtiene la fecha
