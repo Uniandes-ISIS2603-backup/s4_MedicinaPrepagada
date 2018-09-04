@@ -14,7 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+//import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -34,9 +34,9 @@ public class LaboratorioEntity
     @OneToMany(mappedBy = "laboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CitaLaboratorioEntity> citasLaboratorio = new ArrayList<>();
     
-    @PodamExclude
-    @ManyToOne
-    private ExamenMedicoEntity examenMedico;
+  //  @PodamExclude
+   // @ManyToOne
+   // private ExamenMedicoEntity examenMedico;
     
     private String nombre;
     private String direccion;
@@ -122,10 +122,10 @@ public class LaboratorioEntity
         return this.citasLaboratorio;
     }
     
-    public ExamenMedicoEntity getExamen ()
-    {
-        return this.examenMedico;
-    }
+   // public ExamenMedicoEntity getExamen ()
+    //{
+    //    return this.examenMedico;
+   // }
     
     @Override
     public boolean equals(Object obj) {
