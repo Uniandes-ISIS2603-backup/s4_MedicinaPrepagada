@@ -48,7 +48,7 @@ public class MedicoPersistence {
     public List<MedicoEntity> findAll() 
     {
         LOGGER.log(Level.INFO, "Consultando todos los Medicoes");
-        Query q = em.createQuery("select u from MedicoEntity u");
+        Query q = em.createQuery("select u from MedicoEntity u", MedicoEntity.class);
         return q.getResultList();
     }
     
