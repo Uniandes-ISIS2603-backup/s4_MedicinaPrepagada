@@ -16,6 +16,7 @@ import javax.persistence.Id;
 public class UsuarioEntity{
     
     @Id
+    private Long cedula;
     private String login;
     private String contrasena;
     private String tipoUsuario;
