@@ -7,32 +7,41 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *clase que representa un Paciente
  * @author MIGUELHOYOS
  */
 @Entity
-public class PacienteEntity extends UsuarioEntity  implements Serializable{
+public class PacienteEntity  implements Serializable{
     
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<CitaLaboratorioEntity> citasLaboratorio;
-//    
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<FacturaEntity> facturas;
-    
+    @PodamExclude    
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<CitaLaboratorioEntity> citasLaboratorio;
+    
+    @PodamExclude  
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<FacturaEntity> facturas;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TarjetaCreditoEntity> tarjetasCredito;
     
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<CitaMedicaEntity> citasMedicas;
-//    
+    @PodamExclude    
+    @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY)
+    private List<CitaMedicaEntity> citasMedicas;
+    
+//    @PodamExclude    
 //    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
 //    private List<HistoriaClinicaEntity> historiasClinicas;
-    
+//    
+    @Id
     private Long cedula;
     private String nombre;
     private String fechaNacimiento;
@@ -44,30 +53,30 @@ public class PacienteEntity extends UsuarioEntity  implements Serializable{
     /**
      * @return the citasLaboratorio
      */
-//    public List<CitaLaboratorioEntity> getCitasLaboratorio() {
-//        return citasLaboratorio;
-//    }
+    public List<CitaLaboratorioEntity> getCitasLaboratorio() {
+        return citasLaboratorio;
+    }
 
     /**
      * @param citasLaboratorio the citasLaboratorio to set
      */
-//    public void setCitasLaboratorio(List<CitaLaboratorioEntity> citasLaboratorio) {
-//        this.citasLaboratorio = citasLaboratorio;
-//    }
+    public void setCitasLaboratorio(List<CitaLaboratorioEntity> citasLaboratorio) {
+        this.citasLaboratorio = citasLaboratorio;
+    }
 
     /**
      * @return the facturas
      */
-//    public List<FacturaEntity> getFacturas() {
-//        return facturas;
-//    }
+    public List<FacturaEntity> getFacturas() {
+        return facturas;
+    }
 
     /**
      * @param facturas the facturas to set
      */
-//    public void setFacturas(List<FacturaEntity> facturas) {
-//        this.facturas = facturas;
-//    }
+    public void setFacturas(List<FacturaEntity> facturas) {
+        this.facturas = facturas;
+    }
 
     /**
      * @return the tarjetasCredito
@@ -86,27 +95,27 @@ public class PacienteEntity extends UsuarioEntity  implements Serializable{
     /**
      * @return the citasMedicas
      */
-//    public List<CitaMedicaEntity> getCitasMedicas() {
-//        return citasMedicas;
-//    }
+    public List<CitaMedicaEntity> getCitasMedicas() {
+        return citasMedicas;
+    }
 
     /**
      * @param citasMedicas the citasMedicas to set
      */
-//    public void setCitasMedicas(List<CitaMedicaEntity> citasMedicas) {
-//        this.citasMedicas = citasMedicas;
-//    }
+    public void setCitasMedicas(List<CitaMedicaEntity> citasMedicas) {
+        this.citasMedicas = citasMedicas;
+    }
 
-    /**
-     * @return the historiasClinicas
-     */
+//    /**
+//     * @return the historiasClinicas
+//     */
 //    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
 //        return historiasClinicas;
 //    }
-
-    /**
-     * @param historiasClinicas the historiasClinicas to set
-     */
+//
+//    /**
+//     * @param historiasClinicas the historiasClinicas to set
+//     */
 //    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
 //        this.historiasClinicas = historiasClinicas;
 //    }

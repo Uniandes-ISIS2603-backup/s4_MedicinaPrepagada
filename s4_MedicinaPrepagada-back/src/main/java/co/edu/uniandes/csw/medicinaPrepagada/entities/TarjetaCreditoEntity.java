@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
  * @author MIGUELHOYOS
  */
 @Entity
-public class TarjetaCreditoEntity extends BaseEntity implements Serializable{
+public class TarjetaCreditoEntity implements Serializable{
 
     @ManyToOne()
     private PacienteEntity paciente;
