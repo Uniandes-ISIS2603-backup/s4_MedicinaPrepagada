@@ -8,15 +8,10 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-
-import javax.persistence.FetchType;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
