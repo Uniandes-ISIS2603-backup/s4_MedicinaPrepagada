@@ -213,6 +213,11 @@ public class ConsultorioTest
         ConsultorioEntity resp = em.find(ConsultorioEntity.class, entity.getId());
         
         
+                //Test Atributos
+        Assert.assertEquals(newEntity.getEdificio(), resp.getEdificio());
+        Assert.assertEquals(newEntity.getNOficina(), resp.getNOficina());
+        
+        
         //Test relaciones
         Assert.assertEquals(newEntity.getEspecialidad(), resp.getEspecialidad());
         Assert.assertEquals(newEntity.getSede(), resp.getSede());
