@@ -110,7 +110,8 @@ public class EspecialidadPersistenceTest {
 
         EspecialidadEntity entity = em.find(EspecialidadEntity.class, result.getNombre());
 
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getConsultorios(), entity.getConsultorios());
+        Assert.assertEquals(newEntity.getMedicos(), entity.getMedicos());
     }
 
     /**
@@ -139,7 +140,8 @@ public class EspecialidadPersistenceTest {
         EspecialidadEntity entity = data.get(0);
         EspecialidadEntity newEntity = especialidadPersistence.find(entity.getNombre());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(newEntity.getConsultorios(), entity.getConsultorios());
+        Assert.assertEquals(newEntity.getMedicos(), entity.getMedicos());
     }
 
     /**
@@ -157,7 +159,8 @@ public class EspecialidadPersistenceTest {
 
         EspecialidadEntity resp = em.find(EspecialidadEntity.class, entity.getNombre());
 
-        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getConsultorios(), resp.getConsultorios());
+        Assert.assertEquals(newEntity.getMedicos(), resp.getMedicos());
     }
 
     /**
