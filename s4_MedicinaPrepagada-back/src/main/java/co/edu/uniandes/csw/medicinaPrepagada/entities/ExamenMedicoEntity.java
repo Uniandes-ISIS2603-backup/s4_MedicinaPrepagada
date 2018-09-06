@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +41,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     @OneToMany(
             mappedBy ="examenMedico",     
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-            Collection<LaboratorioEntity> laboratorios;
+            List<LaboratorioEntity> laboratorios = new ArrayList<>();
     
     @PodamExclude
     @ManyToOne
@@ -50,18 +52,18 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
      *
      * @return laboratorios
      */
-    //public Collection<LaboratorioEntity> getLaboratorios() {
-      //  return laboratorios;
-    //}
+    public List<LaboratorioEntity> getLaboratorios() {
+        return laboratorios;
+    }
 
     /**
      * Modifica los laboratorios del examen medico.
      *
      * @param pLaboratorios the laboratorios to set
      */
-    //public void setLaboratorios(Collection<LaboratorioEntity> pLaboratorios) {
-      //  this.laboratorios = pLaboratorios;
-    //}
+    public void setLaboratorios(List<LaboratorioEntity> pLaboratorios) {
+        this.laboratorios = pLaboratorios;
+    }
     
      /**
      * Devuelve la orden medica del medicamento.
