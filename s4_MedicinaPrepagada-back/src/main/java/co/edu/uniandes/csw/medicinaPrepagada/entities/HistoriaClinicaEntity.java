@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -37,9 +40,13 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private boolean bebe; 
     private String operaciones; 
     
-   // @PodamExclude
-   // @ManyToOne
-   // private List<OrdenMedicaEntity> ordenesMedicas = new ArrayList<OrdenMedicaEntity>();
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private PacienteEntity paciente; 
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "historias",fetch=FetchType.LAZY)
+    private List<OrdenMedicaEntity> ordenesMedicas;
     
     /**
      * Obtiene el atributo id.
@@ -226,20 +233,38 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @return Lista de ordenes medicas
      */
     
-//    public List<OrdenMedicaEntity> getOrdenesMedicas()
-//    {
-//        return ordenesMedicas;
-//    }
-//    
-//    /**
-//     * Modifica las ordenes medicas de la historia clinica.
-//     * @param pOrdenesMedicas Las nuevas ordenes medicas.
-//     */
-//    
-//    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
-//    {
-//        this.ordenesMedicas = pOrdenesMedicas;
-//    }
+    public List<OrdenMedicaEntity> getOrdenesMedicas()
+    {
+        return ordenesMedicas;
+    }
+    
+    /**
+     * Modifica las ordenes medicas de la historia clinica.
+     * @param pOrdenesMedicas Las nuevas ordenes medicas.
+     */
+    
+    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrdenesMedicas) 
+    {
+        this.ordenesMedicas = pOrdenesMedicas;
+    }
+
+    /**
+     * @return the paciente
+     */
+    public PacienteEntity getPaciente() 
+    {
+        return paciente;
+    }
+
+    /**
+     * @param paciente the paciente to set
+     */
+    public void setPaciente(PacienteEntity paciente) 
+    {
+        this.paciente = paciente;
+    }
+    
+    
     
     
     

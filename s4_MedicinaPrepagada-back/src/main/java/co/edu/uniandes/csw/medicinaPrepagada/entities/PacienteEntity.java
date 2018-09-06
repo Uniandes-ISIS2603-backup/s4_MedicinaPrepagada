@@ -36,10 +36,10 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
     @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY)
     private List<CitaMedicaEntity> citasMedicas;
    
-//    @PodamExclude    
-//    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-//    private List<HistoriaClinicaEntity> historiasClinicas;
-//    
+    @PodamExclude    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<HistoriaClinicaEntity> historiasClinicas;
+ 
 
     private String nombre;
     private String fechaNacimiento;

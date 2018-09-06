@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -34,13 +35,16 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @Temporal(TemporalType.DATE)
     private Date validaHasta; 
     
-    //@PodamExclude
-    //@ManyToOne
-    //private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private HistoriaClinicaEntity historias; 
     
-    //@PodamExclude
-    //@ManyToOne
-    //private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
+    @PodamExclude
+    @OneToMany
+    private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
+    
+    @PodamExclude
+    @OneToMany
+    private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
     
     /**
      * Obtiene el atributo id.
@@ -147,7 +151,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return Los medicamentos
      */
     
-    /**public List<MedicamentoEntity> getMedicamentos() 
+    public List<MedicamentoEntity> getMedicamentos() 
     {
         return medicamentos;
     }
@@ -157,9 +161,9 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pMedicamentos Los medicamentos a poner
      */
     
-    /**public void setMedicamentos(List<MedicamentoEntity> pMedicamentos) 
+    public void setMedicamentos(List<MedicamentoEntity> pMedicamentos) 
     {
-       // this.medicamentos = pMedicamentos;
+       this.medicamentos = pMedicamentos;
     }
     
     /**
@@ -167,7 +171,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return Los examenes medicos.
      */
     
-    /**public List<ExamenesMedicosEntity> getExamenesMedicos() 
+    public List<ExamenMedicoEntity> getExamenesMedicos() 
     {
         return examenesMedicos;
     }
@@ -177,8 +181,22 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pExamenesMedicos Los examenes medicos a poner.
      */
     
-    /**public void setExamenesMedicos(List<ExamenesMedicosEntity> pExamenesMedicos) 
+    public void setExamenesMedicos(List<ExamenMedicoEntity> pExamenesMedicos) 
     {
         this.examenesMedicos = pExamenesMedicos;
-    }*/
+    }
+
+    /**
+     * @return the historias
+     */
+    public HistoriaClinicaEntity getHistorias() {
+        return historias;
+    }
+
+    /**
+     * @param historias the historias to set
+     */
+    public void setHistorias(HistoriaClinicaEntity historias) {
+        this.historias = historias;
+    }
 }
