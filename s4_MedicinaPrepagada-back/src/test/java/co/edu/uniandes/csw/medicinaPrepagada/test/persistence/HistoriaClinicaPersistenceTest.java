@@ -142,7 +142,7 @@ public class HistoriaClinicaPersistenceTest
         List<HistoriaClinicaEntity> list = histPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         
-        for (HistoriaClinicaEntity ent : list) 
+        for(HistoriaClinicaEntity ent : list) 
         {
             boolean found = false;
             

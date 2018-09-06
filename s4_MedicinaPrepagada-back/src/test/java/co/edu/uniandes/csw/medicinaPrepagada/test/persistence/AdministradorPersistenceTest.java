@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.AdministradorPersistence;
+import static java.time.Clock.system;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -41,7 +42,7 @@ public class AdministradorPersistenceTest
     @Inject
     UserTransaction utx;
 
-    private List<AdministradorEntity> data = new ArrayList<AdministradorEntity>();
+    private List<AdministradorEntity> data = new ArrayList<>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -125,11 +126,11 @@ public class AdministradorPersistenceTest
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
         AdministradorEntity result = admiPersistence.create(newEntity);
 
-        //Assert.assertNotNull(result);
+        Assert.assertNotNull(result);
 
-        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
+        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getCedula());
 
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getCedula(), entity.getCedula());
     }
     
     /**
@@ -148,7 +149,7 @@ public class AdministradorPersistenceTest
             
             for (AdministradorEntity entity : data) 
             {
-                if (ent.getId().equals(entity.getId())) 
+                if (ent.getCedula().equals(entity.getCedula())) 
                 {
                     found = true;
                 }
@@ -165,9 +166,9 @@ public class AdministradorPersistenceTest
     public void getAdministradorTest() 
     {
         AdministradorEntity entity = data.get(0);
-        AdministradorEntity newEntity = admiPersistence.find(entity.getId());
-        //Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
+        AdministradorEntity newEntity = admiPersistence.find(entity.getCedula());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCedula(), newEntity.getCedula());
     }
     
     /**
@@ -178,9 +179,9 @@ public class AdministradorPersistenceTest
     public void deleteAdministradorTest() 
     {
         AdministradorEntity entity = data.get(0);
-        admiPersistence.delete(entity.getId());
-        AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getId());
-        //Assert.assertNull(deleted);
+        admiPersistence.delete(entity.getCedula());
+        AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getCedula());
+        Assert.assertNull(deleted);
     }
     
     /**
@@ -194,13 +195,13 @@ public class AdministradorPersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
 
-        newEntity.setId(entity.getId());
+        newEntity.setCedula(entity.getCedula());
 
         admiPersistence.update(newEntity);
 
-        AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
+        AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getCedula());
 
-        Assert.assertEquals(newEntity.getId(), resp.getId());
+        Assert.assertEquals(newEntity.getCedula(), resp.getCedula());
     }
     
 }
