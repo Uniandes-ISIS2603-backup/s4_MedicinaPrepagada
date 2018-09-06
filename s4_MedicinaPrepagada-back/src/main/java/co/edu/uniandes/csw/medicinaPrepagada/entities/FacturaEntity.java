@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -27,12 +29,15 @@ public class FacturaEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @PodamExclude
     @ManyToOne
     private PacienteEntity paciente;
     
+    @PodamExclude
     @OneToOne //(mappedBy = "factura", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private CitaLaboratorioEntity citaLaboratorio;
     
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
     private int valor;
     private String concepto;

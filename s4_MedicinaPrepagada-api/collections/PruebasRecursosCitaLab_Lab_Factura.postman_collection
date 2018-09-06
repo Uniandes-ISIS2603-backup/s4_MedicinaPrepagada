@@ -91,6 +91,18 @@
 		},
 		{
 			"name": "GET ALL FACTURAS ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55d678dd-92a4-4c69-b9eb-5e7d8c4b1a0e",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -177,7 +189,7 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -186,10 +198,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{}"
+					"raw": "{\"id\":\"1\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaLaboratorio",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -198,7 +210,7 @@
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
-						"citaLaboratorio"
+						"laboratorios"
 					]
 				}
 			},
@@ -211,6 +223,49 @@
 					"listen": "test",
 					"script": {
 						"id": "6a73ed37-da86-46b3-a60d-130cae652ebd",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL LABORATORIOS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "22639724-a9a9-4e89-832b-7b96b6ce5e9a",
 						"type": "text/javascript",
 						"exec": [
 							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
@@ -247,37 +302,6 @@
 			"response": []
 		},
 		{
-			"name": "GET ALL LABORATORIOS",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"laboratorios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "POST LAB",
 			"event": [
 				{
@@ -292,7 +316,7 @@
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -304,7 +328,7 @@
 					"raw": "{}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/facturas/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -313,7 +337,8 @@
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
-						"laboratorios"
+						"facturas",
+						"1"
 					]
 				}
 			},
@@ -321,6 +346,18 @@
 		},
 		{
 			"name": "PUT LAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9889beca-72e5-4826-ae2f-dd9c1ecdb71c",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -344,6 +381,18 @@
 		},
 		{
 			"name": "DELETE LAB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b6e8399-3292-4cb7-89f9-1541eb4ac99a",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELETE\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -371,10 +420,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1fe99e02-8cb3-40ee-922e-b3bdde170233",
+						"id": "5e4aaac3-e851-4cc3-9e3a-74bbae9a8203",
 						"type": "text/javascript",
 						"exec": [
-							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
 						]
 					}
 				}
@@ -414,10 +463,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1fe99e02-8cb3-40ee-922e-b3bdde170233",
+						"id": "f6d5dbc3-db3e-45b9-b036-52fa303dd3e9",
 						"type": "text/javascript",
 						"exec": [
-							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+							"tests [\"No genera error en el DELETE\"] = responseCode.code === 204;"
 						]
 					}
 				}
