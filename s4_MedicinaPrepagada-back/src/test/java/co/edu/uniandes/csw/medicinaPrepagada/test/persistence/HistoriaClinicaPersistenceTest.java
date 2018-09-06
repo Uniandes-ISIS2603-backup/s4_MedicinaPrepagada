@@ -33,7 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class HistoriaClinicaPersistenceTest 
 {
     @Inject
-    private HistoriaClinicaPersistence histPersistence;
+    private HistoriaClinicaPersistence historiaPersistence;
 
     @PersistenceContext
     private EntityManager em;
@@ -41,14 +41,14 @@ public class HistoriaClinicaPersistenceTest
     @Inject
     UserTransaction utx;
 
-    private List<HistoriaClinicaEntity> data = new ArrayList<HistoriaClinicaEntity>();
+    private List<HistoriaClinicaEntity> data = new ArrayList<>();
     
-    /**
+    
+     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
      */
-    
     @Deployment
     public static JavaArchive createDeployment() 
     {
@@ -58,11 +58,11 @@ public class HistoriaClinicaPersistenceTest
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-
+    
+    
     /**
      * Configuración inicial de la prueba.
      */
-    
     @Before
     public void configTest() 
     {
@@ -74,15 +74,14 @@ public class HistoriaClinicaPersistenceTest
             insertData();
             utx.commit();
         } 
-        catch (Exception e) 
+        catch (Exception e)
         {
             e.printStackTrace();
             try 
             {
                 utx.rollback();
             } 
-            catch (Exception e1) 
-            {
+            catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
@@ -91,8 +90,7 @@ public class HistoriaClinicaPersistenceTest
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
-    
-    private void clearData() 
+    private void clearData()
     {
         em.createQuery("delete from HistoriaClinicaEntity").executeUpdate();
     }
@@ -101,14 +99,13 @@ public class HistoriaClinicaPersistenceTest
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
-    
     private void insertData() 
     {
         PodamFactory factory = new PodamFactoryImpl();
-        
         for (int i = 0; i < 3; i++) 
         {
             HistoriaClinicaEntity entity = factory.manufacturePojo(HistoriaClinicaEntity.class);
+
             em.persist(entity);
             data.add(entity);
         }
@@ -123,7 +120,7 @@ public class HistoriaClinicaPersistenceTest
     {
         PodamFactory factory = new PodamFactoryImpl();
         HistoriaClinicaEntity newEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
-        HistoriaClinicaEntity result = histPersistence.create(newEntity);
+        HistoriaClinicaEntity result = historiaPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
@@ -139,7 +136,7 @@ public class HistoriaClinicaPersistenceTest
     @Test
     public void getHistoriasClinicasTest() 
     {
-        List<HistoriaClinicaEntity> list = histPersistence.findAll();
+        List<HistoriaClinicaEntity> list = historiaPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         
         for(HistoriaClinicaEntity ent : list) 
@@ -165,7 +162,7 @@ public class HistoriaClinicaPersistenceTest
     public void getHistoriaClinicaTest() 
     {
         HistoriaClinicaEntity entity = data.get(0);
-        HistoriaClinicaEntity newEntity = histPersistence.find(entity.getId());
+        HistoriaClinicaEntity newEntity = historiaPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
@@ -178,7 +175,7 @@ public class HistoriaClinicaPersistenceTest
     public void deleteHistoriaClinicaTest() 
     {
         HistoriaClinicaEntity entity = data.get(0);
-        histPersistence.delete(entity.getId());
+        historiaPersistence.delete(entity.getId());
         HistoriaClinicaEntity deleted = em.find(HistoriaClinicaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -196,7 +193,7 @@ public class HistoriaClinicaPersistenceTest
 
         newEntity.setId(entity.getId());
 
-        histPersistence.update(newEntity);
+        historiaPersistence.update(newEntity);
 
         HistoriaClinicaEntity resp = em.find(HistoriaClinicaEntity.class, entity.getId());
 

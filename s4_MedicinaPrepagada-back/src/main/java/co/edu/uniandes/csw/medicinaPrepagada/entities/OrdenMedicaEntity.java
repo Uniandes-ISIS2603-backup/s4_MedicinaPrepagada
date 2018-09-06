@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -34,7 +35,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @Temporal(TemporalType.DATE)
     private Date validaHasta; 
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
     @PodamExclude

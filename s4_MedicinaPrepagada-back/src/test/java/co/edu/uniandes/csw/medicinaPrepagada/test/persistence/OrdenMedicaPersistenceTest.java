@@ -14,11 +14,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -26,6 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author estudiante
  */
+@RunWith(Arquillian.class)
 public class OrdenMedicaPersistenceTest 
 {
     @Inject
@@ -37,7 +40,7 @@ public class OrdenMedicaPersistenceTest
     @Inject
     UserTransaction utx;
 
-    private List<OrdenMedicaEntity> data = new ArrayList<OrdenMedicaEntity>();
+    private List<OrdenMedicaEntity> data = new ArrayList<>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -59,6 +62,7 @@ public class OrdenMedicaPersistenceTest
      * Configuración inicial de la prueba.
      */
     
+  
     @Before
     public void configTest() 
     {
@@ -70,15 +74,14 @@ public class OrdenMedicaPersistenceTest
             insertData();
             utx.commit();
         } 
-        catch (Exception e) 
+        catch (Exception e)
         {
             e.printStackTrace();
             try 
             {
                 utx.rollback();
             } 
-            catch (Exception e1) 
-            {
+            catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
@@ -98,13 +101,11 @@ public class OrdenMedicaPersistenceTest
      * pruebas.
      */
     
-    private void insertData() 
-    {
+   private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
-        for (int i = 0; i < 3; i++) 
-        {
+        for (int i = 0; i < 3; i++) {
             OrdenMedicaEntity entity = factory.manufacturePojo(OrdenMedicaEntity.class);
+
             em.persist(entity);
             data.add(entity);
         }
