@@ -111,6 +111,9 @@ public class CitaMedicaPersistenceTest {
         CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newEntity.getComentarios(), entity.getComentarios());
+        Assert.assertEquals(newEntity.getPacienteAAtender(), entity.getPacienteAAtender());
+        Assert.assertEquals(newEntity.getHorarioAtencionAsignado(), entity.getHorarioAtencionAsignado());
     }
 
     /**
@@ -139,8 +142,10 @@ public class CitaMedicaPersistenceTest {
         CitaMedicaEntity entity = data.get(0);
         CitaMedicaEntity newEntity = citaMedicaPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
-        Assert.assertEquals(entity.getComentarios(), newEntity.getComentarios());
+        Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newEntity.getComentarios(), entity.getComentarios());
+        Assert.assertEquals(newEntity.getPacienteAAtender(), entity.getPacienteAAtender());
+        Assert.assertEquals(newEntity.getHorarioAtencionAsignado(), entity.getHorarioAtencionAsignado());
     }
 
     /**
@@ -159,6 +164,10 @@ public class CitaMedicaPersistenceTest {
         CitaMedicaEntity resp = em.find(CitaMedicaEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
+        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
+        Assert.assertEquals(newEntity.getComentarios(), resp.getComentarios());
+        Assert.assertEquals(newEntity.getPacienteAAtender(), resp.getPacienteAAtender());
+        Assert.assertEquals(newEntity.getHorarioAtencionAsignado(), resp.getHorarioAtencionAsignado());
     }
 
     /**
