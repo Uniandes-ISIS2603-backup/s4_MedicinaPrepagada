@@ -103,6 +103,14 @@ public class CitaLaboratorioPersistenceTest {
     }
     
     @Test
+    public void deleteEditorialTest() {
+        CitaLaboratorioEntity entity = data.get(0);
+        citaLaboratorioPersistence.delete(entity.getId());
+        CitaLaboratorioEntity deleted = em.find(CitaLaboratorioEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    @Test
     public void getAllCitaLaboratorioTest() {
         List<CitaLaboratorioEntity> list = citaLaboratorioPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
