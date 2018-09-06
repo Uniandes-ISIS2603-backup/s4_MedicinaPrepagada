@@ -115,6 +115,13 @@ public class FarmaciaPersistenceTest {
         FarmaciaEntity entity = em.find(FarmaciaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getUbicacion(), entity.getUbicacion());
+        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), entity.getCorreo());
+        Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
+        Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
+        
+        Assert.assertEquals(newEntity.getMedicamento(), entity.getMedicamento());
     }
 
     /**
@@ -144,6 +151,13 @@ public class FarmaciaPersistenceTest {
         FarmaciaEntity newEntity = farmaciaPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getUbicacion(), newEntity.getUbicacion());
+        Assert.assertEquals(entity.getTelefono(), newEntity.getTelefono());
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
+        Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
+        Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
+        
+        Assert.assertEquals(entity.getMedicamento(), newEntity.getMedicamento());
     }
 
     /**
@@ -173,6 +187,15 @@ public class FarmaciaPersistenceTest {
         FarmaciaEntity resp = em.find(FarmaciaEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getUbicacion(), resp.getUbicacion());
+        Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
+        Assert.assertEquals(newEntity.getLatitud(), resp.getLatitud(),0);
+        Assert.assertEquals(newEntity.getLongitud(), resp.getLongitud(),0);
+        
+        Assert.assertEquals(newEntity.getMedicamento(), entity.getMedicamento());
+        
+        
     }
 
     /**
@@ -184,6 +207,14 @@ public class FarmaciaPersistenceTest {
         FarmaciaEntity newEntity = farmaciaPersistence.findByNombre(entity.getNombre());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getUbicacion(), newEntity.getUbicacion());
+        Assert.assertEquals(entity.getTelefono(), newEntity.getTelefono());
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
+        Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
+        Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
+        
+        Assert.assertEquals(entity.getMedicamento(), newEntity.getMedicamento());
 
         newEntity = farmaciaPersistence.findByNombre(null);
         Assert.assertNull(newEntity);
