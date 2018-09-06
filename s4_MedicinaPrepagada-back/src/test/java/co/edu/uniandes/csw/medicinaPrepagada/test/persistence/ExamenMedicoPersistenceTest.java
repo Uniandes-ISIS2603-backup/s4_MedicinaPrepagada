@@ -115,6 +115,15 @@ public class ExamenMedicoPersistenceTest {
         ExamenMedicoEntity entity = em.find(ExamenMedicoEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getCosto(), entity.getCosto(),0);
+        Assert.assertEquals(newEntity.getRecomendaciones(), entity.getRecomendaciones());
+        Assert.assertEquals(newEntity.getOrdenMedica(), entity.getOrdenMedica());
+
+        Assert.assertEquals(newEntity.getLaboratorios().size(), entity.getLaboratorios().size());
+        for (int i=0;i<newEntity.getLaboratorios().size();i++)
+        {
+            Assert.assertEquals(newEntity.getLaboratorios().get(i), entity.getLaboratorios().get(i));
+        }
     }
 
     /**
@@ -144,6 +153,15 @@ public class ExamenMedicoPersistenceTest {
         ExamenMedicoEntity newEntity = examenMedicoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getCosto(), newEntity.getCosto(),0);
+        Assert.assertEquals(entity.getRecomendaciones(), newEntity.getRecomendaciones());
+        Assert.assertEquals(entity.getOrdenMedica(), newEntity.getOrdenMedica());
+
+        Assert.assertEquals(entity.getLaboratorios().size(), newEntity.getLaboratorios().size());
+        for (int i=0;i<entity.getLaboratorios().size();i++)
+        {
+            Assert.assertEquals(entity.getLaboratorios().get(i), newEntity.getLaboratorios().get(i));
+        }
     }
 
     /**
@@ -173,6 +191,15 @@ public class ExamenMedicoPersistenceTest {
         ExamenMedicoEntity resp = em.find(ExamenMedicoEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getCosto(), resp.getCosto(),0);
+        Assert.assertEquals(newEntity.getRecomendaciones(), resp.getRecomendaciones());
+        Assert.assertEquals(newEntity.getOrdenMedica(), resp.getOrdenMedica());
+
+        Assert.assertEquals(newEntity.getLaboratorios().size(), resp.getLaboratorios().size());
+        for (int i=0;i<newEntity.getLaboratorios().size();i++)
+        {
+            Assert.assertEquals(newEntity.getLaboratorios().get(i), resp.getLaboratorios().get(i));
+        }   
     }
 
     /**
@@ -184,6 +211,15 @@ public class ExamenMedicoPersistenceTest {
         ExamenMedicoEntity newEntity = examenMedicoPersistence.findByNombre(entity.getNombre());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getCosto(), newEntity.getCosto(),0);
+        Assert.assertEquals(entity.getRecomendaciones(), newEntity.getRecomendaciones());
+        Assert.assertEquals(entity.getOrdenMedica(), newEntity.getOrdenMedica());
+
+        Assert.assertEquals(entity.getLaboratorios().size(), newEntity.getLaboratorios().size());
+        for (int i=0;i<entity.getLaboratorios().size();i++)
+        {
+            Assert.assertEquals(entity.getLaboratorios().get(i), newEntity.getLaboratorios().get(i));
+        }
 
         newEntity = examenMedicoPersistence.findByNombre(null);
         Assert.assertNull(newEntity);

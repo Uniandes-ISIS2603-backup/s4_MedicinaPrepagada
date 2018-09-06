@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +43,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     @OneToMany(
             mappedBy ="medicamento",     
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-            Collection<FarmaciaEntity> farmacias;
+            List<FarmaciaEntity> farmacias = new ArrayList<>();
     
     @PodamExclude
     @ManyToOne
@@ -52,7 +54,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
      *
      * @return farmacias
      */
-    public Collection<FarmaciaEntity> getFarmacias() {
+    public List<FarmaciaEntity> getFarmacias() {
         return farmacias;
     }
 
@@ -61,7 +63,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
      *
      * @param pFarmacias the farmacias to set
      */
-    public void setFarmacias(Collection<FarmaciaEntity> pFarmacias) {
+    public void setFarmacias(List<FarmaciaEntity> pFarmacias) {
         this.farmacias = pFarmacias;
     }
     
@@ -131,7 +133,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     /**
      * Modifica la cantidad del medicamento.
      *
-     * @param cantidad the cantidad to set
+     * @param pCantidad the cantidad to set
      */
     public void setCantidad(String pCantidad) {
         this.cantidad = pCantidad;
