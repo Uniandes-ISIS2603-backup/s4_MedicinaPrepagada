@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.persistence.ConsultorioPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import java.util.ArrayList;
 import java.util.List;

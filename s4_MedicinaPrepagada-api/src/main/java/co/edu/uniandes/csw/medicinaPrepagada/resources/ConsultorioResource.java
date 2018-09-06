@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
