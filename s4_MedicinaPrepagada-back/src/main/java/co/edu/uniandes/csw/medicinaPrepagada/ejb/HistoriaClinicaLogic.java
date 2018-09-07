@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
 /**
  *
- * @author estudiante
+ * @author ni.ramirez10
  */
 public class HistoriaClinicaLogic {
     
