@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.medicinaPrepagada.logic;
+package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
 /**
  *
  * @author Daniel Ivan Romero
  */
-public class EspecialidadLogic {
+public class MedicoLogic {
     
 }
