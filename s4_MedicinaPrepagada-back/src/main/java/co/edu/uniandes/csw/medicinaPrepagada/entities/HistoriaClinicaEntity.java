@@ -85,7 +85,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     
     public void setFecha(Date fecha ) 
     {
-        this.fecha = fecha;
+        this.fecha = fecha; 
     }
     
     /**

@@ -61,7 +61,7 @@ public class LaboratorioPersistence {
          return query.getResultList();
      }
      
-     public LaboratorioEntity modify (LaboratorioEntity labEntity)
+     public LaboratorioEntity update (LaboratorioEntity labEntity)
      {
          LOGGER.log(Level.INFO,"Buscando el laboratorio para modificar con id=(0)", labEntity.getId());
          return em.merge(labEntity);
