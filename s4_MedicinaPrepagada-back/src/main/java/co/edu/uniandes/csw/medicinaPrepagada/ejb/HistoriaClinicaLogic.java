@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
-import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
