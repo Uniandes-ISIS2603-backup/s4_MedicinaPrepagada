@@ -5,9 +5,10 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.medicinaPrepagada.persistence.EspecialidadPersistence;
+import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class MedicoLogic {
     private MedicoPersistence persistence;
     
     @Inject
-    private EspecialidadPersistence especialidadPersistence;
+    private HorarioAtencionPersistence horarioPersistence;
 
     public MedicoEntity createMedico(MedicoEntity medicooEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del médico");
@@ -42,13 +43,13 @@ public class MedicoLogic {
             throw new BusinessLogicException("Debe ingresar el nombre del médico. ");
         }
         if(medicooEntity.getTelefono() <= 999999){
-            throw new BusinessLogicException("El numero de telefono no es válido. ");
+            throw new BusinessLogicException("La numero de telefono no es válido. ");
         }
         Pattern patronDeCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         String email = medicooEntity.getCorreo();
         Matcher mather = patronDeCorreo.matcher(email);
         if (mather.find() == false) {
-            throw new BusinessLogicException("El correo no es un correo válido. ");
+            throw new BusinessLogicException("La correo no es un correo válido. ");
         }
         persistence.create(medicooEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del médico satisfactoriamente");
@@ -77,7 +78,7 @@ public class MedicoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el medico con id = {0}", medicosId);
         MedicoEntity medicoEntity = persistence.find(medicosId);
         if (medicoEntity == null) {
-            LOGGER.log(Level.SEVERE, "El medico con el id = {0} no existe", medicosId);
+            LOGGER.log(Level.SEVERE, "La medico con el id = {0} no existe", medicosId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el medico con id = {0}", medicosId);
         return medicoEntity;
@@ -90,7 +91,7 @@ public class MedicoLogic {
      * @param medicoEntity Instancia de MedicoEntity con los nuevos datos.
      * @return Instancia de MedicoEntity con los datos actualizados.
      */
-    public MedicoEntity updateAuthor(Long medicosId, MedicoEntity medicoEntity) {
+    public MedicoEntity updateMedico(Long medicosId, MedicoEntity medicoEntity) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el medico con id = {0}", medicosId);
         MedicoEntity newMedicoEntity = persistence.update(medicoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el medico con id = {0}", medicosId);
@@ -101,14 +102,14 @@ public class MedicoLogic {
      * Eliminar un medico por ID
      *
      * @param medicosId El ID del medico a eliminar
-     * @throws BusinessLogicException si el medico tiene medicoes asociados
+     * @throws BusinessLogicException si el medico tiene medicos asociados
      */
     public void deleteMedico(Long medicosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el medico con id = {0}", medicosId);
-//        List<AuthorEntity> medicos = getMedico(medicosId).getAuthors();
-//        if (medicos != null && !medicos.isEmpty()) {
-//            throw new BusinessLogicException("No se puede borrar el medico con id = " + medicosId + " porque tiene medicoes asociados");
-//        }
+        List<HorarioAtencionEntity> horarios = getMedico(medicosId).getHorariosAtencion();
+        for(int i = 0; i<horarios.size();i++){
+            horarioPersistence.delete(horarios.get(i).getId());
+        }
         persistence.delete(medicosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el medico con id = {0}", medicosId);
     }
