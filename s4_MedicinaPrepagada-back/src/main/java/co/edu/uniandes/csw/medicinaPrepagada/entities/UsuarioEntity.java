@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,29 +14,17 @@ import javax.persistence.Id;
  * @author MIGUELHOYOS
  */
 @Entity
-public class UsuarioEntity{
+public class UsuarioEntity extends BaseEntity implements Serializable{
 
 
     
-    @Id
-    private Long cedula;
+    
+    private Long documentoIdentidad;
     private String login;
     private String contrasena;
     private String tipoUsuario;
     
-        /**
-     * @return the cedula
-     */
-    public Long getCedula() {
-        return cedula;
-    }
 
-    /**
-     * @param cedula the cedula to set
-     */
-    public void setCedula(Long cedula) {
-        this.cedula = cedula;
-    }
 
     /**
      * @return the login
@@ -77,5 +66,19 @@ public class UsuarioEntity{
      */
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    /**
+     * @return the documentoIdentidad
+     */
+    public Long getDocumentoIdentidad() {
+        return documentoIdentidad;
+    }
+
+    /**
+     * @param documentoIdentidad the documentoIdentidad to set
+     */
+    public void setDocumentoIdentidad(Long documentoIdentidad) {
+        this.documentoIdentidad = documentoIdentidad;
     }
 }

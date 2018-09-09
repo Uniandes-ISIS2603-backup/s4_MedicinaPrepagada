@@ -70,7 +70,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      */
     public PacienteDTO(PacienteEntity pacienteEntity){
         if(pacienteEntity != null){
-            this.cedula = pacienteEntity.getCedula();
+            this.cedula = pacienteEntity.getDocumentoIdentidad();
             this.nombre = pacienteEntity.getNombre();
             this.fechaNacimiento = pacienteEntity.getFechaNacimiento();
             this.direccion = pacienteEntity.getDireccion();
@@ -184,7 +184,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      */
     public PacienteEntity toEntity(){
         PacienteEntity pacienteEntity = new PacienteEntity();
-        pacienteEntity.setCedula(this.cedula);
+        pacienteEntity.setDocumentoIdentidad(this.cedula);
         pacienteEntity.setNombre(this.nombre);
         pacienteEntity.setFechaNacimiento(this.fechaNacimiento);
         pacienteEntity.setMail(this.mail);
