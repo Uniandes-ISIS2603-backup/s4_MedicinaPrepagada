@@ -16,7 +16,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Daniel Ivan Romero
+ * @medico Daniel Ivan Romero
  */
 @Stateless
 public class EspecialidadPersistence {
