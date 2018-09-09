@@ -25,6 +25,9 @@ public class MedicoEntity extends UsuarioEntity implements Serializable{
     private String nombre;
     private int telefono;
     private String correo;
+    private int documentoMedico;
+    private String firma;
+    private String descripcion;
     
     @PodamExclude
     @ManyToOne
@@ -73,6 +76,31 @@ public class MedicoEntity extends UsuarioEntity implements Serializable{
     public void setHorariosAtencion(List<HorarioAtencionEntity> horariosAtencion) {
         this.horariosAtencion = horariosAtencion;
     }
+
+    public int getDocumentoMedico() {
+        return documentoMedico;
+    }
+
+    public void setDocumentoMedico(int documentoMedico) {
+        this.documentoMedico = documentoMedico;
+    }
+
+    public String getFirma() {
+        return firma;
+    }
+
+    public void setFirma(String firma) {
+        this.firma = firma;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     
     
 }

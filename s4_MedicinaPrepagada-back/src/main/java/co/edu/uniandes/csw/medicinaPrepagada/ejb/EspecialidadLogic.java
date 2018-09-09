@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
+import javax.ejb.Stateless;
+
 /**
  *
  * @author Daniel Ivan Romero
  */
+@Stateless
 public class EspecialidadLogic {
     
 }
