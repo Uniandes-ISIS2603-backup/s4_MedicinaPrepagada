@@ -38,6 +38,8 @@ public class HistoriaClinicaResource
     /**
      * Crea una nueva historia clinica con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico.
+     * @param histClinica
+     * @return 
      * @throws BusinessLogicException
      */
     
@@ -67,8 +69,8 @@ public class HistoriaClinicaResource
     
     /**
      * Busca la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @return 
      */
     
     @GET
@@ -89,8 +91,8 @@ public class HistoriaClinicaResource
     
     /**
      * Elimina la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @throws BusinessLogicException 
      */
     
     @DELETE
@@ -108,8 +110,10 @@ public class HistoriaClinicaResource
     
      /**
      * Modifica la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @param pHistoria
+     * @return 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      */
     
     @PUT

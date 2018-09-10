@@ -39,6 +39,8 @@ public class AdministradorResource
     /**
      * Crea un nuevo administrador con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico.
+     * @param admi
+     * @return 
      * @throws BusinessLogicException
      */
     
@@ -68,6 +70,8 @@ public class AdministradorResource
     
     /**
      * Busca el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
+     * @return 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el adminsitrador.
      */
@@ -90,6 +94,8 @@ public class AdministradorResource
     
     /**
      * Elimina el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el adminsitrador.
      */
@@ -112,6 +118,7 @@ public class AdministradorResource
      * @param administradorId
      * @param pAdmi
      * @return 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el administrador.
      */

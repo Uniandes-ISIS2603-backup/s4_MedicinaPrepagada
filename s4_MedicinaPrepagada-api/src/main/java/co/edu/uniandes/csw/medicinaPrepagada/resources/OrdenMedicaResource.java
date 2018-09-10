@@ -39,6 +39,8 @@ public class OrdenMedicaResource
     /**
      * Crea una nueva orden medica con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico.
+     * @param ordenMedica
+     * @return 
      * @throws BusinessLogicException
      */
     
@@ -69,8 +71,8 @@ public class OrdenMedicaResource
     
     /**
      * Busca la orden medica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la orden medica.
+     * @param ordenMedicaid
+     * @return 
      */
     
     @GET
@@ -91,8 +93,8 @@ public class OrdenMedicaResource
     
     /**
      * Elimina la orden medica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la orden medica.
+     * @param ordenMedicaid
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     
     @DELETE
@@ -110,8 +112,10 @@ public class OrdenMedicaResource
     
     /**
      * Modifica la orden medica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la orden medica.
+     * @param ordenMedicaid
+     * @param pOrden
+     * @return 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      */
     
     @PUT
