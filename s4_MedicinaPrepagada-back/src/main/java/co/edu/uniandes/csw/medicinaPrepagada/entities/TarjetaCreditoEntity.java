@@ -26,6 +26,7 @@ public class TarjetaCreditoEntity implements Serializable{
     private String nombreEnTarjeta;
     private String fechaExpiracion;
     private String franquicia;
+    private Integer codigoSeguridad;
 
     /**
      * @return the numero
@@ -81,6 +82,20 @@ public class TarjetaCreditoEntity implements Serializable{
      */
     public void setFranquicia(String franquicia) {
         this.franquicia = franquicia;
+    }
+
+    /**
+     * @return the codigoSeguridad
+     */
+    public Integer getCodigoSeguridad() {
+        return codigoSeguridad;
+    }
+
+    /**
+     * @param codigoSeguridad the codigoSeguridad to set
+     */
+    public void setCodigoSeguridad(Integer codigoSeguridad) {
+        this.codigoSeguridad = codigoSeguridad;
     }
 
 }
