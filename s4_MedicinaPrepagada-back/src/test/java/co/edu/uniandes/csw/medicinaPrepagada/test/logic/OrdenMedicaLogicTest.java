@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.OrdenMedicaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -113,5 +116,91 @@ public class OrdenMedicaLogicTest
             data.add(entity);
         }
     }
+    
+     /**
+     * Prueba para crear una orden medica
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    
+    @Test
+    public void createOrdenMedicaTest() throws BusinessLogicException
+    {
+        OrdenMedicaEntity newEntity = factory.manufacturePojo(OrdenMedicaEntity.class);
+        OrdenMedicaEntity result = ordenLogic.createOrdenMedica(newEntity);
+        Assert.assertNotNull(result);
+        OrdenMedicaEntity entity = em.find(OrdenMedicaEntity.class, result.getId());
+    }
+    
+    /**
+     * Prueba para consultar la lista de ordenes medicas.
+     */
+    
+    @Test
+    public void getOrdenesMedicasTest() 
+    {
+        List<OrdenMedicaEntity> list = ordenLogic.getOrdenesMedicas();
+        Assert.assertEquals(data.size(), list.size());
+        
+        for (OrdenMedicaEntity entity : list) 
+        {
+            boolean found = false;
+            
+            for (OrdenMedicaEntity storedEntity : data) 
+            {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * Prueba para consultar una ordne medica.
+     */
+    
+    @Test
+    public void getOrdenMedicaTest() 
+    {
+        OrdenMedicaEntity entity = data.get(0);
+        OrdenMedicaEntity resultEntity = ordenLogic.getOrdenMedica(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    }
+    
+    /**
+     * Prueba para actualizar una orden medica.
+     */
+    
+    @Test
+    public void updateOrdenMedicaTest()
+    {
+        OrdenMedicaEntity entity = data.get(0);
+        OrdenMedicaEntity pojoEntity = factory.manufacturePojo(OrdenMedicaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        ordenLogic.updateOrdenMedica(pojoEntity.getId(), pojoEntity);
+
+        OrdenMedicaEntity resp = em.find(OrdenMedicaEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+    /**
+     * Prueba para eliminar una orden medica
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    
+    @Test
+    public void deleteOrdenMedicaTest() throws BusinessLogicException 
+    {
+        OrdenMedicaEntity entity = data.get(0);
+        ordenLogic.deleteOrdenMedica(entity.getId());
+        OrdenMedicaEntity deleted = em.find(OrdenMedicaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    
     
 }
