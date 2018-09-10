@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -34,6 +35,46 @@ public class HorarioAtencionDTO implements Serializable
     public HorarioAtencionDTO ()
     {
         
+    }
+    
+           /**
+     * Crea un objeto HorarioAtencionDTO a partir de un objeto HorarioAtencionEntity.
+     *
+     * @param pHorarioAtencionEntity Entidad HorarioAtencionEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */
+    
+    public HorarioAtencionDTO (HorarioAtencionEntity pHorarioAtencionEntity) 
+   {
+   
+       if (pHorarioAtencionEntity != null)
+       {
+          this.id =pHorarioAtencionEntity.getId();
+          this.fechaInicio = pHorarioAtencionEntity.getFechaInicio();
+          this.fechaFin = pHorarioAtencionEntity.getFechaFin();
+          this.consultorio = new ConsultorioDTO(pHorarioAtencionEntity.getConsultorio());
+          //Agregar en parametro: pHorarioAtencionEntity.getMedico()
+          this.medico = new MedicoDTO();
+       }
+   } 
+    
+         /**
+     * Convierte un objeto HorarioAtencionDTO a HorarioAtencionEntity.
+     *
+     * @return Nueva objeto HorarioAtencionEntity.
+     *
+     */
+    public HorarioAtencionEntity toEntity() 
+    {
+        HorarioAtencionEntity horarioAtencionEntity = new HorarioAtencionEntity();
+
+        horarioAtencionEntity.setId(this.id);
+        horarioAtencionEntity.setFechaInicio(this.fechaInicio);
+        horarioAtencionEntity.setFechaFin(this.fechaFin);
+        horarioAtencionEntity.setConsultorio(this.consultorio.toEntity());
+       // horarioAtencionEntity.setMedico(this.medico.toEntity());
+        return horarioAtencionEntity;
     }
     
     

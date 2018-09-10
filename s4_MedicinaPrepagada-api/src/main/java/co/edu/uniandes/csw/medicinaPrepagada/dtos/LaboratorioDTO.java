@@ -96,7 +96,7 @@ public class LaboratorioDTO implements Serializable
     
     public void setLongitud(double pLongitud)
     {
-        this.latitud = pLongitud;
+        this.longitud = pLongitud;
     }
     
     public double getLongitud ()
