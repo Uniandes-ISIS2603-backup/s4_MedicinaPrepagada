@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -26,25 +27,78 @@ public class SedeDTO implements Serializable
     
     private String descripcion;
     
-    private double latitud;
+    private Double latitud;
     
-    private double longitud;
+    private Double longitud;
     
     private Long telefono;
     
     private String correo;
     
     
+    //Constructor vacio
    public SedeDTO () 
    {
        
    }
+   
+        /**
+     * Crea un objeto SedeDTO a partir de un objeto SedeEntity.
+     *
+     * @param pSedeEntity Entidad SedeEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */   
+     public SedeDTO (SedeEntity pSedeEntity) 
+   {
+       if (pSedeEntity != null)
+       {
+           this.id=pSedeEntity.getId();
+           this.nombre = pSedeEntity.getNombre();
+           this.direccion = pSedeEntity.getDireccion();
+           this.tipoSede = pSedeEntity.getTipoSede();
+           this.descripcion = pSedeEntity.getDescripcion();
+           this.latitud = pSedeEntity.getLatitud();
+           this.longitud = pSedeEntity.getLongitud();
+           this.telefono = pSedeEntity.getTelefono();
+           this.correo = pSedeEntity.getCorreo();
+       }
+       
+   }
+     
+     
+     
+     
+     /**
+     * Convierte un objeto SedeDTO a SedeEntity.
+     *
+     * @return Nueva objeto SedeEntity.
+     *
+     */
+    public SedeEntity toEntity() 
+    {
+        SedeEntity sedeEntity = new SedeEntity();
+        sedeEntity.setId(this.getId());
+        sedeEntity.setNombre(this.nombre);
+        sedeEntity.setDireccion(this.direccion);
+        sedeEntity.setTipoSede(this.tipoSede);
+        sedeEntity.setDescripcion(this.descripcion);
+        sedeEntity.setLatitud(this.latitud);
+        sedeEntity.setLongitud(this.longitud);
+        sedeEntity.setTelefono(this.telefono);
+        sedeEntity.setCorreo(this.correo);
+        
+        return sedeEntity;
+    }
+   
+   
     
    
-   public void setId (long pId)
+   public void setId (Long pId)
    {
        this.id = pId;
    }
+ 
    
    public Long getId  ()
    {
@@ -73,7 +127,7 @@ public class SedeDTO implements Serializable
        return this.direccion;
    }
     
-    public void setTipoSede (int pTipoSede)
+    public void setTipoSede (Integer pTipoSede)
    {
        this.tipoSede=pTipoSede;
    }
@@ -93,7 +147,7 @@ public class SedeDTO implements Serializable
        return this.descripcion;
    }
    
-   public void setLatitud (double pLatitud)
+   public void setLatitud (Double pLatitud)
    {
        this.latitud = pLatitud;
    }
@@ -103,7 +157,7 @@ public class SedeDTO implements Serializable
        return this.latitud;
    }
    
-   public void setLongitud (double pLongitud)
+   public void setLongitud (Double pLongitud)
    {
        this.longitud = pLongitud;
    }
@@ -114,7 +168,7 @@ public class SedeDTO implements Serializable
    }
     
    
-   public void setTelefono (long pTelefono)
+   public void setTelefono (Long pTelefono)
    {
        this.telefono = pTelefono;
    }
