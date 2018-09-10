@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,10 +22,43 @@ public class SedeDetailDTO extends SedeDTO implements Serializable
     private List<ConsultorioDTO> consultorios;
     
     
-    
+
     public SedeDetailDTO ()
     {
         super();
+    }
+    
+         /**
+     * Crea un objeto SedeDetailDTO a partir de un objeto SedeEntity.
+     *
+     * @param pSedeEntity Entidad SedeEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */
+    
+    public SedeDetailDTO (SedeEntity pSedeEntity) 
+   {
+       super(pSedeEntity);
+   
+       if (pSedeEntity != null)
+       {
+          // completar
+       }
+   } 
+    
+         /**
+     * Convierte un objeto SedeDTO a SedeEntity.
+     *
+     * @return Nueva objeto SedeEntity.
+     *
+     */
+    @Override
+    public SedeEntity toEntity() 
+    {
+        SedeEntity sedeEntity = super.toEntity();
+
+        //COmpletar
+        return sedeEntity;
     }
     
     

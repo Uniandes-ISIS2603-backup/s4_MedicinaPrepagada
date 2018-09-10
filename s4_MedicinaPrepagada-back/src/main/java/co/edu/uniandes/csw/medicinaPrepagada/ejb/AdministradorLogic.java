@@ -38,7 +38,7 @@ public class AdministradorLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del administrador");
         
-        if (persistence.find(admiEntity.getCedula()) != null) 
+        if (persistence.find(admiEntity.getId()) != null) 
         {
             throw new BusinessLogicException("El administrador con ese id ya existe");
         }
@@ -92,7 +92,7 @@ public class AdministradorLogic
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el administrador con id = {0}", admiId);
 
         AdministradorEntity newEntity = persistence.update(admiEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getCedula());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
         return newEntity;
     }
     

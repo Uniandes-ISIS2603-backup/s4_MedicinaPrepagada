@@ -72,7 +72,7 @@ public class MedicoPersistence {
     
     public MedicoEntity update(MedicoEntity medicoEntity) 
     {
-        LOGGER.log(Level.INFO, "Actualizando el Medico con id={0}", medicoEntity.getCedula());
+        LOGGER.log(Level.INFO, "Actualizando el Medico con id={0}", medicoEntity.getId());
         return em.merge(medicoEntity);
     }
     
