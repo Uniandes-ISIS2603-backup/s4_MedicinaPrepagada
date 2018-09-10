@@ -131,7 +131,7 @@ public class SedeResource
      */
     @PUT
     @Path("{sedeId: \\d+}")
-    public SedeDTO updateSede(@PathParam("sedeId") Long pSedeId, SedeDetailDTO pSede) throws WebApplicationException 
+    public SedeDTO updateSede(@PathParam("sedeId") Long pSedeId, SedeDetailDTO pSede) throws WebApplicationException, BusinessLogicException
     {
         LOGGER.log(Level.INFO, "SedeResource updateSede: input: id:{0} , sede: {1}", new Object[]{pSedeId, pSede.toString()});
         pSede.setId(pSedeId);

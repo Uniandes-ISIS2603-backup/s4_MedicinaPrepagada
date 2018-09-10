@@ -47,7 +47,7 @@ public class SedeLogic
         //verifica que la direccion sea validad
         if (!validateDireccion(sedeEntity.getDireccion()))
             throw new BusinessLogicException("La direccion no puede ser vacia y debe respetar el formato de una direccion");
-        //verifica que la direccion sea validad
+        //verifica que el telefono sea validad
         if (!validateNumero(sedeEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
         //Verifica que no exista otra sede con la misma direccion
@@ -99,8 +99,9 @@ public class SedeLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el sede con id = {0}", sedesId);
         SedeEntity sedeEntity = persistence.find(sedesId);
-        if (sedeEntity == null) {
-            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", sedesId);
+        if (sedeEntity == null)
+        {
+            LOGGER.log(Level.SEVERE, "La sede con el id = {0} no existe", sedesId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el sede con id = {0}", sedesId);
         return sedeEntity;
@@ -115,8 +116,42 @@ public class SedeLogic
      * @param sedeEntity Instancia de SedeEntity con los nuevos datos.
      * @return Instancia de SedeEntity con los datos actualizados.
      */
-    public SedeEntity updateSede(Long sedesId, SedeEntity sedeEntity) {
+    public SedeEntity updateSede(Long sedesId, SedeEntity sedeEntity) throws BusinessLogicException
+    {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el sede con id = {0}", sedesId);
+        
+        SedeEntity pSedeOld = persistence.find(sedesId);
+        //Verifica que la sede que se intenta modificar exista
+        if (pSedeOld == null)
+            throw new BusinessLogicException ("La sede que intenta modificar no existe");
+        //Verifica que no se intente cambiar el Id
+        if (sedeEntity.getId() != sedesId)
+            throw new BusinessLogicException("No se puede cambiar el id de la sede");
+        //Verifica que no se intente cambiar la longitud de la sede
+        if (sedeEntity.getLongitud() != pSedeOld.getLongitud())
+            throw new BusinessLogicException("No se puede cambiar la longitud de una Sede");
+        //Verifica que no se intente cambia la latitud de la sede
+        if (sedeEntity.getLatitud() != pSedeOld.getLatitud())
+            throw new BusinessLogicException ("No se puede cambiar la latitud de una sede");
+        //Verifica que no se intente cambiar la direccion de la sede
+        if (sedeEntity.getDireccion() != pSedeOld.getDireccion())
+            throw new BusinessLogicException("No se puede cambiar la direccion de una sede");      
+         //Verifica que el nombre sea valido
+        if (!validateNombre(sedeEntity.getNombre()))
+           throw new BusinessLogicException ("EL nombre no puede ser vacio ");
+        //Verifica que no exista otra sede con el mismo nombre
+        if (persistence.findByNombre(sedeEntity.getNombre())!=null)
+            throw new BusinessLogicException("Ya existe una sede con este nombre");
+        //verifica que el telefono sea validad
+        if (!validateNumero(sedeEntity.getTelefono()))
+            throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
+        //verifica que el tipo de la sede sea de los posibles
+        if (!validateTipo(sedeEntity.getTipoSede()))
+            throw new BusinessLogicException ("El tipo de sede no es de los posibles");
+        //Valida que el correo tenga un formato correcto
+        if (!validateCorreo(sedeEntity.getCorreo()))
+            throw new BusinessLogicException("EL correo no sigue un formato de correo regular");        
+        
         SedeEntity newSedeEntity = persistence.update(sedeEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el sede con id = {0}", sedesId);
         return newSedeEntity;
@@ -128,9 +163,15 @@ public class SedeLogic
      * @param sedesId Identificador de la instancia a eliminar.
      * @throws BusinessLogicException si el sede tiene libros asociados.
      */
-    public void deleteSede(Long sedesId) throws BusinessLogicException {
+    public void deleteSede(Long sedesId) throws BusinessLogicException 
+    {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el sede con id = {0}", sedesId);
   
+        
+        //Verifica que la sede que se intenta modificar exista
+        if (persistence.find(sedesId) == null)
+            throw new BusinessLogicException ("La sede que intenta modificar no existe");
+        
         persistence.delete(sedesId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el sede con id = {0}", sedesId);
     }
