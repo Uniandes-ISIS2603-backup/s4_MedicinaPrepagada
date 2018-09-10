@@ -169,11 +169,22 @@ public class PacientePersistenceTest {
      * prueba para eliminar un Paciente
      */
     @Test
-    public void DeletePacienteTest(){
+    public void deletePacienteTest(){
         PacienteEntity entity = data.get(0);
         pacientePersistence.delete(entity.getId());
         PacienteEntity deleted = em.find(PacienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+    /**
+     * prueba para encontrar un paciente mediante el login
+     */
+    @Test
+    public void getPacienteByLoginTest(){
+        PacienteEntity entity = data.get(0);
+        PacienteEntity newEntity = pacientePersistence.getPacienteByLogin(entity.getLogin());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
 }
