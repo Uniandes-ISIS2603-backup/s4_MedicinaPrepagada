@@ -7,12 +7,15 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.OrdenMedicaDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.OrdenMedicaDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.OrdenMedicaLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -34,6 +38,9 @@ import javax.ws.rs.Produces;
 public class OrdenMedicaResource 
 {
     private static final Logger LOGGER = Logger.getLogger(OrdenMedicaResource.class.getName());
+    
+     @Inject
+    private OrdenMedicaLogic ordenLogic;
     
     
     /**
@@ -77,15 +84,17 @@ public class OrdenMedicaResource
     
     @GET
     @Path("{OrdenMedicaId: \\d+}")
-    public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid) 
+    public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: input: {0}", ordenMedicaid);
-        /**OrdenMedicaEntity ordenmedicaEntity = ordenMedicaLogic.getOrdenMedica(ordenMedicaid);
+        
+        OrdenMedicaEntity ordenmedicaEntity = ordenLogic.getOrdenMedica(ordenMedicaid);
         
         if (ordenmedicaEntity == null) 
         {
             throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
-        }*/
+        }
+        
         OrdenMedicaDTO ordenMedicaDetailDTO = new OrdenMedicaDTO();
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: output: {0}", ordenMedicaDetailDTO.toString());
         return ordenMedicaDetailDTO;
@@ -99,14 +108,16 @@ public class OrdenMedicaResource
     
     @DELETE
     @Path("{OrdenMedicaId: \\d+}")
-    public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
+    public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException, WebApplicationException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource deleteOrdenMedica: input:(0)", ordenMedicaid);
-        /**if (OrdenMedicaLogic.getOrdenMedica(ordenMedicaid) == null) 
+        
+        if (ordenLogic.getOrdenMedica(ordenMedicaid) == null) 
         {
            throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
         }
-        OrdenMedicaLogic.deleteOrdenMedica(ordenMedicaid); */
+        
+        ordenLogic.deleteOrdenMedica(ordenMedicaid); 
         LOGGER.info("OrdenMedicaResource deleteOrdenMedica: output: void");
     }
     
