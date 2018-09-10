@@ -43,13 +43,13 @@ public class SedeEntity implements Serializable
     
     private String direccion;
     
-    private int tipoSede;
+    private Integer tipoSede;
     
     private String descripcion;
     
-    private double latitud;
+    private Double latitud;
     
-    private double longitud;
+    private Double longitud;
     
     private Long telefono;
     
@@ -89,7 +89,7 @@ public class SedeEntity implements Serializable
        return this.direccion;
    }
     
-    public void setTipoSede (int pTipoSede)
+    public void setTipoSede (Integer pTipoSede)
    {
        this.tipoSede=pTipoSede;
    }
@@ -110,7 +110,7 @@ public class SedeEntity implements Serializable
        return this.descripcion;
    }
    
-   public void setLatitud (double pLatitud)
+   public void setLatitud (Double pLatitud)
    {
        this.latitud = pLatitud;
    }
@@ -120,7 +120,7 @@ public class SedeEntity implements Serializable
        return this.latitud;
    }
    
-   public void setLongitud (double pLongitud)
+   public void setLongitud (Double pLongitud)
    {
        this.longitud = pLongitud;
    }
@@ -131,7 +131,7 @@ public class SedeEntity implements Serializable
    }
     
    
-   public void setTelefono (long pTelefono)
+   public void setTelefono (Long pTelefono)
    {
        this.telefono = pTelefono;
    }

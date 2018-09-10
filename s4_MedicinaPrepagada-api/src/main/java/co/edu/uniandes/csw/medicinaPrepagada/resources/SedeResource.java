@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.SedeLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,8 @@ public class SedeResource
     
        private static final Logger LOGGER = Logger.getLogger(SedeResource.class.getName());
        
+       private SedeLogic sedeLogic;
+     
        
 /**
      * Crea un nuevo  sede con la informacion que se recibe en la cuerpo de
@@ -59,11 +63,10 @@ public class SedeResource
         // Convierte la DTO (json) en un objeto Entity para ser manejado por la lógica.
 
         // Invoca la lógica para crear la sede  nuevo
-        
-        // Como debe retornar un DTO (json) se invoca la constructor del DTO con argumento la entity nuevo
-        SedeDTO nuevoSedeDTO = new SedeDTO();
-        LOGGER.log(Level.INFO, "SedeResource createSede: output: {0}", nuevoSedeDTO.toString());
-        return nuevoSedeDTO;
+        SedeDTO sedeDTO = new SedeDTO(sedeLogic.createSede(pSede.toEntity()));
+       
+        LOGGER.log(Level.INFO, "SedeResource createSede: output: {0}", sedeDTO.toString());
+        return sedeDTO;
     }
     
     
@@ -78,15 +81,14 @@ public class SedeResource
     public List<SedeDTO> getSedes()
     {
         LOGGER.info("SedeResource getSedes: input: void");
-        List<SedeDTO> listaSedes = listEntity2DetailDTO();
-                //listEntity2DetailDTO(sedesLogic.getSedes());
+        List<SedeDTO> listaSedes = listEntity2DetailDTO(sedeLogic.getSedes());
         LOGGER.log(Level.INFO, "SedeResource getSedes: output: {0}", listaSedes.toString());
         return listaSedes;
     }
 
     
     
-        /**
+     /**
      * Busca la sede con la id asociado recibido en la URL y la devuelve.
      *
      * @param sedeId Identificador ded sede que se esta buscando.
@@ -100,12 +102,12 @@ public class SedeResource
     public SedeDTO getSede(@PathParam("sedeId") Long pSedeId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "SedeResource getSede: input: {0}", pSedeId);
-        //SedeEntity sedeEntity = null;
-      //  if (sedeEntity == null) }
-      //  {
-      //      throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
-      //  }
-        SedeDetailDTO detailDTO = new SedeDetailDTO();
+        SedeEntity sedeEntity = sedeLogic.getSede(pSedeId);
+        if (sedeEntity == null) 
+        {
+            throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
+        }
+        SedeDetailDTO detailDTO = new SedeDetailDTO(sedeEntity);
         LOGGER.log(Level.INFO, "SedeResource getSede: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -133,13 +135,14 @@ public class SedeResource
     {
         LOGGER.log(Level.INFO, "SedeResource updateSede: input: id:{0} , sede: {1}", new Object[]{pSedeId, pSede.toString()});
         pSede.setId(pSedeId);
-      //  if (logic.get(pSedeId) == null) {
-      //      throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
-      //  }
-        SedeDetailDTO detailDTO = new SedeDetailDTO();
+        if (sedeLogic.getSede(pSedeId) == null)
+        {
+            throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
+        }
+        SedeDetailDTO detailDTO = new SedeDetailDTO(sedeLogic.updateSede(pSedeId, pSede.toEntity()));
         LOGGER.log(Level.INFO, "SedeResource updateSede: output: {0}", detailDTO.toString());
         return detailDTO;
-
+ 
     }
     
     
@@ -160,11 +163,11 @@ public class SedeResource
     public void deleteSede(@PathParam("sedeId") Long sedeId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "SedeResource deleteSede: input: {0}", sedeId);
-    //    if (logic.get(sedeId) == null) 
-    //    {
-    //        throw new WebApplicationException("El recurso /sedes/" + sedeId + " no existe.", 404);
-    //    }
-    //    logic.delet(sedeId);
+        if (sedeLogic.getSede(sedeId) == null) 
+        {
+            throw new WebApplicationException("El recurso /sedes/" + sedeId + " no existe.", 404);
+        }
+        sedeLogic.deleteSede(sedeId);
         LOGGER.info("SedeResource deleteSede: output: void");
     }
     
@@ -180,14 +183,18 @@ public class SedeResource
      * que vamos a convertir a DTO.
      * @return la lista de sede en forma DTO (json)
      */
-    private List<SedeDTO> listEntity2DetailDTO() 
+    private List<SedeDTO> listEntity2DetailDTO(List<SedeEntity> entityList) 
     {
         List<SedeDTO> list = new ArrayList<>();
-     //   for (SedeEntity entity : entityList) {
-     //       list.add(new SedeDetail(entity));
-     //   }
+        for (SedeEntity entity : entityList) 
+        {
+            list.add(new SedeDetailDTO(entity));
+        }
         return list;
     }
+    
+    
+ 
        
     
 }
