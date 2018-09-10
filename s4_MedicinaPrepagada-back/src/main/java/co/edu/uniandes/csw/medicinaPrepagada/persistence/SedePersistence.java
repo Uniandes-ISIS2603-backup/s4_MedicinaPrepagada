@@ -66,7 +66,24 @@ public class SedePersistence
         LOGGER.log(Level.INFO, "Consultando el sede con id={0}", sedeId);
         return em.find(SedeEntity.class, sedeId);
     }
+    
+        public SedeEntity findByNombre(String pNombre)
+    {
+        LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pNombre);
+        return em.find(SedeEntity.class, pNombre);
+    }
+        
+    public SedeEntity findByDireccion(String pDireccion)
+    {
+        LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pDireccion);
+        return em.find(SedeEntity.class, pDireccion);
+    }
      
+    public SedeEntity findByLongitud(Double pLongitud)
+    {
+        LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pLongitud);
+        return em.find(SedeEntity.class, pLongitud);
+    }
         /**
      * Actualiza una sede.
      *
