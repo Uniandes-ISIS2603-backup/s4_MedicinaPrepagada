@@ -112,7 +112,7 @@ public class PacientePersistenceTest {
       
       Assert.assertNotNull(result);
       
-      PacienteEntity entity = em.find(PacienteEntity.class, result.getCedula());
+      PacienteEntity entity = em.find(PacienteEntity.class, result.getId());
       
       Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
@@ -127,7 +127,7 @@ public class PacientePersistenceTest {
         for(PacienteEntity ent : list){
             boolean found = false;
             for(PacienteEntity ent2 : data){
-                if(ent.getCedula().equals(ent2.getCedula())){
+                if(ent.getId().equals(ent2.getId())){
                     found = true;
                 }
             }
@@ -141,7 +141,7 @@ public class PacientePersistenceTest {
     @Test
     public void getPacienteTest(){
         PacienteEntity entity = data.get(0);
-        PacienteEntity newEntity = pacientePersistence.find(entity.getCedula());
+        PacienteEntity newEntity = pacientePersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getDireccion(), newEntity.getDireccion());
@@ -156,11 +156,11 @@ public class PacientePersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
         
-        newEntity.setCedula(entity.getCedula());
+        newEntity.setId(entity.getId());
         
         pacientePersistence.update(newEntity);
         
-        PacienteEntity resp = em.find(PacienteEntity.class, entity.getCedula());
+        PacienteEntity resp = em.find(PacienteEntity.class, entity.getId());
         
         Assert.assertEquals(newEntity.getNombre(), newEntity.getNombre());
     }
@@ -169,11 +169,22 @@ public class PacientePersistenceTest {
      * prueba para eliminar un Paciente
      */
     @Test
-    public void DeletePacienteTest(){
+    public void deletePacienteTest(){
         PacienteEntity entity = data.get(0);
-        pacientePersistence.delete(entity.getCedula());
-        PacienteEntity deleted = em.find(PacienteEntity.class, entity.getCedula());
+        pacientePersistence.delete(entity.getId());
+        PacienteEntity deleted = em.find(PacienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+    /**
+     * prueba para encontrar un paciente mediante el login
+     */
+    @Test
+    public void getPacienteByLoginTest(){
+        PacienteEntity entity = data.get(0);
+        PacienteEntity newEntity = pacientePersistence.getPacienteByLogin(entity.getLogin());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
 }

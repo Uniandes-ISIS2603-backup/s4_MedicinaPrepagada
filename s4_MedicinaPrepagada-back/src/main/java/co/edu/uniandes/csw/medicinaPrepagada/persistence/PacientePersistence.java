@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *Clase que maneja la persistencia para Paciente. Se conecta a traves del
@@ -64,5 +65,22 @@ public class PacientePersistence {
     public void delete(Long pacienteId){
         PacienteEntity pacienteEntity = em.find(PacienteEntity.class, pacienteId);
         em.remove(pacienteEntity);
+    }
+    
+    /**
+     * Busca un Paciente con el login que llega por parametro
+     * @param login
+     * @return un paciente con el login dado por param
+     */
+    public PacienteEntity getPacienteByLogin(String login){
+        TypedQuery q = em.createQuery("Select e from PacienteEntity e where e.login = :login", PacienteEntity.class);
+        q = q.setParameter("login", login);
+        List<PacienteEntity> lista = q.getResultList();
+        if(lista.get(0) == null){
+            return null;
+        }
+        else{
+            return lista.get(0);
+        }
     }
 }

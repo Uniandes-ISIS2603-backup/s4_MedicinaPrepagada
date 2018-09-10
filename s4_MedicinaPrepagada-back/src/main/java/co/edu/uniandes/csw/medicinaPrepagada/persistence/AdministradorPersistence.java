@@ -73,7 +73,7 @@ public class AdministradorPersistence
     
     public AdministradorEntity update(AdministradorEntity admiEntity) 
     {
-        LOGGER.log(Level.INFO, "Actualizando el administrador con id={0}", admiEntity.getCedula());
+        LOGGER.log(Level.INFO, "Actualizando el administrador con id={0}", admiEntity.getId());
         return em.merge(admiEntity);
     }
     

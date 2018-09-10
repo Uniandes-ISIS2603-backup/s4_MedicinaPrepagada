@@ -128,9 +128,9 @@ public class AdministradorPersistenceTest
 
         Assert.assertNotNull(result);
 
-        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getCedula());
+        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getCedula(), entity.getCedula());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
@@ -149,7 +149,7 @@ public class AdministradorPersistenceTest
             
             for (AdministradorEntity entity : data) 
             {
-                if (ent.getCedula().equals(entity.getCedula())) 
+                if (ent.getId().equals(entity.getId())) 
                 {
                     found = true;
                 }
@@ -166,9 +166,9 @@ public class AdministradorPersistenceTest
     public void getAdministradorTest() 
     {
         AdministradorEntity entity = data.get(0);
-        AdministradorEntity newEntity = admiPersistence.find(entity.getCedula());
+        AdministradorEntity newEntity = admiPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getCedula(), newEntity.getCedula());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
     /**
@@ -179,8 +179,8 @@ public class AdministradorPersistenceTest
     public void deleteAdministradorTest() 
     {
         AdministradorEntity entity = data.get(0);
-        admiPersistence.delete(entity.getCedula());
-        AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getCedula());
+        admiPersistence.delete(entity.getId());
+        AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
@@ -195,13 +195,13 @@ public class AdministradorPersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
 
-        newEntity.setCedula(entity.getCedula());
+        newEntity.setId(entity.getId());
 
         admiPersistence.update(newEntity);
 
-        AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getCedula());
+        AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getCedula(), resp.getCedula());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
 }
