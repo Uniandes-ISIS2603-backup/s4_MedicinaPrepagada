@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -32,6 +33,47 @@ public class ConsultorioDTO  implements Serializable
     public ConsultorioDTO ( )
     {
         
+    }
+    
+            /**
+     * Crea un objeto ConsultorioDTO a partir de un objeto ConsultorioEntity.
+     *
+     * @param pConsultorioEntity Entidad ConsultorioEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */   
+     public ConsultorioDTO (ConsultorioEntity pConsultorioEntity) 
+   {
+       if (pConsultorioEntity != null)
+       {
+           this.id=pConsultorioEntity.getId();
+           this.edificio= pConsultorioEntity.getEdificio();
+           this.nOficina = pConsultorioEntity.getNOficina();
+           //this.especialidad = new EspecialidadDTO(pConsultorioEntity.getEspecialidad());
+           this.sede = new SedeDTO (pConsultorioEntity.getSede());
+           
+       }
+       
+   }
+     
+     
+     /**
+     * Convierte un objeto ConsultorioDTO a ConsultorioEntity.
+     *
+     * @return Nueva objeto ConsultorioEntity.
+     *
+     */
+    public ConsultorioEntity toEntity() 
+    {
+        ConsultorioEntity consultorioEntity = new ConsultorioEntity();
+        
+        consultorioEntity.setId(this.getId());
+        consultorioEntity.setEdificio(this.edificio);
+        consultorioEntity.setNOficina(this.nOficina);
+        consultorioEntity.setSede(this.sede.toEntity());
+        //consultorioEntity.setEspecialidad(this.especialidad.toEntity);
+ 
+        return consultorioEntity;
     }
     
     
