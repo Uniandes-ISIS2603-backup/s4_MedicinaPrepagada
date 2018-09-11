@@ -42,6 +42,22 @@ public class MedicamentoLogic {
         if (persistence.findByNombre(medicamentoEntity.getNombre()) != null) {
             throw new BusinessLogicException("Ya existe un Medicamento con el nombre \"" + medicamentoEntity.getNombre() + "\"");
         }
+        //Verifica que el nombre sea valido
+        if (!validateString(medicamentoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+        
+        //Verifica que el elaboradoPor sea valido
+        if (!validateString(medicamentoEntity.getElaboradoPor()))
+           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
+        
+        //Verifica que la descripción sea valida
+        if (!validateString(medicamentoEntity.getDescripcion()))
+           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+        
+        //Verifica que el costo sea valido
+        if (!validateCosto(medicamentoEntity.getCosto()))
+           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+        
         // Invoca la persistencia para crear el medicamento
         persistence.create(medicamentoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del medicamento");
@@ -90,8 +106,37 @@ public class MedicamentoLogic {
      * por ejemplo el nombre.
      * @return la medicamento con los cambios actualizados en la base de datos.
      */
-    public MedicamentoEntity updateMedicamento(Long medicamentosId, MedicamentoEntity medicamentoEntity) {
+    public MedicamentoEntity updateMedicamento(Long medicamentosId, MedicamentoEntity medicamentoEntity) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la medicamento con id = {0}", medicamentosId);
+        
+        MedicamentoEntity pMedicamentoOld = persistence.find(medicamentosId);
+        //Verifica que la medicamento que se intenta modificar exista
+        if (pMedicamentoOld == null)
+             throw new BusinessLogicException ("El medicamento que intenta modificar no existe");
+         if (medicamentoEntity.getId()!= medicamentosId)
+            throw new BusinessLogicException("No se puede cambiar el id de la medicamento");
+        //Verifica que no se intente cambiar el nombre del medicamento
+        if (medicamentoEntity.getNombre() != pMedicamentoOld.getNombre())
+            throw new BusinessLogicException("No se puede cambiar el nombre de una medicamento");
+        if (persistence.findByNombre(medicamentoEntity.getNombre()) != null) {
+            throw new BusinessLogicException("Ya existe un Medicamento con el nombre \"" + medicamentoEntity.getNombre() + "\"");
+        }
+        //Verifica que el nombre sea valido
+        if (!validateString(medicamentoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+        
+        //Verifica que el elaboradoPor sea valido
+        if (!validateString(medicamentoEntity.getElaboradoPor()))
+           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
+        
+        //Verifica que la descripción sea valida
+        if (!validateString(medicamentoEntity.getDescripcion()))
+           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+        
+        //Verifica que el costo sea valido
+        if (!validateCosto(medicamentoEntity.getCosto()))
+           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+        
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
         MedicamentoEntity newEntity = persistence.update(medicamentoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la medicamento con id = {0}", medicamentoEntity.getId());
@@ -104,11 +149,25 @@ public class MedicamentoLogic {
      * @param medicamentosId: id de la medicamento a borrar
      * 
      */
-    public void deleteMedicamento(Long medicamentosId){
+    public void deleteMedicamento(Long medicamentosId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la medicamento con id = {0}", medicamentosId);
         // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
+        //Verifica que la medicamento que se intenta modificar exista
+         MedicamentoEntity pMedicamentoOld = persistence.find(medicamentosId);
+        if (pMedicamentoOld == null)
+             throw new BusinessLogicException ("El medicamento que intenta modificar no existe");
         
         persistence.delete(medicamentosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la medicamento con id = {0}", medicamentosId);
+    }
+    
+    private boolean validateString (String pNombre)
+    {
+        return !(pNombre == null || pNombre.isEmpty());
+    }
+       
+    private boolean validateCosto (Double pCosto)
+    {
+        return !(pCosto == null || pCosto<1000 || pCosto>10000000);
     }
 }
