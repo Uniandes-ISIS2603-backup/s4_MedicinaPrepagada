@@ -7,12 +7,15 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.HistoriaClinicaLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -35,9 +39,14 @@ public class HistoriaClinicaResource
 {
     private static final Logger LOGGER = Logger.getLogger(HistoriaClinicaResource.class.getName());
     
+     @Inject
+    private HistoriaClinicaLogic historiaLogic;
+    
     /**
      * Crea una nueva historia clinica con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico.
+     * @param histClinica
+     * @return 
      * @throws BusinessLogicException
      */
     
@@ -67,21 +76,23 @@ public class HistoriaClinicaResource
     
     /**
      * Busca la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @return 
      */
     
     @GET
     @Path("{HistoriaClinicaId: \\d+}")
-    public HistoriaClinicaDTO getHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) 
+    public HistoriaClinicaDTO getHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: input: {0}", histClinicaId);
-        /**HistoriaClinicaEntity histClinEntity = historiaClinicaLogic.getHistoriaClinica(histClinicaId);
+        
+        HistoriaClinicaEntity histClinEntity = historiaLogic.getHistoriaClinica(histClinicaId);
         
         if (histClinEntity == null) 
         {
             throw new WebApplicationException("El recurso /historiClinica/" + histClinicaId + " no existe.", 404);
-        }*/
+        }
+        
         HistoriaClinicaDTO histClinDetailDTO = new HistoriaClinicaDTO();
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: output: {0}", histClinDetailDTO.toString());
         return histClinDetailDTO;
@@ -89,27 +100,32 @@ public class HistoriaClinicaResource
     
     /**
      * Elimina la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @throws WebApplicationException 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      */
     
     @DELETE
     @Path("{HistoriaClinicaId: \\d+}")
-    public void deleteHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId) throws BusinessLogicException
+    public void deleteHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId) throws WebApplicationException, BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource deleteHistoriaClinica: input:(0)", histClinicaId);
-        /**if (HistoriaClinicaLogic.getHistoriaClinica(histClinicaId) == null) 
+        
+        if (historiaLogic.getHistoriaClinica(histClinicaId) == null) 
         {
            throw new WebApplicationException("El recurso /historiaClinica/" + histClinicaId + " no existe.", 404);
         }
-        HistoriaClinicaLogic.deleteHistoriaClinica(histClinicaId); */
+        
+        historiaLogic.deleteHistoriaClinica(histClinicaId); 
         LOGGER.info("HistoriaClinicaResource deleteHistoriaClinica: output: void");
     }
     
      /**
      * Modifica la historia clinica con el id asociado recibido en la URL y lo devuelve.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la historia clinica.
+     * @param histClinicaId
+     * @param pHistoria
+     * @return 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      */
     
     @PUT
