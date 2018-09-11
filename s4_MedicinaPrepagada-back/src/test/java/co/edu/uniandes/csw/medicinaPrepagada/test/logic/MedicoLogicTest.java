@@ -109,6 +109,7 @@ public class MedicoLogicTest {
         for (int i = 0; i < 3; i++) 
         {
             MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
+            entity.setDocumentoMedico(i);
             em.persist(entity);
             data.add(entity);
         }
@@ -123,6 +124,12 @@ public class MedicoLogicTest {
     public void createMedicoTest() throws BusinessLogicException 
     {
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre("Alberto Rodriguez");
+        newEntity.setTelefono(1234567);
+        newEntity.setCorreo("alberto@uniandes.com");
+        newEntity.setDocumentoMedico(5);
+        newEntity.setFirma("firma del medico");
+        newEntity.setContrasena("abcdefgh1");
         MedicoEntity result = medicoLogic.createMedico(newEntity);
         Assert.assertNotNull(result);
         
@@ -130,6 +137,109 @@ public class MedicoLogicTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void createMedicoNombreNullTest() throws BusinessLogicException 
+    {
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre(null);
+        newEntity.setTelefono(1234567);
+        newEntity.setCorreo("alberto@uniandes.com");
+        newEntity.setDocumentoMedico(6);
+        newEntity.setFirma("firma del medico");
+        newEntity.setContrasena("abcdefgh1");
+        MedicoEntity result = medicoLogic.createMedico(newEntity);
+        Assert.assertNotNull(result);
+        
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createMedicoTelefonoMalTest() throws BusinessLogicException 
+    {
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre("Alberto Rodriguez");
+        newEntity.setTelefono(123456);
+        newEntity.setCorreo("alberto@uniandes.com");
+        newEntity.setDocumentoMedico(7);
+        newEntity.setFirma("firma del medico");
+        newEntity.setContrasena("abcdefgh1");
+        MedicoEntity result = medicoLogic.createMedico(newEntity);
+        Assert.assertNotNull(result);
+        
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createMedicoDocumentoRepetidoTest() throws BusinessLogicException 
+    {
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre("Alberto Rodriguez");
+        newEntity.setTelefono(1234567);
+        newEntity.setCorreo("alberto@uniandes.com");
+        newEntity.setDocumentoMedico(1);
+        newEntity.setFirma("firma del medico");
+//        newEntity.setContrasena("abcdefgh1");
+        MedicoEntity result = medicoLogic.createMedico(newEntity);
+        
+        Assert.assertNotNull(result);
+        
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createMedicoFirmaNullTest() throws BusinessLogicException 
+    {
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre("Alberto Rodriguez");
+        newEntity.setTelefono(1234567);
+        newEntity.setCorreo("alberto@uniandes.com");
+        newEntity.setDocumentoMedico(9);
+        newEntity.setFirma(null);
+        newEntity.setContrasena("abcdefgh1");
+        MedicoEntity result = medicoLogic.createMedico(newEntity);
+        Assert.assertNotNull(result);
+        
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    
+//    @Test(expected = BusinessLogicException.class)
+//    public void createMedicoContrasenaNullTest() throws BusinessLogicException 
+//    {
+//        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+//        newEntity.setNombre("Alberto Rodriguez");
+//        newEntity.setTelefono(1234567);
+//        newEntity.setCorreo("alberto@uniandes.com");
+//        newEntity.setDocumentoMedico(1);
+//        newEntity.setFirma("firma del medico");
+//        newEntity.setContrasena(null);
+//        MedicoEntity result = medicoLogic.createMedico(newEntity);
+//        Assert.assertNotNull(result);
+//        
+//        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+//        Assert.assertEquals(newEntity.getId(), entity.getId());
+//    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createMedicoCorreoNoValidoTest() throws BusinessLogicException 
+    {
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        newEntity.setNombre("Alberto Rodriguez");
+        newEntity.setTelefono(1234567);
+        newEntity.setCorreo("albertouniandes.com");
+        newEntity.setDocumentoMedico(10);
+        newEntity.setFirma("firma del medico");
+        newEntity.setContrasena("abcdefgh1");
+        MedicoEntity result = medicoLogic.createMedico(newEntity);
+        Assert.assertNotNull(result);
+        
+        MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
     /**
      * Prueba para consultar la lista de medicos clinicas.
      */
@@ -177,7 +287,12 @@ public class MedicoLogicTest {
     {
         MedicoEntity entity = data.get(0);
         MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
-
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+        pojoEntity.setDocumentoMedico(5);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
