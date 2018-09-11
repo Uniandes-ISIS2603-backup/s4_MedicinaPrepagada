@@ -154,7 +154,7 @@ public class PacienteLogic {
             throw new BusinessLogicException("La direccion dada no sigue el formato");
         }
         
-        String epsValidationPattern = "(Nueva Eps|Colsanitas|Sura|Aliansalud|Compensar|Salud Toatal|Coomeva|Famisanar|Cruz Blanca|Cafesalud)";
+        String epsValidationPattern = "(Nueva Eps|Colsanitas|Sura|Aliansalud|Compensar|Salud Total|Coomeva|Famisanar|Cruz Blanca|Cafesalud)";
         Pattern patternEps = Pattern.compile(epsValidationPattern);
         Matcher matchEps = patternDirecccion.matcher(pacienteEntity.getEps());
         if(matchEps.matches()){
