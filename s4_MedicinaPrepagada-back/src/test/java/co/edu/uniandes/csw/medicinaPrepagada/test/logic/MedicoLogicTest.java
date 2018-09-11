@@ -120,7 +120,7 @@ public class MedicoLogicTest {
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     
-//    @Test
+    @Test
     public void createMedicoTest() throws BusinessLogicException 
     {
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
@@ -282,7 +282,7 @@ public class MedicoLogicTest {
      * Prueba para actualizar una medico clinica.
      */
     
-//    @Test
+    @Test
     public void updateMedicoTest() throws BusinessLogicException
     {
         MedicoEntity entity = data.get(0);
