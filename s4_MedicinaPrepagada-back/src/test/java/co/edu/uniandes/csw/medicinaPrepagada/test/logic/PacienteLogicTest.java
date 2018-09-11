@@ -112,6 +112,7 @@ public class PacienteLogicTest {
         newEntity.setMail("abdcd@udad.com");
         newEntity.setNombre("Miguel Hoyos Ruge");
         newEntity.setDireccion("Cra 22#104-82");
+        newEntity.setEps("Sura");
         newEntity.setNumeroContacto(new Long(1234567890));
         PacienteEntity result = pacienteLogic.createPaciente(newEntity);
         Assert.assertNotNull(result);
@@ -161,6 +162,7 @@ public class PacienteLogicTest {
         pojoEntity.setMail("abdcd@udad.com");
         pojoEntity.setDireccion("Av Esperanza#104B-82");
         pojoEntity.setNumeroContacto(new Long(1234567890));
+        pojoEntity.setEps("Nueva Eps");
         pojoEntity.setFechaNacimiento(entity.getFechaNacimiento());
 
         pacienteLogic.updatePaciente(pojoEntity);

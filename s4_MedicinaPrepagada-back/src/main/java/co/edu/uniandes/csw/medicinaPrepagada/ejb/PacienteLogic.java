@@ -124,7 +124,7 @@ public class PacienteLogic {
     }
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
-       // TODO: Arreglar error con el login
+
         if(persistence.existePacienteByLogin(pacienteEntity.getLogin())){
             throw new BusinessLogicException("El login dado ya existe");
         }
@@ -152,6 +152,13 @@ public class PacienteLogic {
         Matcher matchDireccion = patternDirecccion.matcher(pacienteEntity.getDireccion());
         if(!matchDireccion.matches()){
             throw new BusinessLogicException("La direccion dada no sigue el formato");
+        }
+        
+        String epsValidationPattern = "(Nueva Eps|Colsanitas|Sura|Aliansalud|Compensar|Salud Toatal|Coomeva|Famisanar|Cruz Blanca|Cafesalud)";
+        Pattern patternEps = Pattern.compile(epsValidationPattern);
+        Matcher matchEps = patternDirecccion.matcher(pacienteEntity.getEps());
+        if(matchEps.matches()){
+            throw new BusinessLogicException("La eps no existe");
         }
         
         String numeroContactoString = pacienteEntity.getNumeroContacto().toString();
