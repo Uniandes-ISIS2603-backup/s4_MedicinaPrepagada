@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import java.util.LinkedList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -30,8 +31,8 @@ import javax.ws.rs.PathParam;
 @RequestScoped
 public class PacienteResource {
     
-//    @Inject
-    //PacienteLogic pacienteLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    @Inject
+    PacienteLogic pacienteLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     /**
      * Crea una nuevo paciente con la informacion que se recibe en el cuerpo de

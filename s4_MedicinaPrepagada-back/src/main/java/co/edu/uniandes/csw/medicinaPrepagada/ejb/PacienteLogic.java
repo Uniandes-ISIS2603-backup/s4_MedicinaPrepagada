@@ -124,13 +124,16 @@ public class PacienteLogic {
     }
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
-        if(persistence.getPacienteByLogin(pacienteEntity.getLogin()) != null){
+       // TODO: Arreglar error con el login
+        if(persistence.existePacienteByLogin(pacienteEntity.getLogin())){
             throw new BusinessLogicException("El login dado ya existe");
         }
+
         if(pacienteEntity.getLogin() == null || pacienteEntity.getLogin().equals("")){
             throw new BusinessLogicException("El login no puede ser vacio o nulo");
         }
-        String nameValidationPattern = "([A-Z][a-z]+ ){2,3}([A-Z][a-z]+)";
+        
+        String nameValidationPattern = "([A-Z][a-z]+\\s){2,3}[A-Z][a-z]+";
         Pattern patternName = Pattern.compile(nameValidationPattern);
         Matcher matchName = patternName.matcher(pacienteEntity.getNombre());
         if(!matchName.matches()){
@@ -143,12 +146,14 @@ public class PacienteLogic {
             throw new BusinessLogicException("El mail no sigue el formato de un mail");
         }
         // falta revidar casa o apto, solo recibe la direccion sin la parte especifica
-        String direccionValidationPattern = "[A-Z][a-z]{1,2}([A-Z][a-z]+|[0,9]{1,3}[ABC]*#[0-9]{1,3}[ABC]*-[0-9]{2}";
+        
+        String direccionValidationPattern = "[A-Z][a-z]{1,2}\\s([A-Z][a-z]+|[0-9]{1,3})#([0-9]{1,3})[ABC]*-[0-9]{1,2}";
         Pattern patternDirecccion = Pattern.compile(direccionValidationPattern);
         Matcher matchDireccion = patternDirecccion.matcher(pacienteEntity.getDireccion());
         if(!matchDireccion.matches()){
             throw new BusinessLogicException("La direccion dada no sigue el formato");
         }
+        
         String numeroContactoString = pacienteEntity.getNumeroContacto().toString();
         String numeroContactoValidationPattern = "([0-9]{10}|[0-9]{6})";
         Pattern patternNumeroContacto = Pattern.compile(numeroContactoValidationPattern);

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
+package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
-
-
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,22 +27,25 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *Pruebas persistencia Paciente
+ *Pruebas Logica de Paciente
+ * 
  * @author MIGUELHOYOS
  */
 @RunWith(Arquillian.class)
-public class PacientePersistenceTest {
+public class PacienteLogicTest {
+    
+    private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private PacientePersistence pacientePersistence;
+    private PacienteLogic pacienteLogic;
     
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager  em;
     
     @Inject
-    UserTransaction utx;
+    private UserTransaction utx;
     
-    private List<PacienteEntity> data = new ArrayList<>();
+    private List<PacienteEntity> data = new ArrayList();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -50,22 +53,22 @@ public class PacientePersistenceTest {
      * archivo beans.xml para resolver la inyección de dependencias.
      */
     @Deployment
-    public static JavaArchive cerateDeployment(){
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(PacienteEntity.class.getPackage())
+                .addPackage(PacienteLogic.class.getPackage())
                 .addPackage(PacientePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
     /**
-     * Configuración inicial de la prueba
+     * Configuración inicial de la prueba.
      */
     @Before
-    public void configTest(){
-         try {
+    public void configTest() {
+        try {
             utx.begin();
-            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -78,56 +81,55 @@ public class PacientePersistenceTest {
             }
         }
     }
-    
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
-    private void clearData(){
+    private void clearData() {
         em.createQuery("delete from PacienteEntity").executeUpdate();
     }
-    
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
-    private void insertData(){
-        PodamFactory factory = new PodamFactoryImpl();
-        int i = 0;
-        while(i<3){
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             PacienteEntity entity = factory.manufacturePojo(PacienteEntity.class);
             em.persist(entity);
             data.add(entity);
-            i++;
         }
+       
     }
     
     /**
      * Prueba para crear un Paciente.
      */
     @Test
-    public void crearPacienteTest(){
-      PodamFactory factory = new PodamFactoryImpl();
-      PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
-      PacienteEntity result = pacientePersistence.create(newEntity);
-      
-      Assert.assertNotNull(result);
-      
-      PacienteEntity entity = em.find(PacienteEntity.class, result.getId());
-      
-      Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+    public void createPacienteTest() throws BusinessLogicException {
+        PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
+        newEntity.setFechaNacimiento("21/10/1997");
+        newEntity.setMail("abdcd@udad.com");
+        newEntity.setNombre("Miguel Hoyos Ruge");
+        newEntity.setDireccion("Cra 22#104-82");
+        newEntity.setNumeroContacto(new Long(1234567890));
+        PacienteEntity result = pacienteLogic.createPaciente(newEntity);
+        Assert.assertNotNull(result);
+        PacienteEntity entity = em.find(PacienteEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
-     * Prueba para consultar la lista de Pacienets
+     * Prueba para consultar la lista de Pacientes.
      */
     @Test
-    public void getPacientesTest(){
-        List<PacienteEntity> list = pacientePersistence.findAll();
-        Assert.assertEquals(list.size(), data.size());
-        for(PacienteEntity ent : list){
+    public void getPacientesTest() {
+        List<PacienteEntity> list = pacienteLogic.getPacientes();
+        Assert.assertEquals(data.size(), list.size());
+        for (PacienteEntity entity : list) {
             boolean found = false;
-            for(PacienteEntity ent2 : data){
-                if(ent.getId().equals(ent2.getId())){
+            for (PacienteEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
                     found = true;
                 }
             }
@@ -136,56 +138,48 @@ public class PacientePersistenceTest {
     }
     
     /**
-     * prueba para consultar un Paciente
+     * Prueba para consultar un Paciente.
      */
     @Test
-    public void getPacienteTest(){
+    public void getPacienteTest() {
         PacienteEntity entity = data.get(0);
-        PacienteEntity newEntity = pacientePersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
-        Assert.assertEquals(entity.getDireccion(), newEntity.getDireccion());
+        PacienteEntity resultEntity = pacienteLogic.getPaciente(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
     /**
-     * prueba para actualizar un Paciente
+     * Prueba para actualizar un Paciente.
      */
     @Test
-    public void updatePacienteTest(){
+    public void updatePacienteTest() throws BusinessLogicException {
         PacienteEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
-        
-        newEntity.setId(entity.getId());
-        
-        pacientePersistence.update(newEntity);
-        
+        PacienteEntity pojoEntity = factory.manufacturePojo(PacienteEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Pepito Andres Perez Rojas");
+        pojoEntity.setMail("abdcd@udad.com");
+        pojoEntity.setDireccion("Av Esperanza#104B-82");
+        pojoEntity.setNumeroContacto(new Long(1234567890));
+        pojoEntity.setFechaNacimiento(entity.getFechaNacimiento());
+
+        pacienteLogic.updatePaciente(pojoEntity);
+
         PacienteEntity resp = em.find(PacienteEntity.class, entity.getId());
-        
-        Assert.assertEquals(newEntity.getNombre(), newEntity.getNombre());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     
     /**
-     * prueba para eliminar un Paciente
+     * prueba para eliminar un paciente
      */
     @Test
     public void deletePacienteTest(){
         PacienteEntity entity = data.get(0);
-        pacientePersistence.delete(entity.getId());
-        PacienteEntity deleted = em.find(PacienteEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        pacienteLogic.deletePaciente(entity.getId());
+        PacienteEntity delet = em.find(PacienteEntity.class, entity.getId());
+        Assert.assertNull(delet);
     }
-    
-    /**
-     * prueba para encontrar un paciente mediante el login
-     */
-    @Test
-    public void getPacienteByLoginTest(){
-        PacienteEntity entity = data.get(0);
-        Boolean existe = pacientePersistence.existePacienteByLogin(entity.getLogin());
-        Assert.assertTrue(existe);
-    }
-    
+
+
 }
-
-
