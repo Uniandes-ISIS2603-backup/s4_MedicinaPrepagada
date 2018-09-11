@@ -33,27 +33,33 @@ public class MedicoLogic {
     @Inject
     private HorarioAtencionPersistence horarioPersistence;
 
-    public MedicoEntity createMedico(MedicoEntity medicooEntity) throws BusinessLogicException {
+    public MedicoEntity createMedico(MedicoEntity medicoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del médico");
-        MedicoEntity idRepetido = persistence.find(medicooEntity.getCedula());
+        MedicoEntity idRepetido = persistence.find(medicoEntity.getDocumentoIdentidad());
         if(idRepetido != null){
-            throw new BusinessLogicException("Ya existe un medicoo con el id que se quiere ingresar.");
+            throw new BusinessLogicException("Ya existe un medico con el id que se quiere ingresar.");
         }
-        if(medicooEntity.getNombre() == null){
+        if(medicoEntity.getNombre() == null){
             throw new BusinessLogicException("Debe ingresar el nombre del médico. ");
         }
-        if(medicooEntity.getTelefono() <= 999999){
+        if(medicoEntity.getTelefono() <= 999999){
             throw new BusinessLogicException("La numero de telefono no es válido. ");
         }
+        if(isNull(medicoEntity.getDocumentoMedico())){
+            throw new BusinessLogicException("El numero de documento no es válido. ");
+        }
+        if(isNull(medicoEntity.getFirma())){
+            throw new BusinessLogicException("La firma no es válida. ");
+        }
         Pattern patronDeCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        String email = medicooEntity.getCorreo();
+        String email = medicoEntity.getCorreo();
         Matcher mather = patronDeCorreo.matcher(email);
         if (mather.find() == false) {
             throw new BusinessLogicException("La correo no es un correo válido. ");
         }
-        persistence.create(medicooEntity);
+        persistence.create(medicoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del médico satisfactoriamente");
-        return medicooEntity;
+        return medicoEntity;
     }
     
     /**
@@ -91,8 +97,29 @@ public class MedicoLogic {
      * @param medicoEntity Instancia de MedicoEntity con los nuevos datos.
      * @return Instancia de MedicoEntity con los datos actualizados.
      */
-    public MedicoEntity updateMedico(Long medicosId, MedicoEntity medicoEntity) {
+    public MedicoEntity updateMedico(Long medicosId, MedicoEntity medicoEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el medico con id = {0}", medicosId);
+        if(medicosId!=medicoEntity.getId()){
+            throw new BusinessLogicException("Debe ingresar el id existente del médico.");
+        }
+        if(medicoEntity.getNombre() == null){
+            throw new BusinessLogicException("Debe ingresar el nombre del médico. ");
+        }
+        if(medicoEntity.getTelefono() <= 999999){
+            throw new BusinessLogicException("La numero de telefono no es válido. ");
+        }
+        if(isNull(medicoEntity.getDocumentoMedico())){
+            throw new BusinessLogicException("El numero de documento no es válido. ");
+        }
+        if(isNull(medicoEntity.getFirma())){
+            throw new BusinessLogicException("La firma no es válida. ");
+        }
+        Pattern patronDeCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        String email = medicoEntity.getCorreo();
+        Matcher mather = patronDeCorreo.matcher(email);
+        if (mather.find() == false) {
+            throw new BusinessLogicException("La correo no es un correo válido. ");
+        }
         MedicoEntity newMedicoEntity = persistence.update(medicoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el medico con id = {0}", medicosId);
         return newMedicoEntity;
@@ -108,9 +135,16 @@ public class MedicoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el medico con id = {0}", medicosId);
         List<HorarioAtencionEntity> horarios = getMedico(medicosId).getHorariosAtencion();
         for(int i = 0; i<horarios.size();i++){
+            if(!horarios.get(i).getCitasMedicas().isEmpty()){
+                throw new BusinessLogicException("El médico tiene citas médicas pendientes ");
+            }
             horarioPersistence.delete(horarios.get(i).getId());
         }
         persistence.delete(medicosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el medico con id = {0}", medicosId);
+    }
+    
+    public boolean isNull(Object x){
+        return x==null;
     }
 }

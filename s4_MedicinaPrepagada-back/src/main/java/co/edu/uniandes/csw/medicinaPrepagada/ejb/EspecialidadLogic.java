@@ -27,6 +27,12 @@ public class EspecialidadLogic {
    
     public EspecialidadEntity createEspecialidad(EspecialidadEntity especialidadoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la médico");
+        if( especialidadoEntity.getNombre() == null){
+            throw new BusinessLogicException("La especialidad requiere un nombre. ");
+        }
+        if(persistence.find(especialidadoEntity.getNombre())!=null){
+            throw new BusinessLogicException("La especialidad ya existe. ");
+        }
         persistence.create(especialidadoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la médico satisfactoriamente");
         return especialidadoEntity;
@@ -67,8 +73,14 @@ public class EspecialidadLogic {
      * @param especialidadEntity Instancia de EspecialidadEntity con las nuevas datas.
      * @return Instancia de EspecialidadEntity con las datas actualizadas.
      */
-    public EspecialidadEntity updateEspecialidad(String especialidadNombre, EspecialidadEntity especialidadEntity) {
+    public EspecialidadEntity updateEspecialidad(String especialidadNombre, EspecialidadEntity especialidadEntity) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la especialidad con id = {0}", especialidadNombre);
+        if( especialidadEntity.getNombre() == null){
+            throw new BusinessLogicException("La especialidad requiere un nombre. ");
+        }
+        if(persistence.find(especialidadEntity.getNombre())!=null){
+            throw new BusinessLogicException("La especialidad ya existe. ");
+        }
         EspecialidadEntity newEspecialidadEntity = persistence.update(especialidadEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la especialidad con id = {0}", especialidadNombre);
         return newEspecialidadEntity;
