@@ -19,7 +19,7 @@ public class FarmaciaDTO implements Serializable {
     private Long id;
     private String nombre;
     private String ubicacion;
-    private String telefono;
+    private Long telefono;
     private double latitud;
     private double longitud;
     private String correo;
@@ -109,7 +109,7 @@ public class FarmaciaDTO implements Serializable {
      *
      * @return telefono
      */
-    public String getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
@@ -118,7 +118,7 @@ public class FarmaciaDTO implements Serializable {
      *
      * @param telefono the descripcion to set
      */
-    public void setTelefono(String telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
     

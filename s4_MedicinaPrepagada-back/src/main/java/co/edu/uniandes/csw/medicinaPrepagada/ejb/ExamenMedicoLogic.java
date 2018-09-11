@@ -30,18 +30,31 @@ public class ExamenMedicoLogic {
      *
      * @param examenMedicoEntity La entidad que representa la examenMedico a
      * persistir.
-     * @return La entiddad de la examenMedico luego de persistirla.
+     * @return La entiddad del examenMedico luego de persistirla.
      * @throws BusinessLogicException Si la examenMedico a persistir ya existe.
      */
     public ExamenMedicoEntity createExamenMedico(ExamenMedicoEntity examenMedicoEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la examenMedico");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del examenMedico");
         // Verifica la regla de negocio que dice que no puede haber dos examenMedicoes con el mismo nombre
         if (persistence.findByNombre(examenMedicoEntity.getNombre()) != null) {
             throw new BusinessLogicException("Ya existe una ExamenMedico con el nombre \"" + examenMedicoEntity.getNombre() + "\"");
         }
+        
+         //Verifica que el nombre sea valido
+        if (!validateString(examenMedicoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+        
+        //Verifica que las recomendaciones sean validas
+        if (!validateString(examenMedicoEntity.getRecomendaciones()))
+           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+        
+        //Verifica que el costo sea valido
+        if (!validateCosto(examenMedicoEntity.getCosto()))
+           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+        
         // Invoca la persistencia para crear la examenMedico
         persistence.create(examenMedicoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la examenMedico");
+        LOGGER.log(Level.INFO, "Termina proceso de creación del examenMedico");
         return examenMedicoEntity;
     }
 
@@ -63,7 +76,7 @@ public class ExamenMedicoLogic {
      *
      * Obtener una examenMedico por medio de su id.
      *
-     * @param examenMedicosId: id de la examenMedico para ser buscada.
+     * @param examenMedicosId: id del examenMedico para ser buscada.
      * @return la examenMedico solicitada por medio de su id.
      */
     public ExamenMedicoEntity getExamenMedico(Long examenMedicosId) {
@@ -81,15 +94,42 @@ public class ExamenMedicoLogic {
      *
      * Actualizar una examenMedico.
      *
-     * @param examenMedicosId: id de la examenMedico para buscarla en la base de
+     * @param examenMedicosId: id del examenMedico para buscarla en la base de
      * datos.
      * @param examenMedicoEntity: examenMedico con los cambios para ser actualizada,
      * por ejemplo el nombre.
      * @return la examenMedico con los cambios actualizados en la base de datos.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
-    public ExamenMedicoEntity updateExamenMedico(Long examenMedicosId, ExamenMedicoEntity examenMedicoEntity) {
+    public ExamenMedicoEntity updateExamenMedico(Long examenMedicosId, ExamenMedicoEntity examenMedicoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la examenMedico con id = {0}", examenMedicosId);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
+        ExamenMedicoEntity pExamenMedicoOld = persistence.find(examenMedicosId);
+        //Verifica que la examenMedico que se intenta modificar exista
+        if (pExamenMedicoOld == null)
+             throw new BusinessLogicException ("El examen medico que intenta modificar no existe");
+         if (examenMedicoEntity.getId()!= examenMedicosId)
+            throw new BusinessLogicException("No se puede cambiar el id del examenMedico");
+        //Verifica que no se intente cambiar el nombre del examenMedico
+        if (examenMedicoEntity.getNombre() != pExamenMedicoOld.getNombre())
+            throw new BusinessLogicException("No se puede cambiar el nombre de una examenMedico");
+        
+        if (persistence.findByNombre(examenMedicoEntity.getNombre()) != null) {
+            throw new BusinessLogicException("Ya existe una ExamenMedico con el nombre \"" + examenMedicoEntity.getNombre() + "\"");
+        }
+        
+         //Verifica que el nombre sea valido
+        if (!validateString(examenMedicoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+        
+        //Verifica que las recomendaciones sean validas
+        if (!validateString(examenMedicoEntity.getRecomendaciones()))
+           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+        
+        //Verifica que el costo sea valido
+        if (!validateCosto(examenMedicoEntity.getCosto()))
+           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+        
         ExamenMedicoEntity newEntity = persistence.update(examenMedicoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la examenMedico con id = {0}", examenMedicoEntity.getId());
         return newEntity;
@@ -98,7 +138,7 @@ public class ExamenMedicoLogic {
     /**
      * Borrar un examenMedico
      *
-     * @param examenMedicosId: id de la examenMedico a borrar
+     * @param examenMedicosId: id del examenMedico a borrar
      * @throws BusinessLogicException Si la examenMedico a eliminar tiene libros.
      */
     public void deleteExamenMedico(Long examenMedicosId) throws BusinessLogicException {
@@ -109,5 +149,15 @@ public class ExamenMedicoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar la examenMedico con id = {0}", examenMedicosId);
     }
     
+    private boolean validateString (String pNombre)
+    {
+        return !(pNombre == null || pNombre.isEmpty());
+    }
+       
+    private boolean validateCosto (Double pCosto)
+    {
+        return !(pCosto == null || pCosto<1000 || pCosto>100000000);
+    }
+
     
 }

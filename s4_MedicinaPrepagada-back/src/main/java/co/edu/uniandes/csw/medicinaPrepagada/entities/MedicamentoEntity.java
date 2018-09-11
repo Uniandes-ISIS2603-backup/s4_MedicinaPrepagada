@@ -30,13 +30,8 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
    private String nombre;
     private String cantidad;
     private String descripcion;
-    private double costo;
+    private Double costo;
     private String elaboradoPor;
-    
-    //@javax.persistence.Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-    
     
     
     @PodamExclude
