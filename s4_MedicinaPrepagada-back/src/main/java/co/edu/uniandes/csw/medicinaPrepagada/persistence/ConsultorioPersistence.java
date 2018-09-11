@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.persistence;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +68,12 @@ public class ConsultorioPersistence
     {
         LOGGER.log(Level.INFO, "Consultando el consultorio con id={0}", consultorioId);
         return em.find(ConsultorioEntity.class, consultorioId);
+    }
+    
+       public ConsultorioEntity findBySede(SedeEntity pSede)
+    {
+        LOGGER.log(Level.INFO, "Consultando el consultorio con id={0}", pSede.toString());
+        return em.find(ConsultorioEntity.class, pSede);
     }
      
         /**

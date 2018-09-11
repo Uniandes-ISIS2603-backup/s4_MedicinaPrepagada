@@ -46,7 +46,7 @@ public class ConsultorioEntity implements Serializable
     private String edificio;
     
     
-    private int nOficina;
+    private Integer nOficina;
      
      
      
@@ -77,7 +77,7 @@ public class ConsultorioEntity implements Serializable
    }
    
    
-    public void setNOficina (int pNOficina)
+    public void setNOficina (Integer pNOficina)
    {
        this.nOficina=pNOficina;
    }

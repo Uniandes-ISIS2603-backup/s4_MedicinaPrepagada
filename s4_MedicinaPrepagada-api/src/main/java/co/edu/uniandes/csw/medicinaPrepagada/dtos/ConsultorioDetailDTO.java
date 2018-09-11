@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,6 +27,39 @@ public class ConsultorioDetailDTO extends ConsultorioDTO implements Serializable
     public ConsultorioDetailDTO ()
     {
         super();
+    }
+    
+    /**
+     * Crea un objeto ConsultorioDetailDTO a partir de un objeto ConsultorioEntity.
+     *
+     * @param pConsultorioEntity Entidad ConsultorioEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */
+    
+    public ConsultorioDetailDTO (ConsultorioEntity pConsultorioEntity) 
+   {
+       super(pConsultorioEntity);
+   
+       if (pConsultorioEntity != null)
+       {
+          // completar
+       }
+   } 
+    
+     /**
+     * Convierte un objeto ConsultorioDTO a ConsultorioEntity.
+     *
+     * @return Nueva objeto ConsultorioEntity.
+     *
+     */
+    @Override
+    public ConsultorioEntity toEntity() 
+    {
+        ConsultorioEntity consultorioEntity = super.toEntity();
+
+        //COmpletar
+        return consultorioEntity;
     }
     
     

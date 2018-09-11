@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -28,6 +29,40 @@ public class HorarioAtencionDetailDTO extends HorarioAtencionDTO implements Seri
     public HorarioAtencionDetailDTO() 
     {
         super();
+    }
+    
+    
+     /**
+     * Crea un objeto HorarioAtencionDetailDTO a partir de un objeto HorarioAtencionEntity.
+     *
+     * @param pHorarioAtencionEntity Entidad HorarioAtencionEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */
+    
+    public HorarioAtencionDetailDTO (HorarioAtencionEntity pHorarioAtencionEntity) 
+   {
+       super(pHorarioAtencionEntity);
+   
+       if (pHorarioAtencionEntity != null)
+       {
+          // completar
+       }
+   } 
+    
+         /**
+     * Convierte un objeto HorarioAtencionDTO a HorarioAtencionEntity.
+     *
+     * @return Nueva objeto HorarioAtencionEntity.
+     *
+     */
+    @Override
+    public HorarioAtencionEntity toEntity() 
+    {
+        HorarioAtencionEntity horarioAtencionEntity = super.toEntity();
+
+        //COmpletar
+        return horarioAtencionEntity;
     }
     
     

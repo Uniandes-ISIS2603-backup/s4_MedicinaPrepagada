@@ -17,28 +17,28 @@ import javax.persistence.Id;
 @Entity 
 public class AdministradorEntity extends UsuarioEntity implements Serializable 
 {
-//    @Id
-//    private Long cedula;
+    //@Id
+    //private Long cedula;
     
-}
+
     
     /**
      * Devuelve el identificador del administrador.
      * @return El id
      */
     
-//    public Long getCedula() 
-//    {
-//        return cedula;
-//    }
-//
-//    /**
-//     * Modifica el identificador del administrador.
-//     * @param pId El id a poner
-//     */
-//    
-//    public void setCedula(Long pCedula) 
-//    {
-//        this.cedula = pCedula;
-//    }
-//}
+    //public Long getCedula() 
+    //{
+    //    return cedula;
+    //}
+
+    /**
+     * Modifica el identificador del administrador.
+     * @param pId El id a poner
+     */
+ 
+    //public void setCedula(Long pCedula) 
+    //{        
+    //    this.cedula = pCedula;
+    //}
+}
