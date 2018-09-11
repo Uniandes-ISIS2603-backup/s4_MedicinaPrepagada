@@ -116,10 +116,10 @@ public class TarjetaCreditoLogic {
                 else{
                     sumaDigitos = doblePares;
                 }
-                sumaPares =+ sumaDigitos;
+                sumaPares += sumaDigitos;
             }
             else{
-                sumaInpares =+ num;
+                sumaInpares += num;
             }
             numero = numero/10;
             i++;
