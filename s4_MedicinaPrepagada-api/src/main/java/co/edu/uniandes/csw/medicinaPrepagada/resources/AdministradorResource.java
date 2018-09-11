@@ -7,12 +7,15 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.AdministradorDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.AdministradorLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -36,9 +39,14 @@ public class AdministradorResource
 {
     private static final Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
     
+    @Inject
+    private AdministradorLogic admiLogic;
+    
     /**
      * Crea un nuevo administrador con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico.
+     * @param admi
+     * @return 
      * @throws BusinessLogicException
      */
     
@@ -68,21 +76,24 @@ public class AdministradorResource
     
     /**
      * Busca el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
+     * @return 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el adminsitrador.
      */
     
     @GET
     @Path("{AdministradorId: \\d+}")
-    public AdministradorDTO getAdministrador(@PathParam("administradorId") Long administradorId) 
+    public AdministradorDTO getAdministrador(@PathParam("administradorId") Long administradorId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: input: {0}", administradorId);
-        /**AdministradorEntity admiEntity = administradorLogic.getAdministrador(administradorId);
+        AdministradorEntity admiEntity = admiLogic.getAdministrador(administradorId);
         
         if (admiEntity == null) 
         {
             throw new WebApplicationException("El recurso /administrador/" + administradorId + " no existe.", 404);
-        }*/
+        }
+        
         AdministradorDTO admiDetailDTO = new AdministradorDTO();
         LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: output: {0}", admiDetailDTO.toString());
         return admiDetailDTO;
@@ -90,20 +101,23 @@ public class AdministradorResource
     
     /**
      * Elimina el administrador con el id asociado recibido en la URL y lo devuelve.
+     * @param administradorId
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el adminsitrador.
      */
     
     @DELETE
     @Path("{AdministradorId: \\d+}")
-    public void deleteAdministrador(@PathParam ("administradorId") Long administradorId) throws BusinessLogicException
+    public void deleteAdministrador(@PathParam ("administradorId") Long administradorId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "AdministradorResource deleteAdministrador: input:(0)", administradorId);
-        /**if (AdministradorLogic.getAdministrador(administradorId) == null) 
+        
+        if (admiLogic.getAdministrador(administradorId) == null) 
         {
            throw new WebApplicationException("El recurso /administradores/" + administradorId + " no existe.", 404);
         }
-        AdministradorLogic.deleteAdministrador(administradorId); */
+        
+        admiLogic.deleteAdministrador(administradorId); 
         LOGGER.info("AdministradorResource deleteAdministrador: output: void");
     }
     
@@ -112,6 +126,7 @@ public class AdministradorResource
      * @param administradorId
      * @param pAdmi
      * @return 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el administrador.
      */
