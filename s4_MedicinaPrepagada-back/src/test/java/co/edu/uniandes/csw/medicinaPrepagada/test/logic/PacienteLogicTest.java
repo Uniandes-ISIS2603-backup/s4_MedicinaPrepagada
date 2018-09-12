@@ -6,11 +6,17 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -100,6 +106,8 @@ public class PacienteLogicTest {
             data.add(entity);
         }
         data.get(1).setFechaNacimiento("19/02/1995");
+        em.merge(data.get(1));
+
        
     }
     
@@ -267,7 +275,7 @@ public class PacienteLogicTest {
         newEntity.setNumeroContacto(new Long(1234567890));
         pacienteLogic.createPaciente(newEntity);
     }
-    
+       
     //Las pruebas que estan a continuacion prueban el mismo codigo que esta en updatePaciente()
     // y createPciente() de la logica del mismo, por eso no se deben probar las misamas reglas
     //para update

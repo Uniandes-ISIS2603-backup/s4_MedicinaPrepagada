@@ -147,4 +147,131 @@ public class TarjetaCreditoLogicTest {
        Assert.assertEquals(ent.getFranquicia(), result.getFranquicia());
        Assert.assertEquals(ent.getNombreEnTarjeta(), result.getNombreEnTarjeta());
     }
+    
+    /**
+     * Prueba para crear una tarjeta de credito con un numero no valido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConNumeroNoValido() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554044L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/21");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+    /**
+     * Prueba para crear una tarjeta de credito con un numero que no coincida con la franquicia
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConNumeroQueNoCoincidaConLaFranquicia() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("Visa");
+        newEntity.setFechaExpiracion("11/21");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+    /**
+     * Prueba para crear una tarjeta de credito con una fecha de expiarcion que ya paso
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConFechaExpiracionPasada() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/08");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+     /**
+     * Prueba para crear una tarjeta de credito con una fecha de expiarcion 20 anos mayor
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConFechaExpiracionFutura() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/50");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+    /**
+     * Prueba para crear una tarjeta de credito con una fecha de expiarcion que no cumpla el formato
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConFechaExpiracionNoCumpleFormato() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("1150");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+     
+    /**
+     * Prueba para crear una tarjeta de credito con un codigo de seguridad invalido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConCcvInvalido() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/25");
+        newEntity.setCodigoSeguridad(12);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+     /**
+     * Prueba para crear una tarjeta de credito con un nombre en la tarjeta invalido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConNombreInvalido() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(5555555555554444L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/25");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("nicolas martojo tieroojil");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
 }
