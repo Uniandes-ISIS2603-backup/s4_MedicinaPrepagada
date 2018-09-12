@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.persistence;
 
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -64,6 +66,17 @@ public class MedicoPersistence {
         return em.find(MedicoEntity.class, medicoId);
     }
     
+    public MedicoEntity findByDocumento(int medicoDocumento)
+    {
+        LOGGER.log(Level.INFO, "Consultando medico por documento ", medicoDocumento);
+        TypedQuery query = em.createQuery("Select e From MedicoEntity e where e.documentoMedico >= :medicoDocumento", MedicoEntity.class);
+        query.setParameter("medicoDocumento", medicoDocumento);
+        List<MedicoEntity> respuesta = query.getResultList();
+        if(respuesta.isEmpty()){
+            return null;
+        }
+        return respuesta.get(0);
+    }
     /**
      * Actualiza un Medico.
      * @param medicoEntity: el Medico que viene con nueva informacion. 

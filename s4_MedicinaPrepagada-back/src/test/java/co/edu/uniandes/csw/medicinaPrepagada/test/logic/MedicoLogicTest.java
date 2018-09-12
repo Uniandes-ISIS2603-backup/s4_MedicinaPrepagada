@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicoLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
@@ -113,6 +115,19 @@ public class MedicoLogicTest {
             em.persist(entity);
             data.add(entity);
         }
+//        MedicoEntity enti = factory.manufacturePojo(MedicoEntity.class);
+//        enti.setDocumentoMedico(3);
+//        HorarioAtencionEntity horario = factory.manufacturePojo(HorarioAtencionEntity.class);
+//        CitaMedicaEntity cita = factory.manufacturePojo(CitaMedicaEntity.class);
+//        List<CitaMedicaEntity> lista = new ArrayList<>();
+//        lista.add(cita);
+//        horario.setCitasMedicas(lista);
+//        cita.setHorarioAtencionAsignado(horario);
+//        List<HorarioAtencionEntity> listaHorario = new ArrayList<>();
+//        listaHorario.add(horario);
+//        enti.setHorariosAtencion(listaHorario);
+//        em.persist(enti);
+//        data.add(enti);
     }
     
     /**
@@ -245,7 +260,7 @@ public class MedicoLogicTest {
      */
     
     @Test
-    public void getHistoriasClinicasTest()
+    public void getMedicosTest()
     {
         List<MedicoEntity> list = medicoLogic.getMedicos();
         Assert.assertEquals(data.size(), list.size());
@@ -290,7 +305,7 @@ public class MedicoLogicTest {
         pojoEntity.setNombre("Alberto Rodriguez");
         pojoEntity.setTelefono(1234567);
         pojoEntity.setCorreo("alberto@uniandes.com");
-        pojoEntity.setDocumentoMedico(5);
+        pojoEntity.setDocumentoMedico(0);
         pojoEntity.setFirma("firma del medico");
         pojoEntity.setContrasena("abcdefgh1");
         pojoEntity.setId(entity.getId());
@@ -301,6 +316,119 @@ public class MedicoLogicTest {
 
     }
     
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoIdDistintoTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+//        pojoEntity.setDocumentoMedico(5);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(data.get(2).getId(), pojoEntity);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoDocumentoDistintoTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+        pojoEntity.setDocumentoMedico(5);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(data.get(0).getId(), pojoEntity);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoCorreoNoValidoTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("albertouniandes.com");
+        pojoEntity.setDocumentoMedico(0);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
+
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+
+    }
+    
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoFirmaNullTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+        pojoEntity.setDocumentoMedico(0);
+        pojoEntity.setFirma(null);
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
+
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+
+    }
+    
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoNombreNullTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre(null);
+        pojoEntity.setTelefono(1234567);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+        pojoEntity.setDocumentoMedico(0);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
+
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+
+    }
+    
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicoTelefonoMalTest() throws BusinessLogicException
+    {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity pojoEntity = factory.manufacturePojo(MedicoEntity.class);
+        pojoEntity.setNombre("Alberto Rodriguez");
+        pojoEntity.setTelefono(12345);
+        pojoEntity.setCorreo("alberto@uniandes.com");
+        pojoEntity.setDocumentoMedico(0);
+        pojoEntity.setFirma("firma del medico");
+        pojoEntity.setContrasena("abcdefgh1");
+        pojoEntity.setId(entity.getId());
+
+        medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
+
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+
+    }
     /**
      * Prueba para eliminar una medico clinica
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
@@ -310,6 +438,28 @@ public class MedicoLogicTest {
     public void deleteMedicoTest() throws BusinessLogicException 
     {
         MedicoEntity entity = data.get(0);
+        medicoLogic.deleteMedico(entity.getId());
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void deleteMedicoHayCitasPendientesTest() throws BusinessLogicException 
+    {
+//        MedicoEntity enti = factory.manufacturePojo(MedicoEntity.class);
+//        enti.setDocumentoMedico(3);
+//        HorarioAtencionEntity horario = factory.manufacturePojo(HorarioAtencionEntity.class);
+//        CitaMedicaEntity cita = factory.manufacturePojo(CitaMedicaEntity.class);
+//        List<CitaMedicaEntity> lista = new ArrayList<>();
+//        lista.add(cita);
+//        horario.setCitasMedicas(lista);
+//        cita.setHorarioAtencionAsignado(horario);
+//        List<HorarioAtencionEntity> listaHorario = new ArrayList<>();
+//        listaHorario.add(horario);
+//        enti.setHorariosAtencion(listaHorario);
+//        em.persist(enti);
+//        data.add(enti);
+        MedicoEntity entity = data.get(3);
         medicoLogic.deleteMedico(entity.getId());
         MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
         Assert.assertNull(deleted);
