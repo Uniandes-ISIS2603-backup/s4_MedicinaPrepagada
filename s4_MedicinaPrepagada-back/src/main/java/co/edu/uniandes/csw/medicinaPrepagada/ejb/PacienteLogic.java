@@ -72,7 +72,7 @@ public class PacienteLogic {
     
     /**
      * retorna una lista con todos los pacientes
-     * @return: todos los pacientes
+     * @return todos los pacientes
      */
     public List<PacienteEntity> getPacientes(){
         return persistence.findAll();
@@ -82,16 +82,13 @@ public class PacienteLogic {
      * Actualiza un paciente
      * @param pacienteEntity: el pacienteactualizado
      * @return: el paciente actualizado
-     * @throws BusinessLogicException. si no se cumple alguna regla de negocio
+     * @throws BusinessLogicException si no se cumple alguna regla de negocio
      */
     public PacienteEntity updatePaciente(PacienteEntity pacienteEntity) throws BusinessLogicException{
         PacienteEntity oldEntity = getPaciente(pacienteEntity.getId());
         if(!pacienteEntity.getFechaNacimiento().equals(oldEntity.getFechaNacimiento())){
             throw new BusinessLogicException("No se puede actualizar la fecha de nacimiento");
         }
-        
-        
-        //falta revisar que la eps exista 
         
         List<CitaMedicaEntity> oldCitasMedicas = oldEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
@@ -139,7 +136,7 @@ public class PacienteLogic {
         if(!matchName.matches()){
             throw new BusinessLogicException("El formato del nombre no es valido: Nombre Apellidos");
         }
-        String mailValidationPattern = "[a-z]+@[a-z]+.[a-z]+";
+        String mailValidationPattern = "[a-z]+@[a-z]+\\.[a-z]+";
         Pattern patternMail = Pattern.compile(mailValidationPattern);
         Matcher matchMail = patternMail.matcher(pacienteEntity.getMail());
         if(!matchMail.matches()){
@@ -154,10 +151,10 @@ public class PacienteLogic {
             throw new BusinessLogicException("La direccion dada no sigue el formato");
         }
         
-        String epsValidationPattern = "(Nueva Eps|Colsanitas|Sura|Aliansalud|Compensar|Salud Total|Coomeva|Famisanar|Cruz Blanca|Cafesalud)";
+        String epsValidationPattern = "^Nueva\\sEps$|^Colsanitas$|^Sura$|^Aliansalud$|^Compensar$|^Salud\\sTotal$|^Coomeva$|^Famisanar$|^Cruz\\sBlanca$|^Cafesalud";
         Pattern patternEps = Pattern.compile(epsValidationPattern);
-        Matcher matchEps = patternDirecccion.matcher(pacienteEntity.getEps());
-        if(matchEps.matches()){
+        Matcher matchEps = patternEps.matcher(pacienteEntity.getEps());
+        if(!matchEps.matches()){
             throw new BusinessLogicException("La eps no existe");
         }
         
