@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *clase que representa un Paciente
@@ -42,6 +43,7 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
  
 
     private String nombre;
+//    @PodamStrategyValue()
     private String fechaNacimiento;
     private String direccion;
     private Long numeroContacto;

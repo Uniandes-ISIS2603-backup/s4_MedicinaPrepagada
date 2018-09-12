@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -72,15 +73,18 @@ public class PacientePersistence {
      * @param login
      * @return un paciente con el login dado por param
      */
-    public PacienteEntity getPacienteByLogin(String login){
+    public Boolean existePacienteByLogin(String login){
         TypedQuery q = em.createQuery("Select e from PacienteEntity e where e.login = :login", PacienteEntity.class);
         q = q.setParameter("login", login);
-        List<PacienteEntity> lista = q.getResultList();
-        if(lista.get(0) == null){
-            return null;
+        try{
+            PacienteEntity ent = (PacienteEntity) q.getSingleResult();
+            return true;
+
         }
-        else{
-            return lista.get(0);
+        catch(NoResultException e2){
+            return false;
         }
+        
+        
     }
 }
