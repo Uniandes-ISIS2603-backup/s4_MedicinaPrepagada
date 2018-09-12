@@ -41,7 +41,7 @@ public class TarjetaCreditoLogic {
             throw new BusinessLogicException("El numero de la tarjeta no es valido");
         }
         if(!validarNumeroConFranquicia(tarjetaCreditoEntity.getNumero(), tarjetaCreditoEntity.getFranquicia())){
-            throw new BusinessLogicException("En numero no coincide con la tarjeta");
+            throw new BusinessLogicException("En numero no coincide con la franquicia");
         }
         SimpleDateFormat format = new SimpleDateFormat("MM/yy");
         Calendar nowCal = Calendar.getInstance();
@@ -66,7 +66,7 @@ public class TarjetaCreditoLogic {
         if(!matchCcv.matches()){
             throw new BusinessLogicException("El codigo de seguridad no sigue el formato, solo puede ser tres digitos numericos");
         }
-        String nombreValidartionPattern = "([A-Z]+ ){2,3}[A-Z]+";
+        String nombreValidartionPattern = "([A-Z]+\\s){2,3}[A-Z]+";
         Pattern patternNombre = Pattern.compile(nombreValidartionPattern);
         Matcher matchNombre = patternNombre.matcher(tarjetaCreditoEntity.getNombreEnTarjeta());
         if(!matchNombre.matches()){
@@ -134,19 +134,19 @@ public class TarjetaCreditoLogic {
      * @return si coinciden
      */
     public boolean validarNumeroConFranquicia(Long numero, String franquicia){
-        String num = numero.toString();
-        int primerNum = num.charAt(0);
+        Long primerNum = numero;
+        while(primerNum>9){
+           primerNum = primerNum/10; 
+        }
         if(primerNum == 3 && (franquicia.equals("American Express") || franquicia.equals("Diners Club"))){
             return true;
         }
-        else if(primerNum == 4 && franquicia.equals("Visa")){
+        if(primerNum == 4 && franquicia.equals("Visa")){
             return true;
         }
-        else if(primerNum == 5 && franquicia.equals("MasterCard")){
+        if(primerNum == 5 && franquicia.equals("MasterCard")){
             return true;
         }
-        else{
-            return false;
-        }
+        return false;
     }
 }
