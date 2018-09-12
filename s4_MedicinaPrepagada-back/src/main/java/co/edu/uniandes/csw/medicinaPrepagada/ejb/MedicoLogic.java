@@ -35,18 +35,15 @@ public class MedicoLogic {
 
     public MedicoEntity createMedico(MedicoEntity medicoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del médico");
-        MedicoEntity idRepetido = persistence.find(medicoEntity.getDocumentoIdentidad());
-        if(idRepetido != null){
-            throw new BusinessLogicException("Ya existe un medico con el id que se quiere ingresar.");
+        MedicoEntity documentoRepetido = persistence.findByDocumento(medicoEntity.getDocumentoMedico());
+        if(documentoRepetido != null){
+            throw new BusinessLogicException("Ya existe un medico con el documento medico que se quiere ingresar.");
         }
         if(medicoEntity.getNombre() == null){
             throw new BusinessLogicException("Debe ingresar el nombre del médico. ");
         }
         if(medicoEntity.getTelefono() <= 999999){
             throw new BusinessLogicException("La numero de telefono no es válido. ");
-        }
-        if(isNull(medicoEntity.getDocumentoMedico())){
-            throw new BusinessLogicException("El numero de documento no es válido. ");
         }
         if(isNull(medicoEntity.getFirma())){
             throw new BusinessLogicException("La firma no es válida. ");
@@ -102,14 +99,16 @@ public class MedicoLogic {
         if(medicosId!=medicoEntity.getId()){
             throw new BusinessLogicException("Debe ingresar el id existente del médico.");
         }
+        int documentoMedico = persistence.find(medicosId).getDocumentoMedico();
+        int documentoNuevo = medicoEntity.getDocumentoMedico();
+        if(documentoMedico != documentoNuevo){
+            throw new BusinessLogicException("El documento médico no debe modificarse bajo ninguna circunstancia");
+        }
         if(medicoEntity.getNombre() == null){
             throw new BusinessLogicException("Debe ingresar el nombre del médico. ");
         }
         if(medicoEntity.getTelefono() <= 999999){
             throw new BusinessLogicException("La numero de telefono no es válido. ");
-        }
-        if(isNull(medicoEntity.getDocumentoMedico())){
-            throw new BusinessLogicException("El numero de documento no es válido. ");
         }
         if(isNull(medicoEntity.getFirma())){
             throw new BusinessLogicException("La firma no es válida. ");
@@ -135,7 +134,7 @@ public class MedicoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el medico con id = {0}", medicosId);
         List<HorarioAtencionEntity> horarios = getMedico(medicosId).getHorariosAtencion();
         for(int i = 0; i<horarios.size();i++){
-            if(!horarios.get(i).getCitasMedicas().isEmpty()){
+            if(!horarios.get(i).getCitasMedicas().isEmpty() || horarios.get(i).getCitasMedicas() != null){
                 throw new BusinessLogicException("El médico tiene citas médicas pendientes ");
             }
             horarioPersistence.delete(horarios.get(i).getId());
