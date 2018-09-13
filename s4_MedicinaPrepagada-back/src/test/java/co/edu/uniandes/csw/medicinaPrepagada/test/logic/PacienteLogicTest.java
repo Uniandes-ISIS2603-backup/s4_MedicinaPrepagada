@@ -173,6 +173,7 @@ public class PacienteLogicTest {
         pojoEntity.setNumeroContacto(new Long(1234567890));
         pojoEntity.setEps("Nueva Eps");
         pojoEntity.setFechaNacimiento(entity.getFechaNacimiento());
+        pojoEntity.setCitasMedicas(new ArrayList<CitaMedicaEntity>());
 
         pacienteLogic.updatePaciente(pojoEntity);
 
@@ -224,6 +225,7 @@ public class PacienteLogicTest {
         newEntity.setDireccion("Cra 22#104-82");
         newEntity.setEps("Sura");
         newEntity.setNumeroContacto(new Long(1234567890));
+        newEntity.setCitasMedicas(new ArrayList<CitaMedicaEntity>());
         pacienteLogic.updatePaciente(newEntity);
     }
     
@@ -274,6 +276,30 @@ public class PacienteLogicTest {
         newEntity.setEps("Sura");
         newEntity.setNumeroContacto(new Long(1234567890));
         pacienteLogic.createPaciente(newEntity);
+    }
+    
+    /**
+     * Prueba para agregarle una cita medica a un paciente en el horario que ya tenia
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void agregarleUnaCitaMedicaEnElMismoHorarioQueOtraAUnPaciente() throws BusinessLogicException{
+        PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
+        newEntity.setId(data.get(1).getId());
+        newEntity.setFechaNacimiento(data.get(1).getFechaNacimiento());
+        newEntity.setMail("abdcd@udad.com");
+        newEntity.setNombre("Miguel Hoyos Ruge");
+        newEntity.setDireccion("Cra 22#104-82");
+        newEntity.setEps("Sura");
+        newEntity.setNumeroContacto(new Long(1234567890));
+        CitaMedicaEntity newCita = factory.manufacturePojo(CitaMedicaEntity.class);
+        CitaMedicaEntity newCita2 = factory.manufacturePojo(CitaMedicaEntity.class);
+        newCita2.setFecha(newCita.getFecha());
+        ArrayList<CitaMedicaEntity> listaCitas = new ArrayList();
+        listaCitas.add(newCita);
+        listaCitas.add(newCita2);
+        newEntity.setCitasMedicas(listaCitas);
+        pacienteLogic.updatePaciente(newEntity);
     }
        
     //Las pruebas que estan a continuacion prueban el mismo codigo que esta en updatePaciente()

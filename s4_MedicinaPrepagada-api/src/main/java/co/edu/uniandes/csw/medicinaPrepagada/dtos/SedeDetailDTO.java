@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -42,7 +44,11 @@ public class SedeDetailDTO extends SedeDTO implements Serializable
    
        if (pSedeEntity != null)
        {
-          // completar
+           consultorios = new ArrayList<>();
+           for (ConsultorioEntity entityConsultorios : pSedeEntity.getConsultorios())
+           {
+               consultorios.add(new ConsultorioDTO(entityConsultorios));
+           }
        }
    } 
     
@@ -56,8 +62,19 @@ public class SedeDetailDTO extends SedeDTO implements Serializable
     public SedeEntity toEntity() 
     {
         SedeEntity sedeEntity = super.toEntity();
-
-        //COmpletar
+        
+        if (consultorios != null)
+        {
+            List <ConsultorioEntity> consultoriosEntity = new ArrayList<>();
+            for (ConsultorioDTO dtoConsultorio : consultorios)
+            {
+                consultoriosEntity.add(dtoConsultorio.toEntity());
+            }
+            sedeEntity.setConsultorios(consultoriosEntity);
+        }
+        
+        
+        
         return sedeEntity;
     }
     

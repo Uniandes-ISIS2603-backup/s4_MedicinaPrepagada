@@ -26,7 +26,9 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class SedeEntity implements Serializable
 {
     
-    
+    /**
+     * Id autogenerado de la sedeEntity
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,41 +36,69 @@ public class SedeEntity implements Serializable
     
     
     
-    
+    /**
+     * Lista de consultorio de las entidades
+     */
     @PodamExclude
     @OneToMany(mappedBy = "sede",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ConsultorioEntity> consultorios = new ArrayList<>();
     
+    /**
+     * nombre de la sedeEntity
+     */
     private String nombre;
-    
+    /**
+     * Direccion de la sedeEntity
+     */
     private String direccion;
-    
+    /**
+     * tipo de la sedeEntity
+     */
     private Integer tipoSede;
-    
+    /**
+     * Descripcion de la sedeEntity
+     */
     private String descripcion;
-    
+    /**
+     * latitud de la sedeEntity
+     */
     private Double latitud;
-    
+    /**
+     * longitud de la sedeEntity
+     */
     private Double longitud;
-    
+    /**
+     * Telefono de la sedeEntity
+     */
     private Long telefono;
-    
+    /**
+     * correo de la sedeEntity
+     */
     private String correo;
 
     
   
-    
+    /**
+     * Obtiene el id de la sede
+     * @return 
+     */
     public Long getId() 
     {
         return id;
     }
-
+    /**
+     * Pone el id de la sede
+     * @param id 
+     */
     public void setId(Long id) 
     {
         this.id = id;
     }
-    
- public void setNombre (String pNombre)
+    /**
+     * Pone el nombre de la sede
+     * @param pNombre 
+     */
+    public void setNombre (String pNombre)
    {
        this.nombre = pNombre;
    }
