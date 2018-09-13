@@ -42,6 +42,7 @@ public class CitaLaboratorioEntity implements Serializable
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
+    
     private String especialidad;
     private String comentarios;
     private String recomendaciones;
