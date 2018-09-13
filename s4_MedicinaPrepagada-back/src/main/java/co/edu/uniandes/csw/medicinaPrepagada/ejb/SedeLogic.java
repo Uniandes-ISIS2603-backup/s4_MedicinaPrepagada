@@ -33,6 +33,7 @@ public class SedeLogic
      *
      * @param sedeEntity Objeto de SedeEntity con los datos nuevos
      * @return Objeto de SedeEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public SedeEntity createSede(SedeEntity sedeEntity) throws BusinessLogicException
     {
@@ -114,6 +115,7 @@ public class SedeLogic
      * @param sedesId Identificador de la instancia a actualizar
      * @param sedeEntity Instancia de SedeEntity con los nuevos datos.
      * @return Instancia de SedeEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public SedeEntity updateSede(Long sedesId, SedeEntity sedeEntity) throws BusinessLogicException
     {
