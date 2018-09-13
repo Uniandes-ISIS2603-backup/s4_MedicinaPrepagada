@@ -11,8 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.ws.rs.NotFoundException;
 
 /**
  *
@@ -71,10 +74,18 @@ public class AdministradorPersistence
      * @return un administrador. 
      */
     
-    public AdministradorEntity findByLogin(String pLogin) 
+    public Boolean findByLogin(String pLogin) 
     {
         LOGGER.log(Level.INFO, "Consultando el administrador con login={0}", pLogin);
-        return em.find(AdministradorEntity.class, pLogin);
+         TypedQuery q = em.createQuery("Select e from AdministradorEntity e where e.login = :login", AdministradorEntity.class);
+        q = q.setParameter("login", pLogin);
+        try{
+             q.getSingleResult();
+             return true;
+        }
+        catch(NoResultException e){
+            return false;
+        }
     }
     
     /**

@@ -39,7 +39,7 @@ public class AdministradorLogic
         LOGGER.log(Level.INFO, "Inicia proceso de creación del administrador");
         
         //Regla de negocio 1: No puede haber un login igual en la base de datos
-        if (persistence.findByLogin(admiEntity.getLogin() ) != null) 
+        if(persistence.findByLogin(admiEntity.getLogin()))
         {
             throw new BusinessLogicException("El administrador con ese Login ya existe");
         }
