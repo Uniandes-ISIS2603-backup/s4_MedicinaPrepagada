@@ -144,7 +144,7 @@ public class AdministradorLogic
                 
         String pas1 = contrasena.trim();
         
-        if(pas1.matches("[A-Za-z][0-9]{10}"))
+        if(pas1.matches("^[A-Za-z0-9]{8,20}$"))
         {
             char clave;
             byte contLetra = 0; 
@@ -168,7 +168,7 @@ public class AdministradorLogic
             int sumaLetrasYnumeros = conNumero + contLetra; 
                         
             if(conNumero == 0 || conNumero == sumaLetrasYnumeros || contLetra == 0 ||
-               contLetra == sumaLetrasYnumeros || sumaLetrasYnumeros < 8 || sumaLetrasYnumeros > 20   )
+               contLetra == sumaLetrasYnumeros )
               {
                     throw new BusinessLogicException("La contraseña no cumple con los lineamientos de longitud"
                         + " y composición"); 

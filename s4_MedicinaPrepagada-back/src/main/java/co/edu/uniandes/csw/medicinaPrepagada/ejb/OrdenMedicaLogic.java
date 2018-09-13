@@ -9,6 +9,9 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,15 +42,20 @@ public class OrdenMedicaLogic
     public OrdenMedicaEntity createOrdenMedica(OrdenMedicaEntity ordenEntity) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date d1 = Date.from(Instant.now());
 
         if(persistence.find(ordenEntity.getId()) != null) 
         {
             throw new BusinessLogicException("Ya existe una orden medica con el id \"" + ordenEntity.getId() + "\"");
         }
         
-        if( ordenEntity.getValidaHasta().before(new Date( )) )
+        Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
+        
+        if(fechaValidoHasta.compareTo(d1) < 0)
         {
-            throw new BusinessLogicException("La validez de la orden debe ser posterior a la fecha actual");
+            throw new BusinessLogicException("La validez de la orden es antes de la fecha actual");
         }
         
         if( ordenEntity.getFirmaMedico() == null ||
