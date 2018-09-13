@@ -47,5 +47,12 @@ public class FacturaPersistence {
          
          return query.getResultList();
     }
+
+    public FacturaEntity updateFactura(FacturaEntity facturaEntity) {
+        LOGGER.log(Level.INFO, "Actualizando la factura con id={0}", facturaEntity.getId());
+        return em.merge(facturaEntity);
+    }
+    
+    
     
 }

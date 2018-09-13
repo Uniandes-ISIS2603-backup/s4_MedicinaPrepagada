@@ -42,7 +42,7 @@ public class FacturaEntity implements Serializable{
     private int valor;
     private String concepto;
     private boolean pagada;
-    private int idCliente;
+    private Long idCliente;
     
     public Long getId()
     {
@@ -114,12 +114,12 @@ public class FacturaEntity implements Serializable{
         this.pagada = pPagada;
     }
     
-    public int getIdCliente ()
+    public Long getIdCliente ()
     {
         return this.idCliente;
     }
     
-    public void setIdCliente (int pIdCliente)
+    public void setIdCliente (Long pIdCliente)
     {
         this.idCliente = pIdCliente;
     }
