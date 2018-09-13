@@ -56,7 +56,7 @@ public class AdministradorLogic
             throw new BusinessLogicException("La contraseña no puede ser vacia");
         }
         
-        validarFormatoContrasena(admiEntity);
+        //validarFormatoContrasena(admiEntity);
         
         persistence.create(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del administrador");
@@ -113,7 +113,7 @@ public class AdministradorLogic
             throw new BusinessLogicException("La contraseña no puede ser vacia");
         }
         
-        validarFormatoContrasena(admiEntity);
+        //validarFormatoContrasena(admiEntity);
 
         AdministradorEntity newEntity = persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());

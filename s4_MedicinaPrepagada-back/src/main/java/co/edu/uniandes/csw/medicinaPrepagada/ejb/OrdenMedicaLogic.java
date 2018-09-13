@@ -53,10 +53,17 @@ public class OrdenMedicaLogic
         
         Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
         
-        if(fechaValidoHasta.compareTo(d1) < 0)
+        try
         {
-            throw new BusinessLogicException("La validez de la orden es antes de la fecha actual");
+            if(fechaValidoHasta.compareTo(d1) < 0)
+            {
+                throw new BusinessLogicException("La validez de la orden es antes de la fecha actual");
+            }
         }
+        catch( Exception e)
+                {
+                
+                }
         
         if( ordenEntity.getFirmaMedico() == null ||
             ordenEntity.getFirmaMedico().equals("")   )
