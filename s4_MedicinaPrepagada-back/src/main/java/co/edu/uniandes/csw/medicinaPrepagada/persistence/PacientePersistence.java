@@ -77,7 +77,7 @@ public class PacientePersistence {
         TypedQuery q = em.createQuery("Select e from PacienteEntity e where e.login = :login", PacienteEntity.class);
         q = q.setParameter("login", login);
         try{
-            PacienteEntity ent = (PacienteEntity) q.getSingleResult();
+            q.getSingleResult();
             return true;
 
         }

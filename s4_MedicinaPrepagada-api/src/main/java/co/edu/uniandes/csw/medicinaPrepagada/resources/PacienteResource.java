@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -47,13 +49,12 @@ public class PacienteResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public PacienteDTO createPaciente(PacienteDTO paciente)
+    public PacienteDTO createPaciente(PacienteDTO paciente) throws BusinessLogicException
     {
-      // PacienteEntity entity = paciente.toEntity();
-      // PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
-      // PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
-      // return nuevoDTO;
-        return paciente;
+       PacienteEntity entity = paciente.toEntity();
+       PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
+       PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
+       return nuevoDTO;
     }
     
     /**

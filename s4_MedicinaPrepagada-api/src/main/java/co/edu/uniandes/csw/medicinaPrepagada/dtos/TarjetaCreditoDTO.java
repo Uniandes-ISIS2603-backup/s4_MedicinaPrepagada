@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -50,16 +51,16 @@ public class TarjetaCreditoDTO implements Serializable{
         
     }
     
-//    public TarjetaCreditoDTO(TarjetaCreditoEntity tarjetaCreditoEntity){
-//        if(tarjetaCreditoEntity != null)
-//        {
-//            this.numero = tarjetaCreditoEntity.getNumero();
-//            this.fechaExpiracion = tarjetaCreditoEntity.getFechaExpiracion();
-//            this.nombreEnTarjeta = tarjetaCreditoEntity.getNombreEnTarjeta();
-//            this.franquicia = tarjetaCreditoEntity.getFranquicia();
-//            this.codigoSeguridad = tarjetaCreditoEntity.getCodigoSeguridad();
-//        }
-//    }
+    public TarjetaCreditoDTO(TarjetaCreditoEntity tarjetaCreditoEntity){
+        if(tarjetaCreditoEntity != null)
+        {
+            this.numero = tarjetaCreditoEntity.getNumero();
+            this.fechaExpiracion = tarjetaCreditoEntity.getFechaExpiracion();
+            this.nombreEnTarjeta = tarjetaCreditoEntity.getNombreEnTarjeta();
+            this.franquicia = tarjetaCreditoEntity.getFranquicia();
+            this.codigoSeguridad = tarjetaCreditoEntity.getCodigoSeguridad();
+        }
+    }
 
     /**
      * @return the numero
@@ -135,15 +136,15 @@ public class TarjetaCreditoDTO implements Serializable{
      * convertir DTO a Entity
      * @return Un entity con los valores del DTO
      */
-//    public TarjetaCreditoEntity toEntity(){
-//        TarjetaCreditoEntity entity = new TarjetaCreditoEntity();
-//        entity.setNumero(this.numero);
-//        entity.setFechaExpiracion(this.fechaExpiracion);
-//        entity.setNombreEnTarjeta(this.nombreEnTarjeta);
-//        entity.setFranquicia(this.franquicia);
-//        entity.setCodigoSeguridad(this.codigoSeguridad);
-//        return entity;
-//    }
+    public TarjetaCreditoEntity toEntity(){
+        TarjetaCreditoEntity entity = new TarjetaCreditoEntity();
+        entity.setNumero(this.numero);
+        entity.setFechaExpiracion(this.fechaExpiracion);
+        entity.setNombreEnTarjeta(this.nombreEnTarjeta);
+        entity.setFranquicia(this.franquicia);
+        entity.setCodigoSeguridad(this.codigoSeguridad);
+        return entity;
+    }
     
     @Override
     public String toString(){

@@ -90,16 +90,12 @@ public class PacienteLogic {
             throw new BusinessLogicException("No se puede actualizar la fecha de nacimiento");
         }
         
-        List<CitaMedicaEntity> oldCitasMedicas = oldEntity.getCitasMedicas();
+        List<CitaMedicaEntity> oldCitasMedicas = pacienteEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
-        Iterator ite = oldCitasMedicas.iterator();
-        while(ite.hasNext()){
-            CitaMedicaEntity ent = (CitaMedicaEntity) ite.next();
-            Iterator ite2 = newCitasMedicas.iterator();
-            while(ite2.hasNext()){
-                CitaMedicaEntity ent2 =(CitaMedicaEntity) ite2.next();
-                if(ent.getFecha().compareTo(ent2.getFecha()) == 0 && ent2.getId() == ent.getId()){
-                  throw  new BusinessLogicException("No se puede tener dos citas medicas al tiempo");
+        for (CitaMedicaEntity ent : oldCitasMedicas) {
+            for (CitaMedicaEntity ent2 : newCitasMedicas) {
+                if(ent.getId() != ent2.getId() && ent.getFecha().compareTo(ent2.getFecha()) == 0){
+                    throw  new BusinessLogicException("No se puede tener dos citas medicas al tiempo");
                 }
             }
         }
