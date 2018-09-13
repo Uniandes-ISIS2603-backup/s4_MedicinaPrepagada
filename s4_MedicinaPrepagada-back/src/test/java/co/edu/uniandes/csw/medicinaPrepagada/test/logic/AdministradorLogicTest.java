@@ -126,6 +126,7 @@ public class AdministradorLogicTest
     public void createAdministradorTest() throws BusinessLogicException 
     {
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
+        newEntity.setContrasena("12345678909");
         AdministradorEntity result = admiLogic.createAdministrador(newEntity);
         Assert.assertNotNull(result);
     }
