@@ -66,6 +66,18 @@ public class AdministradorPersistence
     }
     
     /**
+     * Busca el administrador con el Login que se envía de parametro
+     * @param pLogin: Login correspondiente al administrador buscado.
+     * @return un administrador. 
+     */
+    
+    public AdministradorEntity findByLogin(String pLogin) 
+    {
+        LOGGER.log(Level.INFO, "Consultando el administrador con login={0}", pLogin);
+        return em.find(AdministradorEntity.class, pLogin);
+    }
+    
+    /**
      * Actualiza un administrador.
      * @param admiEntity: el administrador que viene con nueva informacion. 
      * @return un administrador con los cambios aplicados.

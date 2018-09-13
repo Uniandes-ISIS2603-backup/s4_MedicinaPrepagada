@@ -43,6 +43,22 @@ public class HistoriaClinicaLogic
         {
             throw new BusinessLogicException("La historia clinica ya existe");
         }
+        
+        if (historiaEntity.getPeso() < 0 ) 
+        {
+            throw new BusinessLogicException("El peso no puede ser negativo");
+        }
+        
+        if (historiaEntity.getEstatura() < 0 ) 
+        {
+            throw new BusinessLogicException("La estatura no puede ser negativa");
+        }
+        
+        if( historiaEntity.getDescripcionDiagnostico() == null || 
+            historiaEntity.getDescripcionDiagnostico().equals("")   )
+        {
+            throw new BusinessLogicException("La descripcion no puede ser vacia");
+        }
 
         persistence.create(historiaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la historia clinica");
@@ -89,9 +105,25 @@ public class HistoriaClinicaLogic
      * @return la historia clinica con los cambios actualizados en la base de datos.
      */
     
-    public HistoriaClinicaEntity updateHistoriaClinica(Long historiaId, HistoriaClinicaEntity historiaEntity) 
+    public HistoriaClinicaEntity updateHistoriaClinica(Long historiaId, HistoriaClinicaEntity historiaEntity) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la historia clinica con id = {0}", historiaId);
+        
+        if( historiaId != historiaEntity.getId() )
+        {
+            throw new BusinessLogicException("No se puede modificar el id. ");
+        }
+        
+        if (!persistence.find(historiaId).getAlergias().equals(historiaEntity.getAlergias()))
+        {
+            throw new BusinessLogicException("No se pueden modificar las alergias");
+        }
+        
+        if (!persistence.find(historiaId).getFecha().equals(historiaEntity.getFecha()))
+        {
+            throw new BusinessLogicException("No se puede modificar la fecha");
+        }
+
         HistoriaClinicaEntity newEntity = persistence.update(historiaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la historia clinica con id = {0}", historiaEntity.getId());
         return newEntity;

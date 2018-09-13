@@ -38,10 +38,25 @@ public class AdministradorLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del administrador");
         
-        if (persistence.find(admiEntity.getId()) != null) 
+        //Regla de negocio 1: No puede haber un login igual en la base de datos
+        if (persistence.findByLogin(admiEntity.getLogin() ) != null) 
         {
-            throw new BusinessLogicException("El administrador con ese id ya existe");
+            throw new BusinessLogicException("El administrador con ese Login ya existe");
         }
+        
+        //Regla de negocio 2: El login no puede ser vacio
+        if( admiEntity.getLogin().isEmpty() )
+        {
+            throw new BusinessLogicException("El Login no puede ser vacio");
+        }
+        
+        //Regla de negocio 3: La contraseña no puede ser null
+        if( admiEntity.getContrasena().isEmpty() )
+        {
+            throw new BusinessLogicException("La contraseña no puede ser vacia");
+        }
+        
+        validarFormatoContrasena(admiEntity);
         
         persistence.create(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del administrador");
@@ -85,11 +100,20 @@ public class AdministradorLogic
      * @param admiId
      * @param admiEntity
      * @return La entidad del administrador luego de actualizarla
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     
-    public AdministradorEntity updateAdministrador(Long admiId, AdministradorEntity admiEntity) 
+    public AdministradorEntity updateAdministrador(Long admiId, AdministradorEntity admiEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el administrador con id = {0}", admiId);
+        
+        //Regla de negocio 1: La contraseña no puede ser null
+        if( admiEntity.getContrasena().isEmpty() )
+        {
+            throw new BusinessLogicException("La contraseña no puede ser vacia");
+        }
+        
+        validarFormatoContrasena(admiEntity);
 
         AdministradorEntity newEntity = persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
@@ -106,5 +130,53 @@ public class AdministradorLogic
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el administrador con id = {0}", admiId);
         persistence.delete(admiId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el administrador con id = {0}", admiId);
+    }
+    
+    /**
+     * Valida que la contraseña cumpla con el formato
+     * @param admiEntity
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    
+    public void validarFormatoContrasena( AdministradorEntity admiEntity ) throws BusinessLogicException
+    {
+        String contrasena = admiEntity.getContrasena(); 
+                
+        String pas1 = contrasena.trim();
+        
+        if(pas1.matches("[A-Za-z][0-9]{10}"))
+        {
+            char clave;
+            byte contLetra = 0; 
+            byte conNumero = 0;
+            
+            for(byte i = 0; i <= pas1.length(); i++)
+            {
+                clave = pas1.charAt(i);
+                String pas2 = String.valueOf(clave);
+                
+                if(pas2.matches("[a-zA-Z]"))
+                {
+                    contLetra++;
+                }
+                else if(pas2.matches("[0-9]"))
+                {
+                    conNumero++;
+                }
+            }
+            
+            int sumaLetrasYnumeros = conNumero + contLetra; 
+                        
+            if(conNumero == 0 || conNumero == sumaLetrasYnumeros || contLetra == 0 ||
+               contLetra == sumaLetrasYnumeros || sumaLetrasYnumeros < 8 || sumaLetrasYnumeros > 20   )
+              {
+                    throw new BusinessLogicException("La contraseña no cumple con los lineamientos de longitud"
+                        + " y composición"); 
+              } 
+        }
+        else 
+        {
+            throw new BusinessLogicException("La contraseña no puede tener caracteres especiales como %-&-$.");
+        }
     }
 }
