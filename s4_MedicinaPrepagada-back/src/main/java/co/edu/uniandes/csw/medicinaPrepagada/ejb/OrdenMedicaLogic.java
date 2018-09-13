@@ -109,7 +109,7 @@ public class OrdenMedicaLogic
         
         if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
         {
-            throw new BusinessLogicException("No se pueden modificar la firma del medico");
+            throw new BusinessLogicException("No se puede modificar la firma del medico");
         }
         
         if (!persistence.find(ordenId).getFechaExpedicion().equals(ordenEntity.getFechaExpedicion()))
