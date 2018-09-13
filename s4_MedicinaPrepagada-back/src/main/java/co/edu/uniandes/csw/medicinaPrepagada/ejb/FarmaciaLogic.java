@@ -11,8 +11,12 @@ import co.edu.uniandes.csw.medicinaPrepagada.persistence.FarmaciaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /**
  *
@@ -206,10 +210,29 @@ public class FarmaciaLogic {
         return (pLatitud !=null && pLatitud>= -4.223596 && pLatitud <= 12.514801 );
     }
     
-    private boolean  validateCorreo (String pCorreo)
+    private boolean  validateCorreo (String pCorreo) throws BusinessLogicException
     {
-        return (pCorreo.contains("@")&& pCorreo != null);
+        Boolean rta = true;
+        String mailValidationPattern = "[a-z]+@[a-z]+.[a-z]+";
+        Pattern patternMail = Pattern.compile(mailValidationPattern);
+        Matcher matchMail = patternMail.matcher(pCorreo);
+        if(!matchMail.matches()){
+           rta= false;
+        }
+        return rta;
     }
-       
+     
+    public static boolean isValidEmailAddress(String email) {
+   boolean result = true;
+   try {
+       InternetAddress emailAddr = new InternetAddress(email);
+      emailAddr.validate();
+   } catch (AddressException ex) {
+      result = false;
+   }
+   return result;
+   
+   
+}
     
 }

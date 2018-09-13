@@ -26,9 +26,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     private double longitud;
     private String correo;
     
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
+    
     
     @PodamExclude
     @ManyToOne
@@ -52,24 +50,6 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     public void setMedicamento(MedicamentoEntity pMedicamento) {
         this.medicamento = pMedicamento;
     }
-    
-     /**
-     * Devuelve el ID de la farmacia.
-     *
-     * @return the id
-     */
-  //  public Long getId() {
-    //    return id;
-   // }
-
-    /**
-     * Modifica el ID de la farmacia.
-     *
-     * @param id the id to set
-     */
- //   public void setId(Long id) {
-   //     this.id = id;
-    //}
 
     /**
      * Devuelve el nombre de la farmacia.
