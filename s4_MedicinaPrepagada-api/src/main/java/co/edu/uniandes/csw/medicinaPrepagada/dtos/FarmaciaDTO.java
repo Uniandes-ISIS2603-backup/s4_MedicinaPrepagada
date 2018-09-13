@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FarmaciaEntity;
@@ -89,7 +85,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Devuelve la ubicacion de la farmacia.
      *
-     * @return cantidad
+     * @return ubicacion
      */
     public String getUbicacion() {
         return ubicacion;
@@ -98,7 +94,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica la ubicacion de la farmacia.
      *
-     * @param pUbicacion the cantidad to set
+     * @param pUbicacion the ubicacion to set
      */
     public void setUbicacion(String pUbicacion) {
         this.ubicacion = pUbicacion;
@@ -116,7 +112,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica el telefono de la farmacia.
      *
-     * @param telefono the descripcion to set
+     * @param telefono the telefono to set
      */
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
@@ -134,7 +130,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica el telefono de la farmacia.
      *
-     * @param pCorreo the descripcion to set
+     * @param pCorreo the correo to set
      */
     public void setCorreo(String pCorreo) {
         this.correo = pCorreo;
@@ -152,7 +148,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica la latitud de la farmacia.
      *
-     * @param pLat the lat to set
+     * @param pLat the latitud to set
      */
     public void setLatitud(double pLat) {
         this.latitud = pLat;
@@ -170,7 +166,7 @@ public class FarmaciaDTO implements Serializable {
     /**
      * Modifica la longitud de la farmacia.
      *
-     * @param pLon the lon to set
+     * @param pLon the longitud to set
      */
     public void setLongitud(double pLon) {
         this.longitud = pLon;

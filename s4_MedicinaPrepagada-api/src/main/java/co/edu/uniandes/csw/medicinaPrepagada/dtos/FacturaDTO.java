@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
+import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,11 +15,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class FacturaDTO {
+public class FacturaDTO implements Serializable{
     
-    private int idFactura;
+    private Long idFactura;
   
-    private int idCliente;
+    private Long idCliente;
     
     private Date fecha;
     
@@ -27,26 +29,58 @@ public class FacturaDTO {
     
     private boolean pagada;
     
+    private PacienteDTO paciente;
+    
+    
+    //Constructor vacio
     public FacturaDTO ()
     {
         
     }    
-    public void setIdFactura ( int pIdFactura )
+    
+     public FacturaDTO(FacturaEntity pFacturaEntity) {
+        if (pFacturaEntity != null) {
+            this.idFactura = pFacturaEntity.getId();
+            this.idCliente= pFacturaEntity.getIdCliente();
+            this.concepto= pFacturaEntity.getConcepto();
+            this.fecha=pFacturaEntity.getFecha();
+            this.paciente =new PacienteDTO (pFacturaEntity.getPaciente());
+            this.pagada = pFacturaEntity.getPagada();
+            this.valor = pFacturaEntity.getValor();
+        }
+
+    }
+
+    public FacturaEntity toEntity() {
+        FacturaEntity facturaEntity = new FacturaEntity();
+
+        facturaEntity.setId(this.idFactura);
+        facturaEntity.setIdCliente(this.idCliente);
+        facturaEntity.setConcepto(this.concepto);
+        facturaEntity.setFecha(this.fecha);
+        facturaEntity.setPaciente(this.paciente.toEntity());
+        facturaEntity.setPagada(this.pagada);
+        facturaEntity.setValor(this.valor);
+      
+
+        return facturaEntity;
+    }
+    public void setIdFactura ( Long pIdFactura )
     {
         this.idFactura = pIdFactura;
     }
     
-    public int getIdFactura ()
+    public Long getIdFactura ()
     {
         return this.idFactura;
     }
         
-    public void setIdCliente ( int pIdCliente )
+    public void setIdCliente ( Long pIdCliente )
     {
         this.idCliente = pIdCliente;
     }
     
-    public int getIdCliente ()
+    public Long getIdCliente ()
     {
         return this.idCliente;
     }
