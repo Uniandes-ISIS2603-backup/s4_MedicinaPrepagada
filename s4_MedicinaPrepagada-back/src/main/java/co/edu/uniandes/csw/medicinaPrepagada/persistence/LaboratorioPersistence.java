@@ -60,12 +60,37 @@ public class LaboratorioPersistence {
          
          return query.getResultList();
      }
+     public LaboratorioEntity findByNombre(String pNombre)
+    {
+        LOGGER.log(Level.INFO, "Consultando el laboratorio con nombre={0}", pNombre);
+        return em.find(LaboratorioEntity.class, pNombre);
+    }
      
      public LaboratorioEntity update (LaboratorioEntity labEntity)
      {
          LOGGER.log(Level.INFO,"Buscando el laboratorio para modificar con id=(0)", labEntity.getId());
          return em.merge(labEntity);
      }
+     
+
+        
+    public LaboratorioEntity findByDireccion(String pDireccion)
+    {
+        LOGGER.log(Level.INFO, "Consultando el laboratorio con direccion={0}", pDireccion);
+        return em.find(LaboratorioEntity.class, pDireccion);
+    }
+     
+    public LaboratorioEntity findByLongitud(Double pLongitud)
+    {
+        LOGGER.log(Level.INFO, "Consultando el laboratorio con longitud={0}", pLongitud);
+        return em.find(LaboratorioEntity.class, pLongitud);
+    }
+    
+    public LaboratorioEntity findByLatitud(Double pLongitud)
+    {
+        LOGGER.log(Level.INFO, "Consultando el laboratorio con latitud={0}", pLongitud);
+        return em.find(LaboratorioEntity.class, pLongitud);
+    }
      
      public void delete (Long labId)
      {
