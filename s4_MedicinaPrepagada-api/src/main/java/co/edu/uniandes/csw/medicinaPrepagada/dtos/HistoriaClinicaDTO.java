@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -42,7 +43,7 @@ public class HistoriaClinicaDTO implements Serializable
      * nuevo objeto.
      */
     
-    /**public HistoriaClinicaDTO(HistoriaClinicaEntity historiaClinicaEntity) 
+    public HistoriaClinicaDTO(HistoriaClinicaEntity historiaClinicaEntity) 
     {
         if (historiaClinicaEntity != null) 
         {
@@ -64,7 +65,7 @@ public class HistoriaClinicaDTO implements Serializable
      * @return Nuevo objeto HistoriaClinicaEntity.
      */
     
-    /**public HistoriaClinicaEntity toEntity() 
+    public HistoriaClinicaEntity toEntity() 
     {
         HistoriaClinicaEntity historiaClinicaEntity = new HistoriaClinicaEntity();
         historiaClinicaEntity.setId(this.getId());
@@ -76,6 +77,7 @@ public class HistoriaClinicaDTO implements Serializable
         historiaClinicaEntity.setFuma(this.getFuma());
         historiaClinicaEntity.setBebe(this.getBebe());
         historiaClinicaEntity.setOperaciones(this.getOperaciones());
+        
         return historiaClinicaEntity;
     }
     
