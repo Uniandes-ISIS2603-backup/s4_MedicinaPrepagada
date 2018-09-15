@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -27,6 +26,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
     
      /**
      * Obtiene la lista de ordenes medicas
+     * @return 
      */
     
     public List<OrdenMedicaDTO> getOrdenesMedicas() 
@@ -36,6 +36,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
     
     /**
      * Declara una la lista de ordenes medicas
+     * @param pOrdenesMedicas
      */
     
     public void setOrdenesMedicas (List<OrdenMedicaDTO> pOrdenesMedicas)

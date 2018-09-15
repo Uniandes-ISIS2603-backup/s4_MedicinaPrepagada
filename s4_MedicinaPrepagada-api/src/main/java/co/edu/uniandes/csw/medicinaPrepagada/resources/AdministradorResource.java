@@ -54,7 +54,7 @@ public class AdministradorResource
     public AdministradorDTO createAdministrador(AdministradorDTO admi) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", admi.toString());
-        AdministradorDTO nuevoAdmiDTO = new AdministradorDTO();
+        AdministradorDTO nuevoAdmiDTO = new AdministradorDTO(admiLogic.createAdministrador(admi.toEntity()));
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", nuevoAdmiDTO.toString());
         return nuevoAdmiDTO;
     }
@@ -69,7 +69,7 @@ public class AdministradorResource
     public List<AdministradorDTO> getAdministradores() 
     {
         LOGGER.info("AdministradorResource getAdministradores: input: void");
-        List<AdministradorDTO> listaAdministradores = listEntity2DetailDTO();
+        List<AdministradorDTO> listaAdministradores = listEntity2DetailDTO(admiLogic.getAdministradores());
         LOGGER.log(Level.INFO, "AdministradorResource getAdministradores: output: {0}", listaAdministradores.toString());
         return listaAdministradores;
     }
@@ -133,16 +133,22 @@ public class AdministradorResource
     
     @PUT
     @Path("(administradorId: \\d+)")
-    public AdministradorDTO modificarAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
+    public AdministradorDTO updateAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
         pAdmi.setId(administradorId);
-        AdministradorDetailDTO modificarDetailDto = new AdministradorDetailDTO ();        
+        
+        if (admiLogic.getAdministrador(administradorId) == null)
+        {
+            throw new WebApplicationException("El administrador con id " + administradorId + " no existe.", 404);
+        }
+        
+        AdministradorDetailDTO modificarDetailDto = new AdministradorDetailDTO (admiLogic.updateAdministrador(administradorId, pAdmi.toEntity()));        
         LOGGER.log(Level.INFO,"AdministradorResource modificarAdministrador: output: (0)", modificarDetailDto.toString());
         return modificarDetailDto;
     }
     
-    private List<AdministradorDTO> listEntity2DetailDTO() 
+    private List<AdministradorDTO> listEntity2DetailDTO(List<AdministradorEntity> entityList) 
     { 
         List<AdministradorDTO> list = new ArrayList<>();
         
