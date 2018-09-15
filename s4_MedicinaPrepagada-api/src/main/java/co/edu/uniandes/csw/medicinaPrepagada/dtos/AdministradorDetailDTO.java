@@ -5,8 +5,9 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -26,6 +27,16 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     public AdministradorDetailDTO()
     {
         super();
+    }
+    
+    /**
+     * Crea un objeto AdministradorDetailDTO a partir de un objeto AdministradorEntity
+     * @param admiEntity
+     */
+    
+    public AdministradorDetailDTO(AdministradorEntity admiEntity) 
+    {
+        super(admiEntity);
     }
     
     /**
