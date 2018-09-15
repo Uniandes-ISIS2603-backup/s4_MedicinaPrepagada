@@ -64,7 +64,7 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
     }
     
     
-    private List<CitaLaboratorioDTO> citasLaboratorio;
+    
     
          @Override
     public String toString(){
@@ -73,13 +73,13 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
     
     public List <CitaLaboratorioDTO> getCitasLab()
     {
-        return this.citasLaboratorio;
+        return this.citasLab;
     }
     
     
     public void setCitas (List<CitaLaboratorioDTO> pCitas)
     {
-        this.citasLaboratorio = pCitas;
+        this.citasLab = pCitas;
     }
     
 }
