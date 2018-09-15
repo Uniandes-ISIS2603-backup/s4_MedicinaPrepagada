@@ -64,21 +64,22 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
     }
     
     
-    private List<LaboratorioDTO> citasLaboratorio;
+    
     
          @Override
     public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
-    public List <LaboratorioDTO> getCitasLab()
+    public List <CitaLaboratorioDTO> getCitasLab()
     {
-        return this.citasLaboratorio;
+        return this.citasLab;
     }
     
-    public void setCitas (List<LaboratorioDTO> pCitas)
+    
+    public void setCitas (List<CitaLaboratorioDTO> pCitas)
     {
-        this.citasLaboratorio = pCitas;
+        this.citasLab = pCitas;
     }
     
 }
