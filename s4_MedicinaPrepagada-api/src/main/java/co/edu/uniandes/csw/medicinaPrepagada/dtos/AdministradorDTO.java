@@ -53,6 +53,7 @@ public class AdministradorDTO implements Serializable
     public AdministradorEntity toEntity() 
     {
         AdministradorEntity administradorEntity = new AdministradorEntity();
+        
         administradorEntity.setLogin(this.getLogin());
         administradorEntity.setContrasena(this.getContrasena());
         administradorEntity.setTipoUsuario(this.getTipoUsuario());

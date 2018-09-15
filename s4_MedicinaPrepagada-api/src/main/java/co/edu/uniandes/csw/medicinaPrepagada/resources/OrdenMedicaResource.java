@@ -39,7 +39,7 @@ public class OrdenMedicaResource
 {
     private static final Logger LOGGER = Logger.getLogger(OrdenMedicaResource.class.getName());
     
-     @Inject
+    @Inject
     private OrdenMedicaLogic ordenLogic;
     
     
