@@ -38,11 +38,6 @@ public class HistoriaClinicaLogic
     public HistoriaClinicaEntity createHistoriaClinica(HistoriaClinicaEntity historiaEntity) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la historia clinica");
-
-        if (persistence.find(historiaEntity.getId()) != null ) 
-        {
-            throw new BusinessLogicException("La historia clinica ya existe");
-        }
         
         if (historiaEntity.getPeso() < 0 ) 
         {
