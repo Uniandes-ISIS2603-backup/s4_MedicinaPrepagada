@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.EspecialidadEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -19,6 +20,28 @@ public class EspecialidadDTO {
         
     }
 
+    public EspecialidadDTO (EspecialidadEntity especialidadEntity){
+        if (especialidadEntity != null){
+           this.nombre = especialidadEntity.getNombre();
+        }   
+    }
+     
+     
+     /**
+     * Convierte un objeto ConsultorioDTO a EspecialidadEntity.
+     *
+     * @return Nueva objeto EspecialidadEntity.
+     *
+     */
+    public EspecialidadEntity toEntity() 
+    {
+        EspecialidadEntity especialidadEntity = new EspecialidadEntity();
+        
+        especialidadEntity.setNombre(this.getNombre());
+ 
+        return especialidadEntity;
+    }
+    
     /**
      * @return the nombre
      */

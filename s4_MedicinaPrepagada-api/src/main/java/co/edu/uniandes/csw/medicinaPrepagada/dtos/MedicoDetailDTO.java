@@ -5,7 +5,11 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -20,6 +24,42 @@ public class MedicoDetailDTO extends MedicoDTO implements Serializable{
     
     public MedicoDetailDTO (){
         super();
+    }
+    
+    public MedicoDetailDTO (MedicoEntity pMedicoEntity) 
+   {
+       super(pMedicoEntity);
+       if (pMedicoEntity != null)
+       {
+           horariosAtencion = new ArrayList<>();
+           for(HorarioAtencionEntity entityHorariosAtencion : pMedicoEntity.getHorariosAtencion())
+           {
+               horariosAtencion.add(new HorarioAtencionDTO(entityHorariosAtencion));
+           }
+       }
+   } 
+    
+         /**
+     * Convierte un objeto SedeDTO a MedicoEntity.
+     *
+     * @return Nueva objeto MedicoEntity.
+     *
+     */
+    @Override
+    public MedicoEntity toEntity() 
+    {
+        MedicoEntity medicoEntity = super.toEntity();
+        
+        if (horariosAtencion != null)
+        {
+            List<HorarioAtencionEntity> horariosAtencionEntity = new ArrayList<>();
+            for(HorarioAtencionDTO dtoHorarioAtencion : horariosAtencion)
+            {
+                horariosAtencionEntity.add(dtoHorarioAtencion.toEntity());
+            }
+            medicoEntity.setHorariosAtencion(horariosAtencionEntity);
+        }
+        return medicoEntity;
     }
     
      @Override
