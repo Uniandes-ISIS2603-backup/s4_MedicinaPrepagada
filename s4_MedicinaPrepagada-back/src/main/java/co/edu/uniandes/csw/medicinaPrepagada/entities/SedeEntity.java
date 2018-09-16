@@ -87,7 +87,7 @@ public class SedeEntity implements Serializable
         return id;
     }
     /**
-     * Pone el id de la sede
+     * Pone el id de la sedeEntity
      * @param id 
      */
     public void setId(Long id) 
@@ -95,7 +95,7 @@ public class SedeEntity implements Serializable
         this.id = id;
     }
     /**
-     * Pone el nombre de la sede
+     * Pone el nombre de la sedeEntity
      * @param pNombre 
      */
     public void setNombre (String pNombre)
@@ -103,17 +103,27 @@ public class SedeEntity implements Serializable
        this.nombre = pNombre;
    }
    
+    /**
+     * Recibe el nombre del sedeEntity
+     * @return string del nombre
+     */
    public String getNombre  ()
    {
        return this.nombre;
    }
    
-   
+   /**
+    * Pone la direccion de la sedeEntity
+    * @param pDirreccion 
+    */
    public void setDireccion (String pDirreccion)
    {
        this.direccion = pDirreccion;
    }
-   
+   /**
+    * Recibe la direccion de la sedeEntity
+    * @return la direccion
+    */
    public String getDireccion  ()
    {
        return this.direccion;

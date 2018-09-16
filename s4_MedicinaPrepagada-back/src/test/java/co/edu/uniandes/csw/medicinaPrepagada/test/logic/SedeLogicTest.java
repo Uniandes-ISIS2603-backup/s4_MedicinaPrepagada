@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.SedeLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.SedePersistence;
@@ -89,6 +90,7 @@ public class SedeLogicTest
     private void clearData() 
     {
         em.createQuery("delete from SedeEntity").executeUpdate();
+        em.createQuery("delete from ConsultorioEntity").executeUpdate();
         
     }
     
@@ -105,17 +107,19 @@ public class SedeLogicTest
             entity.setConsultorios(new ArrayList<>());
             data.add(entity);
         }
-//        SedeEntity sede = data.get(0);
-//        ConsultorioEntity entity = factory.manufacturePojo(ConsultorioEntity.class);
-//        entity.setSede(sede);
-//        em.persist(entity);
-//        sede.getConsultorios().add(entity);
-//        
-//        SedeEntity sede2 = data.get(1);
-//        ConsultorioEntity entity2 = factory.manufacturePojo(ConsultorioEntity.class);
-//        entity.setSede(sede2);
-//        em.persist(entity2);
-//        sede.getConsultorios().add(entity2);
+        SedeEntity sede = data.get(0);
+        ConsultorioEntity entity = factory.manufacturePojo(ConsultorioEntity.class);
+        //entity.setSede(sede);
+        em.persist(entity);
+        sede.getConsultorios().add(entity);
+        em.merge(sede);
+        
+        SedeEntity sede2 = data.get(1);
+        ConsultorioEntity entity2 = factory.manufacturePojo(ConsultorioEntity.class);
+        //entity.setSede(sede2);
+        em.persist(entity2);
+        sede2.getConsultorios().add(entity2);
+        em.merge(sede2);
 
         
     }
@@ -123,17 +127,24 @@ public class SedeLogicTest
     
         /**
      * Prueba para crear un Sede.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
-//    @Test
-//    public void createSedeTest() throws BusinessLogicException
-//    {
-//        SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
-//        SedeEntity result = sedeLogic.createSede(newEntity);
-//        Assert.assertNotNull(result);
-//        SedeEntity entity = em.find(SedeEntity.class, result.getId());
-//        Assert.assertEquals(newEntity.getId(), entity.getId());
-//        
-//                //Test Atributos
+    @Test
+    public void createSedeTest() throws BusinessLogicException
+    {
+        SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+        newEntity.setTelefono(876543987L);
+        newEntity.setDireccion("Calle 120 # 13 - 22");
+        newEntity.setTipoSede(2);
+        newEntity.setLatitud(1.0);
+        newEntity.setLongitud(-70.3);
+        newEntity.setCorreo("pepito@gmail.com");
+        SedeEntity result = sedeLogic.createSede(newEntity);
+        Assert.assertNotNull(result);
+        SedeEntity entity = em.find(SedeEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        
+                //Test Atributos
 //        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
 //        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
 //        Assert.assertEquals(newEntity.getTipoSede(), entity.getTipoSede());
@@ -148,7 +159,7 @@ public class SedeLogicTest
 //        {
 //            Assert.assertEquals(newEntity.getConsultorios().get(i), entity.getConsultorios().get(i));
 //        }
-//    }
+    }
     
     
     

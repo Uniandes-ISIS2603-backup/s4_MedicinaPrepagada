@@ -16,9 +16,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class SedeDTO implements Serializable
 {
-    
+    // id de la sede DTO
     private Long id;
-    
+    // Nombre de la sedeDTO
     private String nombre;
     
     private String direccion;
@@ -93,13 +93,19 @@ public class SedeDTO implements Serializable
    
    
     
-   
+   /**
+    * ASigna el Id de la sedeDTO
+    * @param pId 
+    */
    public void setId (Long pId)
    {
        this.id = pId;
    }
  
-   
+   /**
+    * Recibe el id de la sedeDTO
+    * @return 
+    */
    public Long getId  ()
    {
         return this.id;
