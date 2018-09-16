@@ -20,17 +20,21 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class SedeDetailDTO extends SedeDTO implements Serializable
 {
     
-    
+    /**
+     * Lista de consultoriosDTO de la sedeDetailDTO
+     */
     private List<ConsultorioDTO> consultorios;
     
     
-
+    /**
+     * Constructor vacio 
+     */
     public SedeDetailDTO ()
     {
         super();
     }
     
-         /**
+     /**
      * Crea un objeto SedeDetailDTO a partir de un objeto SedeEntity.
      *
      * @param pSedeEntity Entidad SedeEntity desde la cual se va a crear el
@@ -72,26 +76,32 @@ public class SedeDetailDTO extends SedeDTO implements Serializable
             }
             sedeEntity.setConsultorios(consultoriosEntity);
         }
-        
-        
-        
         return sedeEntity;
     }
     
     
-    
+    /**
+     * Recibe la lista de consultorioDTO de la sedeDetailDTO
+     * @return 
+     */
     public List<ConsultorioDTO> getConsultorios ()
     {
         return this.consultorios;
     }
-    
+    /**
+     * ASigna la lista de consultorioDTO a la sedeDetailDTO
+     * @param pConsultorios 
+     */
     public void setConsultorios (List<ConsultorioDTO> pConsultorios)
     {
         this.consultorios = pConsultorios;
     }
     
     
-    
+    /**
+     * Convierte la sedeDetailDTO en un string
+     * @return 
+     */
      @Override
     public String toString() 
     {
