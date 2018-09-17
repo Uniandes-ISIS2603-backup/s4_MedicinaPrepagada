@@ -9,7 +9,10 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
  *
  * @author ncobos
  */
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -25,9 +28,25 @@ public class ExamenMedicoDetailDTO extends ExamenMedicoDTO implements Serializab
     
     public ExamenMedicoDetailDTO() 
     {
-        super();
+       super();
     }
     
+     /**
+     * Constructor para transformar un Entity a un DTO
+     *
+     * @param examenMedicoEntity La entidad de la examenMedico para transformar a DTO.
+     */
+    public ExamenMedicoDetailDTO(ExamenMedicoEntity examenMedicoEntity) {
+        super(examenMedicoEntity);
+        if (examenMedicoEntity != null) {
+            if (examenMedicoEntity.getLaboratorios() != null) {
+                laboratorios = new ArrayList<>();
+                for (LaboratorioEntity entityLaboratorio : examenMedicoEntity.getLaboratorios()) {
+                    laboratorios.add(new LaboratorioDTO(entityLaboratorio));
+                }
+            }
+        }
+    }
     
     public void setLaboratorios(List<LaboratorioDTO> pLabs)
     {

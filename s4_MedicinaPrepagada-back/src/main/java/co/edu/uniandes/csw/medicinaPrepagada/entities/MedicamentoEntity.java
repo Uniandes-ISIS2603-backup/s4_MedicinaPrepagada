@@ -7,13 +7,9 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -38,14 +34,14 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     @OneToMany(
             mappedBy ="medicamento",     
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-            List<FarmaciaEntity> farmacias = new ArrayList<>();
+           private List<FarmaciaEntity> farmacias = new ArrayList<>();
     
     @PodamExclude
     @ManyToOne
     private OrdenMedicaEntity ordenMedica;
     
     /**
-     * Devuelve las farmacias del medicamento.
+     * Devuelve las farmacias del medicamentoEntity.
      *
      * @return farmacias
      */
@@ -54,7 +50,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica las farmacias del medicamento.
+     * Modifica las farmacias del medicamentoEntity.
      *
      * @param pFarmacias the farmacias to set
      */
@@ -63,7 +59,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
     
      /**
-     * Devuelve la orden medica del medicamento.
+     * Devuelve la orden medica del medicamentoEntity.
      *
      * @return ordenMedica
      */
@@ -72,34 +68,16 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica la orden medica del medicamento.
+     * Modifica la orden medica del medicamentoEntity.
      *
      * @param pOrden the orden medica to set
      */
     public void setOrdenMedica(OrdenMedicaEntity pOrden) {
         this.ordenMedica = pOrden;
     }
-    
-    /**
-     * Devuelve el ID del medicamento.
-     *
-     * @return the id
-     */
-    //public Long getId() {
-    //    return id;
-    //}
 
     /**
-     * Modifica el ID del medicamento.
-     *
-     * @param pId the id to set
-     */
-   // public void setId(Long pId) {
-   //     this.id = pId;
-   // }
-
-    /**
-     * Devuelve el nombre del medicamento.
+     * Devuelve el nombre del medicamentoEntity.
      *
      * @return the name
      */
@@ -108,7 +86,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica el nombre del medicamento.
+     * Modifica el nombre del medicamentoEntity.
      *
      * @param pNombre the name to set
      */
@@ -117,7 +95,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
     
     /**
-     * Devuelve la cantidad del medicamento.
+     * Devuelve la cantidad del medicamentoEntity.
      *
      * @return cantidad
      */
@@ -126,7 +104,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica la cantidad del medicamento.
+     * Modifica la cantidad del medicamentoEntity.
      *
      * @param pCantidad the cantidad to set
      */
@@ -135,7 +113,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
     
     /**
-     * Devuelve la descripcion del medicamento.
+     * Devuelve la descripcion del medicamentoEntity.
      *
      * @return descripcion
      */
@@ -144,7 +122,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica la descripcion del medicamento.
+     * Modifica la descripcion del medicamentoEntity.
      *
      * @param pDescripcion the descripcion to set
      */
@@ -154,7 +132,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     
     
     /**
-     * Devuelve el costo del medicamento.
+     * Devuelve el costo del medicamentoEntity.
      *
      * @return the costo
      */
@@ -163,7 +141,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica el costo del medicamento.
+     * Modifica el costo del medicamentoEntity.
      *
      * @param pCosto the costo set
      */
@@ -172,7 +150,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
     
     /**
-     * Devuelve quién hizo el medicamento.
+     * Devuelve quién hizo el medicamentoEntity.
      *
      * @return the ElaboradoPor
      */
@@ -181,7 +159,7 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Modifica el elaborado por del medicamento.
+     * Modifica el elaborado por del medicamentoEntity.
      *
      * @param pElaboradoPor the elaboradoPor set
      */

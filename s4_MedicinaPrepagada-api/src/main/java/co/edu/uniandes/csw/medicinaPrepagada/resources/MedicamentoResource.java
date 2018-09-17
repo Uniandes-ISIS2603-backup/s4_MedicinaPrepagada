@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicamentoLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +40,15 @@ public class MedicamentoResource {
     
     private static final Logger LOGGER = Logger.getLogger(MedicamentoResource.class.getName());
 
-  //  @Inject
-  //  MedicamentoLogic medicamentoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    @Inject
+    MedicamentoLogic medicamentoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
      * Crea un nuevo medicamento con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
      * la base de datos.
      *
-     * @param medicamento {@link MedicamentoDTO} - El medicamento que se desea
+     * @param pMedicamento {@link MedicamentoDTO} - El medicamento que se desea
      * guardar.
      * @return JSON {@link MedicamentoDTO} - El medicamento guardado con el atributo
      * id autogenerado.
@@ -57,19 +59,16 @@ public class MedicamentoResource {
     public MedicamentoDTO createMedicamento(MedicamentoDTO pMedicamento) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: input: {0}", pMedicamento.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-       // MedicamentoEntity medicamentoEntity = medicamento.toEntity();
+        MedicamentoEntity medicamentoEntity = pMedicamento.toEntity();
         // Invoca la lógica para crear el nuevo medicamento
-       // MedicamentoEntity nuevoMedicamentoEntity = medicamentoLogic.createMedicamento(medicamentoEntity);
+        MedicamentoEntity nuevoMedicamentoEntity = medicamentoLogic.createMedicamento(medicamentoEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO();
+        MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO(nuevoMedicamentoEntity);
         LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO.toString());
         return pMedicamento;
     }
     
- //    @GET
- //   public MedicamentoDTO consultarMedicamento(){
- //       return new MedicamentoDTO();
- //   }
+
     /**
      * Busca y devuelve todos los medicamentos que existen en la aplicacion.
      *
@@ -77,9 +76,9 @@ public class MedicamentoResource {
      * la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<MedicamentoDTO> getMedicamentos() {
+    public List<MedicamentoDetailDTO> getMedicamentos() {
         LOGGER.info("MedicamentoResource getMedicamentos: input: void");
-        List<MedicamentoDTO> listaMedicamentos = listEntity2DetailDTO();
+        List<MedicamentoDetailDTO> listaMedicamentos = listEntity2DetailDTO(medicamentoLogic.getMedicamentos());
         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamentos: output: {0}", listaMedicamentos.toString());
         return listaMedicamentos;
    }
@@ -95,14 +94,14 @@ public class MedicamentoResource {
      */
     @GET
     @Path("{medicamentosId: \\d+}")
-    public MedicamentoDTO getMedicamento(@PathParam("medicamentosId") Long pMedicamentosId) throws WebApplicationException 
+    public MedicamentoDTO getMedicamento(@PathParam("pMedicamentosId") Long pMedicamentosId) throws WebApplicationException 
     {
-        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", pMedicamentosId);
-       // MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(medicamentosId);
-     //   if (medicamentoEntity == null) {
-   //         throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
- //       }
-        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO();
+         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", pMedicamentosId);
+        MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(pMedicamentosId);
+        if (medicamentoEntity == null) {
+            throw new WebApplicationException("El recurso /medicamentos/" + pMedicamentosId + " no existe.", 404);
+        }
+        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(medicamentoEntity);
         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -121,13 +120,13 @@ public class MedicamentoResource {
      */
     @PUT
     @Path("{medicamentosId: \\d+}")
-   public MedicamentoDTO updateMedicamento(@PathParam("medicamentosId") Long medicamentosId, MedicamentoDetailDTO pMedicamento) throws WebApplicationException {
+   public MedicamentoDTO updateMedicamento(@PathParam("medicamentosId") Long medicamentosId, MedicamentoDetailDTO pMedicamento) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: input: id:{0} , medicamento: {1}", new Object[]{medicamentosId, pMedicamento.toString()});
         pMedicamento.setId(medicamentosId);
-     //   if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
-   //         throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
-    //    }
-        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO();
+        if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
+            throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
+        }
+        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(medicamentoLogic.updateMedicamento(medicamentosId, pMedicamento.toEntity()));
         LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: output: {0}", detailDTO.toString());
         return detailDTO;
    }
@@ -145,11 +144,11 @@ public class MedicamentoResource {
     @DELETE
     @Path("{medicamentosId: \\d+}")
     public void deleteMedicamento(@PathParam("medicamentosId") Long medicamentosId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "MedicamentoResource deleteMedicamento: input: {0}", medicamentosId);
-      //  if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
-        //    throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
-       // }
-       // medicamentoLogic.deleteMedicamento(medicamentosId);
+         LOGGER.log(Level.INFO, "MedicamentoResource deleteMedicamento: input: {0}", medicamentosId);
+        if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
+            throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
+        }
+        medicamentoLogic.deleteMedicamento(medicamentosId);
         LOGGER.info("MedicamentoResource deleteMedicamento: output: void");
     }
 
@@ -157,19 +156,18 @@ public class MedicamentoResource {
  /**
      * Convierte una lista de entidades a DTO.
      *
-     * Este método convierte una lista de objetos SedesEntitya una lista de
-     * objetos SedeDTO (json)
+     * Este método convierte una lista de objetos MedicamentoEntity a una lista de
+     * objetos MedicamentoDetailDTO (json)
      *
-     * @param entityList corresponde a la lista de sede de tipo Entity
+     * @param entityList corresponde a la lista de medicamentos de tipo Entity
      * que vamos a convertir a DTO.
-     * @return la lista de sede en forma DTO (json)
+     * @return la lista de medicamentos en forma DTO (json)
      */
-    private List<MedicamentoDTO> listEntity2DetailDTO() 
-    {
-        List<MedicamentoDTO> list = new ArrayList<>();
-     //   for (SedeEntity entity : entityList) {
-     //       list.add(new SedeDetail(entity));
-     //   }
+    private List<MedicamentoDetailDTO> listEntity2DetailDTO(List<MedicamentoEntity> entityList) {
+        List<MedicamentoDetailDTO> list = new ArrayList<>();
+        for (MedicamentoEntity entity : entityList) {
+            list.add(new MedicamentoDetailDTO(entity));
+        }
         return list;
     }
 }
