@@ -104,7 +104,7 @@ public class SedeDTO implements Serializable
  
    /**
     * Recibe el id de la sedeDTO
-    * @return 
+    * @return idSedeDTO
     */
    public Long getId  ()
    {
@@ -179,7 +179,7 @@ public class SedeDTO implements Serializable
    }
    /**
     * Asigna la latitud de la sedeDTO
-    * @param pLatitud 
+    * @param pLatitud del DTO
     */
    public void setLatitud (double pLatitud)
    {
