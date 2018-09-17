@@ -39,7 +39,7 @@ public class OrdenMedicaResource
 {
     private static final Logger LOGGER = Logger.getLogger(OrdenMedicaResource.class.getName());
     
-     @Inject
+    @Inject
     private OrdenMedicaLogic ordenLogic;
     
     
@@ -55,7 +55,7 @@ public class OrdenMedicaResource
     public OrdenMedicaDTO createOrdenMedica(OrdenMedicaDTO ordenMedica) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: input: {0}", ordenMedica.toString());
-        OrdenMedicaDTO nuevaOrdenMedicaDTO = new OrdenMedicaDTO();
+        OrdenMedicaDTO nuevaOrdenMedicaDTO = new OrdenMedicaDTO(ordenLogic.createOrdenMedica(ordenMedica.toEntity()));
         LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: output: {0}", nuevaOrdenMedicaDTO.toString());
         return nuevaOrdenMedicaDTO;
     }

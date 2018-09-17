@@ -7,13 +7,9 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -32,23 +28,19 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     private double costo;
     private String recomendaciones;
     
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)    
-    //private Long id;
-    
     
     @PodamExclude
     @OneToMany(
             mappedBy ="examenMedico",     
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-            List<LaboratorioEntity> laboratorios = new ArrayList<>();
+           private List<LaboratorioEntity> laboratorios = new ArrayList<>();
     
     @PodamExclude
     @ManyToOne
     private OrdenMedicaEntity ordenMedica;
     
     /**
-     * Devuelve los laboratorios del examen medico.
+     * Devuelve los laboratorios del examenMedicoEntity.
      *
      * @return laboratorios
      */
@@ -57,7 +49,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica los laboratorios del examen medico.
+     * Modifica los laboratorios del examenMedicoEntity.
      *
      * @param pLaboratorios the laboratorios to set
      */
@@ -66,7 +58,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
     
      /**
-     * Devuelve la orden medica del medicamento.
+     * Devuelve la orden medica del examenMedicoEntity.
      *
      * @return ordenMedica
      */
@@ -75,35 +67,16 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica la orden medica del medicamento.
+     * Modifica la orden medica del examenMedicoEntity.
      *
      * @param pOrden the orden medica to set
      */
     public void setOrdenMedica(OrdenMedicaEntity pOrden) {
         this.ordenMedica = pOrden;
     }
-    
-    
-      /**
-     * Devuelve el ID del examen medico.
-     *
-     * @return the id
-     */
-//    public Long getId() {
-  //      return id;
-   // }
 
     /**
-     * Modifica el ID del examen medico.
-     *
-     * @param id the id to set
-     */
-    //public void setId(Long id) {
-      //  this.id = id;
-    //}
-
-    /**
-     * Devuelve el nombre del examen medico.
+     * Devuelve el nombre del examenMedicoEntity.
      *
      * @return the name
      */
@@ -112,7 +85,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica el nombre del examen medico.
+     * Modifica el nombre del examenMedicoEntity.
      *
      * @param pNombre the name to set
      */
@@ -123,7 +96,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     
     
     /**
-     * Devuelve el costo del examen medico.
+     * Devuelve el costo del examenMedicoEntity.
      *
      * @return the costo
      */
@@ -132,7 +105,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica el costo del examen medico.
+     * Modifica el costo del examenMedicoEntity.
      *
      * @param pCosto the costo set
      */
@@ -141,7 +114,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
     
     /**
-     * Devuelve las recomendaciones del examen medico.
+     * Devuelve las recomendaciones del examenMedicoEntity.
      *
      * @return the Recomendaciones
      */
@@ -150,7 +123,7 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica las recomendaciones del examen medico.
+     * Modifica las recomendaciones del examenMedicoEntity.
      *
      * @param pRecomendaciones the recomendaciones set
      */

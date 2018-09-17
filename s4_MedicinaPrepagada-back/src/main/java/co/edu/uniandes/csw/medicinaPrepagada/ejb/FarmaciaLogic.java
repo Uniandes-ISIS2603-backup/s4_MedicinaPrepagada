@@ -45,14 +45,14 @@ public class FarmaciaLogic {
             throw new BusinessLogicException("Ya existe una Farmacia con el nombre \"" + farmaciaEntity.getNombre() + "\"");
         }
         if (!validateNombre(farmaciaEntity.getNombre()))
-           throw new BusinessLogicException ("EL nombre no puede ser vacio ");
+           throw new BusinessLogicException ("El nombre no puede ser vacio ");
         //Verifica que no exista otra farmacia con el mismo nombre
         if (persistence.findByNombre(farmaciaEntity.getNombre())!=null)
             throw new BusinessLogicException("Ya existe una farmacia con este nombre");
-        //verifica que la direccion sea validad
+        //verifica que la direccion sea valida
         if (!validateDireccion(farmaciaEntity.getUbicacion()))
             throw new BusinessLogicException("La ubicación no puede ser vacia y debe respetar el formato de una direccion");
-        //verifica que el telefono sea validad
+        //verifica que el telefono sea valida
         if (!validateNumero(farmaciaEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener más de 6 digitos");
         //Valida que el correo tenga un formato correcto
@@ -134,7 +134,7 @@ public class FarmaciaLogic {
         if (farmaciaEntity.getLatitud() != pFarmaciaOld.getLatitud())
             throw new BusinessLogicException ("No se puede cambiar la latitud de una farmacia");
         //Verifica que no se intente cambiar la direccion de la farmacia
-        if (farmaciaEntity.getUbicacion() != pFarmaciaOld.getUbicacion())
+        if (!farmaciaEntity.getUbicacion().equals(pFarmaciaOld.getUbicacion()))
             throw new BusinessLogicException("No se puede cambiar la direccion de una farmacia");      
          //Verifica que el nombre sea valido
         if (!validateNombre(farmaciaEntity.getNombre()))
@@ -210,7 +210,7 @@ public class FarmaciaLogic {
         return (pLatitud !=null && pLatitud>= -4.223596 && pLatitud <= 12.514801 );
     }
     
-    private boolean  validateCorreo (String pCorreo) throws BusinessLogicException
+    private boolean  validateCorreo (String pCorreo) 
     {
         Boolean rta = true;
         String mailValidationPattern = "[a-z]+@[a-z]+.[a-z]+";

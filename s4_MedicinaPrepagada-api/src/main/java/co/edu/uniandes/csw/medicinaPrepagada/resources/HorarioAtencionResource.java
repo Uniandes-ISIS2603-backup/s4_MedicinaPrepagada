@@ -7,12 +7,14 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.HorarioAtencionLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -35,6 +37,8 @@ public class HorarioAtencionResource
 {
 
        private static final Logger LOGGER = Logger.getLogger(HorarioAtencionResource.class.getName());
+       @Inject
+       private HorarioAtencionLogic horarioAtencionLogic;
        
        
        

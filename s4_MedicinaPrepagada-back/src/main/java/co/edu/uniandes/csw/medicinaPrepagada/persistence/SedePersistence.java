@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -67,22 +68,66 @@ public class SedePersistence
         return em.find(SedeEntity.class, sedeId);
     }
     
+    /**
+     * Busca una sede en la persistencia basandose en el nombre sedeEntity
+     * @param pNombre
+     * @return la sede si la encuentra 
+     */
         public SedeEntity findByNombre(String pNombre)
     {
         LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pNombre);
-        return em.find(SedeEntity.class, pNombre);
-    }
         
+        
+       TypedQuery q = em.createQuery("Select e from SedeEntity e where e.nombre = :nombre", SedeEntity.class);
+        q = q.setParameter("nombre", pNombre);       
+        try 
+        {
+            return (SedeEntity) q.getSingleResult();
+        }
+        catch (NoResultException e1)
+        {
+            return null;
+        }
+        
+        
+    }
+    /**
+     * Busca una sede en la persistencia basandose en la direccion de SedeEntity
+     * @param pDireccion
+     * @return 
+     */    
     public SedeEntity findByDireccion(String pDireccion)
     {
-        LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pDireccion);
-        return em.find(SedeEntity.class, pDireccion);
+        LOGGER.log(Level.INFO, "Consultando el sede con direccion={0}", pDireccion);
+        
+       TypedQuery q = em.createQuery("Select e from SedeEntity e where e.direccion = :direccion", SedeEntity.class);
+        q = q.setParameter("direccion", pDireccion);       
+        try 
+        {
+            return (SedeEntity) q.getSingleResult();
+        }
+        catch (NoResultException e1)
+        {
+            return null;
+        }
+        
+        
     }
      
     public SedeEntity findByLongitud(Double pLongitud)
     {
-        LOGGER.log(Level.INFO, "Consultando el sede con nombre={0}", pLongitud);
-        return em.find(SedeEntity.class, pLongitud);
+        LOGGER.log(Level.INFO, "Consultando el sede con longitud={0}", pLongitud);
+        
+       TypedQuery q = em.createQuery("Select e from SedeEntity e where e.direccion = :direccion", SedeEntity.class);
+        q = q.setParameter("direccion", pLongitud);       
+        try 
+        {
+            return (SedeEntity) q.getSingleResult();
+        }
+        catch (NoResultException e1)
+        {
+            return null;
+        }
     }
         /**
      * Actualiza una sede.

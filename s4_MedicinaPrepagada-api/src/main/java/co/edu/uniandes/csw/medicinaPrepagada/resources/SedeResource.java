@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -39,7 +40,7 @@ public class SedeResource
     
     
        private static final Logger LOGGER = Logger.getLogger(SedeResource.class.getName());
-       
+       @Inject
        private SedeLogic sedeLogic;
      
        
@@ -111,23 +112,18 @@ public class SedeResource
         LOGGER.log(Level.INFO, "SedeResource getSede: output: {0}", detailDTO.toString());
         return detailDTO;
     }
-    
-    
-    
-    
-    
-        /**
+
+     /**
      * Actualiza la sede con la id recibido en la URL con la informacion
      * que se recibe en la cuerpo de la petición.
      *
-     * @param sedeId Identificador del sede que se desea
-     * actualizar. Este debe ser una cadena de dígitos.
-     * @param sedeId {@link SedeDTO} la sede que se desea
-     * guardar.
+     * @param pSedeId
+     * @param pSede
      * @return JSON {@link SedeDTO} - la sede guardada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la sede a
      * actualizar.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @PUT
     @Path("{sedeId: \\d+}")
@@ -144,10 +140,7 @@ public class SedeResource
         return detailDTO;
  
     }
-    
-    
-    
-    
+
     /**
      * Borra la sede con la id asociado recibido en la URL.
      *
@@ -170,9 +163,6 @@ public class SedeResource
         sedeLogic.deleteSede(sedeId);
         LOGGER.info("SedeResource deleteSede: output: void");
     }
-    
-    
-
     /**
      * Convierte una lista de entidades a DTO.
      *
