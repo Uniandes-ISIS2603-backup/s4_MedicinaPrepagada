@@ -451,7 +451,7 @@ public class MedicoLogicTest {
         Assert.assertNull(deleted);
     }
     
-    @Test(expected = BusinessLogicException.class)
+    @Test
     public void deleteMedicoHayCitasPendientesTest() throws BusinessLogicException 
     {
         MedicoEntity entity = data.get(3);
