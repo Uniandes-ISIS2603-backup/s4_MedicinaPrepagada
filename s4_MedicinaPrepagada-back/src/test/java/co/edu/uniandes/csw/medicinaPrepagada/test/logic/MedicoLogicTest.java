@@ -99,6 +99,8 @@ public class MedicoLogicTest {
     private void clearData() 
     {
         em.createQuery("delete from MedicoEntity").executeUpdate();
+//        em.createQuery("delete from HorarioAtencionEntity").executeUpdate();
+//        em.createQuery("delete from CitaMedicaEntity").executeUpdate();
     }
 
     /**
@@ -112,23 +114,28 @@ public class MedicoLogicTest {
         {
             MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
             entity.setDocumentoMedico(i);
-            entity.setHorariosAtencion(null);
             em.persist(entity);
             data.add(entity);
         }
         MedicoEntity enti = factory.manufacturePojo(MedicoEntity.class);
         enti.setDocumentoMedico(3);
-        HorarioAtencionEntity horario = factory.manufacturePojo(HorarioAtencionEntity.class);
-        CitaMedicaEntity cita = factory.manufacturePojo(CitaMedicaEntity.class);
-        horario.setCitasMedicas(new ArrayList<>());
-        horario.getCitasMedicas().add(cita);
-        em.persist(horario);
-        cita.setHorarioAtencionAsignado(horario);
-        em.persist(cita);
         enti.setHorariosAtencion(new ArrayList<>());
+        for(int i = 0; i < 10; i++){
+        HorarioAtencionEntity horario = factory.manufacturePojo(HorarioAtencionEntity.class);
+//        CitaMedicaEntity cita = factory.manufacturePojo(CitaMedicaEntity.class);
+//        horario.setCitasMedicas(new ArrayList<>());
+//        horario.getCitasMedicas().add(cita);
+        em.persist(horario);
+//        cita.setHorarioAtencionAsignado(horario);
+//        em.persist(cita);
         enti.getHorariosAtencion().add(horario);     
+        }
         em.persist(enti);
+//        em.merge(horario);
+//        em.merge(cita);
+//        em.merge(enti);
         data.add(enti);
+        
     }
     
     /**
@@ -444,12 +451,12 @@ public class MedicoLogicTest {
         Assert.assertNull(deleted);
     }
     
-//    @Test(expected = BusinessLogicException.class)
-//    public void deleteMedicoHayCitasPendientesTest() throws BusinessLogicException 
-//    {
-//        MedicoEntity entity = data.get(3);
-//        medicoLogic.deleteMedico(entity.getId());
-//        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
-//        Assert.assertNull(deleted);
-//    }
+    @Test(expected = BusinessLogicException.class)
+    public void deleteMedicoHayCitasPendientesTest() throws BusinessLogicException 
+    {
+        MedicoEntity entity = data.get(3);
+        medicoLogic.deleteMedico(entity.getId());
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }
