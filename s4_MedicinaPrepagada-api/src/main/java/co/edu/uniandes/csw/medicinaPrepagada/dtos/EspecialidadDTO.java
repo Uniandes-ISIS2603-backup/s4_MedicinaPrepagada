@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.EspecialidadEntity;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class EspecialidadDTO {
+public class EspecialidadDTO implements Serializable{
     private String nombre;
     
     public EspecialidadDTO(){

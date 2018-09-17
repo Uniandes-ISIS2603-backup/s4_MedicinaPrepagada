@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class MedicoDTO extends UsuarioDTO{
+public class MedicoDTO extends UsuarioDTO implements Serializable{
     
     private long idMedico;
     

@@ -34,7 +34,7 @@ public class MedicoEntity extends UsuarioEntity implements Serializable{
     private EspecialidadEntity especialidad;
     
     @PodamExclude
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "medico", fetch=FetchType.LAZY)// , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HorarioAtencionEntity> horariosAtencion;
 
     public EspecialidadEntity getEspecialidad() {
