@@ -45,7 +45,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Dependencias comunes a los proyectos -->
+    <!-- Dependencias comunes a los proyectos --> 
     <dependencies>
         
         <!-- Java EE -->
