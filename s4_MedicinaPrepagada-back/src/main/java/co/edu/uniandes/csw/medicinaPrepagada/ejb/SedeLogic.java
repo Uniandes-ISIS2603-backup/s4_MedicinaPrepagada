@@ -135,7 +135,7 @@ public class SedeLogic
         if (sedeEntity.getLatitud() != pSedeOld.getLatitud())
             throw new BusinessLogicException ("No se puede cambiar la latitud de una sede");
         //Verifica que no se intente cambiar la direccion de la sede
-        if (sedeEntity.getDireccion() != pSedeOld.getDireccion())
+        if (!sedeEntity.getDireccion().equals(pSedeOld.getDireccion()))
             throw new BusinessLogicException("No se puede cambiar la direccion de una sede");      
          //Verifica que el nombre sea valido al editarlo
         if (!validateNombre(sedeEntity.getNombre()))
