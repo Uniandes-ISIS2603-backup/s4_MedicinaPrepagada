@@ -6,6 +6,10 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicoDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicoLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,9 @@ import javax.ws.rs.WebApplicationException;
 public class MedicoResource {
     private static final Logger LOGGER = Logger.getLogger(MedicoResource.class.getName());
 
+    @Inject
+    private MedicoLogic medicoLogic;
+
 
     /**
      * Crea una nueva medico con la informacion que se recibe en el cuerpo de
@@ -51,12 +58,7 @@ public class MedicoResource {
     @POST
     public MedicoDTO createMedico(MedicoDTO medico) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicoResource createMedico: input: {0}", medico.toString());
-        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        //MedicoEntity editorialEntity = medico.toEntity();
-        // Invoca la lógica para crear la medico nueva
-        //MedicoEntity nuevoMedicoEntity = medicoLogic.createMedico(editorialEntity);
-        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        MedicoDTO nuevoMedicoDTO = new MedicoDTO();
+        MedicoDTO nuevoMedicoDTO = new MedicoDTO(medicoLogic.createMedico(medico.toEntity()));
         LOGGER.log(Level.INFO, "MedicoResource createMedico: output: {0}", nuevoMedicoDTO.toString());
         return nuevoMedicoDTO;
     }
@@ -71,7 +73,7 @@ public class MedicoResource {
     @GET
     public List<MedicoDTO> getMedicos() {
         LOGGER.info("MedicoResource getMedicos: input: void");
-        List<MedicoDTO> listaMedicos = listEntity2DetailDTO(); //Paramtero List<MedicoEntity> entityList
+        List<MedicoDTO> listaMedicos = listEntity2DetailDTO(medicoLogic.getMedicos()); //Paramtero List<MedicoEntity> entityList
         LOGGER.log(Level.INFO, "MedicoResource getMedicos: output: {0}", listaMedicos.toString());
         return listaMedicos;
     }
@@ -89,11 +91,11 @@ public class MedicoResource {
     @Path("{medicosId: \\d+}")
     public MedicoDTO getMedico(@PathParam("medicosId") Long medicosId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "MedicoResource getMedico: input: {0}", medicosId);
-//        MedicoEntity editorialEntity = medicoLogic.getMedico(medicosId);
-//        if (medicoEntity == null) {
-//            throw new WebApplicationException("El recurso /medicos/" + medicosId + " no existe.", 404);
-//        }
-        MedicoDTO detailDTO = new MedicoDTO();
+        MedicoEntity medicoEntity = medicoLogic.getMedico(medicosId);
+        if (medicoEntity == null) {
+            throw new WebApplicationException("El recurso /medicos/" + medicosId + " no existe.", 404);
+        }
+        MedicoDTO detailDTO = new MedicoDetailDTO(medicoEntity);
         LOGGER.log(Level.INFO, "MedicoResource getMedico: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -112,13 +114,13 @@ public class MedicoResource {
      */
     @PUT
     @Path("{medicosId: \\d+}")
-    public MedicoDTO updateMedico(@PathParam("medicosId") Long medicosId, MedicoDTO medico) throws WebApplicationException {
+    public MedicoDTO updateMedico(@PathParam("medicosId") Long medicosId, MedicoDTO medico) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicoResource updateMedico: input: id:{0} , medico: {1}", new Object[]{medicosId, medico.toString()});
-//        medico.setId(medicosId);
-//        if (medicoLogic.getMedico(medicosId) == null) {
-//            throw new WebApplicationException("El recurso /editorials/" + medicosId + " no existe.", 404);
-//        }
-        MedicoDTO detailDTO = new MedicoDTO(); //Parametro = medicoLogic.updateMedico(medicosId, medico.toEntity())
+        medico.setIdMedico(medicosId);
+        if (medicoLogic.getMedico(medicosId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + medicosId + " no existe.", 404);
+        }
+        MedicoDTO detailDTO = new MedicoDTO(medicoLogic.updateMedico(medicosId, medico.toEntity()));
         LOGGER.log(Level.INFO, "MedicoResource updateMedico: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -137,10 +139,10 @@ public class MedicoResource {
     @Path("{medicosId: \\d+}")
     public void deleteMedico(@PathParam("medicosId") Long medicosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicoResource deleteMedico: input: {0}", medicosId);
-//        if (medicoLogic.getMedico(medicosId) == null) {
-//            throw new WebApplicationException("El recurso /editorials/" + medicosId + " no existe.", 404);
-//        }
-//        medicoLogic.deleteMedico(medicosId);
+        if (medicoLogic.getMedico(medicosId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + medicosId + " no existe.", 404);
+        }
+        medicoLogic.deleteMedico(medicosId);
         LOGGER.info("MedicoResource deleteMedico: output: void");
     }
 
@@ -154,11 +156,11 @@ public class MedicoResource {
      * que vamos a convertir a DTO.
      * @return la lista de editoriales en forma DTO (json)
      */
-    private List<MedicoDTO> listEntity2DetailDTO() { //paramtero: List<MedicoEntity> entityList
+    private List<MedicoDTO> listEntity2DetailDTO(List<MedicoEntity> entityList){
         List<MedicoDTO> list = new ArrayList<>();
-//        for (MedicoEntity entity : entityList) {
-//            list.add(new MedicoDTO(entity));
-//        }
+        for (MedicoEntity entity : entityList) {
+            list.add(new MedicoDTO(entity));
+        }
         return list;
     }
 }
