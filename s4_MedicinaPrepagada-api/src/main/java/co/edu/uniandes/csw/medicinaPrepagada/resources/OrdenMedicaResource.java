@@ -70,7 +70,7 @@ public class OrdenMedicaResource
     public List<OrdenMedicaDTO> getOrdenesMedicas() 
     {
         LOGGER.info("OrdenMedicaResource getOrdenesMedicas: input: void");
-        List<OrdenMedicaDTO> listaOrdenesMedicas = listEntity2DetailDTO();
+        List<OrdenMedicaDTO> listaOrdenesMedicas = listEntity2DetailDTO(ordenLogic.getOrdenesMedicas());
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenesMedicas: output: {0}", listaOrdenesMedicas.toString());
         return listaOrdenesMedicas;
     }
@@ -95,7 +95,7 @@ public class OrdenMedicaResource
             throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
         }
         
-        OrdenMedicaDTO ordenMedicaDetailDTO = new OrdenMedicaDTO();
+        OrdenMedicaDTO ordenMedicaDetailDTO = new OrdenMedicaDTO(ordenmedicaEntity);
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: output: {0}", ordenMedicaDetailDTO.toString());
         return ordenMedicaDetailDTO;
     }
@@ -141,9 +141,14 @@ public class OrdenMedicaResource
     }
        
     
-     private List<OrdenMedicaDTO> listEntity2DetailDTO() 
+     private List<OrdenMedicaDTO> listEntity2DetailDTO( List<OrdenMedicaEntity> entityList) 
     { 
         List<OrdenMedicaDTO> list = new ArrayList<>();
+        
+        for(OrdenMedicaEntity entity : entityList)
+        {
+            list.add(new OrdenMedicaDetailDTO(entity)); 
+        }
         
         return list;
     }
