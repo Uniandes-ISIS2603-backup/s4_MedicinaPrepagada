@@ -12,10 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
- *clase que representa un Paciente
+ *clase que representa un Paciente Entity
  * @author MIGUELHOYOS
  */
 @Entity
@@ -203,5 +202,19 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
      */
     public void setEps(String eps) {
         this.eps = eps;
+    }
+
+    /**
+     * @return the historiasClinicas
+     */
+    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
+        return historiasClinicas;
+    }
+
+    /**
+     * @param historiasClinicas the historiasClinicas to set
+     */
+    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
     }
 }

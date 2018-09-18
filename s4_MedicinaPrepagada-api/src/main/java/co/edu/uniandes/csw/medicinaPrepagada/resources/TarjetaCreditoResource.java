@@ -6,9 +6,9 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.TarjetaCreditoLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,8 +30,8 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class TarjetaCreditoResource {
     
-//    @Inject
-//    TarjetaCreditoLogic tarjetaCreditoLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    @Inject
+    TarjetaCreditoLogic tarjetaCreditoLogic;// Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
      * Crea una nueva tarjeta de credito con la informacion que se recibe en el cuerpo de
@@ -46,11 +46,10 @@ public class TarjetaCreditoResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public TarjetaCreditoDTO createTarjetaCredito(TarjetaCreditoDTO tarjetaCredito){
-//        TarjetaCreditoEntity entity = tarjetaCredito.toEntity();
-//        TarjetaCreditoEntity nuevaEntity = tarjetaCreditoLogic.createTarjetaCredito(entity);
-//        return new TarjetaCreditoDTO(nuevaEntity);
-        return tarjetaCredito;
+    public TarjetaCreditoDTO createTarjetaCredito(TarjetaCreditoDTO tarjetaCredito) throws BusinessLogicException{
+        TarjetaCreditoEntity entity = tarjetaCredito.toEntity();
+        TarjetaCreditoEntity nuevaEntity = tarjetaCreditoLogic.createTarjetaCredito(entity);
+        return new TarjetaCreditoDTO(nuevaEntity);
     }
     
     /**
@@ -62,7 +61,7 @@ public class TarjetaCreditoResource {
     @DELETE
     @Path("{tarjetascreditoId: \\d+}")
     public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-//        tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
+        tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
     }
     
      /**
@@ -73,20 +72,9 @@ public class TarjetaCreditoResource {
     @GET
     @Path("{tarjetascreditoId: \\d+}")
     public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-//        TarjetaCreditoEntity entity = tarjetaCreditoLogic.findPaciente(tarjetaCreditoLogic);
-//        return new TarjetaCreditoDTO(entity);
-
-        return null;
+        TarjetaCreditoEntity entity = tarjetaCreditoLogic.getTarjetaCredito(tarjetascreditoId);
+        return new TarjetaCreditoDTO(entity);
     }
     
-    @GET
-    public List<TarjetaCreditoDTO> getTarjetasCredito(){
-        List<TarjetaCreditoDTO> rta = new LinkedList<>();
-//        List<TarjetaCreditoEntity> listaEntity = tarjetaCreditoLogic.getAll();
-//        Iterator ite = listaEntity.iterator();
-//        while(ite.hasNext()){
-//            rta.add(new TarjetaCreditoDTO(ite.next()));
-//        }
-        return rta;
-    }
+
 }

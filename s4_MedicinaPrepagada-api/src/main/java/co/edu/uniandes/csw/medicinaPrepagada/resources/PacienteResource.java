@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
@@ -66,7 +67,7 @@ public class PacienteResource {
     @DELETE
     @Path("{pacientesId: \\d+}")
     public void deletePaciente(@PathParam("pacientesId") Long pacientesId){
-        //pacienteLogic.deletePaciente(pacientesId);
+        pacienteLogic.deletePaciente(pacientesId);
     }
     
     /**
@@ -77,9 +78,8 @@ public class PacienteResource {
     @GET
     @Path("{pacientesId: \\d+}")
     public PacienteDTO getPaciente(@PathParam("pacientesId") Long pacientesId){
-        //PacienteEntity entity = pacienteLogic.findPaciente(pacientesId);
-        //return new PacienteDTO(entity);
-        return null;
+        PacienteEntity entity = pacienteLogic.getPaciente(pacientesId);
+        return new PacienteDTO(entity);
     }
     
     /**
@@ -88,11 +88,10 @@ public class PacienteResource {
      * @return JSON del paciente actualizado
      */
     @PUT
-    public PacienteDTO actualizarPaciente(PacienteDTO paciente){
-        //PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
-        //PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
-        //return nuevoDTO;
-        return paciente;
+    public PacienteDTO actualizarPaciente(PacienteDTO paciente) throws BusinessLogicException{
+        PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
+        PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
+        return nuevoDTO;
     }
     
     /**
@@ -100,8 +99,14 @@ public class PacienteResource {
      * 
      */
     @GET
-    public List<PacienteDTO> getAll(){
-        return new LinkedList<PacienteDTO>();
+    public List<PacienteDetailDTO> getAll(){
+        List<PacienteEntity> listaEntity = pacienteLogic.getPacientes();
+        List<PacienteDetailDTO> rta = new LinkedList<>();
+        for(PacienteEntity ent:listaEntity){
+            PacienteDetailDTO  dto = new PacienteDetailDTO(ent);
+            rta.add(dto);
+        }
+        return rta;
     }
     
 //    /**
