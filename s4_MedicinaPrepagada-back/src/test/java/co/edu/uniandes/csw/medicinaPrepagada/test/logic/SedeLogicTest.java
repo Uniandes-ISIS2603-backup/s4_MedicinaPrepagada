@@ -120,6 +120,12 @@ public class SedeLogicTest
         em.persist(entity2);
         sede2.getConsultorios().add(entity2);
         em.merge(sede2);
+        
+        SedeEntity sede3 = data.get(2);
+        data.get(2).setLongitud(-70.3);
+        data.get(2).setLatitud(1.0);
+        data.get(2).setDireccion("Calle 100 # 15 - 03");
+        em.merge(sede3);
 
         
     }
@@ -136,8 +142,8 @@ public class SedeLogicTest
         newEntity.setTelefono(876543987L);
         newEntity.setDireccion("Calle 120 # 13 - 22");
         newEntity.setTipoSede(2);
-        newEntity.setLatitud(1.0);
-        newEntity.setLongitud(-70.3);
+        newEntity.setLatitud(1.7);
+        newEntity.setLongitud(-71.8);
         newEntity.setCorreo("pepito@gmail.com");
         SedeEntity result = sedeLogic.createSede(newEntity);
         Assert.assertNotNull(result);
@@ -255,10 +261,10 @@ public class SedeLogicTest
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
         newEntity.setNombre("sede12");
         newEntity.setTelefono(876543987L);
-        newEntity.setDireccion(data.get(0).getDireccion());
+        newEntity.setDireccion("Calle 100 # 15 - 03");
         newEntity.setTipoSede(2);
-        newEntity.setLatitud(1.0);
-        newEntity.setLongitud(-70.3);
+        newEntity.setLatitud(1.1);
+        newEntity.setLongitud(-71.3);
         newEntity.setCorreo("pepito@gmail.com");
         SedeEntity result = sedeLogic.createSede(newEntity);
         Assert.assertNotNull(result);
@@ -357,11 +363,10 @@ public class SedeLogicTest
      * Prueba para crear un Sede con longitud y latitud existente
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
-    @Test
+    @Test (expected = BusinessLogicException.class)
     public void createSedeLongLatRepetidasTest() throws BusinessLogicException
     {
-        data.get(1).setLongitud(-70.3);
-        data.get(1).setLatitud(1.0);
+
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
         newEntity.setNombre("sede12");
         newEntity.setTelefono(876543987L);
@@ -427,6 +432,7 @@ public class SedeLogicTest
     
         /**
      * Prueba para actualizar un Sede.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @Test
     public void updateSedeTest() throws BusinessLogicException 
@@ -454,12 +460,308 @@ public class SedeLogicTest
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
 
     }
+        
+     /**
+     * Prueba para actualizar un Sede. que no existe 
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeInexistenteTest() throws BusinessLogicException 
+     {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede100");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(999999L, pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+         /**
+     * Prueba para actualizar un Sede cambiando su id.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeCambiaIdTest() throws BusinessLogicException 
+     {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede100");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(2).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+             /**
+     * Prueba para actualizar un Sede cambiando su Longitud.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeCambiaLongitudTest() throws BusinessLogicException 
+     {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede100");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud()+1);
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+     /**
+     * Prueba para actualizar un Sede cambiando su latitud.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeCambiaLatitudTest() throws BusinessLogicException 
+     {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede100");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud()+1);
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+         /**
+     * Prueba para actualizar un Sede cambiando su direccion.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeCambiaDireccionTest() throws BusinessLogicException 
+     {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede100");
+        pojoEntity.setDireccion(entity.getDireccion()+ "hola");
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+        /**
+     * Prueba para actualizar un Sede con un nombre vacio
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeTestMalNombre() throws BusinessLogicException
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+    /**
+     * Prueba para actualizar un Sede con un nombre ya usado
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeTestNombreRepetido() throws BusinessLogicException
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(data.get(1).getNombre());
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78987643L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+        /**
+     * Prueba para actualizar un Sede con un telefono con menos de 7 digitos
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeTestMalTelefono() throws BusinessLogicException
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede 200");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(783L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+            /**
+     * Prueba para actualizar un Sede con un tipo no aceptado
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeTestMalTipo() throws BusinessLogicException
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede 200");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(5);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78876543L);
+        pojoEntity.setCorreo("pepitoPerez@gmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+                /**
+     * Prueba para actualizar un Sede con un tipo no aceptado
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateSedeTestMalCorreo() throws BusinessLogicException
+    {
+        SedeEntity entity = data.get(0);
+        SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Sede 200");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setTipoSede(2);
+        pojoEntity.setDescripcion("La mejor sede de sedes");
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(78876543L);
+        pojoEntity.setCorreo("pepigmail.com");
+        
+       
+        sedeLogic.updateSede(data.get(0).getId(), pojoEntity);
+
+        SedeEntity resp = em.find(SedeEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
     
 
-        /**
+     /**
      * Prueba para eliminar un Sede
      *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @Test
     public void deleteSedeTest() throws BusinessLogicException 
@@ -470,4 +772,17 @@ public class SedeLogicTest
         Assert.assertNull(deleted);
     }
     
+    
+            /**
+     * Prueba para eliminar un Sede que no existe
+     *
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void deleteSedeInexistenteTest() throws BusinessLogicException 
+    {
+        sedeLogic.deleteSede(99999999L);
+        SedeEntity deleted = em.find(SedeEntity.class, 99999999L );
+        Assert.assertNull(deleted);
+    }
 }
