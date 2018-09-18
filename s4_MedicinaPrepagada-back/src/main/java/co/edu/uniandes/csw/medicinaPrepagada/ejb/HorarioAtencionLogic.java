@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.medicinaPrepagada.persistence.ConsultorioPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.SedePersistence;
@@ -19,8 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -50,19 +47,44 @@ public class HorarioAtencionLogic
      * Se encarga de crear un HorarioAtencion en la base de datos.
      *
      * @param horarioAtencionEntity Objeto de HorarioAtencionEntity con los datos nuevos
+     * @param sedeEntity
+     * @param idMedico
      * @return Objeto de HorarioAtencionEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity, Long idMedico) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion");
         
-        
-        
-        
-        
- 
-
-
+        //Valida que la fecha sea despues de la actual
+        if (!validatePostActual(horarioAtencionEntity.getFechaInicio()))
+            throw new BusinessLogicException("La fecha de inicio debe ser despues a la fecha actual");
+        //Valida que este entre los horarios de trabajo de la empresa
+        if (!validateHorarioTrabajo(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Los horarios de antencion solo pueden estar entre las 6 am y las 6 pm");
+        //Valida que los horarios no sobrepasen on mes de la fecha de cracion
+        if (!validateLessThanMonth(horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Solo puede crear horarios hasta 1 mes despues de la fecha actual");
+        //Valida que el horario de atencion sea en el mismo dia
+        if (!validateOneDay(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Su horario de atencion debe empezar y terminar en el mismo dia");
+        //Valida que los horarios empiecen y terminen en 00, 20 o 40
+        if (!validateMinutos(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Sus horarios de atencion deben empezar y acabar en xx:00, xx:20 o xx:40");
+        //Valida que el horario que se intenta crear no genere problema con los horarios actuales del medico
+        if (!validateHorMedico(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin(), idMedico))
+            throw new BusinessLogicException("No puede crear este horario ya que se cruza con otro horario que ya tiene");
+        // Busca que exista un consultorio al que se le pueda asignar el horario
+        ConsultorioEntity pConsult = findConsultorio(sedeEntity.getId(), idMedico, horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin());
+        if (pConsult != null)
+        {
+            horarioAtencionEntity.setConsultorio(pConsult);
+            horarioAtencionEntity.setMedico(medicoPersistence.find(idMedico));
+        }
+        else
+        {
+            throw new BusinessLogicException("No es posible crear su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
+        }
         HorarioAtencionEntity newHorarioAtencionEntity = persistence.create(horarioAtencionEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del horarioAtencion");
         return newHorarioAtencionEntity;
@@ -121,7 +143,38 @@ public class HorarioAtencionLogic
         //Verifica que no se intente cambiar el Id
         if (horarioAtencionEntity.getId() != horarioAtencionsId)
             throw new BusinessLogicException("No se puede cambiar el id de la horarioAtencion");
-       
+       //Valida que la fecha sea despues de la actual
+        if (!validatePostActual(horarioAtencionEntity.getFechaInicio()))
+            throw new BusinessLogicException("La fecha de inicio debe ser despues a la fecha actual");
+        //Valida que este entre los horarios de trabajo de la empresa
+        if (!validateHorarioTrabajo(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Los horarios de antencion solo pueden estar entre las 6 am y las 6 pm");
+        //Valida que los horarios no sobrepasen on mes de la fecha de cracion
+        if (!validateLessThanMonth(horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Solo puede crear horarios hasta 1 mes despues de la fecha actual");
+        //Valida que el horario de atencion sea en el mismo dia
+        if (!validateOneDay(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Su horario de atencion debe empezar y terminar en el mismo dia");
+        //Valida que los horarios empiecen y terminen en 00, 20 o 40
+        if (!validateMinutos(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
+            throw new BusinessLogicException("Sus horarios de atencion deben empezar y acabar en xx:00, xx:20 o xx:40");
+       //Valida que el horario editado no genere problema con los horarios del medico 
+        if (!validateHorMedicoUpdate(horarioAtencionEntity))
+            throw new BusinessLogicException("No puede cambiar este horario ya que se cruza con otro horario que ya tiene");
+        // Busca que exista un consultorio al que se le pueda asignar el horario
+        ConsultorioEntity pConsult = findConsultorio(horarioAtencionEntity.getConsultorio().getSede().getId(), 
+                horarioAtencionEntity.getMedico().getId(), horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin());
+        if (pConsult != null)
+        {
+            horarioAtencionEntity.setConsultorio(pConsult);
+            horarioAtencionEntity.setMedico(medicoPersistence.find(horarioAtencionEntity.getMedico().getId()));
+        }
+        else
+        {
+            throw new BusinessLogicException("No es posible crear su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
+        }
+        
+        
 
         HorarioAtencionEntity newHorarioAtencionEntity = persistence.update(horarioAtencionEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el horarioAtencion con id = {0}", horarioAtencionsId);
@@ -142,6 +195,9 @@ public class HorarioAtencionLogic
         //Verifica que la horarioAtencion que se intenta modificar exista
         if (persistence.find(horarioAtencionsId) == null)
             throw new BusinessLogicException ("La horarioAtencion que intenta modificar no existe");
+        //Verifica que el horario no tenga citas medicas
+        if (!persistence.find(horarioAtencionsId).getCitasMedicas().isEmpty())
+            throw new BusinessLogicException("No puede eliminar el horario por que tiene citas medicas asignadas");
         
         persistence.delete(horarioAtencionsId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el horarioAtencion con id = {0}", horarioAtencionsId);
@@ -242,7 +298,7 @@ public class HorarioAtencionLogic
     /**
      * Valida que la fecha de inicio sea mayor que la fecha actual
      * @param pHoraInicio
-     * @return 
+     * @return true si la fecha es despues de la actual
      */
     public boolean validatePostActual (Date pHoraInicio)
     {
@@ -258,7 +314,7 @@ public class HorarioAtencionLogic
     
      /**
      * Valida que la fecha final no sobrepase un mes de lafecha actual
-     * @param pHoraInicio
+     * @param pHoraFin
      * @return 
      */
     public boolean validateLessThanMonth (Date pHoraFin)
@@ -275,7 +331,7 @@ public class HorarioAtencionLogic
     }
     
     /**
-     * Verifica que el horario no genere conflicto con los horariosactuales del medico
+     * Verifica que el horario no genere conflicto con los horariosactuales del medico en create
      * @param pHoraInicio
      * @param pHoraFin
      * @param id
@@ -289,6 +345,32 @@ public class HorarioAtencionLogic
         {
             if ((pHoraInicio.after(horarios.get(i).getFechaInicio()) && pHoraInicio.before(horarios.get(i).getFechaFin()))
                     || (pHoraFin.after(horarios.get(i).getFechaInicio()) && pHoraFin.before(horarios.get(i).getFechaFin())) )
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    /**
+     * Verifica que el horario no genere conflicto con los horariosactuales del medico en update
+     * @param pHoraInicio
+     * @param pHoraFin
+     * @param id
+     * @return true si no se genera ningun problema con los horarios actuales del medico
+     */
+    public boolean validateHorMedicoUpdate (HorarioAtencionEntity horEntity)
+    {
+        Date pHoraInicio = horEntity.getFechaInicio();
+        Date pHoraFin = horEntity.getFechaFin();
+        
+        MedicoEntity medico = medicoPersistence.find(horEntity.getMedico().getId());
+        List <HorarioAtencionEntity> horarios = medico.getHorariosAtencion();
+        for (int i = 0; i < horarios.size();i++)
+        {
+            if (horarios.get(i).getId() != horEntity.getId() &&
+                    ((pHoraInicio.after(horarios.get(i).getFechaInicio()) && pHoraInicio.before(horarios.get(i).getFechaFin()))
+                    || (pHoraFin.after(horarios.get(i).getFechaInicio()) && pHoraFin.before(horarios.get(i).getFechaFin()))) )
             {
                 return false;
             }

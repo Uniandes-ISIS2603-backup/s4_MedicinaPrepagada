@@ -9,6 +9,10 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,10 +42,33 @@ public class OrdenMedicaLogic
     public OrdenMedicaEntity createOrdenMedica(OrdenMedicaEntity ordenEntity) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date d1 = Date.from(Instant.now());
 
         if(persistence.find(ordenEntity.getId()) != null) 
         {
             throw new BusinessLogicException("Ya existe una orden medica con el id \"" + ordenEntity.getId() + "\"");
+        }
+        
+        Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
+        
+        try
+        {
+            if(fechaValidoHasta.compareTo(d1) < 0)
+            {
+                throw new BusinessLogicException("La validez de la orden es antes de la fecha actual");
+            }
+        }
+        catch( Exception e)
+                {
+                
+                }
+        
+        if( ordenEntity.getFirmaMedico() == null ||
+            ordenEntity.getFirmaMedico().equals("")   )
+        {
+            throw new BusinessLogicException("La firma del medico no puede ser vacia");
         }
 
         persistence.create(ordenEntity);
@@ -88,11 +115,28 @@ public class OrdenMedicaLogic
      * @param ordenId
      * @param ordenEntity
      * @return la orden medica con los cambios actualizados en la base de datos.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     
-    public OrdenMedicaEntity updateOrdenMedica(Long ordenId, OrdenMedicaEntity ordenEntity)
+    public OrdenMedicaEntity updateOrdenMedica(Long ordenId, OrdenMedicaEntity ordenEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la orden medica con id = {0}", ordenId);
+        
+        if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
+        {
+            throw new BusinessLogicException("No se puede modificar la firma del medico");
+        }
+        
+        if (!persistence.find(ordenId).getFechaExpedicion().equals(ordenEntity.getFechaExpedicion()))
+        {
+            throw new BusinessLogicException("No se puede modificar la fecha de expedicion");
+        }
+        
+        if( ordenEntity.getId() != ordenId )
+        {
+            throw new BusinessLogicException("No se puede modificar el id. ");
+        }
+        
         OrdenMedicaEntity newEntity = persistence.update(ordenEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la orden medica con id = {0}", ordenEntity.getId());
         return newEntity;

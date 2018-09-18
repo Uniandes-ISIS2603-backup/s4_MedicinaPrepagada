@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -15,6 +16,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class AdministradorDTO implements Serializable 
 {
+    private String login;
+    private String contrasena;
+    private String tipoUsuario;
+    
     /**
      * Constructor vacio
      */
@@ -30,11 +35,13 @@ public class AdministradorDTO implements Serializable
      * nuevo objeto.
      */
     
-    /**public AdministradorDTO(AdministradorEntity administradorEntity) 
+    public AdministradorDTO(AdministradorEntity administradorEntity) 
     {
-        if (AdministradorEntity != null) 
+        if (administradorEntity != null) 
         {
-            
+            this.login = administradorEntity.getLogin(); 
+            this.contrasena = administradorEntity.getContrasena(); 
+            this.tipoUsuario = administradorEntity.getTipoUsuario();             
         }
     }
      
@@ -43,12 +50,77 @@ public class AdministradorDTO implements Serializable
     * @return Nueva objeto AdministradorEntity.
     */
     
-    /**public AdministradorEntity toEntity() 
+    public AdministradorEntity toEntity() 
     {
         AdministradorEntity administradorEntity = new AdministradorEntity();
+        
+        administradorEntity.setLogin(this.getLogin());
+        administradorEntity.setContrasena(this.getContrasena());
+        administradorEntity.setTipoUsuario(this.getTipoUsuario());
+        
         return administradorEntity;
     }
-    * */
+    
+    /**
+     * Obtiene el atributo login.
+     * @return atributo login.
+     */
+    
+    public String getLogin() 
+    {
+        return login;
+    }
+
+    /**
+     * Establece el valor del atributo login.
+     * @param pLogin nuevo valor del atributo
+     */
+    
+    public void setId(String pLogin)
+    {
+        this.login = pLogin;
+    }
+    
+    /**
+     * Obtiene el atributo contrasena.
+     * @return atributo contrasena.
+     */
+    
+    public String getContrasena() 
+    {
+        return contrasena;
+    }
+
+    /**
+     * Establece el valor del atributo contrasena.
+     * @param pContrasena nuevo valor del atributo
+     */
+    
+    public void setContrasena(String pContrasena)
+    {
+        this.contrasena = pContrasena;
+    }
+    
+    /**
+     * Obtiene el atributo tipoUsuario.
+     * @return atributo tipoUsuario.
+     */
+    
+    public String getTipoUsuario() 
+    {
+        return tipoUsuario;
+    }
+
+    /**
+     * Establece el valor del atributo tipoUsuario.
+     * @param pTipoUsuario nuevo valor del atributo
+     */
+    
+    public void setTipoUsuario(String pTipoUsuario)
+    {
+        this.tipoUsuario = pTipoUsuario;
+    }
+    
     
     
     @Override

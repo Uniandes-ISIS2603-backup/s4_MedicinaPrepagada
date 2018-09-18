@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-//import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -50,13 +49,13 @@ public class CitaLaboratorioPersistence {
    
    public CitaLaboratorioEntity update(CitaLaboratorioEntity citaLabEntity)
      {
-         LOGGER.log(Level.INFO,"Buscando la cita laboratorio para modificar con id=(0)", citaLabEntity.getId());
+         LOGGER.log(Level.INFO,"Buscando la cita laboratorio para modificar con id={0}", citaLabEntity.getId());
          return em.merge(citaLabEntity);
      }
      
      public void delete (Long citaLabId)
      {
-         LOGGER.log(Level.INFO,"Borrando la cita laboratorio con id=(0)",citaLabId);
+         LOGGER.log(Level.INFO,"Borrando la cita laboratorio con id={0}",citaLabId);
          CitaLaboratorioEntity citaLabEntity = em.find(CitaLaboratorioEntity.class,citaLabId);
          em.remove(citaLabEntity);
      }

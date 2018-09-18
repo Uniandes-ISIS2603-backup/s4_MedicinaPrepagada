@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
+import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,13 +15,44 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class CitaMedicaDTO
+public class CitaMedicaDTO implements Serializable
 {
     private long idCitaMedica;
     private Date fecha;
     private String comentarios;
     private HorarioAtencionDTO horarioAtencionAsignado;
     private PacienteDTO pacienteAAtender;
+    
+    public CitaMedicaDTO (CitaMedicaEntity citaMedicaEntity){
+        if (citaMedicaEntity != null){
+           this.idCitaMedica =citaMedicaEntity.getId();
+           this.fecha = citaMedicaEntity.getFecha();
+           this.comentarios = citaMedicaEntity.getComentarios();
+           this.horarioAtencionAsignado = new HorarioAtencionDTO(citaMedicaEntity.getHorarioAtencionAsignado());
+           this.pacienteAAtender = new PacienteDTO(citaMedicaEntity.getPacienteAAtender());
+        }   
+    }
+     
+     
+     /**
+     * Convierte un objeto ConsultorioDTO a CitaMedicaEntity.
+     *
+     * @return Nueva objeto CitaMedicaEntity.
+     *
+     */
+    public CitaMedicaEntity toEntity() 
+    {
+        CitaMedicaEntity citaMedicaEntity = new CitaMedicaEntity();
+        
+        citaMedicaEntity.setId(this.getIdCitaMedica());
+        citaMedicaEntity.setFecha(this.getFecha());
+        citaMedicaEntity.setComentarios(this.getComentarios());
+        citaMedicaEntity.setHorarioAtencionAsignado(this.horarioAtencionAsignado.toEntity());
+        citaMedicaEntity.setPacienteAAtender(this.pacienteAAtender.toEntity());
+ 
+        return citaMedicaEntity;
+    }
+
     
     public CitaMedicaDTO(){
     

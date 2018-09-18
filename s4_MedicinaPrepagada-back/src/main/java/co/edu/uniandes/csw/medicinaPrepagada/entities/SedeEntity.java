@@ -87,7 +87,7 @@ public class SedeEntity implements Serializable
         return id;
     }
     /**
-     * Pone el id de la sede
+     * Pone el id de la sedeEntity
      * @param id 
      */
     public void setId(Long id) 
@@ -95,7 +95,7 @@ public class SedeEntity implements Serializable
         this.id = id;
     }
     /**
-     * Pone el nombre de la sede
+     * Pone el nombre de la sedeEntity
      * @param pNombre 
      */
     public void setNombre (String pNombre)
@@ -103,79 +103,125 @@ public class SedeEntity implements Serializable
        this.nombre = pNombre;
    }
    
+    /**
+     * Recibe el nombre del sedeEntity
+     * @return string del nombre
+     */
    public String getNombre  ()
    {
        return this.nombre;
    }
    
-   
+   /**
+    * Pone la direccion de la sedeEntity
+    * @param pDirreccion 
+    */
    public void setDireccion (String pDirreccion)
    {
        this.direccion = pDirreccion;
    }
-   
+   /**
+    * Recibe la direccion de la sedeEntity
+    * @return la direccion
+    */
    public String getDireccion  ()
    {
        return this.direccion;
    }
-    
+    /**
+     * Modifica el tipo de sedeEntity
+     * @param pTipoSede 
+     */
     public void setTipoSede (Integer pTipoSede)
    {
        this.tipoSede=pTipoSede;
    }
-   
+    /**
+     * Obtiene el tipo de sedeEntity
+     * @return 
+     */
    public int getTipoSede  ()
    {
        return this.tipoSede;
    }
    
-   
-   public void setDescripcion (String pDirreccion)
+   /**
+    * Modifica la descripcion de la sedeEntity
+     * @param pDescripcion
+    */
+   public void setDescripcion (String pDescripcion)
    {
-       this.descripcion = pDirreccion;
+       this.descripcion = pDescripcion;
    }
-   
+   /**
+    * Obtiene la Descripcion de la sedeEntity
+    * @return 
+    */
    public String getDescripcion  ()
    {
        return this.descripcion;
    }
-   
+   /**
+    * Modifica la latitud de la sedeentity
+    * @param pLatitud 
+    */
    public void setLatitud (Double pLatitud)
    {
        this.latitud = pLatitud;
    }
-   
+   /**
+    * Obtiene la latitud de la sedeEntity
+    * @return de la entidad
+    */
    public double getLatitud  ()
    {
        return this.latitud;
    }
-   
+   /**
+    * Modifica la longitud de la sedeEntity
+    * @param pLongitud nueva
+    */
    public void setLongitud (Double pLongitud)
    {
        this.longitud = pLongitud;
    }
-   
+   /**
+    * Obtiene la longitud de la entidad
+    * @return 
+    */
    public double getLongitud  ()
    {
        return this.longitud;
    }
     
-   
+   /**
+    * Modifica el numero de telefono de la sedeEntoty
+    * @param pTelefono 
+    */
    public void setTelefono (Long pTelefono)
    {
        this.telefono = pTelefono;
    }
-   
+   /**
+    * Obtiene el telefono de la sedeEntity
+    * @return 
+    */
    public Long getTelefono  ()
    {
         return this.telefono;
    }
-   
+   /**
+    * Modifica el correo de la sede entity
+    * @param pCorreo 
+    */
    public void setCorreo (String pCorreo)
    {
        this.correo = pCorreo;
    }
-   
+   /**
+    * Obtiene el correo de la entidad
+    * @return 
+    */
    public String getCorreo  ()
    {
        return this.correo;
@@ -183,12 +229,18 @@ public class SedeEntity implements Serializable
     
     
 
-    
+    /**
+     * Obtiene los consultorios de la sedeEntity
+     * @return 
+     */
     public List<ConsultorioEntity> getConsultorios ()
     {
         return this.consultorios;
     }
-    
+    /**
+     * Modifica los consultorios de la sede entity
+     * @param pConsultorios 
+     */
     public void setConsultorios (List<ConsultorioEntity> pConsultorios)
     {
         this.consultorios = pConsultorios;

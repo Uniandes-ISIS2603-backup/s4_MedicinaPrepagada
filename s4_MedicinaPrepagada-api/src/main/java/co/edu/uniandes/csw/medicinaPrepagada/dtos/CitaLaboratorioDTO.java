@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,10 +27,40 @@ public class CitaLaboratorioDTO implements Serializable {
     
     private String recomendaciones;
     
+    private PacienteDTO paciente;
+    
+    private LaboratorioDTO laboratorio;
+    
     // Constructor de clase vacio
     public CitaLaboratorioDTO ()
     {
         
+    }
+    public CitaLaboratorioDTO(CitaLaboratorioEntity pCitaLaboratorioEntity) {
+        if (pCitaLaboratorioEntity != null) {
+            this.id = pCitaLaboratorioEntity.getId();
+            this.comentarios = pCitaLaboratorioEntity.getComentarios();
+            this.especialidad= pCitaLaboratorioEntity.getEspecialidad();
+            this.fecha=pCitaLaboratorioEntity.getDate();
+            this.recomendaciones=pCitaLaboratorioEntity.getRecomendaciones();
+            this.paciente = new PacienteDTO(pCitaLaboratorioEntity.getPaciente());
+            this.laboratorio = new LaboratorioDTO(pCitaLaboratorioEntity.getLaboratorio());
+        }
+
+    }
+
+    public CitaLaboratorioEntity toEntity() {
+        CitaLaboratorioEntity citaLabEntity = new CitaLaboratorioEntity();
+
+        citaLabEntity.setId(this.getId());
+        citaLabEntity.setComentarios(this.comentarios);
+        citaLabEntity.setDate(this.fecha);
+        citaLabEntity.setEspecialidad(this.especialidad);
+        citaLabEntity.setLaboratorio(this.laboratorio.toEntity());
+        citaLabEntity.setPaciente(this.paciente.toEntity());
+      
+
+        return citaLabEntity;
     }
     
     public void setId (Long pId)
@@ -80,6 +111,24 @@ public class CitaLaboratorioDTO implements Serializable {
     public String getRecomendaciones ()
     {
         return this.recomendaciones;
+    }
+    
+    public void setPaciente(PacienteDTO pPaciente)
+    {
+        this.paciente=pPaciente;
+    }
+    public PacienteDTO getPaciente()
+    {
+        return this.paciente;
+    }
+    
+    public void setLaboratorio(LaboratorioDTO pLab)
+    {
+        this.laboratorio=pLab;
+    }
+    public LaboratorioDTO getLab()
+    {
+        return this.laboratorio;
     }
     
       @Override

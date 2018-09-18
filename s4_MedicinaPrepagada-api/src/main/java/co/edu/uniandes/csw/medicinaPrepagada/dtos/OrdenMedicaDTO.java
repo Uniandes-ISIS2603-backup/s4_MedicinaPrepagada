@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -38,7 +39,7 @@ public class OrdenMedicaDTO implements Serializable
      * nuevo objeto.
      */
     
-    /**public OrdenMedicaDTO(OrdenMedicaEntity ordenMedicaEntity) 
+    public OrdenMedicaDTO(OrdenMedicaEntity ordenMedicaEntity) 
     {
         if (ordenMedicaEntity != null) 
         {
@@ -55,7 +56,7 @@ public class OrdenMedicaDTO implements Serializable
      * @return Nueva objeto OrdenMedicaEntity.
      */
     
-    /**public OrdenMedicaEntity toEntity() 
+    public OrdenMedicaEntity toEntity() 
     {
         OrdenMedicaEntity ordenMedicaEntity = new OrdenMedicaEntity();
         ordenMedicaEntity.setId(this.getId());
@@ -63,6 +64,7 @@ public class OrdenMedicaDTO implements Serializable
         ordenMedicaEntity.setFechaExpedicion(this.getFechaExpedicion());
         ordenMedicaEntity.setComentarios(this.getComentarios());
         ordenMedicaEntity.setValidaHasta(this.getValidaHasta());
+        
         return ordenMedicaEntity;
     }
     

@@ -33,38 +33,39 @@ public class SedeLogic
      *
      * @param sedeEntity Objeto de SedeEntity con los datos nuevos
      * @return Objeto de SedeEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public SedeEntity createSede(SedeEntity sedeEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del sede");
-        //Verifica que el nombre sea valido
+        //Verifica que el nombre sea valido al momento de crear
         if (!validateNombre(sedeEntity.getNombre()))
-           throw new BusinessLogicException ("EL nombre no puede ser vacio ");
-        //Verifica que no exista otra sede con el mismo nombre
+           throw new BusinessLogicException ("EL nombre no puede ser vacio al crear una sede ");
+        //Verifica que no exista otra sede con el mismo nombre al crear
         if (persistence.findByNombre(sedeEntity.getNombre())!=null)
-            throw new BusinessLogicException("Ya existe una sede con este nombre");
-        //verifica que la direccion sea validad
+            throw new BusinessLogicException("Ya existe una sede con este nombre, cambie el nombre para crearla");
+        //verifica que la direccion sea validad al crar la sede
         if (!validateDireccion(sedeEntity.getDireccion()))
             throw new BusinessLogicException("La direccion no puede ser vacia y debe respetar el formato de una direccion");
-        //verifica que el telefono sea validad
+        //verifica que el telefono sea valido al crear la sede
         if (!validateNumero(sedeEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
-        //Verifica que no exista otra sede con la misma direccion
+        //Verifica que no exista otra sede con la misma direccion para crearla
         if (persistence.findByDireccion(sedeEntity.getDescripcion())!= null)
             throw new BusinessLogicException("Ya existe una sede con esta direccion");
-        //verifica que el tipo de la sede sea de los posibles
+        //verifica que el tipo de la sede sea de los posibles al crearla
         if (!validateTipo(sedeEntity.getTipoSede()))
             throw new BusinessLogicException ("El tipo de sede no es de los posibles");
-        //Valida que el correo tenga un formato correcto
+        //Valida que el correo tenga un formato correcto al crearla
         if (!validateCorreo(sedeEntity.getCorreo()))
             throw new BusinessLogicException("EL correo no sigue un formato de correo regular");
-        //Valida que la longitud dada se encuentre en colombia
+        //Valida que la longitud dada se encuentre en colombia al crearla
         if (!validateLongitud(sedeEntity.getLongitud()))
             throw new BusinessLogicException("La longitud dada no se encuentra en Colombia");
-        //Valida que la latitud dada se encuentre en colombia
+        //Valida que la latitud dada se encuentre en colombia al crearla
         if (!validateLatitud(sedeEntity.getLatitud()))
             throw new BusinessLogicException("La latitud dada no se encuentra en Colombia");
-        //Valida que no exista otra sede con la misma longitud y latitud
+        //Valida que no exista otra sede con la misma longitud y latitud al crearla
         if (!validateLongAndLat(sedeEntity.getLongitud(), sedeEntity.getLatitud()))
             throw new BusinessLogicException("Ya existe una sede con esta longitud y latitud");
         
@@ -114,6 +115,7 @@ public class SedeLogic
      * @param sedesId Identificador de la instancia a actualizar
      * @param sedeEntity Instancia de SedeEntity con los nuevos datos.
      * @return Instancia de SedeEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public SedeEntity updateSede(Long sedesId, SedeEntity sedeEntity) throws BusinessLogicException
     {
@@ -133,21 +135,21 @@ public class SedeLogic
         if (sedeEntity.getLatitud() != pSedeOld.getLatitud())
             throw new BusinessLogicException ("No se puede cambiar la latitud de una sede");
         //Verifica que no se intente cambiar la direccion de la sede
-        if (sedeEntity.getDireccion() != pSedeOld.getDireccion())
+        if (!sedeEntity.getDireccion().equals(pSedeOld.getDireccion()))
             throw new BusinessLogicException("No se puede cambiar la direccion de una sede");      
-         //Verifica que el nombre sea valido
+         //Verifica que el nombre sea valido al editarlo
         if (!validateNombre(sedeEntity.getNombre()))
            throw new BusinessLogicException ("EL nombre no puede ser vacio ");
-        //Verifica que no exista otra sede con el mismo nombre
+        //Verifica que no exista otra sede con el mismo nombre al editarlo
         if (persistence.findByNombre(sedeEntity.getNombre())!=null)
             throw new BusinessLogicException("Ya existe una sede con este nombre");
-        //verifica que el telefono sea validad
+        //verifica que el telefono sea valido al editarlo
         if (!validateNumero(sedeEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
-        //verifica que el tipo de la sede sea de los posibles
+        //verifica que el tipo de la sede sea de los posibles al editarla
         if (!validateTipo(sedeEntity.getTipoSede()))
             throw new BusinessLogicException ("El tipo de sede no es de los posibles");
-        //Valida que el correo tenga un formato correcto
+        //Valida que el correo tenga un formato correcto al editarlo
         if (!validateCorreo(sedeEntity.getCorreo()))
             throw new BusinessLogicException("EL correo no sigue un formato de correo regular");        
         

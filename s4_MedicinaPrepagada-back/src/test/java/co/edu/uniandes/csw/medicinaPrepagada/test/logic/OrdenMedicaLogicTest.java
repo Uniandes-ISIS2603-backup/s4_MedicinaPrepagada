@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -175,16 +177,20 @@ public class OrdenMedicaLogicTest
     @Test
     public void updateOrdenMedicaTest()
     {
-        OrdenMedicaEntity entity = data.get(0);
-        OrdenMedicaEntity pojoEntity = factory.manufacturePojo(OrdenMedicaEntity.class);
-
-        pojoEntity.setId(entity.getId());
-
-        ordenLogic.updateOrdenMedica(pojoEntity.getId(), pojoEntity);
-
-        OrdenMedicaEntity resp = em.find(OrdenMedicaEntity.class, entity.getId());
-
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        try {
+            OrdenMedicaEntity entity = data.get(0);
+            OrdenMedicaEntity pojoEntity = factory.manufacturePojo(OrdenMedicaEntity.class);
+            
+            pojoEntity.setId(entity.getId());
+            
+            ordenLogic.updateOrdenMedica(pojoEntity.getId(), pojoEntity);
+            
+            OrdenMedicaEntity resp = em.find(OrdenMedicaEntity.class, entity.getId());
+            
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(OrdenMedicaLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class MedicoDTO extends UsuarioDTO{
+public class MedicoDTO extends UsuarioDTO implements Serializable{
     
     private long idMedico;
     
@@ -32,6 +35,42 @@ public class MedicoDTO extends UsuarioDTO{
     
     public MedicoDTO(){
         super();
+    }
+    
+    public MedicoDTO (MedicoEntity medicoEntity){
+        if (medicoEntity != null){
+           this.idMedico =medicoEntity.getId();
+           this.nombre = medicoEntity.getNombre();
+           this.telefono = medicoEntity.getTelefono();
+           this.correo = medicoEntity.getCorreo();
+           this.documentoMedico = medicoEntity.getDocumentoMedico();
+           this.firma = medicoEntity.getFirma();
+           this.descripcion = medicoEntity.getDescripcion();
+           this.especialidad = new EspecialidadDTO(medicoEntity.getEspecialidad());
+        }   
+    }
+     
+     
+     /**
+     * Convierte un objeto ConsultorioDTO a MedicoEntity.
+     *
+     * @return Nueva objeto MedicoEntity.
+     *
+     */
+    public MedicoEntity toEntity() 
+    {
+        MedicoEntity medicoEntity = new MedicoEntity();
+        
+        medicoEntity.setId(this.getIdMedico());
+        medicoEntity.setNombre(this.getNombre());
+        medicoEntity.setTelefono(this.getTelefono());
+        medicoEntity.setCorreo(this.getCorreo());
+        medicoEntity.setDocumentoMedico(this.getDocumentoMedico());
+        medicoEntity.setFirma(this.getFirma());
+        medicoEntity.setDescripcion(this.getDescripcion());
+        medicoEntity.setEspecialidad(this.especialidad.toEntity());
+ 
+        return medicoEntity;
     }
 
     /**

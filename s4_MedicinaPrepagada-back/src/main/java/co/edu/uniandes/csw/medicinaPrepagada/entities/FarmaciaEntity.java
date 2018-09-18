@@ -26,9 +26,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     private double longitud;
     private String correo;
     
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
+    
     
     @PodamExclude
     @ManyToOne
@@ -36,7 +34,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     
     
     /**
-     * Devuelve el medicamento de la farmacia.
+     * Devuelve el medicamento de la farmaciaEntity.
      *
      * @return the medicamento
      */
@@ -45,34 +43,16 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica el medicamento de la farmacia.
+     * Modifica el medicamento de la farmaciaEntity.
      *
      * @param pMedicamento the medicamento to set
      */
     public void setMedicamento(MedicamentoEntity pMedicamento) {
         this.medicamento = pMedicamento;
     }
-    
-     /**
-     * Devuelve el ID de la farmacia.
-     *
-     * @return the id
-     */
-  //  public Long getId() {
-    //    return id;
-   // }
 
     /**
-     * Modifica el ID de la farmacia.
-     *
-     * @param id the id to set
-     */
- //   public void setId(Long id) {
-   //     this.id = id;
-    //}
-
-    /**
-     * Devuelve el nombre de la farmacia.
+     * Devuelve el nombre de la farmaciaEntity.
      *
      * @return the name
      */
@@ -81,16 +61,16 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica el nombre de la farmacia.
+     * Modifica el nombre de la farmaciaEntity.
      *
-     * @param name the name to set
+     * @param pNombre the name to set
      */
     public void setNombre(String pNombre) {
         this.nombre = pNombre;
     }
     
     /**
-     * Devuelve la ubicacion de la farmacia.
+     * Devuelve la ubicacion de la farmaciaEntity.
      *
      * @return cantidad
      */
@@ -99,7 +79,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica la ubicacion de la farmacia.
+     * Modifica la ubicacion de la farmaciaEntity.
      *
      * @param pUbicacion the cantidad to set
      */
@@ -108,7 +88,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
     
     /**
-     * Devuelve el telefono de la farmacia.
+     * Devuelve el telefono de la farmaciaEntity.
      *
      * @return telefono
      */
@@ -117,7 +97,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica el telefono de la farmacia.
+     * Modifica el telefono de la farmaciaEntity.
      *
      * @param telefono the descripcion to set
      */
@@ -126,7 +106,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
     
     /**
-     * Devuelve el correo de la farmacia.
+     * Devuelve el correo de la farmaciaEntity.
      *
      * @return correo
      */
@@ -135,7 +115,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
    
     /**
-     * Modifica el telefono de la farmacia.
+     * Modifica el telefono de la farmaciaEntity.
      *
      * @param pCorreo the descripcion to set
      */
@@ -144,7 +124,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
     
     /**
-     * Devuelve la latitud de la farmacia.
+     * Devuelve la latitud de la farmaciaEntity.
      *
      * @return latitud
      */
@@ -153,7 +133,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica la latitud de la farmacia.
+     * Modifica la latitud de la farmaciaEntity.
      *
      * @param pLat the lat to set
      */
@@ -162,7 +142,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
     
     /**
-     * Devuelve la longitud de la farmacia.
+     * Devuelve la longitud de la farmaciaEntity.
      *
      * @return longitud
      */
@@ -171,7 +151,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * Modifica la longitud de la farmacia.
+     * Modifica la longitud de la farmaciaEntity.
      *
      * @param pLon the lon to set
      */

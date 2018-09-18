@@ -11,8 +11,12 @@ import co.edu.uniandes.csw.medicinaPrepagada.persistence.FarmaciaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /**
  *
@@ -41,14 +45,14 @@ public class FarmaciaLogic {
             throw new BusinessLogicException("Ya existe una Farmacia con el nombre \"" + farmaciaEntity.getNombre() + "\"");
         }
         if (!validateNombre(farmaciaEntity.getNombre()))
-           throw new BusinessLogicException ("EL nombre no puede ser vacio ");
+           throw new BusinessLogicException ("El nombre no puede ser vacio ");
         //Verifica que no exista otra farmacia con el mismo nombre
         if (persistence.findByNombre(farmaciaEntity.getNombre())!=null)
             throw new BusinessLogicException("Ya existe una farmacia con este nombre");
-        //verifica que la direccion sea validad
+        //verifica que la direccion sea valida
         if (!validateDireccion(farmaciaEntity.getUbicacion()))
             throw new BusinessLogicException("La ubicación no puede ser vacia y debe respetar el formato de una direccion");
-        //verifica que el telefono sea validad
+        //verifica que el telefono sea valida
         if (!validateNumero(farmaciaEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener más de 6 digitos");
         //Valida que el correo tenga un formato correcto
@@ -130,7 +134,7 @@ public class FarmaciaLogic {
         if (farmaciaEntity.getLatitud() != pFarmaciaOld.getLatitud())
             throw new BusinessLogicException ("No se puede cambiar la latitud de una farmacia");
         //Verifica que no se intente cambiar la direccion de la farmacia
-        if (farmaciaEntity.getUbicacion() != pFarmaciaOld.getUbicacion())
+        if (!farmaciaEntity.getUbicacion().equals(pFarmaciaOld.getUbicacion()))
             throw new BusinessLogicException("No se puede cambiar la direccion de una farmacia");      
          //Verifica que el nombre sea valido
         if (!validateNombre(farmaciaEntity.getNombre()))
@@ -206,10 +210,29 @@ public class FarmaciaLogic {
         return (pLatitud !=null && pLatitud>= -4.223596 && pLatitud <= 12.514801 );
     }
     
-    private boolean  validateCorreo (String pCorreo)
+    private boolean  validateCorreo (String pCorreo) 
     {
-        return (pCorreo.contains("@")&& pCorreo != null);
+        Boolean rta = true;
+        String mailValidationPattern = "[a-z]+@[a-z]+.[a-z]+";
+        Pattern patternMail = Pattern.compile(mailValidationPattern);
+        Matcher matchMail = patternMail.matcher(pCorreo);
+        if(!matchMail.matches()){
+           rta= false;
+        }
+        return rta;
     }
-       
+     
+    public static boolean isValidEmailAddress(String email) {
+   boolean result = true;
+   try {
+       InternetAddress emailAddr = new InternetAddress(email);
+      emailAddr.validate();
+   } catch (AddressException ex) {
+      result = false;
+   }
+   return result;
+   
+   
+}
     
 }

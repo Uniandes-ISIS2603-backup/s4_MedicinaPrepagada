@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HistoriaClinicaPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -177,14 +179,18 @@ public class HistoriaClinicaLogicTest
     @Test
     public void updateHistoriaClinicaTest() 
     {
-        HistoriaClinicaEntity entity = data.get(0);
-        HistoriaClinicaEntity pojoEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
-
-        pojoEntity.setId(entity.getId());
-
-        historiaLogic.updateHistoriaClinica(pojoEntity.getId(), pojoEntity);
-
-        HistoriaClinicaEntity resp = em.find(HistoriaClinicaEntity.class, entity.getId());
+        try {
+            HistoriaClinicaEntity entity = data.get(0);
+            HistoriaClinicaEntity pojoEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
+            
+            pojoEntity.setId(entity.getId());
+            
+            historiaLogic.updateHistoriaClinica(pojoEntity.getId(), pojoEntity);
+            
+            HistoriaClinicaEntity resp = em.find(HistoriaClinicaEntity.class, entity.getId());
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(HistoriaClinicaLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     

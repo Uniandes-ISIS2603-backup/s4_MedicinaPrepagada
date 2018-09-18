@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-//import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -42,7 +41,7 @@ public class LaboratorioEntity implements Serializable
     
     private String nombre;
     private String direccion;
-    private int telefono;
+    private Long telefono;
     private String horarioAtencion;
     private double latitud;
     private double longitud;
@@ -79,15 +78,16 @@ public class LaboratorioEntity implements Serializable
         this.direccion = pDireccion;
     }
     
-    public int getTelefono ()
+    public void setTelefono (Long pTelefono)
+    {
+        this.telefono = pTelefono;
+    }
+    public Long getTelefono ()
     {
         return this.telefono;
     }
     
-    public void setTelefono (int pTelefono)
-    {
-        this.telefono = pTelefono;
-    }
+    
     
     public String getHorarioAtencion ()
     {

@@ -157,6 +157,7 @@ public class PacienteLogicTest {
      * Prueba para actualizar un Paciente.
      */
     @Test
+   
     public void updatePacienteTest() throws BusinessLogicException {
         PacienteEntity entity = data.get(1);
         PacienteEntity pojoEntity = factory.manufacturePojo(PacienteEntity.class);

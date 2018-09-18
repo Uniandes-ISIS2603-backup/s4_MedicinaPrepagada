@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,26 +19,67 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
 {
+    
+    private List<CitaLaboratorioDTO> citasLab;
     public LaboratorioDetailDTO()
     {
         super();
     }
     
-    private List<LaboratorioDTO> citasLaboratorio;
+    //TO ENTITY
+    public LaboratorioDetailDTO (LaboratorioEntity pLaboratorioEntity) 
+   {
+       super(pLaboratorioEntity);
+   
+       if (pLaboratorioEntity != null)
+       {
+           citasLab = new ArrayList<>();
+           
+           for (CitaLaboratorioEntity entityLaboratorios : pLaboratorioEntity.getCitasLab())
+           {
+               citasLab.add(new CitaLaboratorioDTO(entityLaboratorios));
+           }
+       }
+   } 
+    
+       
+    @Override
+    public LaboratorioEntity toEntity() 
+    {
+        LaboratorioEntity labEntity = super.toEntity();
+        
+        if (citasLab != null)
+        {
+            List <CitaLaboratorioEntity> citasEntity = new ArrayList<>();
+            for (CitaLaboratorioDTO citasLabDto : citasLab)
+            {
+                citasEntity.add(citasLabDto.toEntity());
+            }
+            labEntity.setCitasLab(citasEntity);
+        }
+        
+        
+        
+        return labEntity;
+    }
+    
+    
+    
     
          @Override
     public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
-    public List <LaboratorioDTO> getCitasLab()
+    public List <CitaLaboratorioDTO> getCitasLab()
     {
-        return this.citasLaboratorio;
+        return this.citasLab;
     }
     
-    public void setCitas (List<LaboratorioDTO> pCitas)
+    
+    public void setCitas (List<CitaLaboratorioDTO> pCitas)
     {
-        this.citasLaboratorio = pCitas;
+        this.citasLab = pCitas;
     }
     
 }
