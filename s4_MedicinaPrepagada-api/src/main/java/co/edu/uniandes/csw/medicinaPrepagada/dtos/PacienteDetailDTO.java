@@ -5,9 +5,15 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -82,7 +88,36 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
     public PacienteDetailDTO(PacienteEntity pacienteEntity){
         super(pacienteEntity);
         if(pacienteEntity!=null){
-           
+           if(pacienteEntity.getCitasLaboratorio() != null){
+               citasLaboratorio = new LinkedList<>();
+               for(CitaLaboratorioEntity citaLab : pacienteEntity.getCitasLaboratorio()){
+//                   citasLaboratorio.add(new CitaLaboratorioDTO(citaLab));
+               }
+           }
+           if(pacienteEntity.getFacturas() != null){
+               facturas = new LinkedList<>();
+               for(FacturaEntity fact: pacienteEntity.getFacturas()){
+//                   facturas.add(new FacturaDTO(fact));
+               }
+           }
+           if(pacienteEntity.getTarjetasCredito() != null){
+               tarjetasCredito = new LinkedList<>();
+               for(TarjetaCreditoEntity tarj : pacienteEntity.getTarjetasCredito()){
+                   tarjetasCredito.add(new TarjetaCreditoDTO(tarj));
+               }
+           }
+           if(pacienteEntity.getCitasMedicas() != null){
+               citasMedicas = new LinkedList<>();
+               for(CitaMedicaEntity med:pacienteEntity.getCitasMedicas()){
+//                  citasMedicas.add(new CitaMedicaDTO(med));
+               }
+           }
+           if(pacienteEntity.getHistoriasClinicas() != null){
+               historiasClinicas = new LinkedList<>();
+               for(HistoriaClinicaEntity his : pacienteEntity.getHistoriasClinicas()){
+//                   historiasClinicas.add(new HistoriaClinicaDTO(his));
+               }
+           }
         }
     }
     

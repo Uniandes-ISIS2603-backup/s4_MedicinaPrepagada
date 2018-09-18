@@ -40,6 +40,7 @@ public class UsuarioDTO {
     private String login;
     private String contrasena;
     private String tipoUsuario;
+    private Long documentoIdentidad;
     
     /**
      * Constructor por defecto
@@ -59,6 +60,7 @@ public class UsuarioDTO {
             this.login = usuarioEntity.getLogin();
             this.contrasena = usuarioEntity.getContrasena();
             this.tipoUsuario = usuarioEntity.getTipoUsuario();
+            this.documentoIdentidad = usuarioEntity.getDocumentoIdentidad();
         }
     }
 
@@ -114,12 +116,27 @@ public class UsuarioDTO {
         entity.setLogin(this.login);
         entity.setContrasena(this.contrasena);
         entity.setTipoUsuario(this.tipoUsuario);
+        entity.setDocumentoIdentidad(this.documentoIdentidad);
         return entity;
     }
     
     @Override
     public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the documentoIdentidad
+     */
+    public Long getDocumentoIdentidad() {
+        return documentoIdentidad;
+    }
+
+    /**
+     * @param documentoIdentidad the documentoIdentidad to set
+     */
+    public void setDocumentoIdentidad(Long documentoIdentidad) {
+        this.documentoIdentidad = documentoIdentidad;
     }
     
 }

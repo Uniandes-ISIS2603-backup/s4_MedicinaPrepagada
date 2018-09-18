@@ -132,16 +132,19 @@ public class MedicoLogic {
      */
     public void deleteMedico(Long medicosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el medico con id = {0}", medicosId);
-        List<HorarioAtencionEntity> horarios = getMedico(medicosId).getHorariosAtencion();
+        MedicoEntity medico = persistence.find(medicosId);
+        List<HorarioAtencionEntity> horarios = medico.getHorariosAtencion();
+        int numero = horarios.size();
+        
         if(!horarios.isEmpty()){
-            throw new BusinessLogicException("El médico tiene horarios de atencion pendientes ");
+            throw new BusinessLogicException("El médico tiene horarios de atencion pendientes 2 ");
         }
-        for(int i = 0; i<horarios.size();i++){
-            if(horarios.get(i).getCitasMedicas().size()>0){
-                throw new BusinessLogicException("El médico tiene citas médicas pendientes ");
-            }
-            horarioPersistence.delete(horarios.get(i).getId());
-        }
+//        for(int i = 0; i<horarios.size();i++){
+//            if(horarios.get(i).getCitasMedicas().size()>0){
+//                throw new BusinessLogicException("El médico tiene citas médicas pendientes ");
+//            }
+//            horarioPersistence.delete(horarios.get(i).getId());
+//        }
         persistence.delete(medicosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el medico con id = {0}", medicosId);
     }

@@ -39,24 +39,11 @@ public class MedicamentoLogic {
     public MedicamentoEntity createMedicamento(MedicamentoEntity medicamentoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la medicamento");
         // Verifica la regla de negocio que dice que no puede haber dos medicamentos con el mismo nombre
+        // Verifica la regla de negocio que dice que no puede haber dos medicamentos con el mismo nombre
         if (persistence.findByNombre(medicamentoEntity.getNombre()) != null) {
             throw new BusinessLogicException("Ya existe un Medicamento con el nombre \"" + medicamentoEntity.getNombre() + "\"");
         }
-        //Verifica que el nombre sea valido
-        if (!validateString(medicamentoEntity.getNombre()))
-           throw new BusinessLogicException ("El nombre no puede ser vacío ");
-        
-        //Verifica que el elaboradoPor sea valido
-        if (!validateString(medicamentoEntity.getElaboradoPor()))
-           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
-        
-        //Verifica que la descripción sea valida
-        if (!validateString(medicamentoEntity.getDescripcion()))
-           throw new BusinessLogicException ("La descripción no puede ser vacía ");
-        
-        //Verifica que el costo sea valido
-        if (!validateCosto(medicamentoEntity.getCosto()))
-           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+        validarCondiciones(medicamentoEntity);
         
         // Invoca la persistencia para crear el medicamento
         persistence.create(medicamentoEntity);
@@ -116,26 +103,10 @@ public class MedicamentoLogic {
          if (medicamentoEntity.getId()!= medicamentosId)
             throw new BusinessLogicException("No se puede cambiar el id de la medicamento");
         //Verifica que no se intente cambiar el nombre del medicamento
-        if (medicamentoEntity.getNombre() != pMedicamentoOld.getNombre())
+        if (!medicamentoEntity.getNombre().equals(pMedicamentoOld.getNombre()))
             throw new BusinessLogicException("No se puede cambiar el nombre de una medicamento");
-        if (persistence.findByNombre(medicamentoEntity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe un Medicamento con el nombre \"" + medicamentoEntity.getNombre() + "\"");
-        }
-        //Verifica que el nombre sea valido
-        if (!validateString(medicamentoEntity.getNombre()))
-           throw new BusinessLogicException ("El nombre no puede ser vacío ");
-        
-        //Verifica que el elaboradoPor sea valido
-        if (!validateString(medicamentoEntity.getElaboradoPor()))
-           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
-        
-        //Verifica que la descripción sea valida
-        if (!validateString(medicamentoEntity.getDescripcion()))
-           throw new BusinessLogicException ("La descripción no puede ser vacía ");
-        
-        //Verifica que el costo sea valido
-        if (!validateCosto(medicamentoEntity.getCosto()))
-           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
+       
+        validarCondiciones(medicamentoEntity);
         
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
         MedicamentoEntity newEntity = persistence.update(medicamentoEntity);
@@ -169,5 +140,25 @@ public class MedicamentoLogic {
     private boolean validateCosto (Double pCosto)
     {
         return !(pCosto == null || pCosto<1000 || pCosto>10000000);
+    }
+    
+    private void validarCondiciones (MedicamentoEntity medicamentoEntity) throws BusinessLogicException
+    {
+        
+        //Verifica que el nombre sea valido
+        if (!validateString(medicamentoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+        
+        //Verifica que el elaboradoPor sea valido
+        if (!validateString(medicamentoEntity.getElaboradoPor()))
+           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
+        
+        //Verifica que la descripción sea valida
+        if (!validateString(medicamentoEntity.getDescripcion()))
+           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+        
+        //Verifica que el costo sea valido
+        if (!validateCosto(medicamentoEntity.getCosto()))
+           throw new BusinessLogicException ("El costo no puede ser vacío o tiene que estar dentro de los límites.");
     }
 }

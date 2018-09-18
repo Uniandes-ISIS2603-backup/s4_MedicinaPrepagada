@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicamentoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicamentoPersistence;
 import java.util.ArrayList;
@@ -102,11 +101,13 @@ public class MedicamentoLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        MedicamentoEntity medicamento = data.get(2);
-        OrdenMedicaEntity entity = factory.manufacturePojo(OrdenMedicaEntity.class);
-        entity.getMedicamentos().add(medicamento);
-        em.persist(entity);
-        medicamento.setOrdenMedica(entity);
+//        MedicamentoEntity medicamento = data.get(2);
+//        OrdenMedicaEntity entity = factory.manufacturePojo(OrdenMedicaEntity.class);
+//        ArrayList<MedicamentoEntity> lista = new ArrayList();
+//        lista.add(medicamento);
+//        entity.setMedicamentos(lista);
+//        em.merge(entity);
+//        medicamento.setOrdenMedica(entity);
     }
     
    /**
@@ -133,78 +134,80 @@ public class MedicamentoLogicTest {
     /**
      * Prueba para consultar la lista de Medicamentos.
      */
-//    @Test
-  //  public void getMedicamentosTest() {
-    //    List<MedicamentoEntity> list = medicamentoLogic.getMedicamentos();
-      //  Assert.assertEquals(data.size(), list.size());
-        //for (MedicamentoEntity entity : list) {
-//            boolean found = false;
-  //          for (MedicamentoEntity storedEntity : data) {
-    //            if (entity.getId().equals(storedEntity.getId())) {
-      //              found = true;
-        //        }
-          //  }
-            //Assert.assertTrue(found);
-//        }
-  //  }
+    @Test
+    public void getMedicamentosTest() {
+        List<MedicamentoEntity> list = medicamentoLogic.getMedicamentos();
+        Assert.assertEquals(data.size(), list.size());
+        for (MedicamentoEntity entity : list) {
+            boolean found = false;
+            for (MedicamentoEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
     /**
      * Prueba para consultar un Medicamento.
      */
-//    @Test
-  //  public void getMedicamentoTest() {
-    //    MedicamentoEntity entity = data.get(0);
-      //  MedicamentoEntity resultEntity = medicamentoLogic.getMedicamento(entity.getId());
-        //Assert.assertNotNull(resultEntity);
-//        Assert.assertEquals(entity.getId(), resultEntity.getId());
-  //  }
+    @Test
+    public void getMedicamentoTest() {
+        MedicamentoEntity entity = data.get(0);
+        MedicamentoEntity resultEntity = medicamentoLogic.getMedicamento(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    }
     
     /**
      * Prueba para actualizar un Medicamento.
      */
-//    @Test
-  //  public void updateMedicamentoTest() throws BusinessLogicException {
-    //    MedicamentoEntity entity = data.get(1);
-      //  MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
+    @Test
+    public void updateMedicamentoTest() throws BusinessLogicException {
+        MedicamentoEntity entity = data.get(1);
+        MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
 
-//        pojoEntity.setElaboradoPor("Glaxo Smith Kline");
-  //      pojoEntity.setDescripcion("Tomar mucha agua");
-    //    pojoEntity.setCosto(15000);
-      //  pojoEntity.setCantidad("20 mg");
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setElaboradoPor("Glaxo Smith Kline");
+        pojoEntity.setDescripcion("Tomar mucha agua");
+        pojoEntity.setCosto(15000);
+        pojoEntity.setCantidad("20 mg");
 
-        //medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
+        medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
 
-//        MedicamentoEntity resp = em.find(MedicamentoEntity.class, entity.getId());
+        MedicamentoEntity resp = em.find(MedicamentoEntity.class, entity.getId());
 
-//        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-  //  }
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
     
     /**
      * prueba para eliminar un medicamento
      */
-//    @Test
-  //  public void deleteMedicamentoTest() throws BusinessLogicException{
-    //    MedicamentoEntity entity = data.get(0);
-      //  medicamentoLogic.deleteMedicamento(entity.getId());
-        //MedicamentoEntity delet = em.find(MedicamentoEntity.class, entity.getId());
-//        Assert.assertNull(delet);
-  //  }
+    @Test
+    public void deleteMedicamentoTest() throws BusinessLogicException{
+        MedicamentoEntity entity = data.get(0);
+        medicamentoLogic.deleteMedicamento(entity.getId());
+        MedicamentoEntity delet = em.find(MedicamentoEntity.class, entity.getId());
+        Assert.assertNull(delet);
+    }
     
     /**
      * Prueba para crear un medicamento con un nombre reptido
      * @throws BusinessLogicException 
      */
-//    @Test(expected = BusinessLogicException.class)
-  //  public void crearMedicamentoConNombreRepetido() throws BusinessLogicException{
-    //    MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
-      //  newEntity.setNombre(data.get(0).getNombre());
-        //newEntity.setElaboradoPor("Glaxo Smith Kline");
-//        newEntity.setDescripcion("Tomar mucha agua");
-  //      newEntity.setCosto(15000);
-    //    newEntity.setCantidad("20 mg");
+    @Test(expected = BusinessLogicException.class)
+    public void crearMedicamentoConNombreRepetido() throws BusinessLogicException{
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        newEntity.setNombre(data.get(0).getNombre());
+        newEntity.setElaboradoPor("Glaxo Smith Kline");
+        newEntity.setDescripcion("Tomar mucha agua");
+        newEntity.setCosto(15000);
+        newEntity.setCantidad("20 mg");
         
-      //  medicamentoLogic.createMedicamento(newEntity);
-//    }
+        medicamentoLogic.createMedicamento(newEntity);
+    }
 
     
     /**
