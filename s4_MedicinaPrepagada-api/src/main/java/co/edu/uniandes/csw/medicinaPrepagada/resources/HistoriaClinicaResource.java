@@ -106,7 +106,7 @@ public class HistoriaClinicaResource
     
     @DELETE
     @Path("{HistoriaClinicaId: \\d+}")
-    public void deleteHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId) throws WebApplicationException, BusinessLogicException
+    public void deleteHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource deleteHistoriaClinica: input:(0)", histClinicaId);
         
