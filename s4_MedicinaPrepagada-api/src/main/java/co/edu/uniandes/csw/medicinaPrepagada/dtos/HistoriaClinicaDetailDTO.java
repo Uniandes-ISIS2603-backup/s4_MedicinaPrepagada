@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -22,6 +25,25 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
     public HistoriaClinicaDetailDTO() 
     {
         super();
+    }
+    
+    /**
+     * Crea un objeto AuthorDetailDTO a partir de un objeto AuthorEntity
+     */
+    
+    public HistoriaClinicaDetailDTO(HistoriaClinicaEntity histEntity) 
+    {
+        super(histEntity);
+        
+        if (histEntity != null) 
+        {
+            ordenesMedicas = new ArrayList<>();
+            
+            for (OrdenMedicaEntity entityOrdenes : histEntity.getOrdenesMedicas())
+            {
+                ordenesMedicas.add(new OrdenMedicaDTO(entityOrdenes));
+            }
+        }
     }
     
      /**

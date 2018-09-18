@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -27,6 +28,7 @@ public class HistoriaClinicaDTO implements Serializable
     private boolean fuma; 
     private boolean bebe; 
     private String operaciones; 
+    
     
     /**
      * Constructor vacio
