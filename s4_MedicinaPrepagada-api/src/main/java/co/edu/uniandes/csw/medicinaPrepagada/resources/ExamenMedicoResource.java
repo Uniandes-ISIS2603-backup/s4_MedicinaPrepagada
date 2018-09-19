@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "examenesMedicos".
  *
- * @author ISIS2603
+ * @author ncobos
  * @version 1.0
  */
 @Path("examenesMedicos")

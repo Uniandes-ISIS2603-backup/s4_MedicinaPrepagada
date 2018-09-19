@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.persistence.ExamenMedicoPersistence
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -42,11 +44,11 @@ public class ExamenMedicoLogic {
         
          //Verifica que el nombre sea valido
         if (!validateString(examenMedicoEntity.getNombre()))
-           throw new BusinessLogicException ("El nombre no puede ser vacío ");
+           throw new BusinessLogicException ("El nombre no puede ser vacío y debe cumplir con un formato.");
         
         //Verifica que las recomendaciones sean validas
         if (!validateString(examenMedicoEntity.getRecomendaciones()))
-           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+           throw new BusinessLogicException ("La descripción no cumple con el formato.");
         
         //Verifica que el costo sea valido
         if (!validateCosto(examenMedicoEntity.getCosto()))
@@ -111,20 +113,12 @@ public class ExamenMedicoLogic {
          if (examenMedicoEntity.getId()!= examenMedicosId)
             throw new BusinessLogicException("No se puede cambiar el id del examenMedico");
         //Verifica que no se intente cambiar el nombre del examenMedico
-        if (examenMedicoEntity.getNombre() != pExamenMedicoOld.getNombre())
+        if (!examenMedicoEntity.getNombre().equals(pExamenMedicoOld.getNombre()))
             throw new BusinessLogicException("No se puede cambiar el nombre de una examenMedico");
-        
-        if (persistence.findByNombre(examenMedicoEntity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe una ExamenMedico con el nombre \"" + examenMedicoEntity.getNombre() + "\"");
-        }
-        
-         //Verifica que el nombre sea valido
-        if (!validateString(examenMedicoEntity.getNombre()))
-           throw new BusinessLogicException ("El nombre no puede ser vacío ");
         
         //Verifica que las recomendaciones sean validas
         if (!validateString(examenMedicoEntity.getRecomendaciones()))
-           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+           throw new BusinessLogicException ("La descripción no cumple con el formato.");
         
         //Verifica que el costo sea valido
         if (!validateCosto(examenMedicoEntity.getCosto()))
@@ -149,10 +143,15 @@ public class ExamenMedicoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar la examenMedico con id = {0}", examenMedicosId);
     }
     
-    private boolean validateString (String pNombre)
+    
+    private boolean validateString (String pString) throws BusinessLogicException
     {
-        return !(pNombre == null || pNombre.isEmpty());
+        String validationPattern = "([A-Za-z]*|([A-Za-z]+\\s))+[A-Za-z]*";
+        Pattern patternNombre = Pattern.compile(validationPattern);
+        Matcher matchNombre = patternNombre.matcher(pString);
+        return matchNombre.matches();
     }
+    
        
     private boolean validateCosto (Double pCosto)
     {
