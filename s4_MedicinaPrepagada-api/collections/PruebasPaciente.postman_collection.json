@@ -36,7 +36,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"cedula\":102879457,\n\t\"nombre\" : \"holoo\",\n\t\"fechanacimiento\":\"21/09/87\",\n\t\"direccion\":\"cra 7 # 134 - 80\",\n\t\"numerocontacto\":2012407869,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"la menos peor\"\n}"
+					"raw": "{\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
@@ -60,11 +60,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c9a18050-bcc7-4f8d-b272-e1801d3542de",
+						"id": "6dd76365-4181-4532-a7ad-457c98ce6f5f",
 						"type": "text/javascript",
 						"exec": [
 							"",
-							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
 						]
 					}
 				}
@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -84,7 +84,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"pacientes",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -130,7 +130,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0d5ae01a-73e0-47f9-8199-ced1df15780b",
+						"id": "d2f6ebe9-caaa-4e6c-b725-28606628d0aa",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
@@ -143,7 +143,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,7 +153,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"pacientes",
-						"1"
+						"4"
 					]
 				}
 			},
@@ -165,18 +165,56 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cc273413-edaf-4aba-8a7f-2f2fc378b846",
+						"id": "b3ef5f4d-3617-4f9f-94e2-db58b486a888",
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
 						]
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"login\":\"djdsd\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/10/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePacienteConNuevaFechaNacimiento",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
 					"protocol": "http",

@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numero\":1234567812343456,\n\t\"fechaexpiracion\":\"12/22\",\n\t\"nombreentarjeta\":\"Alejandro Ospina\",\n\t\"franquicia\":\"Visa\",\n\t\"codigoseguridad\":666\n}"
+					"raw": "{\n\t\"numero\":4111111111111111,\n\t\"fechaExpiracion\":\"12/22\",\n\t\"nombreEnTarjeta\":\"ALEJADNRO OSPINA R\",\n\t\"franquicia\":\"Visa\",\n\t\"codigoSeguridad\":666\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito",
@@ -59,42 +59,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a340aa0e-047f-4a51-be26-8b8d02cf5b1d",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"tarjetascredito",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getTarjetasCredito",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "0fb2ed3f-88ab-4299-a608-8a4754e1fb5b",
+						"id": "08dd0ba5-fd9b-4864-ab7a-ed04c1bec75d",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
@@ -106,6 +71,73 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5100171235475198",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"tarjetascredito",
+						"5100171235475198"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTarjetaCredito",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c050be7-d3ed-452f-b1d8-ce395dbd819f",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5602235051148099",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"tarjetascredito",
+						"5602235051148099"
+					]
+				},
+				"description": "elimina una Tarjeta de credito"
+			},
+			"response": []
+		},
+		{
+			"name": "crearTarjetaConNumeroNoValido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numero\":4111111111111101,\n\t\"fechaExpiracion\":\"12/22\",\n\t\"nombreEnTarjeta\":\"ALEJADNRO OSPINA R\",\n\t\"franquicia\":\"Visa\",\n\t\"codigoSeguridad\":666\n}"
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito",
 					"protocol": "http",
@@ -119,42 +151,6 @@
 						"tarjetascredito"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteTarjetaCredito",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "365866a9-c80d-4706-afe9-6a3deaf79393",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"no genera error en el post\"] = responseCode.code == 204;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"tarjetascredito",
-						"1"
-					]
-				},
-				"description": "elimina una Tarjeta de credito"
 			},
 			"response": []
 		}
