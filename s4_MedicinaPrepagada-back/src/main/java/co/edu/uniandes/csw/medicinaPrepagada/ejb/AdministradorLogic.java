@@ -62,15 +62,8 @@ public class AdministradorLogic
         {
             throw new BusinessLogicException("El tipo de usuario no puede ser vacia");
         }
-        
-        try
-        {
-            validarFormatoContrasena(admiEntity);
-        }
-        catch( BusinessLogicException ex )
-        {
-            throw new BusinessLogicException("La contraseña no cumple con el formato");
-        }
+        //validarFormatoContrasena(admiEntity);
+      
         
         persistence.create(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del administrador");
