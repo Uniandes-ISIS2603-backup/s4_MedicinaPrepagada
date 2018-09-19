@@ -80,7 +80,7 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
      *  Crea un objeto PacienteDetailDTO a partir de un objeto PacienteEntity
      * incluyendo los atributos de PacienteDTO.
      *
-     * @param pacienteEntityEntidad PacienteEntity desde la cual se va a crear el
+     * @param pacienteEntity Entidad PacienteEntity desde la cual se va a crear el
      * nuevo objeto.
      *
      */
@@ -90,13 +90,13 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
            if(pacienteEntity.getCitasLaboratorio() != null){
                citasLaboratorio = new LinkedList<>();
                for(CitaLaboratorioEntity citaLab : pacienteEntity.getCitasLaboratorio()){
-//                   citasLaboratorio.add(new CitaLaboratorioDTO(citaLab));
+                   citasLaboratorio.add(new CitaLaboratorioDTO(citaLab));
                }
            }
            if(pacienteEntity.getFacturas() != null){
                facturas = new LinkedList<>();
                for(FacturaEntity fact: pacienteEntity.getFacturas()){
-//                   facturas.add(new FacturaDTO(fact));
+                   facturas.add(new FacturaDTO(fact));
                }
            }
            if(pacienteEntity.getTarjetasCredito() != null){
@@ -108,13 +108,13 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
            if(pacienteEntity.getCitasMedicas() != null){
                citasMedicas = new LinkedList<>();
                for(CitaMedicaEntity med:pacienteEntity.getCitasMedicas()){
-//                  citasMedicas.add(new CitaMedicaDTO(med));
+                  citasMedicas.add(new CitaMedicaDTO(med));
                }
            }
            if(pacienteEntity.getHistoriasClinicas() != null){
                historiasClinicas = new LinkedList<>();
                for(HistoriaClinicaEntity his : pacienteEntity.getHistoriasClinicas()){
-//                   historiasClinicas.add(new HistoriaClinicaDTO(his));
+                   historiasClinicas.add(new HistoriaClinicaDTO(his));
                }
            }
         }
