@@ -18,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *Clase que implementa el recurso "tarjetascredito"
@@ -25,8 +26,8 @@ import javax.ws.rs.Produces;
  * @author MIGUELHOYOS
  */
 @Path("tarjetascredito")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class TarjetaCreditoResource {
     

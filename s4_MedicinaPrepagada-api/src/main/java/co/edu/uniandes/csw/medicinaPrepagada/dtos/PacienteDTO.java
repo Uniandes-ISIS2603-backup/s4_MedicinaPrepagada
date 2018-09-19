@@ -47,6 +47,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class PacienteDTO extends UsuarioDTO implements Serializable{
     
+    private Long id;
     private String nombre;
     private String fechaNacimiento;
     private String direccion;
@@ -69,6 +70,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      */
     public PacienteDTO(PacienteEntity pacienteEntity){
         if(pacienteEntity != null){
+            this.id = pacienteEntity.getId();
             this.nombre = pacienteEntity.getNombre();
             this.fechaNacimiento = pacienteEntity.getFechaNacimiento();
             this.direccion = pacienteEntity.getDireccion();
@@ -186,6 +188,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
         pacienteEntity.setContrasena(super.toEntity().getContrasena());
         pacienteEntity.setTipoUsuario(super.toEntity().getTipoUsuario());
         pacienteEntity.setDocumentoIdentidad(super.toEntity().getDocumentoIdentidad());
+        pacienteEntity.setId(this.id);
         pacienteEntity.setNombre(this.nombre);
         pacienteEntity.setFechaNacimiento(this.fechaNacimiento);
         pacienteEntity.setMail(this.mail);
@@ -198,5 +201,19 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     @Override
     public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

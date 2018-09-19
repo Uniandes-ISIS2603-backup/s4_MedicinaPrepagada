@@ -12,6 +12,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -22,14 +24,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *Clase que implementa el recurso "pacientes"
  * @author MIGUELHOYOS
  */
 @Path("pacientes")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class PacienteResource {
     
@@ -49,11 +53,17 @@ public class PacienteResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public PacienteDTO createPaciente(PacienteDetailDTO paciente) throws BusinessLogicException
+    public PacienteDTO createPaciente(PacienteDetailDTO paciente)
     {
        PacienteEntity entity = paciente.toEntity();
-       PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
-       return  new PacienteDTO(nuevaEntity);
+       PacienteEntity nuevaEntity;
+        try {
+            nuevaEntity = pacienteLogic.createPaciente(entity);
+            return  new PacienteDTO(nuevaEntity);
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(PacienteResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException();
+        }
     }
     
     /**
