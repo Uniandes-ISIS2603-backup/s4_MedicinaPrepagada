@@ -63,6 +63,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * retorna el numero de DTO
      * @return the numero
      */
     public Long getNumero() {
@@ -70,6 +71,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * sets el numero del DTO
      * @param numero the numero to set
      */
     public void setNumero(Long numero) {
@@ -77,6 +79,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * retorna la fecha de expiracion del DTO
      * @return the fechaExpiracion
      */
     public String getFechaExpiracion() {
@@ -84,6 +87,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * sets la fecha de expiracion del DTO
      * @param fechaExpiracion the fechaExpiracion to set
      */
     public void setFechaExpiracion(String fechaExpiracion) {
@@ -91,6 +95,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * retorna el nombre en la tarjeta del DTO
      * @return the nombreEnTarjeta
      */
     public String getNombreEnTarjeta() {
@@ -98,6 +103,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * sets el nombre de la tarjeta del DTO
      * @param nombreEnTarjeta the nombreEnTarjeta to set
      */
     public void setNombreEnTarjeta(String nombreEnTarjeta) {
@@ -105,6 +111,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * retorna la franquicia del DTO
      * @return the franquicia
      */
     public String getFranquicia() {
@@ -112,6 +119,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * sets la franquicia del DTO
      * @param franquicia the franquicia to set
      */
     public void setFranquicia(String franquicia) {
@@ -119,6 +127,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * retorna el codigo de seguridad del DTO
      * @return the codigoSeguridad
      */
     public Integer getCodigoSeguridad() {
@@ -126,6 +135,7 @@ public class TarjetaCreditoDTO implements Serializable{
     }
 
     /**
+     * sets el codigo de seguridad del DTO
      * @param codigoSeguridad the codigoSeguridad to set
      */
     public void setCodigoSeguridad(Integer codigoSeguridad) {
