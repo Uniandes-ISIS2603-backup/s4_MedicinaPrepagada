@@ -51,6 +51,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return atributo id.
      */
     
+    @Override
     public Long getId() 
     {
         return id;
@@ -61,6 +62,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param id nuevo valor del atributo
      */
     
+    @Override
     public void setId(Long id) 
     {
         this.id = id;

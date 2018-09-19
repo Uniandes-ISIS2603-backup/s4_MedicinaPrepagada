@@ -25,8 +25,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
-//    @Id
-//    private Long id; 
     @Temporal(TemporalType.DATE)
     private Date fecha; 
     private String descripcionDiagnostico; 

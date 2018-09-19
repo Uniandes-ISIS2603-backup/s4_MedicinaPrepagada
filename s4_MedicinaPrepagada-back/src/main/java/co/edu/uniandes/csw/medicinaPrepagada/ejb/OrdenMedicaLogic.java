@@ -9,8 +9,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +41,6 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
         
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date d1 = Date.from(Instant.now());
 
         if(persistence.find(ordenEntity.getId()) != null) 

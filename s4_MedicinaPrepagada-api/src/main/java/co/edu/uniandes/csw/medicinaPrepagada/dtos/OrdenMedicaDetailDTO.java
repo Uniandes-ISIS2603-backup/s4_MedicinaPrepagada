@@ -5,7 +5,11 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -27,6 +31,33 @@ public class OrdenMedicaDetailDTO extends OrdenMedicaDTO implements Serializable
     public OrdenMedicaDetailDTO()
     {
         super();
+    }
+    
+    /**
+     * Crea un objeto OrdenMedicaDetailDto a partir de un objeto OrdenMedicaEntity
+     */
+    
+    public OrdenMedicaDetailDTO(OrdenMedicaEntity ordenEntity) 
+    {
+        super(ordenEntity);
+        
+        if (ordenEntity != null) 
+        {
+            examenesMedicos = new ArrayList<>();
+            
+            for (ExamenMedicoEntity entityExamenesMedicos : ordenEntity.getExamenesMedicos())
+            {
+                examenesMedicos.add(new ExamenMedicoDTO(entityExamenesMedicos));
+            }
+            
+            medicamentos = new ArrayList<>(); 
+            
+            for (MedicamentoEntity entityMedicamentos : ordenEntity.getMedicamentos())
+            {
+                medicamentos.add(new MedicamentoDTO(entityMedicamentos));
+            }
+            
+        }
     }
     
     /**

@@ -41,6 +41,8 @@ public class HistoriaClinicaResource
     
      @Inject
     private HistoriaClinicaLogic histLogic;
+     
+     private String mensaje = "no existe"; 
     
     /**
      * Crea una nueva historia clinica con la informacion que se recibe en el cuerpo de la
@@ -53,9 +55,9 @@ public class HistoriaClinicaResource
     @POST
     public HistoriaClinicaDTO createHistoriaClinica(HistoriaClinicaDTO histClinica) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "HistoriaClinicaResource createHistoriaClinica: input: {0}", histClinica.toString());
+        LOGGER.log(Level.INFO, "HistoriaClinicaResource createHistoriaClinica: input: {0}", histClinica);
         HistoriaClinicaDTO nuevaHistClinicaDTO = new HistoriaClinicaDTO(histLogic.createHistoriaClinica(histClinica.toEntity()));
-        LOGGER.log(Level.INFO, "HistoriaClinicaResource createHistoriaClinica: output: {0}", nuevaHistClinicaDTO.toString());
+        LOGGER.log(Level.INFO, "HistoriaClinicaResource createHistoriaClinica: output: {0}", nuevaHistClinicaDTO);
         return nuevaHistClinicaDTO;
     }
     
@@ -70,7 +72,7 @@ public class HistoriaClinicaResource
     {
         LOGGER.info("HistoriaClinicaResource getHistoriasClinicas: input: void");
         List<HistoriaClinicaDTO> listaHistoriasClinicas = listEntity2DetailDTO(histLogic.getHistoriasClinicas());
-        LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriasClinicas: output: {0}", listaHistoriasClinicas.toString());
+        LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriasClinicas: output: {0}", listaHistoriasClinicas);
         return listaHistoriasClinicas;
     }
     
@@ -89,11 +91,11 @@ public class HistoriaClinicaResource
         
         if (histClinEntity == null) 
         {
-            throw new WebApplicationException("El recurso /historiClinica/" + histClinicaId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /historiClinica/" + histClinicaId + mensaje, 404);
         }
         
         HistoriaClinicaDTO histClinDetailDTO = new HistoriaClinicaDTO(histClinEntity);
-        LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: output: {0}", histClinDetailDTO.toString());
+        LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: output: {0}", histClinDetailDTO);
         return histClinDetailDTO;
     }
     
@@ -112,7 +114,7 @@ public class HistoriaClinicaResource
         
         if (histLogic.getHistoriaClinica(histClinicaId) == null) 
         {
-           throw new WebApplicationException("El recurso /historiaClinica/" + histClinicaId + " no existe.", 404);
+           throw new WebApplicationException("El recurso /historiaClinica/" + histClinicaId + mensaje, 404);
         }
         
         histLogic.deleteHistoriaClinica(histClinicaId); 
@@ -128,7 +130,7 @@ public class HistoriaClinicaResource
      */
     
     @PUT
-    @Path("(HistoriaClinicaId: \\d+)")
+    @Path("{HistoriaClinicaId: \\d+}")
     public HistoriaClinicaDTO updateHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
@@ -136,11 +138,11 @@ public class HistoriaClinicaResource
         
         if (histLogic.getHistoriaClinica(histClinicaId) == null) 
         {
-            throw new WebApplicationException("La orden medica con ese id" + histClinicaId + " no existe.", 404);
+            throw new WebApplicationException("La orden medica con ese id" + histClinicaId +mensaje, 404);
         }
         
         HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO( histLogic.updateHistoriaClinica(histClinicaId, pHistoria.toEntity()));        
-        LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto.toString());
+        LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto);
         return modificarDetailDto;
     }
        
