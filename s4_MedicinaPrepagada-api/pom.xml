@@ -24,12 +24,12 @@
         <dependency>
             <groupId>co.edu.uniandes.csw</groupId>
             <artifactId>s4_medisistemas-back</artifactId>
-            <version>1.2</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.csw</groupId>
             <artifactId>postman-simple</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
