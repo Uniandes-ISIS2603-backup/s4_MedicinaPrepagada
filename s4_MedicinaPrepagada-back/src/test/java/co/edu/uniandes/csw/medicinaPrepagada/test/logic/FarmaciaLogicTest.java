@@ -100,13 +100,7 @@ public class FarmaciaLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-//        FarmaciaEntity farmacia = data.get(2);
-//        OrdenMedicaEntity entity = factory.manufacturePojo(OrdenMedicaEntity.class);
-//        ArrayList<FarmaciaEntity> lista = new ArrayList();
-//        lista.add(farmacia);
-//        entity.setFarmacias(lista);
-//        em.merge(entity);
-//        farmacia.setOrdenMedica(entity);
+
     }
     
    /**
@@ -116,7 +110,7 @@ public class FarmaciaLogicTest {
     public void createFarmaciaTest() throws BusinessLogicException {
         FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
         newEntity.setNombre("Farmatodo");
-        newEntity.setUbicacion("Cra 30 # 70-80");
+        newEntity.setUbicacion("Calle 10 # 10-10");
         newEntity.setTelefono(4561234L);
         newEntity.setLongitud(-72.03);
         newEntity.setLatitud(4.05);
@@ -219,19 +213,126 @@ public class FarmaciaLogicTest {
 
     
     /**
-     * Prueba para crear un farmacia con un costo inválido
+     * Prueba para crear un farmacia con una ubicacion invalida
      * @throws BusinessLogicException 
      */
-//    @Test(expected = BusinessLogicException.class)
-//    public void crearFarmaciaConCostoInvalido() throws BusinessLogicException{
-//        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
-//        newEntity.setElaboradoPor("Glaxo Smith Kline");
-//        newEntity.setDescripcion("Tomar mucha agua");
-//        newEntity.setCosto(1);
-//        newEntity.setCantidad("20 mg");
-//        
-//        farmaciaLogic.createFarmacia(newEntity);
-//    }
+    @Test(expected = BusinessLogicException.class)
+    public void crearFarmaciaConUbicacionInvalida() throws BusinessLogicException{
+        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        newEntity.setNombre("Farmatodo");
+        newEntity.setUbicacion("Calle 10 10-10");
+        newEntity.setTelefono(4561234L);
+        newEntity.setLongitud(-72.03);
+        newEntity.setLatitud(4.05);
+        newEntity.setCorreo("abc@example.com");
+        
+        farmaciaLogic.createFarmacia(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un farmacia con un telefono invalido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearFarmaciaConTelefonoInvalido() throws BusinessLogicException{
+        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        newEntity.setNombre("Farmatodo");
+        newEntity.setUbicacion("Calle 10 #10-10");
+        newEntity.setTelefono(1L);
+        newEntity.setLongitud(-72.03);
+        newEntity.setLatitud(4.05);
+        newEntity.setCorreo("abc@example.com");
+        
+        farmaciaLogic.createFarmacia(newEntity);
+    }
 
+    /**
+     * Prueba para crear un farmacia con una longitud invalida
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearFarmaciaConLongitudInvalida() throws BusinessLogicException{
+        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        newEntity.setNombre("Farmatodo");
+        newEntity.setUbicacion("Calle 10 #10-10");
+        newEntity.setTelefono(3456789L);
+        newEntity.setLongitud(100000);
+        newEntity.setLatitud(4.05);
+        newEntity.setCorreo("abc@example.com");
+        
+        farmaciaLogic.createFarmacia(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un farmacia con una latitud invalida
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearFarmaciaConLatitudInvalida() throws BusinessLogicException{
+        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        newEntity.setNombre("Farmatodo");
+        newEntity.setUbicacion("Calle 10 #10-10");
+        newEntity.setTelefono(3456789L);
+        newEntity.setLongitud(-72.03);
+        newEntity.setLatitud(400);
+        newEntity.setCorreo("abc@example.com");
+        
+        farmaciaLogic.createFarmacia(newEntity);
+    }
+
+     /**
+     * Prueba para crear un farmacia con una latitud invalida
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearFarmaciaConCorreoInvalido() throws BusinessLogicException{
+        FarmaciaEntity newEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        newEntity.setNombre("Farmatodo");
+        newEntity.setUbicacion("Calle 10 #10-10");
+        newEntity.setTelefono(3456789L);
+        newEntity.setLongitud(-72.03);
+        newEntity.setLatitud(4.05);
+        newEntity.setCorreo("abc");
+        
+        farmaciaLogic.createFarmacia(newEntity);
+    }
+    
+     /**
+     * Prueba para actualizar una farmacia con un correo inválido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateFarmaciaConCorreoInvalido() throws BusinessLogicException{
+        FarmaciaEntity entity = data.get(1);
+        FarmaciaEntity pojoEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setUbicacion(entity.getUbicacion());
+        pojoEntity.setTelefono(entity.getTelefono());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setCorreo("abc");
+        
+        farmaciaLogic.updateFarmacia(entity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para actualizar una farmacia con un telefono inválido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateFarmaciaConTelefonoInvalido() throws BusinessLogicException{
+        FarmaciaEntity entity = data.get(1);
+        FarmaciaEntity pojoEntity = factory.manufacturePojo(FarmaciaEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setUbicacion(entity.getUbicacion());
+        pojoEntity.setTelefono(123L);
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setCorreo(entity.getCorreo());
+        
+        farmaciaLogic.updateFarmacia(entity.getId(), pojoEntity);
+    }
     
 }

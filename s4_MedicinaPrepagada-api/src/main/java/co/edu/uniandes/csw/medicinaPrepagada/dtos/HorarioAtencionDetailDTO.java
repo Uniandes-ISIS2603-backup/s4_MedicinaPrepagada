@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -46,7 +48,11 @@ public class HorarioAtencionDetailDTO extends HorarioAtencionDTO implements Seri
    
        if (pHorarioAtencionEntity != null)
        {
-          // completar
+          citasMedicas = new ArrayList<>();
+           for (CitaMedicaEntity entityCitaMedicas : pHorarioAtencionEntity.getCitasMedicas())
+           {
+               citasMedicas.add(new CitaMedicaDTO(entityCitaMedicas));
+           }
        }
    } 
     
@@ -61,7 +67,15 @@ public class HorarioAtencionDetailDTO extends HorarioAtencionDTO implements Seri
     {
         HorarioAtencionEntity horarioAtencionEntity = super.toEntity();
 
-        //COmpletar
+       if (citasMedicas != null)
+       {
+           List<CitaMedicaEntity> citasMedEntity = new ArrayList<>();
+           for (CitaMedicaDTO dtoCitasMed : citasMedicas)
+           {
+               citasMedEntity.add(dtoCitasMed.toEntity());
+           }
+           horarioAtencionEntity.setCitasMedicas(citasMedEntity);
+       }
         return horarioAtencionEntity;
     }
     

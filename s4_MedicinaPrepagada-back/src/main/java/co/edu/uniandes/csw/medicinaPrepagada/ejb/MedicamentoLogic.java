@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicamentoPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -39,11 +41,13 @@ public class MedicamentoLogic {
     public MedicamentoEntity createMedicamento(MedicamentoEntity medicamentoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la medicamento");
         // Verifica la regla de negocio que dice que no puede haber dos medicamentos con el mismo nombre
-        // Verifica la regla de negocio que dice que no puede haber dos medicamentos con el mismo nombre
         if (persistence.findByNombre(medicamentoEntity.getNombre()) != null) {
             throw new BusinessLogicException("Ya existe un Medicamento con el nombre \"" + medicamentoEntity.getNombre() + "\"");
         }
         validarCondiciones(medicamentoEntity);
+         //Verifica que el nombre sea valido
+        if (!validateString(medicamentoEntity.getNombre()))
+           throw new BusinessLogicException ("El nombre debe tener letras.");
         
         // Invoca la persistencia para crear el medicamento
         persistence.create(medicamentoEntity);
@@ -132,9 +136,17 @@ public class MedicamentoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar la medicamento con id = {0}", medicamentosId);
     }
     
-    private boolean validateString (String pNombre)
+    private boolean validateString (String pString) throws BusinessLogicException
     {
-        return !(pNombre == null || pNombre.isEmpty());
+        String validationPattern = "([A-Za-z]*|([A-Za-z]+\\s))+[A-Za-z]*";
+        Pattern patternNombre = Pattern.compile(validationPattern);
+        Matcher matchNombre = patternNombre.matcher(pString);
+        return matchNombre.matches();
+    }
+    
+    private boolean validateCantidad(String pCantidad)
+    {
+        return (pCantidad.endsWith("mg")||pCantidad.endsWith("g")||pCantidad.endsWith("ml"));
     }
        
     private boolean validateCosto (Double pCosto)
@@ -144,18 +156,17 @@ public class MedicamentoLogic {
     
     private void validarCondiciones (MedicamentoEntity medicamentoEntity) throws BusinessLogicException
     {
-        
-        //Verifica que el nombre sea valido
-        if (!validateString(medicamentoEntity.getNombre()))
-           throw new BusinessLogicException ("El nombre no puede ser vacío ");
-        
         //Verifica que el elaboradoPor sea valido
         if (!validateString(medicamentoEntity.getElaboradoPor()))
-           throw new BusinessLogicException ("El elaboradoPor no puede ser vacío ");
+           throw new BusinessLogicException ("El elaboradoPor debe tener letras.");
         
         //Verifica que la descripción sea valida
         if (!validateString(medicamentoEntity.getDescripcion()))
-           throw new BusinessLogicException ("La descripción no puede ser vacía ");
+           throw new BusinessLogicException ("La descripción debe tener letras.");
+        
+        //Verifica que la cantidad sea valida
+        if (!validateCantidad(medicamentoEntity.getCantidad()))
+           throw new BusinessLogicException ("La cantidad no cumple con el formato");
         
         //Verifica que el costo sea valido
         if (!validateCosto(medicamentoEntity.getCosto()))

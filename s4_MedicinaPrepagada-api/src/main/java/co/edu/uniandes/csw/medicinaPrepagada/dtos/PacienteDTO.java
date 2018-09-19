@@ -47,7 +47,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class PacienteDTO extends UsuarioDTO implements Serializable{
     
-    private Long cedula;
     private String nombre;
     private String fechaNacimiento;
     private String direccion;
@@ -70,7 +69,6 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      */
     public PacienteDTO(PacienteEntity pacienteEntity){
         if(pacienteEntity != null){
-            this.cedula = pacienteEntity.getDocumentoIdentidad();
             this.nombre = pacienteEntity.getNombre();
             this.fechaNacimiento = pacienteEntity.getFechaNacimiento();
             this.direccion = pacienteEntity.getDireccion();
@@ -80,21 +78,9 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
         }
     }
 
-    /**
-     * @return the cedula
-     */
-    public Long getCedula() {
-        return cedula;
-    }
 
     /**
-     * @param cedula the cedula to set
-     */
-    public void setCedula(Long cedula) {
-        this.cedula = cedula;
-    }
-
-    /**
+     * retorna el nombre del DTO
      * @return the nombre
      */
     public String getNombre() {
@@ -102,6 +88,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets el nombre del DTO
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
@@ -109,6 +96,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * retorna la fecha de nacimiento del DTO
      * @return the fechaNacimiento
      */
     public String getFechaNacimiento() {
@@ -116,6 +104,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets la fecha de nacimiento del DTO
      * @param fechaNacimiento the fechaNacimiento to set
      */
     public void setFechaNacimiento(String fechaNacimiento) {
@@ -123,6 +112,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * retorna la direccion del DTO
      * @return the direccion
      */
     public String getDireccion() {
@@ -130,6 +120,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets la direccion del DTO
      * @param direccion the direccion to set
      */
     public void setDireccion(String direccion) {
@@ -137,6 +128,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * retorna el numero de contacto del DTO
      * @return the numeroContacto
      */
     public Long getNumeroContacto() {
@@ -144,6 +136,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets el numero de contacto del DTO
      * @param numeroContacto the numeroContacto to set
      */
     public void setNumeroContacto(Long numeroContacto) {
@@ -151,6 +144,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * retorna el mail del DTO
      * @return the mail
      */
     public String getMail() {
@@ -158,6 +152,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets el mail del DTO
      * @param mail the mail to set
      */
     public void setMail(String mail) {
@@ -165,6 +160,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * retorna la eps del DTO
      * @return the eps
      */
     public String getEps() {
@@ -172,6 +168,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
     }
 
     /**
+     * sets la EPS del DTO
      * @param eps the eps to set
      */
     public void setEps(String eps) {
@@ -182,9 +179,13 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      * convierte DTO a entity
      * @return un entity con los valores del dto
      */
+    @Override
     public PacienteEntity toEntity(){
         PacienteEntity pacienteEntity = new PacienteEntity();
-        pacienteEntity.setDocumentoIdentidad(this.cedula);
+        pacienteEntity.setLogin(super.toEntity().getLogin());
+        pacienteEntity.setContrasena(super.toEntity().getContrasena());
+        pacienteEntity.setTipoUsuario(super.toEntity().getTipoUsuario());
+        pacienteEntity.setDocumentoIdentidad(super.toEntity().getDocumentoIdentidad());
         pacienteEntity.setNombre(this.nombre);
         pacienteEntity.setFechaNacimiento(this.fechaNacimiento);
         pacienteEntity.setMail(this.mail);

@@ -19,7 +19,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *   {
  *      "login":string,
  *      "contrasena":string,
- *      "tipoUsuario":string
+ *      "tipoUsuario":string,
+ *      "documentoIdentidad":number
  *   }
  * </pre> Por ejemplo una editorial se representa asi:<br>
  *
@@ -28,7 +29,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *   {
  *      "login":"pepito420",
  *      "contrasena":"345",
- *      "tipoUsuario":"doctor"
+ *      "tipoUsuario":"doctor",
+ *      "documentoIdentidad":1020829469
  *   }
  *
  * </pre>
@@ -65,6 +67,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * retorana el login del DTO
      * @return the login
      */
     public String getLogin() {
@@ -72,6 +75,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * sets el login del DTO
      * @param login the login to set
      */
     public void setLogin(String login) {
@@ -79,6 +83,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * retorna la contrasena del DTO
      * @return the contrasena
      */
     public String getContrasena() {
@@ -86,6 +91,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * sets la contrasena del DTO
      * @param contrasena the contrasena to set
      */
     public void setContrasena(String contrasena) {
@@ -93,6 +99,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * retorna el tipoUsuario del DTO
      * @return the tipoUsuario
      */
     public String getTipoUsuario() {
@@ -100,6 +107,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * sets el tipo usario del DTO
      * @param tipoUsuario the tipoUsuario to set
      */
     public void setTipoUsuario(String tipoUsuario) {
@@ -126,6 +134,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * retorna el documento de indentidad del DTO
      * @return the documentoIdentidad
      */
     public Long getDocumentoIdentidad() {
@@ -133,6 +142,7 @@ public class UsuarioDTO {
     }
 
     /**
+     * sets el documento de identidad del DTO
      * @param documentoIdentidad the documentoIdentidad to set
      */
     public void setDocumentoIdentidad(Long documentoIdentidad) {
