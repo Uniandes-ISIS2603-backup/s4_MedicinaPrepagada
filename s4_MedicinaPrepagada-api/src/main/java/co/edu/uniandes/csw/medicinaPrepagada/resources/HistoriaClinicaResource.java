@@ -128,7 +128,7 @@ public class HistoriaClinicaResource
      */
     
     @PUT
-    @Path("(HistoriaClinicaId: \\d+)")
+    @Path("{HistoriaClinicaId: \\d+}")
     public HistoriaClinicaDTO updateHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);

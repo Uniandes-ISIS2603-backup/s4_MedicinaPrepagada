@@ -132,7 +132,7 @@ public class AdministradorResource
      */
     
     @PUT
-    @Path("(administradorId: \\d+)")
+    @Path("{administradorId: \\d+}")
     public AdministradorDTO updateAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
