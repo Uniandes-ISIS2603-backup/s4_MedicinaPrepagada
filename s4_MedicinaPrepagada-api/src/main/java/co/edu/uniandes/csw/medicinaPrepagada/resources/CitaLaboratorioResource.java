@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaLaboratorioDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.CitaLaboratorioLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,15 +37,15 @@ public class CitaLaboratorioResource {
     
     
     private static final Logger LOGGER = Logger.getLogger(CitaLaboratorioResource.class.getName());
-   
+    private CitaLaboratorioLogic citaLogic;
     @POST
-    public CitaLaboratorioDTO createCitaLaboratorio (CitaLaboratorioDTO CitaLaboratorio) throws BusinessLogicException
+    public CitaLaboratorioDTO createCitaLaboratorio (CitaLaboratorioDTO pCitaLaboratorio) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: input: (0)", CitaLaboratorio.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: input: {0}", pCitaLaboratorio.toString());
         
-        CitaLaboratorioDTO nuevoCitaLabDTO = new CitaLaboratorioDTO();
+        CitaLaboratorioDTO nuevoCitaLabDTO = new CitaLaboratorioDTO(citaLogic.createCitaLaboratorio(pCitaLaboratorio.toEntity()));
         
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: output: (0)", nuevoCitaLabDTO.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: output: {0}", nuevoCitaLabDTO.toString());
         
         return nuevoCitaLabDTO;
     }
@@ -53,12 +55,16 @@ public class CitaLaboratorioResource {
     @Path("{CitaLaboratorioId: \\d+}")
     public CitaLaboratorioDTO getCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId ) throws WebApplicationException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: input: (0)", CitaLaboratorioId);
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: input: {0}", CitaLaboratorioId);
+        CitaLaboratorioEntity entity = citaLogic.getCita(CitaLaboratorioId);
+        if(entity == null)
+        {
+            throw new WebApplicationException("El recurso /citaLaboratorio/" + CitaLaboratorioId + " no existe .", 404);
+        }
         
-        CitaLaboratorioDTO nuevoDetailDTO = new CitaLaboratorioDTO();
-        
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: output: {0}", nuevoDetailDTO.toString());
-        return nuevoDetailDTO;
+        CitaLaboratorioDTO citaLabDTO = new CitaLaboratorioDTO(entity);
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: output: {0}", citaLabDTO.toString());
+        return citaLabDTO;
     }
     
     @GET
@@ -66,7 +72,7 @@ public class CitaLaboratorioResource {
     public List <CitaLaboratorioDTO> getCitasLaboratorio ()
     {
         LOGGER.info("CitaLaboratorioResource getCitasLaboratorio: input: void");
-        List<CitaLaboratorioDTO> listaCitasLab = listEntityDetailDTO() ;
+        List<CitaLaboratorioDTO> listaCitasLab = listEntityDTO(citaLogic.getCitasLab()) ;
         LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitasLaboratorio: output: {0}", listaCitasLab.toString());
         return listaCitasLab;
     }
@@ -75,29 +81,41 @@ public class CitaLaboratorioResource {
     @Path("{CitaLaboratorioId:\\d+}")
     public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioDTO deleteCitaLaboratorio:input:(0)", CitaLaboratorioId);
+        LOGGER.log(Level.INFO, "CitaLaboratorioDTO deleteCitaLaboratorio:input: {0}", CitaLaboratorioId);
+        if (citaLogic.getCita(CitaLaboratorioId) == null) 
+        {
+            throw new WebApplicationException("El recurso /citaLaboratorio/ que desea eliminar" + CitaLaboratorioId + " no existe.", 404);
+        }
+        citaLogic.deleteCitaLab(CitaLaboratorioId);
         LOGGER.info("CitaLaboratorioDTO deleteCitaLaboratorio: output: void");
     }
     
     @PUT
     @Path("{CitaLaboratorioId:\\d+}")
-    public CitaLaboratorioDTO modificarCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
+    public CitaLaboratorioDTO updateCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId, CitaLaboratorioDTO pCitaD) throws BusinessLogicException,WebApplicationException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource modificarCitaLaboratorio: input:(0)", CitaLaboratorioId);
-        CitaLaboratorioDTO modificadoDetailDTO = new CitaLaboratorioDTO ();
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource modificarCitaLaboratorio: input: {0}, citaLaboratorio {1}", new Object[]{CitaLaboratorioId, pCitaD.toString()});
+        pCitaD.setId(CitaLaboratorioId);
+        if (citaLogic.getCita(CitaLaboratorioId) == null)
+        {
+            throw new WebApplicationException("El recurso /citaLaboratorio/ que quiere editar con id" + CitaLaboratorioId + " no existe.", 404);
+        }
+        CitaLaboratorioDTO nuevoDTO = new CitaLaboratorioDTO(citaLogic.updateCitaLaboratorio(CitaLaboratorioId, pCitaD.toEntity()));
+        LOGGER.log(Level.INFO,"CitaLaboratorioResource modificarCitaLaboratorio: output: {0}", nuevoDTO.toString());
         
-        LOGGER.log(Level.INFO,"CitaLaboratorioResource modificarCitaLaboratorio: output: (0)", modificadoDetailDTO.toString());
-        
-        return modificadoDetailDTO;
+        return nuevoDTO;
     }
     
     
             
-    private List<CitaLaboratorioDTO> listEntityDetailDTO()
+    private List<CitaLaboratorioDTO> listEntityDTO(List<CitaLaboratorioEntity> entityList) 
     {
         List<CitaLaboratorioDTO> list = new ArrayList<>();
-
+        for (CitaLaboratorioEntity entity : entityList) 
+        {
+            list.add(new CitaLaboratorioDTO(entity));
+        }
         return list;
-    }       
+    }      
     
 }

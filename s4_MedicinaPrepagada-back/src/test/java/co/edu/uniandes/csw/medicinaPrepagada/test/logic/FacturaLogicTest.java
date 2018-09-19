@@ -93,17 +93,19 @@ public class FacturaLogicTest {
         }
        
     }
-    /*
+    
     @Test
     public void createFactura () throws BusinessLogicException
     {
        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       newEntity.setValor(1000);
        FacturaEntity result = facturaLogic.createFactura(newEntity);
+       
        Assert.assertNotNull(result);
        FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
 
     }
-    */
+    
     @Test
     public void getAllFacturasTest() throws BusinessLogicException
     {
@@ -127,11 +129,35 @@ public class FacturaLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-    
+    /*
     @Test
     public void updateFaturaTest() throws BusinessLogicException
     {
+       FacturaEntity entity = factList.get(1);
+       FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       
+       
+       newEntity.setCitaLab(entity.getCitaLab());
+       
+       newEntity.setConcepto(entity.getConcepto());
+       
+       newEntity.setFecha(entity.getFecha());
+       
+       newEntity.setId(entity.getId());
+       
+       newEntity.setIdCliente(entity.getIdCliente());
+       newEntity.setPaciente(entity.getPaciente());
+       newEntity.setValor(entity.getValor());
         
+       newEntity.setPagada(entity.getPagada());
+       
+       
+       facturaLogic.updateFactura(newEntity);
+       
+       FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+       Assert.assertEquals(newEntity.getId(), resp.getId());
+       
     }
+    */
     
 }

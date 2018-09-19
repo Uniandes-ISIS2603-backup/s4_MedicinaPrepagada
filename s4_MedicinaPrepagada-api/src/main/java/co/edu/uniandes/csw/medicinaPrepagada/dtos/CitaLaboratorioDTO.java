@@ -13,22 +13,37 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author Santiago Rojas
  */
 public class CitaLaboratorioDTO implements Serializable {
     
+    /**
+     * Id de la cita
+     */
     private Long id;
-    
+    /**
+     * fecha de la cita
+     */
     private Date fecha;
-    
+    /**
+     * especialidad de la cita
+     */
     private String especialidad;
-    
+    /**
+     * comentarios de la cita
+     */
     private String comentarios;
-    
+    /**
+     *Recomendaciones para la cita
+     */
     private String recomendaciones;
-    
+    /**
+     * El paciente que pidio la cita
+     */
     private PacienteDTO paciente;
-    
+    /**
+     * Laboratorio donde la cita se llevara acabo
+     */
     private LaboratorioDTO laboratorio;
     
     // Constructor de clase vacio
@@ -36,6 +51,13 @@ public class CitaLaboratorioDTO implements Serializable {
     {
         
     }
+     /**
+     * Crea un objeto CitaLaboratorioDTO a partir de un objeto CitaLaboratorioEntity.
+     *
+     * @param pCitaLaboratorioEntity CitaLaboratorioEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */ 
     public CitaLaboratorioDTO(CitaLaboratorioEntity pCitaLaboratorioEntity) {
         if (pCitaLaboratorioEntity != null) {
             this.id = pCitaLaboratorioEntity.getId();
@@ -48,8 +70,14 @@ public class CitaLaboratorioDTO implements Serializable {
         }
 
     }
-
-    public CitaLaboratorioEntity toEntity() {
+    /**
+     * Convierte un objeto CitaLaboratorioDTO a CitaLaboratorioEntity.
+     *
+     * @return Nueva objeto CitaLaboratorioEntity.
+     *
+     */
+    public CitaLaboratorioEntity toEntity() 
+    {
         CitaLaboratorioEntity citaLabEntity = new CitaLaboratorioEntity();
 
         citaLabEntity.setId(this.getId());
