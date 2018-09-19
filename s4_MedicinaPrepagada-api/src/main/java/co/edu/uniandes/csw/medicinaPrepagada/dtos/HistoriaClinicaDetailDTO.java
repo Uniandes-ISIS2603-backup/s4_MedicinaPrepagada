@@ -29,6 +29,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
     
     /**
      * Crea un objeto HistoriaClinicaDTO a partir de un objeto HistoriaClinicaEntity
+     * @param histEntity
      */
     
     public HistoriaClinicaDetailDTO(HistoriaClinicaEntity histEntity) 

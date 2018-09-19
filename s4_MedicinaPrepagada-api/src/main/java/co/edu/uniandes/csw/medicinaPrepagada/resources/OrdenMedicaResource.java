@@ -54,9 +54,9 @@ public class OrdenMedicaResource
     @POST
     public OrdenMedicaDTO createOrdenMedica(OrdenMedicaDTO ordenMedica) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: input: {0}", ordenMedica.toString());
+        LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: input: {0}", ordenMedica);
         OrdenMedicaDTO nuevaOrdenMedicaDTO = new OrdenMedicaDTO(ordenLogic.createOrdenMedica(ordenMedica.toEntity()));
-        LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: output: {0}", nuevaOrdenMedicaDTO.toString());
+        LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: output: {0}", nuevaOrdenMedicaDTO);
         return nuevaOrdenMedicaDTO;
     }
     
@@ -71,7 +71,7 @@ public class OrdenMedicaResource
     {
         LOGGER.info("OrdenMedicaResource getOrdenesMedicas: input: void");
         List<OrdenMedicaDTO> listaOrdenesMedicas = listEntity2DetailDTO(ordenLogic.getOrdenesMedicas());
-        LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenesMedicas: output: {0}", listaOrdenesMedicas.toString());
+        LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenesMedicas: output: {0}", listaOrdenesMedicas);
         return listaOrdenesMedicas;
     }
     
@@ -84,7 +84,7 @@ public class OrdenMedicaResource
     
     @GET
     @Path("{OrdenMedicaId: \\d+}")
-    public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid) throws WebApplicationException
+    public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid)
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: input: {0}", ordenMedicaid);
         
@@ -96,7 +96,7 @@ public class OrdenMedicaResource
         }
         
         OrdenMedicaDTO ordenMedicaDetailDTO = new OrdenMedicaDTO(ordenmedicaEntity);
-        LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: output: {0}", ordenMedicaDetailDTO.toString());
+        LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: output: {0}", ordenMedicaDetailDTO);
         return ordenMedicaDetailDTO;
     }
     
@@ -108,7 +108,7 @@ public class OrdenMedicaResource
     
     @DELETE
     @Path("{OrdenMedicaId: \\d+}")
-    public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException, WebApplicationException
+    public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource deleteOrdenMedica: input:(0)", ordenMedicaid);
         
@@ -126,17 +126,16 @@ public class OrdenMedicaResource
      * @param ordenMedicaid
      * @param pOrden
      * @return 
-     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException 
      */
     
     @PUT
     @Path("{ordenMedicaId: \\d+}")
-    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid, OrdenMedicaDetailDTO pOrden) throws BusinessLogicException
+    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid, OrdenMedicaDetailDTO pOrden)  
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource modificarOrdenMedica: input:(0)", ordenMedicaid);
         pOrden.setId(ordenMedicaid);
         OrdenMedicaDetailDTO modificarDetailDto = new OrdenMedicaDetailDTO();        
-        LOGGER.log(Level.INFO,"OrdenMedicaResource modificarOrdenMedica: output: (0)", modificarDetailDto.toString());
+        LOGGER.log(Level.INFO,"OrdenMedicaResource modificarOrdenMedica: output: (0)", modificarDetailDto);
         return modificarDetailDto;
     }
        
