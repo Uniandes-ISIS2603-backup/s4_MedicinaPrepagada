@@ -46,27 +46,22 @@ public class FarmaciaLogic {
         }
         if (!validateNombre(farmaciaEntity.getNombre()))
            throw new BusinessLogicException ("El nombre no puede ser vacio ");
+        
+     
         //Verifica que no exista otra farmacia con el mismo nombre
         if (persistence.findByNombre(farmaciaEntity.getNombre())!=null)
             throw new BusinessLogicException("Ya existe una farmacia con este nombre");
-        //verifica que la direccion sea valida
-        if (!validateDireccion(farmaciaEntity.getUbicacion()))
-            throw new BusinessLogicException("La ubicación no puede ser vacia y debe respetar el formato de una direccion");
-        //verifica que el telefono sea valida
-        if (!validateNumero(farmaciaEntity.getTelefono()))
-            throw new BusinessLogicException("El telefono debe tener más de 6 digitos");
-        //Valida que el correo tenga un formato correcto
-        if (!validateCorreo(farmaciaEntity.getCorreo()))
-            throw new BusinessLogicException("El correo no sigue un formato correcto");
-        //Valida que la longitud dada se encuentre en colombia
-        if (!validateLongitud(farmaciaEntity.getLongitud()))
-            throw new BusinessLogicException("La longitud dada no se encuentra en Colombia");
-        //Valida que la latitud dada se encuentre en colombia
+        //Verifica que la ubicación sea valida
+        if (!validateDireccion(farmaciaEntity))
+           throw new BusinessLogicException ("La dirección no cumple con el formato.");
+        //Verifica que la latitud sea valida
         if (!validateLatitud(farmaciaEntity.getLatitud()))
-            throw new BusinessLogicException("La latitud dada no se encuentra en Colombia");
-        //Valida que no exista otra farmacia con la misma longitud y latitud
-        if (!validateLongAndLat(farmaciaEntity.getLongitud(), farmaciaEntity.getLatitud()))
-            throw new BusinessLogicException("Ya existe una farmacia con esta longitud y latitud");
+           throw new BusinessLogicException ("La latitud no corresponde a valores de Colombia.");
+        
+        //Verifica que la longitud sea valida
+        if (!validateLongitud(farmaciaEntity.getLongitud()))
+           throw new BusinessLogicException ("La longitud no corresponde a valores de Colombia.");
+        validarCondiciones(farmaciaEntity);
         
         // Invoca la persistencia para crear la farmacia
         persistence.create(farmaciaEntity);
@@ -142,13 +137,8 @@ public class FarmaciaLogic {
         //Verifica que no exista otra farmacia con el mismo nombre
         if (persistence.findByNombre(farmaciaEntity.getNombre())!=null)
             throw new BusinessLogicException("Ya existe una farmacia con este nombre");
-        //verifica que el telefono sea validad
-        if (!validateNumero(farmaciaEntity.getTelefono()))
-            throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
-     
-        //Valida que el correo tenga un formato correcto
-        if (!validateCorreo(farmaciaEntity.getCorreo()))
-            throw new BusinessLogicException("EL correo no sigue un formato correcto.");    
+       
+        validarCondiciones(farmaciaEntity);
         FarmaciaEntity newEntity = persistence.update(farmaciaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la farmacia con id = {0}", farmaciaEntity.getId());
         return newEntity;
@@ -172,15 +162,13 @@ public class FarmaciaLogic {
     {
         return !(pNombre == null || pNombre.isEmpty());
     }
-       private boolean validateDireccion (String pDireccion)
+       private boolean validateDireccion (FarmaciaEntity entity)
     {
-        return !(pDireccion == null || pDireccion.isEmpty() || !pDireccion.contains("#") );
+        return entity.getUbicacion().contains("#");
     }
-    
-    
-       private boolean validateNumero (Long pNumero)
+    private boolean validateTelefono(Long pTelefono)
     {
-        return !(pNumero == null || pNumero<1000000);
+        return(pTelefono>999999);
     }
     
     private boolean validateLongAndLat (Double pLong, Double pLat )
@@ -231,8 +219,17 @@ public class FarmaciaLogic {
       result = false;
    }
    return result;
-   
-   
 }
+    public void validarCondiciones (FarmaciaEntity entity) throws BusinessLogicException
+    {
+        //Verifica que el correo sea valido
+        if (!validateCorreo(entity.getCorreo()))
+           throw new BusinessLogicException ("El correo no sigue el formato.");
+        
+        //Verifica que el telefono sea valido
+        if (!validateTelefono(entity.getTelefono()))
+           throw new BusinessLogicException ("El telefono no cumple con el formato.");
+        
+    }
     
 }
