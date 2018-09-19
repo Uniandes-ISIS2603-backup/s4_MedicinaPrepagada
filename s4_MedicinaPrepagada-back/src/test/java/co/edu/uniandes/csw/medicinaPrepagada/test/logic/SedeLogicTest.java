@@ -773,7 +773,7 @@ public class SedeLogicTest
     }
     
     
-            /**
+     /**
      * Prueba para eliminar un Sede que no existe
      *
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException

@@ -42,6 +42,8 @@ public class HorarioAtencionLogic
     @Inject 
     private SedePersistence sedePersistence;
     
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+    
     
          /**
      * Se encarga de crear un HorarioAtencion en la base de datos.
@@ -52,9 +54,10 @@ public class HorarioAtencionLogic
      * @return Objeto de HorarioAtencionEntity con los datos nuevos y su ID.
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
-    public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity, Long idMedico) throws BusinessLogicException
+    public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion");
+        Long idMedico = horarioAtencionEntity.getMedico().getId();
         
         //Valida que la fecha sea despues de la actual
         if (!validatePostActual(horarioAtencionEntity.getFechaInicio()))
@@ -151,7 +154,7 @@ public class HorarioAtencionLogic
             throw new BusinessLogicException("Los horarios de antencion solo pueden estar entre las 6 am y las 6 pm");
         //Valida que los horarios no sobrepasen on mes de la fecha de cracion
         if (!validateLessThanMonth(horarioAtencionEntity.getFechaFin()))
-            throw new BusinessLogicException("Solo puede crear horarios hasta 1 mes despues de la fecha actual");
+            throw new BusinessLogicException("Solo puede actualizar horarios hasta 1 mes despues de la fecha actual");
         //Valida que el horario de atencion sea en el mismo dia
         if (!validateOneDay(horarioAtencionEntity.getFechaInicio(), horarioAtencionEntity.getFechaFin()))
             throw new BusinessLogicException("Su horario de atencion debe empezar y terminar en el mismo dia");
@@ -171,7 +174,7 @@ public class HorarioAtencionLogic
         }
         else
         {
-            throw new BusinessLogicException("No es posible crear su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
+            throw new BusinessLogicException("No es posible cambiar su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
         }
         
         
@@ -213,7 +216,6 @@ public class HorarioAtencionLogic
     public boolean validateHorarioTrabajo (Date pHoraInicio, Date pHoraFin)
     {
         
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
         String inicio = dateFormat.format( pHoraInicio); 
         String fin = dateFormat.format( pHoraFin); 
         
@@ -239,7 +241,6 @@ public class HorarioAtencionLogic
      */ 
     public boolean validateMinutos (Date pHoraInicio, Date pHoraFin)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
         String inicio = dateFormat.format( pHoraInicio); 
         String fin = dateFormat.format( pHoraFin); 
         
@@ -268,7 +269,6 @@ public class HorarioAtencionLogic
     public boolean validateOneDay (Date pHoraInicio, Date pHoraFin)
     {
         
-       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
         String inicio = dateFormat.format( pHoraInicio); 
         String fin = dateFormat.format( pHoraFin); 
         
@@ -302,7 +302,6 @@ public class HorarioAtencionLogic
      */
     public boolean validatePostActual (Date pHoraInicio)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, -5);
         Date dateActual =  calendar.getTime();
@@ -319,7 +318,6 @@ public class HorarioAtencionLogic
      */
     public boolean validateLessThanMonth (Date pHoraFin)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, +1);
         calendar.add(Calendar.HOUR_OF_DAY, -5);
@@ -354,9 +352,7 @@ public class HorarioAtencionLogic
     }
     /**
      * Verifica que el horario no genere conflicto con los horariosactuales del medico en update
-     * @param pHoraInicio
-     * @param pHoraFin
-     * @param id
+     * @param horEntity
      * @return true si no se genera ningun problema con los horarios actuales del medico
      */
     public boolean validateHorMedicoUpdate (HorarioAtencionEntity horEntity)

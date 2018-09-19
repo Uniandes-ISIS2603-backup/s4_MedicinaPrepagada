@@ -23,7 +23,7 @@ public class ConsultorioDTO  implements Serializable
     private String edificio;
     
     
-    private int nOficina;
+    private Integer nOficina;
     
     private SedeDTO sede;
     
@@ -106,7 +106,7 @@ public class ConsultorioDTO  implements Serializable
        this.nOficina=pNOficina;
    }
    
-   public int getNOficina  ()
+   public Integer getNOficina  ()
    {
        return this.nOficina;
    }
