@@ -41,13 +41,7 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
         
-        Date d1 = Date.from(Instant.now());
-
-        if(persistence.find(ordenEntity.getId()) != null) 
-        {
-            throw new BusinessLogicException("Ya existe una orden medica con el id \"" + ordenEntity.getId() + "\"");
-        }
-        
+        Date d1 = Date.from(Instant.now());        
         Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
         
         try

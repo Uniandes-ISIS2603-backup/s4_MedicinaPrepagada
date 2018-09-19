@@ -83,7 +83,7 @@ public class HistoriaClinicaResource
      */
     
     @GET
-    @Path("{HistoriaClinicaId: \\d+}")
+    @Path("{historiaClinicaId: \\d+}")
     public HistoriaClinicaDTO getHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: input: {0}", histClinicaId);
@@ -107,7 +107,7 @@ public class HistoriaClinicaResource
      */
     
     @DELETE
-    @Path("{HistoriaClinicaId: \\d+}")
+    @Path("{historiaClinicaId: \\d+}")
     public void deleteHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource deleteHistoriaClinica: input:(0)", histClinicaId);
@@ -130,7 +130,7 @@ public class HistoriaClinicaResource
      */
     
     @PUT
-    @Path("{HistoriaClinicaId: \\d+}")
+    @Path("{historiaClinicaId: \\d+}")
     public HistoriaClinicaDTO updateHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
@@ -138,7 +138,7 @@ public class HistoriaClinicaResource
         
         if (histLogic.getHistoriaClinica(histClinicaId) == null) 
         {
-            throw new WebApplicationException("La orden medica con ese id" + histClinicaId +mensaje, 404);
+            throw new WebApplicationException("La orden medica con ese id" + histClinicaId + mensaje, 404);
         }
         
         HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO( histLogic.updateHistoriaClinica(histClinicaId, pHistoria.toEntity()));        

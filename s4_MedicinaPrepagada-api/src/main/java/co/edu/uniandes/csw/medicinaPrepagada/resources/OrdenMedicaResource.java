@@ -83,7 +83,7 @@ public class OrdenMedicaResource
      */
     
     @GET
-    @Path("{OrdenMedicaId: \\d+}")
+    @Path("{ordenMedicaId: \\d+}")
     public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid)
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: input: {0}", ordenMedicaid);
@@ -107,7 +107,7 @@ public class OrdenMedicaResource
      */
     
     @DELETE
-    @Path("{OrdenMedicaId: \\d+}")
+    @Path("{ordenMedicaId: \\d+}")
     public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource deleteOrdenMedica: input:(0)", ordenMedicaid);
@@ -115,9 +115,9 @@ public class OrdenMedicaResource
         if (ordenLogic.getOrdenMedica(ordenMedicaid) == null) 
         {
            throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
-        }
-        
+        }        
         ordenLogic.deleteOrdenMedica(ordenMedicaid); 
+        
         LOGGER.info("OrdenMedicaResource deleteOrdenMedica: output: void");
     }
     

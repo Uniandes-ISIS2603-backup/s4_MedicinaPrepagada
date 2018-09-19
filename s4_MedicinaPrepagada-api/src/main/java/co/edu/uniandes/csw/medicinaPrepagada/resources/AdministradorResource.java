@@ -56,9 +56,9 @@ public class AdministradorResource
     public AdministradorDTO createAdministrador(AdministradorDTO admi) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", admi);
-        AdministradorDTO nuevoAdmiDTO = new AdministradorDTO(admiLogic.createAdministrador(admi.toEntity()));
-        LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", nuevoAdmiDTO);
-        return nuevoAdmiDTO;
+        AdministradorDTO nuevaAdmiDTO = new AdministradorDTO(admiLogic.createAdministrador(admi.toEntity())); 
+        LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", nuevaAdmiDTO);
+        return nuevaAdmiDTO;
     }
     
     /**
@@ -85,8 +85,8 @@ public class AdministradorResource
      */
     
     @GET
-    @Path("{AdministradorId: \\d+}")
-    public AdministradorDTO getAdministrador(@PathParam("administradorId") Long administradorId) 
+    @Path("{administradorId: \\d+}")
+    public AdministradorDetailDTO getAdministrador(@PathParam("administradorId") Long administradorId) 
     {
         LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: input: {0}", administradorId);
         AdministradorEntity admiEntity = admiLogic.getAdministrador(administradorId);
@@ -96,9 +96,8 @@ public class AdministradorResource
             throw new WebApplicationException("El recurso /administrador/" + administradorId + mensaje, 404);
         }
         
-        AdministradorDTO admiDetailDTO = new AdministradorDTO();
-        LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: output: {0}", admiDetailDTO);
-        return admiDetailDTO;
+        LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: output: {0}", administradorId);
+        return new AdministradorDetailDTO(admiEntity);
     }
     
     /**
@@ -109,7 +108,7 @@ public class AdministradorResource
      */
     
     @DELETE
-    @Path("{AdministradorId: \\d+}")
+    @Path("{administradorId: \\d+}")
     public void deleteAdministrador(@PathParam ("administradorId") Long administradorId)
     {
         LOGGER.log(Level.INFO, "AdministradorResource deleteAdministrador: input:(0)", administradorId);
