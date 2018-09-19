@@ -26,7 +26,7 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
         super();
     }
     
-    //TO ENTITY
+    
     public LaboratorioDetailDTO (LaboratorioEntity pLaboratorioEntity) 
    {
        super(pLaboratorioEntity);
@@ -35,7 +35,7 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
        {
            citasLab = new ArrayList<>();
            
-           for (CitaLaboratorioEntity entityLaboratorios : pLaboratorioEntity.getCitasLab())
+           for (CitaLaboratorioEntity entityLaboratorios : pLaboratorioEntity.getCitasLaboratorio())
            {
                citasLab.add(new CitaLaboratorioDTO(entityLaboratorios));
            }
@@ -55,7 +55,7 @@ public class LaboratorioDetailDTO extends LaboratorioDTO implements Serializable
             {
                 citasEntity.add(citasLabDto.toEntity());
             }
-            labEntity.setCitasLab(citasEntity);
+            labEntity.setCitasLaboratorio(citasEntity);
         }
         
         

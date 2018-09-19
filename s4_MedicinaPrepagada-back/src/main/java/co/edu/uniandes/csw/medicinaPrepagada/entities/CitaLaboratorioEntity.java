@@ -30,7 +30,7 @@ public class CitaLaboratorioEntity implements Serializable
     
     @PodamExclude
     @OneToOne 
-    //(mappedBy = "citaLaboratorio",fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+   
     private LaboratorioEntity laboratorio;
     
     @PodamExclude
