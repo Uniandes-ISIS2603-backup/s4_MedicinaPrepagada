@@ -71,7 +71,11 @@ insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fech
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3585861946780451, 'Aurea Marsh', 412, '00/21', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (5602235051148099, 'Lucas Jenik', 849, '23/76', 'bankcard');
 
+insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (100, 'JuliTo98', 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'megaJulito984', 'Julio Alberto' , 98739279, 'basico', 'Endocrinologia' );
 
+insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (200, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
 
 
 
