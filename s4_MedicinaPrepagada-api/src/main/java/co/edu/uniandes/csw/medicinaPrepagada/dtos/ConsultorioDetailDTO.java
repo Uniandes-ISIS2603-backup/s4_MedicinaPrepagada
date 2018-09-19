@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -43,7 +45,11 @@ public class ConsultorioDetailDTO extends ConsultorioDTO implements Serializable
    
        if (pConsultorioEntity != null)
        {
-          // completar
+          horariosAtencion = new ArrayList<>();
+          for (HorarioAtencionEntity entityHorario : pConsultorioEntity.getHorariosAtencion())
+          {
+              horariosAtencion.add(new HorarioAtencionDTO(entityHorario));
+          }
        }
    } 
     
@@ -58,7 +64,15 @@ public class ConsultorioDetailDTO extends ConsultorioDTO implements Serializable
     {
         ConsultorioEntity consultorioEntity = super.toEntity();
 
-        //COmpletar
+        if (horariosAtencion != null)
+        {
+            List <HorarioAtencionEntity> horariosEntity = new ArrayList<>();
+            for (HorarioAtencionDTO dtoHorario : horariosAtencion)
+            {
+                horariosEntity.add(dtoHorario.toEntity());
+            }
+            consultorioEntity.setHorariosAtencion(horariosEntity);
+        }
         return consultorioEntity;
     }
     
