@@ -53,8 +53,7 @@ public class PacienteResource {
     {
        PacienteEntity entity = paciente.toEntity();
        PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
-       PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
-       return nuevoDTO;
+       return  new PacienteDTO(nuevaEntity);
     }
     
     /**
@@ -89,8 +88,7 @@ public class PacienteResource {
     @PUT
     public PacienteDTO actualizarPaciente(PacienteDetailDTO paciente) throws BusinessLogicException{
         PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
-        PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
-        return nuevoDTO;
+        return new PacienteDTO(entityAct);
     }
     
     /**
