@@ -100,7 +100,7 @@ public class SedeResource
      */
     @GET
     @Path("{sedeId: \\d+}")
-    public SedeDTO getSede(@PathParam("sedeId") Long pSedeId) throws WebApplicationException 
+    public SedeDetailDTO getSede(@PathParam("sedeId") Long pSedeId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "SedeResource getSede: input: {0}", pSedeId);
         SedeEntity sedeEntity = sedeLogic.getSede(pSedeId);

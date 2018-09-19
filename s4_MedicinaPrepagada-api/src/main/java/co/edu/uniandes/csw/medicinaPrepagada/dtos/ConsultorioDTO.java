@@ -49,7 +49,7 @@ public class ConsultorioDTO  implements Serializable
            this.id=pConsultorioEntity.getId();
            this.edificio= pConsultorioEntity.getEdificio();
            this.nOficina = pConsultorioEntity.getNOficina();
-           //this.especialidad = new EspecialidadDTO(pConsultorioEntity.getEspecialidad());
+           this.especialidad = new EspecialidadDTO(pConsultorioEntity.getEspecialidad());
            this.sede = new SedeDTO (pConsultorioEntity.getSede());
            
        }
