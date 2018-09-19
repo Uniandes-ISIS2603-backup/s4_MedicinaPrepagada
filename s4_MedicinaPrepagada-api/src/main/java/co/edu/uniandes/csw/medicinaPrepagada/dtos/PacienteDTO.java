@@ -179,6 +179,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      * convierte DTO a entity
      * @return un entity con los valores del dto
      */
+    @Override
     public PacienteEntity toEntity(){
         PacienteEntity pacienteEntity = new PacienteEntity();
         pacienteEntity.setLogin(super.toEntity().getLogin());
