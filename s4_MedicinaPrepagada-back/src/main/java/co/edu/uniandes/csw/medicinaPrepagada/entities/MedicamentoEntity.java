@@ -166,5 +166,4 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     public void setElaboradoPor(String pElaboradoPor) {
         this.elaboradoPor = pElaboradoPor;
     }
-    
 }

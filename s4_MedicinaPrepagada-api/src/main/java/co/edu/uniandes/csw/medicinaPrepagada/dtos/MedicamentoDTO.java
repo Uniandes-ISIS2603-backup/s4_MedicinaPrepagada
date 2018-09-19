@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author ncobos
  */
 public class MedicamentoDTO implements Serializable {
     

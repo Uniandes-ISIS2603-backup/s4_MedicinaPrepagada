@@ -27,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "farmacias".
  *
- * @author ISIS2603
+ * @author ncobos
  * @version 1.0
  */
 @Path("farmacias")
