@@ -71,7 +71,9 @@ public class HorarioAtencionDTO implements Serializable
         horarioAtencionEntity.setId(this.id);
         horarioAtencionEntity.setFechaInicio(this.fechaInicio);
         horarioAtencionEntity.setFechaFin(this.fechaFin);
+        if (this.consultorio != null)
         horarioAtencionEntity.setConsultorio(this.consultorio.toEntity());
+        if (this.medico != null)
        horarioAtencionEntity.setMedico(this.medico.toEntity());
         return horarioAtencionEntity;
     }
