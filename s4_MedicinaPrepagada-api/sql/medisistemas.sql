@@ -8,6 +8,9 @@ delete from EspecialidadEntity;
 delete from TARJETACREDITOENTITY;
 delete from PACIENTEENTITY;
 
+delete from AdministradorEntity; 
+delete from HistoriaClinicaEntity; 
+delete from OrdenMedicaEntity; 
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -77,26 +80,30 @@ values (100, 'JuliTo98', 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmaun
 insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
 values (200, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
 
+insert into AdministradorEntity (login, contrasena, tipoUsuario)
+values('Carlos12', 'carlitos12', 'Administrador'); 
+insert into AdministradorEntity (login, contrasena, tipoUsuario)
+values('Esteban', 'esteban12', 'Administrador'); 
+insert into AdministradorEntity (login, contrasena, tipoUsuario)
+values('Perdo24', 'pedrito12', 'Paciente'); 
+insert into AdministradorEntity (login, contrasena, tipoUsuario)
+values('Laura1', 'laurita56', 'Paciente'); 
 
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (100, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',700 ,100 );
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
+values('08/10/2018', 'Gripa', 'Ninguna', 55, 178, false, false, 'Fractura pie izquierdo');
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
+values('20/07/2018', 'Dolor de cabeza', 'Mani', 70, 170, true, true, 'Ninguna');
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
+values('26/10/2018', 'Migraña', 'Ninguna', 68, 173, false, true, 'Apendicitis');
 
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (200, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',300 ,200 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (300, '2018-09-22 08:00:00' , '2018-09-22 10:00:00',700 ,100 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (400, '2018-09-22 08:00:00' , '2018-09-22 11:00:00',300 ,200 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,100 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
-
-
+insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values ('Pedro Franco', '19/10/2018', 'Examen de sangre', '19/12/2018'); 
+insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values ('Pedro Franco', '24/10/2018', 'Paracetamol 400', '24/12/2018'); 
+insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values ('Carlos Estupiñan', '01/10/2018', 'Dolex gripa', '01/12/2018'); 
+insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values ('Claudia Forero', '07/09/2018', 'Mucha agua', '07/11/2018'); 
 
 
 

@@ -14,8 +14,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ni.ramirez10
  */
-public class AdministradorDTO implements Serializable 
+public class AdministradorDTO extends UsuarioDTO implements Serializable 
 {
+    private Long id; 
     private String login;
     private String contrasena;
     private String tipoUsuario;
@@ -39,6 +40,7 @@ public class AdministradorDTO implements Serializable
     {
         if (administradorEntity != null) 
         {
+            this.id = administradorEntity.getId(); 
             this.login = administradorEntity.getLogin(); 
             this.contrasena = administradorEntity.getContrasena(); 
             this.tipoUsuario = administradorEntity.getTipoUsuario();             
@@ -50,10 +52,12 @@ public class AdministradorDTO implements Serializable
     * @return Nueva objeto AdministradorEntity.
     */
     
+    @Override
     public AdministradorEntity toEntity() 
     {
         AdministradorEntity administradorEntity = new AdministradorEntity();
         
+        administradorEntity.setId(this.getId());
         administradorEntity.setLogin(this.getLogin());
         administradorEntity.setContrasena(this.getContrasena());
         administradorEntity.setTipoUsuario(this.getTipoUsuario());
@@ -62,65 +66,78 @@ public class AdministradorDTO implements Serializable
     }
     
     /**
-     * Obtiene el atributo login.
-     * @return atributo login.
+     * Obtiene el atributo id.
+     * @return atributo id.
      */
     
-    public String getLogin() 
+    public Long getId() 
     {
+        return id;
+    }
+
+    /**
+     * Establece el valor del atributo id.
+     * @param id nuevo valor del atributo
+     */
+    
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
+    
+    /**
+     * retorana el login del DTO
+     * @return the login
+     */
+    @Override
+    public String getLogin() {
         return login;
     }
 
     /**
-     * Establece el valor del atributo login.
-     * @param pLogin nuevo valor del atributo
+     * sets el login del DTO
+     * @param login the login to set
      */
-    
-    public void setId(String pLogin)
-    {
-        this.login = pLogin;
+    @Override
+    public void setLogin(String login) {
+        this.login = login;
     }
-    
+
     /**
-     * Obtiene el atributo contrasena.
-     * @return atributo contrasena.
+     * retorna la contrasena del DTO
+     * @return the contrasena
      */
-    
-    public String getContrasena() 
-    {
+    @Override
+    public String getContrasena() {
         return contrasena;
     }
 
     /**
-     * Establece el valor del atributo contrasena.
-     * @param pContrasena nuevo valor del atributo
+     * sets la contrasena del DTO
+     * @param contrasena the contrasena to set
      */
-    
-    public void setContrasena(String pContrasena)
-    {
-        this.contrasena = pContrasena;
+    @Override
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
-    
+
     /**
-     * Obtiene el atributo tipoUsuario.
-     * @return atributo tipoUsuario.
+     * retorna el tipoUsuario del DTO
+     * @return the tipoUsuario
      */
-    
-    public String getTipoUsuario() 
-    {
+    @Override
+    public String getTipoUsuario() {
         return tipoUsuario;
     }
 
     /**
-     * Establece el valor del atributo tipoUsuario.
-     * @param pTipoUsuario nuevo valor del atributo
+     * sets el tipo usario del DTO
+     * @param tipoUsuario the tipoUsuario to set
      */
-    
-    public void setTipoUsuario(String pTipoUsuario)
-    {
-        this.tipoUsuario = pTipoUsuario;
+    @Override
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
-    
     
     
     @Override

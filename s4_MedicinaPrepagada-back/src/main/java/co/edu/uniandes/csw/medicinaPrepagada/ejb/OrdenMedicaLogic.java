@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -41,15 +42,14 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
         
-        Date d1 = Date.from(Instant.now());
-
-        if(persistence.find(ordenEntity.getId()) != null) 
-        {
-            throw new BusinessLogicException("Ya existe una orden medica con el id \"" + ordenEntity.getId() + "\"");
-        }
-        
+        Date d1 = Date.from(Instant.now());        
         Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
         
+         if(persistence.find(ordenEntity.getId()) != null)
+         {
+              throw new WebApplicationException("Ya existe una orden con ese id");
+         }
+         
         try
         {
             if(fechaValidoHasta.compareTo(d1) < 0)
