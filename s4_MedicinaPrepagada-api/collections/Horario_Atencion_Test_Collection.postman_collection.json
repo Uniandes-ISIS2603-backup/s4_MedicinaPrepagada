@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1d0c0f5d-8b43-4609-af4d-914635a23f8f",
+		"_postman_id": "c657fd1f-8d8a-4065-81ac-4074da45aab0",
 		"name": "Horario_Atencion_Test_Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,7 +22,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion",
 					"protocol": "http",
@@ -57,9 +60,12 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +75,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"horariosAtencion",
-						"1"
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
@@ -93,9 +99,12 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -105,7 +114,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"horariosAtencion",
-						"1"
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"

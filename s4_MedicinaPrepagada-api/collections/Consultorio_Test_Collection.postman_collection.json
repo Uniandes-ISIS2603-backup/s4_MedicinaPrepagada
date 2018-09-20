@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ebe06f24-08a9-4ccb-a230-cd5adbe0ca6d",
+		"_postman_id": "a61dc0d6-0e52-4658-af6e-6152c03047bb",
 		"name": "Consultorio_Test_Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,7 +22,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios",
 					"protocol": "http",
@@ -34,6 +37,45 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultorios que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd2db5f4-329c-455b-9367-bfc9e863ef77",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error en el GET \"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/10000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"10000"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
@@ -57,9 +99,12 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +114,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"consultorios",
-						"1"
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
@@ -100,7 +145,50 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"NOficina\":3}"
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"Cardiologia\"\n    },    \"sede\": \n    {\n        \n        \"correo\": \"pepito12@hotmail.com\",\n        \"descripcion\": \"Super buena sede\",\n        \"direccion\": \"Calle 153 # 15 - 13\",\n        \"id\": 100,\n        \"latitud\": 2,\n        \"longitud\": -69.2,\n        \"nombre\": \"super sede 1\",\n        \"telefono\": 98999423,\n        \"tipoSede\": 2\n        \n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios Con misma Sede, Oficina y edifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9689d0e2-a6ab-42bc-97cd-c5e894be2e17",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error en el POST\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"Cardiologia\"\n    },    \"sede\": \n    {\n        \n        \"correo\": \"pepito12@hotmail.com\",\n        \"descripcion\": \"Super buena sede\",\n        \"direccion\": \"Calle 153 # 15 - 13\",\n        \"id\": 100,\n        \"latitud\": 2,\n        \"longitud\": -69.2,\n        \"nombre\": \"super sede 1\",\n        \"telefono\": 98999423,\n        \"tipoSede\": 2\n        \n    }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios",
@@ -143,10 +231,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"NOficina\":4}"
+					"raw": "{    \"NOficina\": 9,\n    \"edificio\": \"lleras\",\n    \"especialidad\": {\n        \"nombre\": \"Cardiologia\"\n    },\n    \"sede\": {\n        \"correo\": \"pepito12@hotmail.com\",\n        \"descripcion\": \"Super buena sede\",\n        \"direccion\": \"Calle 153 # 15 - 13\",\n        \"id\": 100,\n        \"latitud\": 2,\n        \"longitud\": -69.2,\n        \"nombre\": \"super sede 1\",\n        \"telefono\": 98999423,\n        \"tipoSede\": 2\n    }}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -156,7 +244,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"consultorios",
-						"1"
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
@@ -190,7 +278,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -200,7 +288,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"consultorios",
-						"1"
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"

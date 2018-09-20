@@ -60,8 +60,7 @@ public class ConsultorioResource
     {
         LOGGER.log(Level.INFO, "ConsultorioResource createConsultorio: input: {0}", pConsultorio.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        if (pConsultorio.getNOficina() == null)
-            throw new WebApplicationException("EL numero de oficina no puede ser null", 400 );
+        
         // Invoca la lógica para crear el consultorio  nuevo
         
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
