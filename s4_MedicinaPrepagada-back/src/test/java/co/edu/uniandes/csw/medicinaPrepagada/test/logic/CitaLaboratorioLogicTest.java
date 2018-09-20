@@ -106,7 +106,7 @@ public class CitaLaboratorioLogicTest
     @Test
     public void createCitaLaboratorio () throws BusinessLogicException
     {
-       Date nueva = new Date().from(Instant.now());
+       Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
        CitaLaboratorioEntity newEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
        newEntity.setDate(nueva);
        citaLabLogic.createCitaLaboratorio(newEntity);
