@@ -45,7 +45,7 @@ public class LaboratorioResource {
     private LaboratorioLogic labLogic;
     
     @POST
-    public LaboratorioDTO createLaboratorio (LaboratorioDTO Laboratorio) throws BusinessLogicException
+    public LaboratorioDTO createLaboratorio (LaboratorioDTO Laboratorio) throws BusinessLogicException, WebApplicationException
     {
         LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: input: {0}", Laboratorio.toString());
         
@@ -58,7 +58,7 @@ public class LaboratorioResource {
     
     @DELETE
     @Path("{LaboratorioId:\\d+}")
-    public void deleteLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId) throws BusinessLogicException
+    public void deleteLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId) throws BusinessLogicException, WebApplicationException
     {
         LOGGER.log(Level.INFO, "LaboratorioDTO deleteLaboratorio: input : {0}", LaboratorioId);
         if (labLogic.getLab(LaboratorioId) == null) 
