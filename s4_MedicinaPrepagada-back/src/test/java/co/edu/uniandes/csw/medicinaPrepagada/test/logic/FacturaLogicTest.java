@@ -110,6 +110,32 @@ public class FacturaLogicTest {
 
     }
     
+     @Test(expected = BusinessLogicException.class)
+    public void createFacturaConValorNegativo () throws BusinessLogicException
+    {
+       Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
+       FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       newEntity.setValor(-1000);
+       newEntity.setFecha(nueva);
+       FacturaEntity result = facturaLogic.createFactura(newEntity);
+       
+       Assert.assertNotNull(result);
+       FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
+
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaConFechaErronea () throws BusinessLogicException
+    {
+       Date nueva = new Date(System.currentTimeMillis()-2*24*60*60*1000);
+       FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       newEntity.setValor(1000);
+       newEntity.setFecha(nueva);
+       FacturaEntity result = facturaLogic.createFactura(newEntity);
+       
+       Assert.assertNotNull(result);
+       FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
+
+    }
     @Test
     public void getAllFacturasTest() throws BusinessLogicException
     {
@@ -133,11 +159,11 @@ public class FacturaLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-    /*
+    
     @Test
     public void updateFaturaTest() throws BusinessLogicException
     {
-       FacturaEntity entity = factList.get(1);
+       FacturaEntity entity = factList.get(0);
        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
        
        
@@ -156,12 +182,71 @@ public class FacturaLogicTest {
        newEntity.setPagada(entity.getPagada());
        
        
-       facturaLogic.updateFactura(newEntity);
+       facturaLogic.updateFactura(newEntity.getId(),newEntity);
        
        FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
        Assert.assertEquals(newEntity.getId(), resp.getId());
        
     }
     
-   */ 
+    @Test(expected = BusinessLogicException.class)
+    public void updateFaturaConOtraFechaTest() throws BusinessLogicException
+    {
+        Date nueva = new Date(System.currentTimeMillis()-24*60*60*1000);
+       FacturaEntity entity = factList.get(0);
+       FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       
+       
+       newEntity.setCitaLab(entity.getCitaLab());
+       
+       newEntity.setConcepto(entity.getConcepto());
+       
+       newEntity.setFecha(nueva);
+       
+       newEntity.setId(entity.getId());
+       
+       newEntity.setIdCliente(entity.getIdCliente());
+       newEntity.setPaciente(entity.getPaciente());
+       newEntity.setValor(entity.getValor());
+        
+       newEntity.setPagada(entity.getPagada());
+       
+       
+       facturaLogic.updateFactura(newEntity.getId(),newEntity);
+       
+       FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+       Assert.assertEquals(newEntity.getId(), resp.getId());
+       
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateFaturaConOtroValorTest() throws BusinessLogicException
+    {
+       
+       FacturaEntity entity = factList.get(0);
+       FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+       
+       
+       newEntity.setCitaLab(entity.getCitaLab());
+       
+       newEntity.setConcepto(entity.getConcepto());
+       
+       newEntity.setFecha(entity.getFecha());
+       
+       newEntity.setId(entity.getId());
+       
+       newEntity.setIdCliente(entity.getIdCliente());
+       newEntity.setPaciente(entity.getPaciente());
+       newEntity.setValor(123456);
+        
+       newEntity.setPagada(entity.getPagada());
+       
+       
+       facturaLogic.updateFactura(newEntity.getId(),newEntity);
+       
+       FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+       Assert.assertEquals(newEntity.getId(), resp.getId());
+       
+    }
+   
 }
