@@ -83,7 +83,7 @@ public class FacturaResource {
         {
             throw new WebApplicationException("El recurso /factura/ que quiere editar con id" + FacturaId + " no existe.", 404);
         }
-        FacturaDTO nuevoDTO = new FacturaDTO(facturaLogic.updateFactura(pFactura.toEntity()));
+        FacturaDTO nuevoDTO = new FacturaDTO(facturaLogic.updateFactura(FacturaId,pFactura.toEntity()));
         LOGGER.log(Level.INFO, "FacturaResource updateFactura: output: {0}", nuevoDTO.toString());
         return nuevoDTO;
  
