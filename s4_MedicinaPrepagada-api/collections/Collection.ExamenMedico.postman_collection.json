@@ -100,10 +100,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
+					"raw": "{\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":12000,\r\n\r\n\"recomendaciones\":\"Tomar mucha agua\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos/",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +113,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"examenesMedicos",
-						""
+						"1"
 					]
 				},
 				"description": "Modifica la información de una farmacia"
@@ -149,7 +149,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"recomendaciones\":\"Venir en ayunas, traer acompañante...\"}"
+					"raw": "{\r\n\"nombre\":\"Colonoscopia\",\r\n\r\n\"costo\":12000,\r\n\r\n\"recomendaciones\":\"Tomar agua\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/examenesMedicos",
