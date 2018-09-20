@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.LaboratorioLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.LaboratorioPersistence;
@@ -83,14 +84,22 @@ public class LaboratorioLogicTest {
     
     private void clearData() {
         em.createQuery("delete from LaboratorioEntity").executeUpdate();
+        em.createQuery("delete from CitaLaboratorioEntity").executeUpdate();
     }
      
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             LaboratorioEntity entity = factory.manufacturePojo(LaboratorioEntity.class);
             em.persist(entity);
+            entity.setCitasLaboratorio(new ArrayList<>());
             labList.add(entity);
         }
+        
+        LaboratorioEntity lab = labList.get(0);
+        CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        em.persist(entity);
+        lab.getCitasLaboratorio().add(entity);
+        em.merge(lab);
        
     }
     
@@ -135,7 +144,7 @@ public class LaboratorioLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-    /*
+    
     @Test
     public void updateLabTest ()throws BusinessLogicException
     { 
@@ -143,31 +152,61 @@ public class LaboratorioLogicTest {
         LaboratorioEntity pojoEntity = factory.manufacturePojo(LaboratorioEntity.class);
         
         pojoEntity.setId(entity.getId());
-        pojoEntity.setDireccion("cra 123 # 35-75");
-        pojoEntity.setHorarioAtencion("Lunes a viernes 8:00am a 11:00am. Entrega de resultados de 1:00pm a 4:00pm");
-        pojoEntity.setLatitud(4.6097100);
-        pojoEntity.setLongitud(-74.0817500);
-        pojoEntity.setNombre("Laboratorio Asanar 2.0");
-        
-        labLogic.updateLaboratorio(pojoEntity.getId(), pojoEntity);
-        
-        LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
-
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        
-        
-        LaboratorioEntity entity = labList.get(0);
-        LaboratorioEntity pojoEntity = factory.manufacturePojo(LaboratorioEntity.class);
-
-        pojoEntity.setId(entity.getId());
-
+        pojoEntity.setNombre("Laboratorio 2039");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(4576221L);
+        pojoEntity.setHorarioAtencion(entity.getHorarioAtencion());
+     
         labLogic.updateLaboratorio(pojoEntity.getId(), pojoEntity);
 
         LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
-    */
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateLabConMalLatitudTest()throws BusinessLogicException
+    {
+        LaboratorioEntity entity = labList.get(0);
+        LaboratorioEntity pojoEntity = factory.manufacturePojo(LaboratorioEntity.class);
+        
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Laboratorio 2039");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setLatitud(456);
+        pojoEntity.setLongitud(entity.getLongitud());
+        pojoEntity.setTelefono(4576221L);
+        pojoEntity.setHorarioAtencion(entity.getHorarioAtencion());
+     
+        labLogic.updateLaboratorio(labList.get(0).getId(), pojoEntity);
+
+        LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateLabConMalLongitudTest()throws BusinessLogicException
+    {
+        LaboratorioEntity entity = labList.get(0);
+        LaboratorioEntity pojoEntity = factory.manufacturePojo(LaboratorioEntity.class);
+        
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre("Laboratorio 666   ");
+        pojoEntity.setDireccion(entity.getDireccion());
+        pojoEntity.setLatitud(entity.getLatitud());
+        pojoEntity.setLongitud(456);
+        pojoEntity.setTelefono(4576221L);
+        pojoEntity.setHorarioAtencion(entity.getHorarioAtencion());
+     
+        labLogic.updateLaboratorio(labList.get(0).getId(), pojoEntity);
+
+        LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+     
     @Test
     public void deleteLabTest () throws BusinessLogicException
     {

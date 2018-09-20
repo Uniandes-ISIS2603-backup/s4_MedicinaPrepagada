@@ -33,11 +33,7 @@ public class LaboratorioLogic {
         
         if (!validateNombre(labEntity.getNombre()))
            throw new BusinessLogicException ("EL nombre no puede ser vacio ");
-        
-       // if (labPersistence.findByNombre(labEntity.getNombre())!=null)
-        //{
-          //  throw new BusinessLogicException("Ya existe un laboratorio con este nombre");
-        //}
+       
         if(!validateNumeroTelefono(labEntity.getTelefono()))
         {
             throw new BusinessLogicException("El telefono no puede ser vacio o debe ser mayor a 6 digitos.");
@@ -99,7 +95,7 @@ public class LaboratorioLogic {
         }
         
         if (!validateNombre(labEntity.getNombre()))
-           throw new BusinessLogicException ("EL nombre no puede ser vacio ");
+           throw new BusinessLogicException ("EL nombre no puede ser vacio");
         
         
         LaboratorioEntity newLabEntity = labPersistence.update(labEntity);

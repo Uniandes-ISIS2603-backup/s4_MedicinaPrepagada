@@ -37,6 +37,7 @@ public class LaboratorioEntity implements Serializable
     
     @PodamExclude
     @ManyToOne
+    
     private ExamenMedicoEntity examenMedico;
     
     private String nombre;
@@ -118,21 +119,23 @@ public class LaboratorioEntity implements Serializable
     {
         this.longitud = pLongitud;
     }
-    
-    public void setCitasLab(List<CitaLaboratorioEntity> citasLab)
-    {
-        this.citasLaboratorio = citasLab;
+
+    public List<CitaLaboratorioEntity> getCitasLaboratorio() {
+        return citasLaboratorio;
+    }
+
+    public void setCitasLaboratorio(List<CitaLaboratorioEntity> citasLaboratorio) {
+        this.citasLaboratorio = citasLaboratorio;
+    }
+
+    public ExamenMedicoEntity getExamenMedico() {
+        return examenMedico;
+    }
+
+    public void setExamenMedico(ExamenMedicoEntity examenMedico) {
+        this.examenMedico = examenMedico;
     }
     
-    public List<CitaLaboratorioEntity> getCitasLab ()
-    {
-        return this.citasLaboratorio;
-    }
-    
-    public ExamenMedicoEntity getExamen ()
-   {
-       return this.examenMedico;
-   }
     
     @Override
     public boolean equals(Object obj) {
