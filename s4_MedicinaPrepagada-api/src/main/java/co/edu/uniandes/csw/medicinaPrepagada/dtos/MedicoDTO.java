@@ -68,8 +68,9 @@ public class MedicoDTO extends UsuarioDTO implements Serializable{
         medicoEntity.setDocumentoMedico(this.getDocumentoMedico());
         medicoEntity.setFirma(this.getFirma());
         medicoEntity.setDescripcion(this.getDescripcion());
-        medicoEntity.setEspecialidad(this.especialidad.toEntity());
- 
+        if(this.especialidad != null){
+            medicoEntity.setEspecialidad(this.especialidad.toEntity());
+        }
         return medicoEntity;
     }
 

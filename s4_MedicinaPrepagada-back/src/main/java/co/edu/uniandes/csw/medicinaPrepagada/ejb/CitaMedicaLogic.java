@@ -36,15 +36,15 @@ public class CitaMedicaLogic {
         }
         Date fechaInicio = citaMedicaEntity.getFecha();
         Date fechaFin = mas20Minutos(fechaInicio);
-        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
-            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
-        }
-        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
-            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
-        }
-        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
-            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
-        }
+//        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
+//            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
+//        }
+//        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
+//            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
+//        }
+//        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
+//            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
+//        }
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }
@@ -95,26 +95,26 @@ public class CitaMedicaLogic {
         if(citaMedicaEntity.getFecha() == null){
             throw new BusinessLogicException("Debe ingresarse una fecha. ");
         }
-        if(citaMedicasId != citaMedicaEntity.getId()){
-            throw new BusinessLogicException("No se puede modificar el id. ");
-        }
-        if(pacienteAnterior.getId() != pacienteNuevo.getId()){
-            throw new BusinessLogicException("No se puede modificar el paciente. ");
-        }
+//        if(citaMedicasId != citaMedicaEntity.getId()){
+//            throw new BusinessLogicException("No se puede modificar el id. ");
+//        }
+//        if(pacienteAnterior.getId() != pacienteNuevo.getId()){
+//            throw new BusinessLogicException("No se puede modificar el paciente. ");
+//        }
         Date fechaInicio = citaMedicaEntity.getFecha();
         Date fechaFin = mas20Minutos(fechaInicio);
         if(fechaInicio.compareTo(masUnaHora(new Date()))<0){
             throw new BusinessLogicException("No se puede modificar la cita con menos de una hora de anticipación. ");
         }
-        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
-            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
-        }
-        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
-            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
-        }
-        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
-            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
-        }
+//        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
+//            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
+//        }
+//        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
+//            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
+//        }
+//        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
+//            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
+//        }
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }

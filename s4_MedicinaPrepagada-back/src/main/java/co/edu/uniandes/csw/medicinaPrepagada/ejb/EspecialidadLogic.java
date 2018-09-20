@@ -26,7 +26,7 @@ public class EspecialidadLogic {
     private EspecialidadPersistence persistence;
    
     public EspecialidadEntity createEspecialidad(EspecialidadEntity especialidadoEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la médico");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la especialidad");
         if( especialidadoEntity.getNombre() == null){
             throw new BusinessLogicException("La especialidad requiere un nombre. ");
         }
@@ -34,7 +34,7 @@ public class EspecialidadLogic {
             throw new BusinessLogicException("La especialidad ya existe. ");
         }
         persistence.create(especialidadoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la médico satisfactoriamente");
+        LOGGER.log(Level.INFO, "Termina proceso de creación de la especialidad satisfactoriamente");
         return especialidadoEntity;
     }
     
