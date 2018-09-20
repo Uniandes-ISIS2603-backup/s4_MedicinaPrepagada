@@ -94,20 +94,20 @@ insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Laura1', 'laurita56', 'Paciente'); 
 
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('08/10/2018', 'Gripa', 'Ninguna', 55, 178, false, false, 'Fractura pie izquierdo');
+values('08/10/2018', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('20/07/2018', 'Dolor de cabeza', 'Mani', 70, 170, true, true, 'Ninguna');
+values('20/07/2018', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('26/10/2018', 'Migraña', 'Ninguna', 68, 173, false, true, 'Apendicitis');
+values('26/10/2018', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
 
-insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values ('Pedro Franco', '19/10/2018', 'Examen de sangre', '19/12/2018'); 
-insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values ('Pedro Franco', '24/10/2018', 'Paracetamol 400', '24/12/2018'); 
-insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values ('Carlos Estupiñan', '01/10/2018', 'Dolex gripa', '01/12/2018'); 
-insert into OrdenMedicaEntity (firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values ('Claudia Forero', '07/09/2018', 'Mucha agua', '07/11/2018'); 
+insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values (400, 'Pedro Franco', '19/10/2018', 'Examen de sangre', '19/12/2018'); 
+insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values (300, 'Pedro Franco', '24/10/2018', 'Paracetamol 400', '24/12/2018'); 
+insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values (200, 'Carlos Estupiñan', '01/10/2018', 'Dolex gripa', '01/12/2018'); 
+insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
+values (100, 'Claudia Forero', '07/09/2018', 'Mucha agua', '07/11/2018'); 
 
 
 
