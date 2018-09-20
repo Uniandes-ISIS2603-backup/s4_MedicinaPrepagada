@@ -111,9 +111,6 @@ insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MED
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 
-insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
-values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
-
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Carlos12', 'carlitos12', 'Administrador'); 
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
@@ -139,6 +136,8 @@ values (200, 'Carlos Estupiñan', '01/10/2018', 'Dolex gripa', '01/12/2018');
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
 values (100, 'Claudia Forero', '07/09/2018', 'Mucha agua', '07/11/2018'); 
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
 
 insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
 values (2,'Laboratorio Heisenberg','Calle 167 # 43-32',4561795,'Lunes a Viernes de 8:00 a 10:00am',-73.2,10.00);

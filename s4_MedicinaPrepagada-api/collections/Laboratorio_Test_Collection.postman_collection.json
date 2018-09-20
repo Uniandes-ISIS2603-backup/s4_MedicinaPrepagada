@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "f03a15bb-0fb0-4ef1-be4c-48c4d8b43719",
+		"name": "Laboratorio_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL LAB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LAB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT LAB",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"direccion\": \"Cra 17#34-25\",\n    \"horario\": \"Lunes a Viernes de 8:00 a 10:00am\",\n    \"id\": 1,\n    \"latitud\": 4.60971,\n    \"longitud\": -74.08175,\n    \"nombre\": \"Laboratorio Dios Me Ampare\",\n    \"telefono\": 1234567\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/laboratorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
