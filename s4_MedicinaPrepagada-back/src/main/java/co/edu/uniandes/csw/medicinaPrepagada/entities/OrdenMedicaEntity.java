@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -26,8 +25,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class OrdenMedicaEntity extends BaseEntity implements Serializable
 {
-    @Id
-    private Long id; 
     private String firmaMedico; 
     @Temporal(TemporalType.DATE)
     private Date fechaExpedicion; 
@@ -46,28 +43,6 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @OneToMany
     private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
     
-    /**
-     * Obtiene el atributo id.
-     * @return atributo id.
-     */
-    
-    @Override
-    public Long getId() 
-    {
-        return id;
-    }
-
-    /**
-     * Establece el valor del atributo id.
-     * @param id nuevo valor del atributo
-     */
-    
-    @Override
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
     /**
      * Obtiene el atributo firmaMedico.
      * @return atributo firmaMedico.

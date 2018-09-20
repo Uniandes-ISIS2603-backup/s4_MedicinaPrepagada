@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionSedeDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.HorarioAtencionLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
@@ -70,7 +69,7 @@ public class HorarioAtencionResource
         HorarioAtencionEntity pHorEntityt = pHorarioAtencion.toEntity();
         SedeEntity pSedeEntity = pHorarioAtencion.getSede().toEntity();
         
-        HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO ();//horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
+        HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO ();//(horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         LOGGER.log(Level.INFO, "HorarioAtencionResource createHorarioAtencion: output: {0}", nuevoHorarioAtencionDTO.toString());
         return nuevoHorarioAtencionDTO;

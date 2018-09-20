@@ -59,6 +59,7 @@ public class OrdenMedicaDTO implements Serializable
     public OrdenMedicaEntity toEntity() 
     {
         OrdenMedicaEntity ordenMedicaEntity = new OrdenMedicaEntity();
+        
         ordenMedicaEntity.setId(this.getId());
         ordenMedicaEntity.setFirmaMedico(this.getFirmaMedico());
         ordenMedicaEntity.setFechaExpedicion(this.getFechaExpedicion());
