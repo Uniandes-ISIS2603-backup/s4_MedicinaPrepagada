@@ -9,7 +9,9 @@ import co.edu.uniandes.csw.medicinaPrepagada.ejb.FacturaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.FacturaPersistence;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -97,8 +99,10 @@ public class FacturaLogicTest {
     @Test
     public void createFactura () throws BusinessLogicException
     {
+       Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
        newEntity.setValor(1000);
+       newEntity.setFecha(nueva);
        FacturaEntity result = facturaLogic.createFactura(newEntity);
        
        Assert.assertNotNull(result);
@@ -158,6 +162,6 @@ public class FacturaLogicTest {
        Assert.assertEquals(newEntity.getId(), resp.getId());
        
     }
-    */
     
+   */ 
 }
