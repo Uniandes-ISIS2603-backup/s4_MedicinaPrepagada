@@ -106,7 +106,10 @@ public class CitaMedicaPersistence {
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idMedico", idMedico);
         List<CitaMedicaEntity> respuesta = query.getResultList();
-        return respuesta.get(0);
+        if(respuesta != null || respuesta.size()>0){
+            return respuesta.get(0);
+        }
+        return null;
     }
     
     public CitaMedicaEntity findByFechaYConsultorio(Date fechaInicio, Date fechaFin, Long idConsultorio){
@@ -116,7 +119,10 @@ public class CitaMedicaPersistence {
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idConsultorio", idConsultorio);
         List<CitaMedicaEntity> respuesta = query.getResultList();
-        return respuesta.get(0);
+        if(respuesta != null || respuesta.size()>0){
+            return respuesta.get(0);
+        }
+        return null;
     }
     
     public HorarioAtencionEntity findByLimitesFechaInicioFechaFinSedeYMedico(Date fechaInicio, Date fechaFin, Long idConsultorio, Long idMedico){
@@ -127,7 +133,10 @@ public class CitaMedicaPersistence {
         query.setParameter("idSede", idConsultorio);
         query.setParameter("idMedico", idMedico);
         List<HorarioAtencionEntity> respuesta = query.getResultList();
-        return respuesta.get(0);
+        if(respuesta != null || respuesta.size()>0){
+            return respuesta.get(0);
+        }
+        return null;
     }
     
 }

@@ -45,10 +45,10 @@ public class OrdenMedicaLogic
         Date d1 = Date.from(Instant.now());        
         Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
         
-         if(persistence.find(ordenEntity.getId()) != null)
+         /**if(persistence.find(ordenEntity.getId()) != null)
          {
               throw new WebApplicationException("Ya existe una orden con ese id");
-         }
+         }*/
          
         try
         {
@@ -119,10 +119,10 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la orden medica con id = {0}", ordenId);
         
-        if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
+        /**if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
         {
             throw new BusinessLogicException("No se puede modificar la firma del medico");
-        }
+        }*/
         
         if (!persistence.find(ordenId).getFechaExpedicion().equals(ordenEntity.getFechaExpedicion()))
         {

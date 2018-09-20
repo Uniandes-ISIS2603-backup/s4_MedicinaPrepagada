@@ -35,7 +35,7 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Devuelve el medicamento de la farmaciaEntity.
      *
-     * @return the medicamento
+     * @return medicamento
      */
     public MedicamentoEntity getMedicamento() {
         return medicamento;
@@ -44,10 +44,10 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica el medicamento de la farmaciaEntity.
      *
-     * @param pMedicamento the medicamento to set
+     * @param parametro el medicamento a asignar
      */
-    public void setMedicamento(MedicamentoEntity pMedicamento) {
-        this.medicamento = pMedicamento;
+    public void setMedicamento(MedicamentoEntity parametro) {
+        this.medicamento = parametro;
     }
 
     /**
@@ -62,16 +62,16 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica el nombre de la farmaciaEntity.
      *
-     * @param pNombre the name to set
+     * @param parametro el nombre a asignar
      */
-    public void setNombre(String pNombre) {
-        this.nombre = pNombre;
+    public void setNombre(String parametro) {
+        this.nombre = parametro;
     }
     
     /**
      * Devuelve la ubicacion de la farmaciaEntity.
      *
-     * @return cantidad
+     * @return ubicacion
      */
     public String getUbicacion() {
         return ubicacion;
@@ -80,14 +80,14 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica la ubicacion de la farmaciaEntity.
      *
-     * @param pUbicacion the cantidad to set
+     * @param parametro la ubicacion a asignar
      */
-    public void setUbicacion(String pUbicacion) {
-        this.ubicacion = pUbicacion;
+    public void setUbicacion(String parametro) {
+        this.ubicacion = parametro;
     }
     
     /**
-     * Devuelve el telefono de la farmaciaEntity.
+     * Retorna el telefono de la farmaciaEntity.
      *
      * @return telefono
      */
@@ -98,14 +98,14 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica el telefono de la farmaciaEntity.
      *
-     * @param telefono the descripcion to set
+     * @param parametro el telefono a asignar
      */
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
+    public void setTelefono(Long parametro) {
+        this.telefono = parametro;
     }
     
     /**
-     * Devuelve el correo de la farmaciaEntity.
+     * Retorna el correo de la farmaciaEntity.
      *
      * @return correo
      */
@@ -114,16 +114,16 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     }
    
     /**
-     * Modifica el telefono de la farmaciaEntity.
+     * Modifica el correo de la farmaciaEntity.
      *
-     * @param pCorreo the descripcion to set
+     * @param parametro el correo a asignar
      */
-    public void setCorreo(String pCorreo) {
-        this.correo = pCorreo;
+    public void setCorreo(String parametro) {
+        this.correo = parametro;
     }
     
     /**
-     * Devuelve la latitud de la farmaciaEntity.
+     * Retorna la latitud de la farmaciaEntity.
      *
      * @return latitud
      */
@@ -134,14 +134,14 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica la latitud de la farmaciaEntity.
      *
-     * @param pLat the lat to set
+     * @param parametro la latitud a asignar
      */
-    public void setLatitud(double pLat) {
-        this.latitud = pLat;
+    public void setLatitud(double parametro) {
+        this.latitud = parametro;
     }
     
     /**
-     * Devuelve la longitud de la farmaciaEntity.
+     * Retorna la longitud de la farmaciaEntity.
      *
      * @return longitud
      */
@@ -152,9 +152,9 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     /**
      * Modifica la longitud de la farmaciaEntity.
      *
-     * @param pLon the lon to set
+     * @param parametro la longitud a asignar
      */
-    public void setLongitud(double pLon) {
-        this.longitud = pLon;
+    public void setLongitud(double parametro) {
+        this.longitud = parametro;
     }
 }

@@ -1,0 +1,365 @@
+{
+	"info": {
+		"_postman_id": "0f9525aa-2f55-4718-91d4-1bb833c88382",
+		"name": "Pruebas-Postman-Medico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Lucas\",\r\n\t\"telefono\":\"12345678\",\r\n\t\"correo\":\"lu.njsd@uniandes.edu.co\",\r\n\t\"documentoMedico\":654322,\r\n\t\"firma\":\"algo.jpg\",\r\n\t\"descripcion\":\"Buen medico\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico"
+					]
+				},
+				"description": "Se crea un nuevo médico en el sistema y persiste"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"5798890\",\r\n\t\"correo\":\"ferchoMedico@unimedicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico"
+					]
+				},
+				"description": "Se crea un nuevo médico en el sistema y persiste"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"5798890\",\r\n\t\"correo\":\"ferchodicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico"
+					]
+				},
+				"description": "Se intenta crear un médico con un correo inválido y se espera un error de precondición"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"5798890\",\r\n\t\"correo\":\"ferchoMedico@unimedicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico"
+					]
+				},
+				"description": "Se consultan todos los médicos del sistema, y se logra identificar que tanto la consulta cómo la persistencia son exitosas "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"5798890\",\r\n\t\"correo\":\"ferchoMedico@unimedicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"3"
+					]
+				},
+				"description": "Se consultan el médico con id 3 y la consulta es exitosa"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"67625\",\r\n\t\"correo\":\"ferchoMedico@unimedicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"3"
+					]
+				},
+				"description": "Se actualiza la información del médico, más especificamente su teléfono, y se logra satisfactoriamente"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Fernando Osorio\",\r\n\t\"telefono\":\"67625\",\r\n\t\"correo\":\"ferchoMedico@unimedicos.com\",\r\n\t\"documentoMedico\":654323,\r\n\t\"firma\":\"firmaFercho.jpg\",\r\n\t\"descripcion\":\"médico graduado de otorrinolaringología de la universidad de los Andes\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"3"
+					]
+				},
+				"description": "Se intenta actualizar el médico con un teléfono no válido y efectivamente no se logra ejecutar la solicitud"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"1"
+					]
+				},
+				"description": "Se elimina un médico por medio de su identificador"
+			},
+			"response": []
+		}
+	]
+}

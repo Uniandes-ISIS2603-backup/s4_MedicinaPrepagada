@@ -67,7 +67,7 @@ public class ConsultorioDTO  implements Serializable
     {
         ConsultorioEntity consultorioEntity = new ConsultorioEntity();
         
-        consultorioEntity.setId(this.getId());
+        consultorioEntity.setId(this.id);
         consultorioEntity.setEdificio(this.edificio);
         consultorioEntity.setNOficina(this.nOficina);
         consultorioEntity.setSede(this.sede.toEntity());
@@ -83,7 +83,7 @@ public class ConsultorioDTO  implements Serializable
        this.id = pId;
    }
    
-   public Long getId  ()
+   public long getId  ()
    {
         return this.id;
    }
@@ -106,7 +106,7 @@ public class ConsultorioDTO  implements Serializable
        this.nOficina=pNOficina;
    }
    
-   public Integer getNOficina  ()
+   public int getNOficina  ()
    {
        return this.nOficina;
    }
@@ -114,7 +114,7 @@ public class ConsultorioDTO  implements Serializable
    
    
    
-      public void getSede (SedeDTO pSede)
+      public void setSede (SedeDTO pSede)
    {
        this.sede = pSede;
    }

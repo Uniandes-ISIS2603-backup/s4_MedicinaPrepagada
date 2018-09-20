@@ -18,6 +18,10 @@ delete from AdministradorEntity;
 delete from HistoriaClinicaEntity; 
 delete from OrdenMedicaEntity; 
 
+delete from MedicamentoEntity;
+delete from FarmaciaEntity;
+delete from ExamenMedicoEntity;
+
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -121,20 +125,20 @@ insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Laura1', 'laurita56', 'Paciente'); 
 
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('08/10/2018', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
+values('2018/10/08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('20/07/2018', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
+values('2018/07/20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('26/10/2018', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
+values('2018/10/26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (400, 'Pedro Franco', '19/10/2018', 'Examen de sangre', '19/12/2018'); 
+values (400, 'Pedro Franco', '2018/10/19', 'Examen de sangre', '2018/12/19'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (300, 'Pedro Franco', '24/10/2018', 'Paracetamol 400', '24/12/2018'); 
+values (300, 'Pedro Franco', '2018/10/24', 'Paracetamol 400', '2018/12/24'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (200, 'Carlos Estupiñan', '01/10/2018', 'Dolex gripa', '01/12/2018'); 
+values (200, 'Carlos Estupiñan', '2018/10/01', 'Dolex gripa', '2018/12/01'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (100, 'Claudia Forero', '07/09/2018', 'Mucha agua', '07/11/2018'); 
+values (100, 'Claudia Forero', '2018/09/07', 'Mucha agua', '2018/11/07'); 
 
 insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
 values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
@@ -174,6 +178,17 @@ values (4,3,'2018-10-22 09:00:00',100000,'Cita Laboratorio Examen de Sangre', 1,
 
 
 
+insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Advil', '50 mg', 'No apto para menores de edad', 'Pfizer', 15000);
+insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Aspirina', '70 mg', 'No apto para menores de edad', 'Bayer', 12000);
+insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Amoxicilina', '100 mg', 'Tomar abundante agua', 'Tecnoquimicas', 170000);
+
+insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Farmatodo', 'Calle 30 # 45-67', 2345678, -72.03, 4.05, 'servicio@farmatodo.com');
+insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Cruz Verde', 'Calle 20 # 35-77', 1245678, -72.05, 4.08, 'servicio@cruzverde.com');
+insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Drogas la Rebaja', 'Calle 36 # 65-17', 2347878, -72.13, 4.15, 'servicio@rebaja.com');
+
+insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Biopsia', 120000, 'Venir con acompanante');
+insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Rayos X', 12000, 'Es preferible no estar en estado de embarazo');
+insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Ecografia', 140000, 'Venir con ropa ligera');
 
 
 
