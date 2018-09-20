@@ -100,7 +100,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Farmatodo\",\r\n\r\n\"ubicacion\":\"carrera 30\",\r\n\r\n\"telefono\":\"555-555555\",\r\n\r\n\"longitud\":2.14,\r\n\r\n\"latitud\":3.14,\r\n\r\n\"correo\":\"serviciocliente@farmatodo.com\"}"
+					"raw": "{\"nombre\":\"Farmatodo\",\r\n\r\n\"ubicacion\":\"carrera 30 # 20-10\",\r\n\r\n\"telefono\":1234567,\r\n\r\n\"longitud\":-72.03,\r\n\r\n\"latitud\":4.05,\r\n\r\n\"correo\":\"servicioclientenuevo@farmatodo.com\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/farmacias/1",
@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Farmatodo\",\r\n\r\n\"ubicacion\":\"carrera 30\",\r\n\r\n\"telefono\":\"555-555555\",\r\n\r\n\"longitud\":2.14,\r\n\r\n\"latitud\":3.14,\r\n\r\n\"correo\":\"serviciocliente@farmatodo.com\"}"
+					"raw": "{\"nombre\":\"Farmatodo\",\r\n\r\n\"ubicacion\":\"carrera 30 # 20-10\",\r\n\r\n\"telefono\":1234567,\r\n\r\n\"longitud\":-72.03,\r\n\r\n\"latitud\":4.05,\r\n\r\n\"correo\":\"serviciocliente@farmatodo.com\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/farmacias",

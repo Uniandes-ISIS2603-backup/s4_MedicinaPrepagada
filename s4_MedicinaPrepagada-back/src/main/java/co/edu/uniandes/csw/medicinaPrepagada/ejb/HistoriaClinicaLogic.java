@@ -104,10 +104,10 @@ public class HistoriaClinicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la historia clinica con id = {0}", historiaId);
         
-        if( historiaId != historiaEntity.getId() )
+        /**if( historiaId != historiaEntity.getId() )
         {
             throw new BusinessLogicException("No se puede modificar el id. ");
-        }
+        }*/
         
         if (!persistence.find(historiaId).getAlergias().equals(historiaEntity.getAlergias()))
         {

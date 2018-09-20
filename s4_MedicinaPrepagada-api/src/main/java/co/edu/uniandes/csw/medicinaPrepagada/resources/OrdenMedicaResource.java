@@ -42,6 +42,8 @@ public class OrdenMedicaResource
     @Inject
     private OrdenMedicaLogic ordenLogic;
     
+    private final String mensaje = "no existe"; 
+    
     
     /**
      * Crea una nueva orden medica con la informacion que se recibe en el cuerpo de la
@@ -83,7 +85,7 @@ public class OrdenMedicaResource
      */
     
     @GET
-    @Path("{OrdenMedicaId: \\d+}")
+    @Path("{ordenMedicaId: \\d+}")
     public OrdenMedicaDTO getOrdenMedica(@PathParam("ordenMedicaId") Long ordenMedicaid)
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenMedica: input: {0}", ordenMedicaid);
@@ -92,7 +94,7 @@ public class OrdenMedicaResource
         
         if (ordenmedicaEntity == null) 
         {
-            throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
+            throw new WebApplicationException("El recurso /ordenMedica/ " + ordenMedicaid + mensaje, 404);
         }
         
         OrdenMedicaDTO ordenMedicaDetailDTO = new OrdenMedicaDTO(ordenmedicaEntity);
@@ -107,17 +109,17 @@ public class OrdenMedicaResource
      */
     
     @DELETE
-    @Path("{OrdenMedicaId: \\d+}")
+    @Path("{ordenMedicaId: \\d+}")
     public void deleteOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource deleteOrdenMedica: input:(0)", ordenMedicaid);
         
         if (ordenLogic.getOrdenMedica(ordenMedicaid) == null) 
         {
-           throw new WebApplicationException("El recurso /ordenMedica/" + ordenMedicaid + " no existe.", 404);
-        }
-        
+           throw new WebApplicationException("El recurso /ordenMedica/ " + ordenMedicaid + mensaje, 404);
+        }        
         ordenLogic.deleteOrdenMedica(ordenMedicaid); 
+        
         LOGGER.info("OrdenMedicaResource deleteOrdenMedica: output: void");
     }
     
@@ -130,11 +132,17 @@ public class OrdenMedicaResource
     
     @PUT
     @Path("{ordenMedicaId: \\d+}")
-    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid, OrdenMedicaDetailDTO pOrden)  
+    public OrdenMedicaDTO modificarOrdenMedica(@PathParam ("ordenMedicaId") Long ordenMedicaid, OrdenMedicaDetailDTO pOrden) throws BusinessLogicException  
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource modificarOrdenMedica: input:(0)", ordenMedicaid);
         pOrden.setId(ordenMedicaid);
-        OrdenMedicaDetailDTO modificarDetailDto = new OrdenMedicaDetailDTO();        
+        
+        if (ordenLogic.getOrdenMedica(ordenMedicaid) == null)
+        {
+            throw new WebApplicationException("La orden medica con id " + ordenMedicaid + mensaje, 404);
+        }
+         
+        OrdenMedicaDetailDTO modificarDetailDto = new OrdenMedicaDetailDTO(ordenLogic.updateOrdenMedica(ordenMedicaid, pOrden.toEntity()));        
         LOGGER.log(Level.INFO,"OrdenMedicaResource modificarOrdenMedica: output: (0)", modificarDetailDto);
         return modificarDetailDto;
     }

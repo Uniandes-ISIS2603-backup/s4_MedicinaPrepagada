@@ -144,7 +144,7 @@ public class ExamenMedicoLogic {
     }
     
     
-    private boolean validateString (String pString) throws BusinessLogicException
+    private boolean validateString (String pString)
     {
         String validationPattern = "([A-Za-z]*|([A-Za-z]+\\s))+[A-Za-z]*";
         Pattern patternNombre = Pattern.compile(validationPattern);

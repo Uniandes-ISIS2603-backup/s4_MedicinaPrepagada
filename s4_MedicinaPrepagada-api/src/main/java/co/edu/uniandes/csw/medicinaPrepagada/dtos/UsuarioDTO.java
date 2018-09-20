@@ -57,7 +57,8 @@ public class UsuarioDTO {
      *
      * @param usuarioEntity: Es la entidad que se va a convertir a DTO
      */
-    public UsuarioDTO(UsuarioEntity usuarioEntity){
+    public UsuarioDTO(UsuarioEntity usuarioEntity)
+    {
         if(usuarioEntity != null){
             this.login = usuarioEntity.getLogin();
             this.contrasena = usuarioEntity.getContrasena();

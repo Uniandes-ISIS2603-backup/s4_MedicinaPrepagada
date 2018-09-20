@@ -106,7 +106,7 @@ public class CitaLaboratorioLogicTest
     @Test
     public void createCitaLaboratorio () throws BusinessLogicException
     {
-       Date nueva = new Date().from(Instant.now());
+       Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
        CitaLaboratorioEntity newEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
        newEntity.setDate(nueva);
        citaLabLogic.createCitaLaboratorio(newEntity);
@@ -150,16 +150,34 @@ public class CitaLaboratorioLogicTest
         
     }
     
-    @Test
-    public void crearCitaCoEspecialidadVacia()throws BusinessLogicException
+    @Test(expected = BusinessLogicException.class)
+    public void crearCitaConEspecialidadVacia()throws BusinessLogicException
     {
-        String espec = "   ";
+        String espec = "";
         CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-        entity.setDate(new Date().from(Instant.now()));
+        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
         entity.setEspecialidad(espec);
         citaLabLogic.createCitaLaboratorio(entity);
     } 
     
+    @Test(expected = BusinessLogicException.class)
+    public void crearCitaConComentariosVacia()throws BusinessLogicException
+    {
+        String comments = "";
+        CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
+        entity.setComentarios(comments);
+        citaLabLogic.createCitaLaboratorio(entity);
+    } 
+    @Test(expected = BusinessLogicException.class)
+    public void crearCitaConRecomendacionesVacia()throws BusinessLogicException
+    {
+        String recom = "";
+        CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
+        entity.setRecomendaciones(recom);
+        citaLabLogic.createCitaLaboratorio(entity);
+    } 
     @Test
     public void updateCitaLaboratorioTest() throws BusinessLogicException
     {
@@ -176,7 +194,40 @@ public class CitaLaboratorioLogicTest
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaLaboratorioConFechaInvalidaTest() throws BusinessLogicException
+    {
+        Date nueva = new Date(System.currentTimeMillis()-2*24*60*60*1000);
+        CitaLaboratorioEntity entity = citaLabList.get(0);
+        CitaLaboratorioEntity pojoEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        
+        pojoEntity.setDate(nueva);
+        pojoEntity.setId(entity.getId());
+        
+        citaLabLogic.updateCitaLaboratorio(pojoEntity.getId(), pojoEntity);
+
+        CitaLaboratorioEntity resp = em.find(CitaLaboratorioEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
   
+    @Test(expected=BusinessLogicException.class)
+    public void updateCitaLaboratorioConEspecialidadInvalidaTest() throws BusinessLogicException
+    {
+        Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
+        CitaLaboratorioEntity entity = citaLabList.get(0);
+        CitaLaboratorioEntity pojoEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        
+        pojoEntity.setDate(nueva);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setEspecialidad("");
+        
+        citaLabLogic.updateCitaLaboratorio(pojoEntity.getId(), pojoEntity);
+
+        CitaLaboratorioEntity resp = em.find(CitaLaboratorioEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
     @Test
     public void deleteCitaLaboratorio() throws BusinessLogicException
     {

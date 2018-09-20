@@ -73,9 +73,9 @@ public class FacturaLogic {
         return facturaEntity;
     }
     
-    public FacturaEntity updateFactura (FacturaEntity facturaEntity) throws BusinessLogicException
+    public FacturaEntity updateFactura (Long FacturaId,FacturaEntity facturaEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la factura con id = {0}", facturaEntity.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la factura con id = {0}", FacturaId);
         
         FacturaEntity facVieja = facturaPersistence.find(facturaEntity.getId());
         
@@ -83,26 +83,30 @@ public class FacturaLogic {
         {
             throw new BusinessLogicException("La factura que intenta cambiar no existe");
         }
-        if (facturaEntity.getId()!=facturaEntity.getId())
+        if (!facturaPersistence.find(FacturaId).getId().equals(facturaEntity.getId()))
         {
             throw new BusinessLogicException("No puede cambiar el Id");
         }
-        if (facturaEntity.getConcepto()!= facVieja.getConcepto())
+        if (!facturaPersistence.find(FacturaId).getConcepto().equals(facturaEntity.getConcepto()))
         {
             throw new BusinessLogicException("No se puede cambiar el concepto");
         }
-        if(facturaEntity.getIdCliente()!=facVieja.getIdCliente())
+        if(!facturaPersistence.find(FacturaId).getIdCliente().equals(facturaEntity.getIdCliente()))
         {
             throw new BusinessLogicException("No se puede cambiar el id cliente");
         }
-        if(facturaEntity.getFecha()!=facVieja.getFecha())
+        if(!facturaPersistence.find(FacturaId).getFecha().equals(facturaEntity.getFecha()))
         {
             throw new BusinessLogicException("No se puede cambiar la fecha");
+        }
+        if(!(facturaPersistence.find(FacturaId).getValor()==facturaEntity.getValor()))
+        {
+            throw new BusinessLogicException("No se puede cambiar el valor");
         }
         
         
         FacturaEntity newFacturaEntity = facturaPersistence.updateFactura(facturaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la cita de laboratorio con id = {0}", facturaEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la cita de laboratorio con id = {0}", FacturaId);
         return newFacturaEntity;
     }
     

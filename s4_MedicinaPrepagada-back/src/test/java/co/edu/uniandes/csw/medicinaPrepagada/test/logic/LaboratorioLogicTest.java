@@ -123,6 +123,26 @@ public class LaboratorioLogicTest {
        
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void createLaboratorioConNombreInvalido () throws BusinessLogicException
+    {
+       LaboratorioEntity newLabEntity = factory.manufacturePojo(LaboratorioEntity.class);
+       
+       newLabEntity.setNombre("");
+       newLabEntity.setDireccion("cra 12 # 12-25");
+       newLabEntity.setLatitud(4.6097100);
+       newLabEntity.setLongitud( -74.0817500);
+       newLabEntity.setHorarioAtencion("Lunes a Sabados, 8:00am a 12:00m. Entrega resultados: 1:00pm a 5:00pm");
+       newLabEntity.setTelefono(new Long(4576221));
+       
+       LaboratorioEntity result = labLogic.createLaboratorio(newLabEntity);
+       Assert.assertNotNull(result);
+       LaboratorioEntity entity = em.find(LaboratorioEntity.class, result.getId());
+       Assert.assertEquals(newLabEntity.getId(), entity.getId());
+       
+       
+    }
+    
     @Test
     public void getLabsTest() {
         List<LaboratorioEntity> list = labLogic.getLabs();
