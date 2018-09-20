@@ -112,11 +112,13 @@ public class MedicamentoLogicTest {
     
    /**
      * Prueba para crear un Medicamento.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @Test
     public void createMedicamentoTest() throws BusinessLogicException {
         MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
-         newEntity.setElaboradoPor("Glaxo Smith Kline");
+        newEntity.setNombre("Dolex");
+        newEntity.setElaboradoPor("Glaxo Smith Kline");
         newEntity.setDescripcion("Tomar mucha agua");
         newEntity.setCosto(15000);
         newEntity.setCantidad("20 mg");
@@ -224,5 +226,121 @@ public class MedicamentoLogicTest {
         
         medicamentoLogic.createMedicamento(newEntity);
     }
+    
+     /**
+     * Prueba para actualizar un medicamento con un costo inválido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicamentoConCostoInvalido() throws BusinessLogicException{
+        MedicamentoEntity entity = data.get(1);
+        MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setElaboradoPor("Glaxo Smith Kline");
+        pojoEntity.setDescripcion("Tomar mucha agua");
+        pojoEntity.setCosto(1);
+        pojoEntity.setCantidad("20 mg");
+        
+        medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para crear un medicamento con una descripción inválida
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearMedicamentoConDescripcionInvalida() throws BusinessLogicException{
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        newEntity.setElaboradoPor("Glaxo Smith Kline");
+        newEntity.setDescripcion("12345678");
+        newEntity.setCosto(15000);
+        newEntity.setCantidad("20 mg");
+        
+        medicamentoLogic.createMedicamento(newEntity);
+    }
 
+    /**
+     * Prueba para actualizar un medicamento con descricpión inválida
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicamentoConDescripcionInvalida() throws BusinessLogicException{
+        MedicamentoEntity entity = data.get(1);
+        MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setElaboradoPor("Glaxo Smith Kline");
+        pojoEntity.setDescripcion("12345");
+        pojoEntity.setCosto(10000);
+        pojoEntity.setCantidad("20 mg");
+        
+        medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para crear un medicamento con un elaborador inválido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearMedicamentoConElaboradoPorInvalido() throws BusinessLogicException{
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        newEntity.setElaboradoPor("123456");
+        newEntity.setDescripcion("Tomar agua");
+        newEntity.setCosto(15000);
+        newEntity.setCantidad("20 mg");
+        
+        medicamentoLogic.createMedicamento(newEntity);
+    }
+    
+    /**
+     * Prueba para actualizar un medicamento con un elaborador inválido
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicamentoConElaboradoPorInvalido() throws BusinessLogicException{
+        MedicamentoEntity entity = data.get(1);
+        MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setElaboradoPor("12345");
+        pojoEntity.setDescripcion("Tomar mucha agua");
+        pojoEntity.setCosto(10000);
+        pojoEntity.setCantidad("20 mg");
+        
+        medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para crear un medicamento con una cantidad invalida.
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearMedicamentoConCantidadInvalida() throws BusinessLogicException{
+        MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        newEntity.setElaboradoPor("123456");
+        newEntity.setDescripcion("Tomar agua");
+        newEntity.setCosto(15000);
+        newEntity.setCantidad("20 m");
+        
+        medicamentoLogic.createMedicamento(newEntity);
+    }
+    
+    /**
+     * Prueba para actualizar un medicamento con una cantidad invalida.
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateMedicamentoConCantidadInvalida() throws BusinessLogicException{
+        MedicamentoEntity entity = data.get(1);
+        MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNombre(entity.getNombre());
+        pojoEntity.setElaboradoPor("12345");
+        pojoEntity.setDescripcion("Tomar mucha agua");
+        pojoEntity.setCosto(10000);
+        pojoEntity.setCantidad("20 m");
+        
+        medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
+    }
 }

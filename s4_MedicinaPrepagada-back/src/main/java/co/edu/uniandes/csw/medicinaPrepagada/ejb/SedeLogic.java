@@ -51,7 +51,7 @@ public class SedeLogic
         if (!validateNumero(sedeEntity.getTelefono()))
             throw new BusinessLogicException("El telefono debe tener al menos 7 digitos");
         //Verifica que no exista otra sede con la misma direccion para crearla
-        if (persistence.findByDireccion(sedeEntity.getDescripcion())!= null)
+        if (persistence.findByDireccion(sedeEntity.getDireccion())!= null)
             throw new BusinessLogicException("Ya existe una sede con esta direccion");
         //verifica que el tipo de la sede sea de los posibles al crearla
         if (!validateTipo(sedeEntity.getTipoSede()))
@@ -171,7 +171,7 @@ public class SedeLogic
         
         //Verifica que la sede que se intenta modificar exista
         if (persistence.find(sedesId) == null)
-            throw new BusinessLogicException ("La sede que intenta modificar no existe");
+            throw new BusinessLogicException ("La sede que intenta eliminar no existe");
         
         persistence.delete(sedesId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el sede con id = {0}", sedesId);

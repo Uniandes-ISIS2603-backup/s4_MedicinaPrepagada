@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,7 +7,10 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetailDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionSedeDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.HorarioAtencionLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,7 @@ public class HorarioAtencionResource
      *
      * @param pHorarioAtencion {@link HorarioAtencionDTO} - el  horarios de atencion que se desea
      * guardar.
+     * @param pSede
      * @return JSON {@link HorarioAtencionDTO} - el  horarios de atencion guardado con el atributo
      * id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
@@ -56,15 +60,17 @@ public class HorarioAtencionResource
      */   
        
     @POST
-    public HorarioAtencionDTO createHorarioAtencion(HorarioAtencionDTO pHorarioAtencion) throws BusinessLogicException 
+    public HorarioAtencionDTO createHorarioAtencion(HorarioAtencionSedeDTO pHorarioAtencion) throws BusinessLogicException //, SedeDTO pSede
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource createHorarioAtencion: input: {0}", pHorarioAtencion.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
 
         // Invoca la lógica para crear el horario de atencion  nuevo
+        HorarioAtencionEntity pHorEntityt = pHorarioAtencion.toEntity();
+        SedeEntity pSedeEntity = pHorarioAtencion.getSede().toEntity();
         
+        HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO ();//(horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        HorarioAtencionDTO nuevoHorarioAtencionDTO = new HorarioAtencionDTO();
         LOGGER.log(Level.INFO, "HorarioAtencionResource createHorarioAtencion: output: {0}", nuevoHorarioAtencionDTO.toString());
         return nuevoHorarioAtencionDTO;
     }
@@ -81,8 +87,7 @@ public class HorarioAtencionResource
     public List<HorarioAtencionDTO> getHorariosAtencion()
     {
         LOGGER.info("HorarioAtencionResource getHorariosAtencion: input: void");
-        List<HorarioAtencionDTO> listaHorariosAtencion = listEntity2DetailDTO();
-                //listEntity2DetailDTO(horariosAtencionLogic.getHorariosAtencion());
+        List<HorarioAtencionDTO> listaHorariosAtencion = listEntity2DetailDTO(horarioAtencionLogic.getHorarioAtencions());
         LOGGER.log(Level.INFO, "HorarioAtencionResource getHorariosAtencion: output: {0}", listaHorariosAtencion.toString());
         return listaHorariosAtencion;
     }
@@ -100,54 +105,47 @@ public class HorarioAtencionResource
      */
     @GET
     @Path("{horarioAtencionId: \\d+}")
-    public HorarioAtencionDTO getHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId) throws WebApplicationException 
+    public HorarioAtencionDetailDTO getHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource getHorarioAtencion: input: {0}", pHorarioAtencionId);
-        //HorarioAtencionEntity horarioAtencionEntity = null;
-      //  if (horarioAtencionEntity == null) }
-      //  {
-      //      throw new WebApplicationException("El recurso /horariosAtencion/" + pHorarioAtencionId + " no existe.", 404);
-      //  }
-        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO();
+        HorarioAtencionEntity horarioAtencionEntity = horarioAtencionLogic.getHorarioAtencion(pHorarioAtencionId);
+        if (horarioAtencionEntity == null) 
+        {
+            throw new WebApplicationException("El recurso /horariosAtencion/ con el id " + pHorarioAtencionId + " no existe.", 404);
+        }
+        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO(horarioAtencionEntity);
         LOGGER.log(Level.INFO, "HorarioAtencionResource getHorarioAtencion: output: {0}", detailDTO.toString());
         return detailDTO;
     }
-    
-    
-    
-    
-    
+
         /**
      * Actualiza el horario de atencion con el id recibido en la URL con la informacion
      * que se recibe en el cuerpo de la petición.
      *
-     * @param horarioAtencionId Identificador del horario de atencion que se desea
-     * actualizar. Este debe ser una cadena de dígitos.
-     * @param horarioAtencionId {@link HorarioAtencionDTO} el horario de atencion que se desea
-     * guardar.
+     * @param pHorarioAtencionId
+     * @param pHorarioAtencion
      * @return JSON {@link HorarioAtencionDTO} - el horario de atencion guardada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el horario de atencion a
      * actualizar.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @PUT
     @Path("{horarioAtencionId: \\d+}")
-    public HorarioAtencionDTO updateHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId, HorarioAtencionDetailDTO pHorarioAtencion) throws WebApplicationException 
+    public HorarioAtencionDTO updateHorarioAtencion(@PathParam("horarioAtencionId") Long pHorarioAtencionId, HorarioAtencionDetailDTO pHorarioAtencion) throws WebApplicationException, BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource updateHorarioAtencion: input: id:{0} , horarioAtencion: {1}", new Object[]{pHorarioAtencionId, pHorarioAtencion.toString()});
         pHorarioAtencion.setId(pHorarioAtencionId);
-      //  if (logic.get(pHorarioAtencionId) == null) {
-      //      throw new WebApplicationException("El recurso /horariosAtencion/" + pHorarioAtencionId + " no existe.", 404);
-      //  }
-        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO();
+        if (horarioAtencionLogic.getHorarioAtencion(pHorarioAtencionId) == null) 
+        {
+            throw new WebApplicationException("El recurso /horariosAtencion/ que quiere editar con id " + pHorarioAtencionId + " no existe.", 404);
+        }
+        HorarioAtencionDetailDTO detailDTO = new HorarioAtencionDetailDTO(horarioAtencionLogic.updateHorarioAtencion(pHorarioAtencionId, pHorarioAtencion.toEntity()));
         LOGGER.log(Level.INFO, "HorarioAtencionResource updateHorarioAtencion: output: {0}", detailDTO.toString());
         return detailDTO;
 
     }
-    
-    
-    
-    
+
     /**
      * Borra el horario de atencion con el id asociado recibido en la URL.
      *
@@ -163,11 +161,11 @@ public class HorarioAtencionResource
     public void deleteHorarioAtencion(@PathParam("horarioAtencionId") Long horarioAtencionId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource deleteHorarioAtencion: input: {0}", horarioAtencionId);
-    //    if (logic.get(horarioAtencionId) == null) 
-    //    {
-    //        throw new WebApplicationException("El recurso /horariosAtencion/" + horarioAtencionId + " no existe.", 404);
-    //    }
-    //    logic.delet(horarioAtencionId);
+        if (horarioAtencionLogic.getHorarioAtencion(horarioAtencionId) == null) 
+        {
+            throw new WebApplicationException("El recurso /horariosAtencion/ que intenta eliminar con id" + horarioAtencionId + " no existe.", 404);
+        }
+        horarioAtencionLogic.deleteHorarioAtencion(horarioAtencionId);
         LOGGER.info("HorarioAtencionResource deleteHorarioAtencion: output: void");
     }
     
@@ -183,12 +181,13 @@ public class HorarioAtencionResource
      * que vamos a convertir a DTO.
      * @return la lista de horarios de atencion en forma DTO (json)
      */
-    private List<HorarioAtencionDTO> listEntity2DetailDTO() 
+    private List<HorarioAtencionDTO> listEntity2DetailDTO(List<HorarioAtencionEntity> entityList) 
     {
         List<HorarioAtencionDTO> list = new ArrayList<>();
-     //   for (HorarioAtencionEntity entity : entityList) {
-     //       list.add(new HorarioAtencionDetail(entity));
-     //   }
+        for (HorarioAtencionEntity entity : entityList) 
+        {
+            list.add(new HorarioAtencionDetailDTO(entity));
+        }
         return list;
     }
 }

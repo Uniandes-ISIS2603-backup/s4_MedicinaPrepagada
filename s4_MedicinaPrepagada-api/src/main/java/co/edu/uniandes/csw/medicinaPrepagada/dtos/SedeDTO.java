@@ -77,7 +77,7 @@ public class SedeDTO implements Serializable
     public SedeEntity toEntity() 
     {
         SedeEntity sedeEntity = new SedeEntity();
-        sedeEntity.setId(this.getId());
+        sedeEntity.setId(this.id);
         sedeEntity.setNombre(this.nombre);
         sedeEntity.setDireccion(this.direccion);
         sedeEntity.setTipoSede(this.tipoSede);
@@ -106,7 +106,7 @@ public class SedeDTO implements Serializable
     * Recibe el id de la sedeDTO
     * @return idSedeDTO
     */
-   public Long getId  ()
+   public long getId  ()
    {
         return this.id;
    }

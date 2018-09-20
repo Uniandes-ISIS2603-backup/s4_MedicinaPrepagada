@@ -28,7 +28,8 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
     }
     
     /**
-     * Crea un objeto AuthorDetailDTO a partir de un objeto AuthorEntity
+     * Crea un objeto HistoriaClinicaDTO a partir de un objeto HistoriaClinicaEntity
+     * @param histEntity
      */
     
     public HistoriaClinicaDetailDTO(HistoriaClinicaEntity histEntity) 
@@ -43,6 +44,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
             {
                 ordenesMedicas.add(new OrdenMedicaDTO(entityOrdenes));
             }
+            
         }
     }
     

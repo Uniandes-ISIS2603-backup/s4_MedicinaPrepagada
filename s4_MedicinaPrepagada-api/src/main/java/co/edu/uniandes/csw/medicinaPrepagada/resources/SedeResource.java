@@ -100,13 +100,13 @@ public class SedeResource
      */
     @GET
     @Path("{sedeId: \\d+}")
-    public SedeDTO getSede(@PathParam("sedeId") Long pSedeId) throws WebApplicationException 
+    public SedeDetailDTO getSede(@PathParam("sedeId") Long pSedeId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "SedeResource getSede: input: {0}", pSedeId);
         SedeEntity sedeEntity = sedeLogic.getSede(pSedeId);
         if (sedeEntity == null) 
         {
-            throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /sede/" + pSedeId + " no existe .", 404);
         }
         SedeDetailDTO detailDTO = new SedeDetailDTO(sedeEntity);
         LOGGER.log(Level.INFO, "SedeResource getSede: output: {0}", detailDTO.toString());
@@ -133,7 +133,7 @@ public class SedeResource
         pSede.setId(pSedeId);
         if (sedeLogic.getSede(pSedeId) == null)
         {
-            throw new WebApplicationException("El recurso /sedes/" + pSedeId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /sedes/ que quiere editar con id" + pSedeId + " no existe.", 404);
         }
         SedeDetailDTO detailDTO = new SedeDetailDTO(sedeLogic.updateSede(pSedeId, pSede.toEntity()));
         LOGGER.log(Level.INFO, "SedeResource updateSede: output: {0}", detailDTO.toString());
@@ -158,7 +158,7 @@ public class SedeResource
         LOGGER.log(Level.INFO, "SedeResource deleteSede: input: {0}", sedeId);
         if (sedeLogic.getSede(sedeId) == null) 
         {
-            throw new WebApplicationException("El recurso /sedes/" + sedeId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /sedes/ que desea eliminar" + sedeId + " no existe.", 404);
         }
         sedeLogic.deleteSede(sedeId);
         LOGGER.info("SedeResource deleteSede: output: void");

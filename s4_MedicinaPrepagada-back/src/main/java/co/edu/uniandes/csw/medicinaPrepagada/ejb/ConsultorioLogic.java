@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.ConsultorioPersistence;
+import co.edu.uniandes.csw.medicinaPrepagada.persistence.EspecialidadPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.SedePersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +33,9 @@ public class ConsultorioLogic
     @Inject
     private SedePersistence persistenceSede;
     
+    @Inject
+    private EspecialidadPersistence persistenceEspecialidad;
+    
     
          /**
      * Se encarga de crear un Consultorio en la base de datos.
@@ -45,21 +49,18 @@ public class ConsultorioLogic
         //Verifica que el edificio sea valido
         if (!validateEdificio(consultorioEntity.getEdificio()))
            throw new BusinessLogicException ("EL edificio no puede ser vacio ");
-        //Verifica que la oficina sea valido
-        if (!validateNOficina(consultorioEntity.getNOficina()))
-           throw new BusinessLogicException ("La oficina no puede ser vacia ");
         //Verifica que tenga una sede
         if (!validateSede(consultorioEntity.getSede()))
             throw new BusinessLogicException("Un consultorio debe tener una sede");
         //Verifica que la sede exista
         if (persistenceSede.find(consultorioEntity.getSede().getId())== null)
             throw new BusinessLogicException("La sede del consultorio no existe");
-        //Verifica que no tenga horarios de atencion
-        if (!consultorioEntity.getHorariosAtencion().isEmpty())
-            throw new BusinessLogicException("Debe crear el consultorio sin horarios de atencion");
         //Verifica que la sede, edificio y oficna no sena la misma
         if (!validateSedeEdificioOficina(consultorioEntity))
-            throw new BusinessLogicException("Un consultorio no puede tener la misma Sde, edificio y numero de oficina");
+            throw new BusinessLogicException("Un consultorio no puede tener la misma Sde, edificio y numero de oficina que otro consultorio");
+        //Verifica que la especialidad si exista
+        if (persistenceEspecialidad.find(consultorioEntity.getEspecialidad().getNombre())== null)
+            throw new BusinessLogicException("La especialidad que intenta asignar no existe");
         
         ConsultorioEntity newConsultorioEntity = persistence.create(consultorioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del consultorio");
@@ -113,16 +114,13 @@ public class ConsultorioLogic
         ConsultorioEntity pConsultorioOld = persistence.find(consultoriosId);
         //Verifica que la consultorio que se intenta modificar exista
         if (pConsultorioOld == null)
-            throw new BusinessLogicException ("La consultorio que intenta modificar no existe");
+            throw new BusinessLogicException ("El consultorio que intenta modificar no existe");
         //Verifica que no se intente cambiar el Id
         if (consultorioEntity.getId() != consultoriosId)
             throw new BusinessLogicException("No se puede cambiar el id de la consultorio");
          //Verifica que el edificio sea valido
         if (!validateEdificio(consultorioEntity.getEdificio()))
            throw new BusinessLogicException ("EL edificio no puede ser vacio ");
-        //Verifica que la oficina sea valido
-        if (!validateNOficina(consultorioEntity.getNOficina()))
-           throw new BusinessLogicException ("La oficina no puede ser vacia ");
          //Verifica que la sede no cambie
         if (!persistence.find(consultoriosId).getSede().equals(consultorioEntity.getSede()))
             throw new BusinessLogicException("Un consultorio no puede cambiar de sede");
@@ -130,6 +128,10 @@ public class ConsultorioLogic
         if (!validateSedeEdificioOficina(consultorioEntity))
             throw new BusinessLogicException("Un consultorio no puede tener la misma Sde, edificio y numero de oficina");
         // validador de horarios?
+        
+        //Verifica que la especialidad si exista
+        if (persistenceEspecialidad.find(consultorioEntity.getEspecialidad().getNombre())== null)
+            throw new BusinessLogicException("La especialidad que intenta asignar no existe ");
         
   
         ConsultorioEntity newConsultorioEntity = persistence.update(consultorioEntity);
@@ -150,7 +152,7 @@ public class ConsultorioLogic
         
         //Verifica que la consultorio que se intenta modificar exista
         if (persistence.find(consultoriosId) == null)
-            throw new BusinessLogicException ("La consultorio que intenta modificar no existe");
+            throw new BusinessLogicException ("El consultorio que intenta eliminar no existe");
         
         persistence.delete(consultoriosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el consultorio con id = {0}", consultoriosId);
@@ -163,10 +165,6 @@ public class ConsultorioLogic
         return !(pNombre == null || pNombre.isEmpty());
     }
     
-    private boolean validateNOficina (Integer pNOficina)
-    {
-        return !(pNOficina == null);
-    }
     
         private boolean validateSedeEdificioOficina (ConsultorioEntity pConsultorio)
     {

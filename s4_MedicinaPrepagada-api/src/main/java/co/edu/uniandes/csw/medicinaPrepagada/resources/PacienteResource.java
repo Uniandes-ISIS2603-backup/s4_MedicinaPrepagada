@@ -7,12 +7,13 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDetailDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -23,14 +24,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *Clase que implementa el recurso "pacientes"
  * @author MIGUELHOYOS
  */
 @Path("pacientes")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class PacienteResource {
     
@@ -50,12 +53,17 @@ public class PacienteResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public PacienteDTO createPaciente(PacienteDTO paciente) throws BusinessLogicException
+    public PacienteDTO createPaciente(PacienteDetailDTO paciente)
     {
        PacienteEntity entity = paciente.toEntity();
-       PacienteEntity nuevaEntity = pacienteLogic.createPaciente(entity);
-       PacienteDTO nuevoDTO = new PacienteDTO(nuevaEntity);
-       return nuevoDTO;
+       PacienteEntity nuevaEntity;
+        try {
+            nuevaEntity = pacienteLogic.createPaciente(entity);
+            return  new PacienteDTO(nuevaEntity);
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(PacienteResource.class.getName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException();
+        }
     }
     
     /**
@@ -77,9 +85,9 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacientesId: \\d+}")
-    public PacienteDTO getPaciente(@PathParam("pacientesId") Long pacientesId){
+    public PacienteDetailDTO getPaciente(@PathParam("pacientesId") Long pacientesId){
         PacienteEntity entity = pacienteLogic.getPaciente(pacientesId);
-        return new PacienteDTO(entity);
+        return new PacienteDetailDTO(entity);
     }
     
     /**
@@ -88,15 +96,14 @@ public class PacienteResource {
      * @return JSON del paciente actualizado
      */
     @PUT
-    public PacienteDTO actualizarPaciente(PacienteDTO paciente) throws BusinessLogicException{
+    public PacienteDTO actualizarPaciente(PacienteDetailDTO paciente) throws BusinessLogicException{
         PacienteEntity entityAct = pacienteLogic.updatePaciente(paciente.toEntity());
-        PacienteDTO nuevoDTO = new PacienteDTO(entityAct);
-        return nuevoDTO;
+        return new PacienteDTO(entityAct);
     }
     
     /**
      * Retorna todos los Pacientes en el sistema
-     * 
+     * @return Todos los Pacientes del sistema
      */
     @GET
     public List<PacienteDetailDTO> getAll(){
@@ -108,49 +115,5 @@ public class PacienteResource {
         }
         return rta;
     }
-    
-//    /**
-//     * Crea una tarjeta de credito al paciente con el id dado por param
-//     * @param tarjetaCredito el dto de la tarjeta de credito que se quiere crear
-//     * @return la tarjeta de credito creada
-//     */
-//    @POST
-//    @Path("{pacientesId: \\d+}")
-//    public TarjetaCreditoDTO crearTarjetaCredito(TarjetaCreditoDTO tarjetaCredito){
-//        return tarjetaCredito;
-//    }
-//    
-//    /**
-//     * obtiene todas las tarjetas de credito de un paciente
-//     * @return una lista con todos los DTOs tipo tarjetaCredito del paciente
-//     */
-//    @GET
-//    @Path("{pacientesId: \\d+}")
-//    public List<TarjetaCreditoDTO> getTarjetasCredito(@PathParam("PacientesId") Long pacientesId){
-//        return new LinkedList<>();
-//    }
-//    
-//    /**
-//     * retorna una tarjeta de credito de un paciente
-//     * @param pacientesId id del paciente propietario de la tarjeta
-//     * @param TarjetaId id de la tarjeta buscada
-//     * @return tarjeta de credito buscada
-//     */
-//    @GET
-//    @Path("{pacientesId: \\d+}/tarjetascredito/{tarjetaId: \\d+}")
-//    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("PacientesId") Long pacientesId, @PathParam("tarjetaId") Long TarjetaId){
-//        return new TarjetaCreditoDTO();
-//    }
-//    
-//    /**
-//     * elimina tarjeta credito de un paciente
-//     * @param pacientesId id del paciente propietario de la tarjeta
-//     * @param TarjetaId id de la tarjeta que se desa eliminar
-//     */
-//    @DELETE
-//    @Path("{pacientesId: \\d+}/tarjetascredito/{tarjetaId: \\d+}")
-//    public void eliminarTarjetaCredito(@PathParam("PacientesId") Long pacientesId, @PathParam("tarjetaId") Long TarjetaId){
-//        
-//    }
-//    
+       
 }

@@ -27,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "farmacias".
  *
- * @author ISIS2603
+ * @author ncobos
  * @version 1.0
  */
 @Path("farmacias")
@@ -54,14 +54,14 @@ public class FarmaciaResource {
      */
     @POST
     public FarmaciaDTO createFarmacia(FarmaciaDTO pFarmacia) throws BusinessLogicException {
-         LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: input: {0}", pFarmacia.toString());
+         LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: input: {0}", pFarmacia);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         FarmaciaEntity farmaciaEntity = pFarmacia.toEntity();
         // Invoca la lógica para crear la farmacia nueva
         FarmaciaEntity nuevoFarmaciaEntity = farmaciaLogic.createFarmacia(farmaciaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         FarmaciaDTO nuevoFarmaciaDTO = new FarmaciaDTO(nuevoFarmaciaEntity);
-        LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: output: {0}", nuevoFarmaciaDTO.toString());
+        LOGGER.log(Level.INFO, "FarmaciaResource createFarmacia: output: {0}", nuevoFarmaciaDTO);
         return nuevoFarmaciaDTO;
     }
 
@@ -75,7 +75,7 @@ public class FarmaciaResource {
     public List<FarmaciaDTO> getFarmacias() {
         LOGGER.info("FarmaciaResource getFarmacias: input: void");
         List<FarmaciaDTO> listaFarmacias = listEntity2DetailDTO(farmaciaLogic.getFarmacias());
-        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias.toString());
+        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias);
         return listaFarmacias;
     }
 
@@ -97,7 +97,7 @@ public class FarmaciaResource {
             throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
         }
         FarmaciaDTO detailDTO = new FarmaciaDTO(farmaciaEntity);
-        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -117,13 +117,13 @@ public class FarmaciaResource {
     @PUT
     @Path("{farmaciasId: \\d+}")
     public FarmaciaDTO updateFarmacia(@PathParam("farmaciasId") Long farmaciasId, FarmaciaDTO farmacia) throws WebApplicationException, BusinessLogicException {
-        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: input: id:{0} , farmacia: {1}", new Object[]{farmaciasId, farmacia.toString()});
+        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: input: id:{0} , farmacia: {1}", new Object[]{farmaciasId, farmacia});
         farmacia.setId(farmaciasId);
         if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
             throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
         }
         FarmaciaDTO detailDTO = new FarmaciaDTO(farmaciaLogic.updateFarmacia(farmaciasId, farmacia.toEntity()));
-        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "FarmaciaResource updateFarmacia: output: {0}", detailDTO);
         return detailDTO;
 
     }

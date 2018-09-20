@@ -54,8 +54,7 @@ public class HorarioAtencionDTO implements Serializable
           this.fechaInicio = pHorarioAtencionEntity.getFechaInicio();
           this.fechaFin = pHorarioAtencionEntity.getFechaFin();
           this.consultorio = new ConsultorioDTO(pHorarioAtencionEntity.getConsultorio());
-          //Agregar en parametro: pHorarioAtencionEntity.getMedico()
-          this.medico = new MedicoDTO();
+          this.medico = new MedicoDTO(pHorarioAtencionEntity.getMedico());
        }
    } 
     
@@ -72,8 +71,10 @@ public class HorarioAtencionDTO implements Serializable
         horarioAtencionEntity.setId(this.id);
         horarioAtencionEntity.setFechaInicio(this.fechaInicio);
         horarioAtencionEntity.setFechaFin(this.fechaFin);
+        if (this.consultorio != null)
         horarioAtencionEntity.setConsultorio(this.consultorio.toEntity());
-       // horarioAtencionEntity.setMedico(this.medico.toEntity());
+        if (this.medico != null)
+       horarioAtencionEntity.setMedico(this.medico.toEntity());
         return horarioAtencionEntity;
     }
     

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.ConsultorioDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.ConsultorioLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,15 +56,16 @@ public class ConsultorioResource
      */   
        
     @POST
-    public ConsultorioDTO createConsultorio(ConsultorioDTO pConsultorio) throws BusinessLogicException 
+    public ConsultorioDTO createConsultorio(ConsultorioDTO pConsultorio) throws BusinessLogicException, WebApplicationException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource createConsultorio: input: {0}", pConsultorio.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-
+        if (pConsultorio.getNOficina() == null)
+            throw new WebApplicationException("EL numero de oficina no puede ser null", 400 );
         // Invoca la lógica para crear el consultorio  nuevo
         
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        ConsultorioDTO nuevoConsultorioDTO = new ConsultorioDTO();
+        ConsultorioDTO nuevoConsultorioDTO = new ConsultorioDTO(consultorioLogic.createConsultorio(pConsultorio.toEntity()));
         LOGGER.log(Level.INFO, "ConsultorioResource createConsultorio: output: {0}", nuevoConsultorioDTO.toString());
         return nuevoConsultorioDTO;
     }
@@ -80,8 +82,7 @@ public class ConsultorioResource
     public List<ConsultorioDTO> getConsultorios()
     {
         LOGGER.info("ConsultorioResource getConsultorios: input: void");
-        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO();
-                //listEntity2DetailDTO(consultoriosLogic.getConsultorios());
+        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO(consultorioLogic.getConsultorios());
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorios: output: {0}", listaConsultorios.toString());
         return listaConsultorios;
     }
@@ -99,15 +100,15 @@ public class ConsultorioResource
      */
     @GET
     @Path("{consultorioId: \\d+}")
-    public ConsultorioDTO getConsultorio(@PathParam("consultorioId") Long pConsultorioId) throws WebApplicationException 
+    public ConsultorioDetailDTO getConsultorio(@PathParam("consultorioId") Long pConsultorioId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorio: input: {0}", pConsultorioId);
-        //ConsultorioEntity consultorioEntity = null;
-      //  if (consultorioEntity == null) }
-      //  {
-      //      throw new WebApplicationException("El recurso /consultorios/" + pConsultorioId + " no existe.", 404);
-      //  }
-        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO();
+        ConsultorioEntity consultorioEntity = consultorioLogic.getConsultorio(pConsultorioId);
+        if (consultorioEntity == null) 
+        {
+            throw new WebApplicationException("El recurso /consultorio/" + pConsultorioId + " no existe .", 404);
+        }
+        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO(consultorioEntity);
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorio: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -120,25 +121,25 @@ public class ConsultorioResource
      * Actualiza el consultorio con el id recibido en la URL con la informacion
      * que se recibe en el cuerpo de la petición.
      *
-     * @param consultorioId Identificador del consultorio que se desea
-     * actualizar. Este debe ser una cadena de dígitos.
-     * @param consultorioId {@link ConsultorioDTO} el consultorio que se desea
-     * guardar.
+     * @param pConsultorioId
+     * @param pConsultorio
      * @return JSON {@link ConsultorioDTO} - el consultorio guardada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el consultorio a
      * actualizar.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     @PUT
     @Path("{consultorioId: \\d+}")
-    public ConsultorioDTO updateConsultorio(@PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException 
+    public ConsultorioDTO updateConsultorio(@PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException, BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: input: id:{0} , consultorio: {1}", new Object[]{pConsultorioId, pConsultorio.toString()});
         pConsultorio.setId(pConsultorioId);
-      //  if (logic.get(pConsultorioId) == null) {
-      //      throw new WebApplicationException("El recurso /consultorios/" + pConsultorioId + " no existe.", 404);
-      //  }
-        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO();
+        if (consultorioLogic.getConsultorio(pConsultorioId) == null) 
+        {
+            throw new WebApplicationException("El recurso /consultorio/ que desea actualizar" + pConsultorioId + " no existe.", 404);
+        }
+        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO(consultorioLogic.updateConsultorio(pConsultorioId, pConsultorio.toEntity()));
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: output: {0}", detailDTO.toString());
         return detailDTO;
 
@@ -162,11 +163,11 @@ public class ConsultorioResource
     public void deleteConsultorio(@PathParam("consultorioId") Long consultorioId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource deleteConsultorio: input: {0}", consultorioId);
-    //    if (logic.get(consultorioId) == null) 
-    //    {
-    //        throw new WebApplicationException("El recurso /consultorios/" + consultorioId + " no existe.", 404);
-    //    }
-    //    logic.delet(consultorioId);
+        if (consultorioLogic.getConsultorio(consultorioId) == null) 
+        {
+            throw new WebApplicationException("El recurso /consultorio/ que desea eliminar" + consultorioId + " no existe.", 404);
+        }
+        consultorioLogic.deleteConsultorio(consultorioId);
         LOGGER.info("ConsultorioResource deleteConsultorio: output: void");
     }
     
@@ -182,12 +183,13 @@ public class ConsultorioResource
      * que vamos a convertir a DTO.
      * @return la lista de consultorio en forma DTO (json)
      */
-    private List<ConsultorioDTO> listEntity2DetailDTO() 
+    private List<ConsultorioDTO> listEntity2DetailDTO(List<ConsultorioEntity> entityList) 
     {
         List<ConsultorioDTO> list = new ArrayList<>();
-     //   for (ConsultorioEntity entity : entityList) {
-     //       list.add(new ConsultorioDetail(entity));
-     //   }
+        for (ConsultorioEntity entity : entityList) 
+        {
+            list.add(new ConsultorioDetailDTO(entity));
+        }
         return list;
     }
        

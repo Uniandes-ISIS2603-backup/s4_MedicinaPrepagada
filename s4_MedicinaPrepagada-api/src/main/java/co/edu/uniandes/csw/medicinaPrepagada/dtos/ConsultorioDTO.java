@@ -23,7 +23,7 @@ public class ConsultorioDTO  implements Serializable
     private String edificio;
     
     
-    private int nOficina;
+    private Integer nOficina;
     
     private SedeDTO sede;
     
@@ -49,7 +49,7 @@ public class ConsultorioDTO  implements Serializable
            this.id=pConsultorioEntity.getId();
            this.edificio= pConsultorioEntity.getEdificio();
            this.nOficina = pConsultorioEntity.getNOficina();
-           //this.especialidad = new EspecialidadDTO(pConsultorioEntity.getEspecialidad());
+           this.especialidad = new EspecialidadDTO(pConsultorioEntity.getEspecialidad());
            this.sede = new SedeDTO (pConsultorioEntity.getSede());
            
        }
@@ -71,7 +71,7 @@ public class ConsultorioDTO  implements Serializable
         consultorioEntity.setEdificio(this.edificio);
         consultorioEntity.setNOficina(this.nOficina);
         consultorioEntity.setSede(this.sede.toEntity());
-        //consultorioEntity.setEspecialidad(this.especialidad.toEntity);
+        consultorioEntity.setEspecialidad(this.especialidad.toEntity());
  
         return consultorioEntity;
     }
@@ -106,7 +106,7 @@ public class ConsultorioDTO  implements Serializable
        this.nOficina=pNOficina;
    }
    
-   public int getNOficina  ()
+   public Integer getNOficina  ()
    {
        return this.nOficina;
    }

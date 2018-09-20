@@ -6,19 +6,23 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.FacturaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.FacturaLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -32,45 +36,70 @@ public class FacturaResource {
     
     
     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
+    @Inject
+    private FacturaLogic facturaLogic;
     
     @POST
      public FacturaDTO createFactura (FacturaDTO Factura) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "FacturaDTO createFactura: input:(0)", Factura.toString());
+        LOGGER.log(Level.INFO, "FacturaDTO createFactura: input: {0}", Factura.toString());
         
-        FacturaDTO nuevaFactura = new FacturaDTO();
+        FacturaDTO nuevaFactura = new FacturaDTO(facturaLogic.createFactura(Factura.toEntity()));
         
-        LOGGER.log(Level.INFO, "FacturaDTO createFactura: output:(0)", nuevaFactura.toString());
+        LOGGER.log(Level.INFO, "FacturaDTO createFactura: output: {0}", nuevaFactura.toString());
         
         return nuevaFactura;
     }
     
     @GET
     @Path("{FacturaId:\\d+}")
-    public FacturaDTO getFactura (@PathParam ("FacturaId") int FacturaId)
+    public FacturaDTO getFactura (@PathParam ("FacturaId") Long FacturaId) throws WebApplicationException
     {
-         LOGGER.log(Level.INFO, "FacturaResource getFactura: input: (0)", FacturaId);
+         LOGGER.log(Level.INFO, "FacturaResource getFactura: input: {0}", FacturaId);
+        FacturaEntity entity = facturaLogic.getFactura(FacturaId);
+        if(entity == null)
+        {
+            throw new WebApplicationException("El recurso /factura/" + FacturaId + " no existe .", 404);
+        }
         
-        FacturaDTO nuevoDetailDTO = new FacturaDTO();
-        
-        LOGGER.log(Level.INFO, "FacturaResource getFactura: output: {0}", nuevoDetailDTO.toString());
-        return nuevoDetailDTO;
+        FacturaDTO factDTO = new FacturaDTO(entity);
+        LOGGER.log(Level.INFO, "FacturaResource getFactura: output: {0}", factDTO.toString());
+        return factDTO;
     }
     
     @GET
     public List<FacturaDTO> getFacturas ()
     {
         LOGGER.info("FacturaResource getFactura: input: void");
-        List<FacturaDTO> listaFacturas = listEntityDetailDTO() ;
+        List<FacturaDTO> listaFacturas = listEntityDTO(facturaLogic.getFacturas()) ;
         LOGGER.log(Level.INFO, "FacturaResource getFactura: output: {0}", listaFacturas.toString());
         return listaFacturas;
     }
     
-    
-    private List<FacturaDTO> listEntityDetailDTO()
+    @PUT
+    @Path("{FacturaId:\\d+}")
+    public FacturaDTO updateFactura(@PathParam("facturaId") Long FacturaId, FacturaDTO pFactura) throws WebApplicationException, BusinessLogicException
     {
-        List<FacturaDTO> list = new ArrayList<>();
-
+        LOGGER.log(Level.INFO, "FacturaResource updateFactura: input: id:{0} , factura: {1}", new Object[]{FacturaId, pFactura.toString()});
+        pFactura.setIdFactura(FacturaId);
+        if (facturaLogic.getFactura(FacturaId) == null)
+        {
+            throw new WebApplicationException("El recurso /factura/ que quiere editar con id" + FacturaId + " no existe.", 404);
+        }
+        FacturaDTO nuevoDTO = new FacturaDTO(facturaLogic.updateFactura(FacturaId,pFactura.toEntity()));
+        LOGGER.log(Level.INFO, "FacturaResource updateFactura: output: {0}", nuevoDTO.toString());
+        return nuevoDTO;
+ 
+    }
+    
+    
+    private List<FacturaDTO> listEntityDTO(List<FacturaEntity> eList)
+    {
+         List<FacturaDTO> list = new ArrayList<>();
+        for (FacturaEntity entity : eList) 
+        {
+            list.add(new FacturaDTO(entity));
+        }
         return list;
     }       
     

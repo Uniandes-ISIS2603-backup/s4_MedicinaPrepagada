@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author SantiagoRojas
  */
 public class LaboratorioDTO implements Serializable {
 
@@ -30,11 +30,21 @@ public class LaboratorioDTO implements Serializable {
 
     private double longitud;
     
-
+    
+    
+    /**
+     * Constructor DTO vacio
+     */
     public LaboratorioDTO() {
 
     }
-
+         /**
+     * Crea un objeto LaboratorioDTO a partir de un objeto LaboratorioEntity.
+     *
+     * @param pLaboratorioEntity LaboratorioEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */ 
     public LaboratorioDTO(LaboratorioEntity pLaboratorioEntity) {
         if (pLaboratorioEntity != null) {
             this.id = pLaboratorioEntity.getId();
@@ -44,10 +54,17 @@ public class LaboratorioDTO implements Serializable {
             this.latitud = pLaboratorioEntity.getLatitud();
             this.longitud = pLaboratorioEntity.getLongitud();
             this.horarioDeAtencion = pLaboratorioEntity.getHorarioAtencion();
+            
         }
 
     }
-
+    
+    /**
+     * Convierte un objeto LaboratorioDTO a LaboratorioEntity.
+     *
+     * @return Nueva objeto LaboratorioEntity.
+     *
+     */
     public LaboratorioEntity toEntity() {
         LaboratorioEntity labEntity = new LaboratorioEntity();
 
@@ -58,6 +75,7 @@ public class LaboratorioDTO implements Serializable {
         labEntity.setLatitud(this.latitud);
         labEntity.setLongitud(this.longitud);
         labEntity.setHorarioAtencion(this.horarioDeAtencion);
+        
 
         return labEntity;
     }
@@ -78,6 +96,7 @@ public class LaboratorioDTO implements Serializable {
         return this.nombre;
     }
 
+    
     public void setTelefono(Long pTelefono) {
         this.telefono = pTelefono;
     }

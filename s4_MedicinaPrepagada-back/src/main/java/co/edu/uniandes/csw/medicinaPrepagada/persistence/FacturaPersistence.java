@@ -36,7 +36,7 @@ public class FacturaPersistence {
     
     public FacturaEntity find (Long facturaId)
     {
-     LOGGER.log(Level.INFO,"Buscando la factura con el id=(0)",facturaId); 
+     LOGGER.log(Level.INFO,"Buscando la factura con el id={0}",facturaId); 
      return em.find(FacturaEntity.class, facturaId);
     }
     

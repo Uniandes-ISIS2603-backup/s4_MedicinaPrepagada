@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -25,10 +28,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
-//    @Id
-//    private Long id; 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PodamStrategyValue(DateStrategy.class)
     private Date fecha; 
+    
     private String descripcionDiagnostico; 
     private String alergias; 
     private Double peso; 
@@ -45,26 +49,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "historias",fetch=FetchType.LAZY)
     private List<OrdenMedicaEntity> ordenesMedicas;
     
-    /**
-     * Obtiene el atributo id.
-     * @return atributo id.
-     */
-    
-//    public Long getId() 
-//    {
-//        return id;
-//    }
-//
-//    /**
-//     * Establece el valor del atributo id.
-//     * @param id nuevo valor del atributo
-//     */
-//    
-//    public void setId(Long id) 
-//    {
-//        this.id = id;
-//    }
-    
+  
      /**
      * Obtiene la fecha
      * @return atributo fecha.
