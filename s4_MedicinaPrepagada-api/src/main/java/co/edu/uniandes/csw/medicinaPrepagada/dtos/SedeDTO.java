@@ -106,7 +106,7 @@ public class SedeDTO implements Serializable
     * Recibe el id de la sedeDTO
     * @return idSedeDTO
     */
-   public Long getId  ()
+   public long getId  ()
    {
         return this.id;
    }

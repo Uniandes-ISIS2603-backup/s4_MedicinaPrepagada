@@ -71,7 +71,7 @@ public class ConsultorioDTO  implements Serializable
         consultorioEntity.setEdificio(this.edificio);
         consultorioEntity.setNOficina(this.nOficina);
         consultorioEntity.setSede(this.sede.toEntity());
-        //consultorioEntity.setEspecialidad(this.especialidad.toEntity);
+        consultorioEntity.setEspecialidad(this.especialidad.toEntity());
  
         return consultorioEntity;
     }

@@ -1,7 +1,8 @@
+delete from HorarioAtencionEntity;
 delete from ConsultorioEntity;
 delete from SedeEntity;
 
-delete from HorarioAtencionEntity;
+
 delete from MedicoEntity;
 delete from EspecialidadEntity;
 
@@ -22,6 +23,9 @@ values (200, 'super sede 2', 'Calle 133 # 90 - 01', 1, 'Super buena sede mega', 
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo) 
 values (300, 'super sede 3', 'Calle 53 # 14 - 12', 2, 'Super buena sede superx2', 2.1, -69.4, 98065423, 'pepitoSuperman@gmail.com' );
+
+insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo) 
+values (400, 'super sede 4', 'Calle 111 # 44 - 21', 1, 'Super buena sede superx2 megax', 2.8, -70.8, 98975423, 'pepitoSupermanSantafe@gmail.com' );
 
 insert into ConsultorioEntity (id, edificio, noficina, sede_id, especialidad_nombre)
 values (100, 'lleras' , 2, 100, 'Cardiologia');
