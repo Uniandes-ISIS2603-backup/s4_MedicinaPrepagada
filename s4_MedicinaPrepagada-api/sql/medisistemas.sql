@@ -78,8 +78,23 @@ insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, 
 values (200, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
 
 
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (100, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',700 ,100 );
 
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (200, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',300 ,200 );
 
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (300, '2018-09-22 08:00:00' , '2018-09-22 10:00:00',700 ,100 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (400, '2018-09-22 08:00:00' , '2018-09-22 11:00:00',300 ,200 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,100 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 
 
