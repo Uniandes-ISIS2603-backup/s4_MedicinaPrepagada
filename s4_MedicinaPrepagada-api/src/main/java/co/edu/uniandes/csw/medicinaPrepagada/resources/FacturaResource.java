@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -35,7 +36,9 @@ public class FacturaResource {
     
     
     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
+    @Inject
     private FacturaLogic facturaLogic;
+    
     @POST
      public FacturaDTO createFactura (FacturaDTO Factura) throws BusinessLogicException
     {
