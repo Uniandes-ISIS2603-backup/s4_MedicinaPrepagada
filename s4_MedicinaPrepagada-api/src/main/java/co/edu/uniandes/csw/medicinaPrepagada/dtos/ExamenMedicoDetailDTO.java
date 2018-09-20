@@ -38,15 +38,14 @@ public class ExamenMedicoDetailDTO extends ExamenMedicoDTO implements Serializab
      */
     public ExamenMedicoDetailDTO(ExamenMedicoEntity examenMedicoEntity) {
         super(examenMedicoEntity);
-        if (examenMedicoEntity != null) {
-            if (examenMedicoEntity.getLaboratorios() != null) {
+        if (examenMedicoEntity != null && examenMedicoEntity.getLaboratorios() != null) {
                 laboratorios = new ArrayList<>();
                 for (LaboratorioEntity entityLaboratorio : examenMedicoEntity.getLaboratorios()) {
                     laboratorios.add(new LaboratorioDTO(entityLaboratorio));
                 }
             }
         }
-    }
+    
     
     public void setLaboratorios(List<LaboratorioDTO> pLabs)
     {

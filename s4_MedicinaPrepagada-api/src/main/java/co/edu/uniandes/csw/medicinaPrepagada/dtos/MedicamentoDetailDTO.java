@@ -38,15 +38,14 @@ public class MedicamentoDetailDTO extends MedicamentoDTO implements Serializable
      */
     public MedicamentoDetailDTO(MedicamentoEntity medicamentoEntity) {
         super(medicamentoEntity);
-        if (medicamentoEntity != null) {
-            if (medicamentoEntity.getFarmacias() != null) {
+        if (medicamentoEntity != null && medicamentoEntity.getFarmacias() != null) {
                 farmacias = new ArrayList<>();
                 for (FarmaciaEntity entityFarmacia : medicamentoEntity.getFarmacias()) {
                     farmacias.add(new FarmaciaDTO(entityFarmacia));
                 }
             }
         }
-    }
+    
 
     /**
      * Transformar un DTO a un Entity

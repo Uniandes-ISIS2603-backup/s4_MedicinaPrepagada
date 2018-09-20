@@ -136,7 +136,7 @@ public class MedicamentoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar la medicamento con id = {0}", medicamentosId);
     }
     
-    private boolean validateString (String pString) throws BusinessLogicException
+    private boolean validateString (String pString) 
     {
         String validationPattern = "([A-Za-z]*|([A-Za-z]+\\s))+[A-Za-z]*";
         Pattern patternNombre = Pattern.compile(validationPattern);

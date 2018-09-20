@@ -37,7 +37,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+					"raw": "{\r\n\t\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Se administra via oral\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos",
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/123456789",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -121,7 +121,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"medicamentos",
-						"123456789"
+						"1"
 					]
 				},
 				"description": "Retorna un medicamento dado un id"
@@ -152,7 +152,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1029849123,\r\n\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Acetaminofen. Se administra via oral...\",\r\n\r\n\"costo\":1234567890,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+					"raw": "{\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"No se administra via oral\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",

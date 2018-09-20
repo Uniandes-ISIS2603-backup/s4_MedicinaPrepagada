@@ -27,7 +27,6 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     private String correo;
     
     
-    
     @PodamExclude
     @ManyToOne
     private MedicamentoEntity medicamento;

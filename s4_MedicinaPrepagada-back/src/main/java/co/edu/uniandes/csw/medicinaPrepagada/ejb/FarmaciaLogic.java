@@ -171,22 +171,6 @@ public class FarmaciaLogic {
         return(pTelefono>999999);
     }
     
-    private boolean validateLongAndLat (Double pLong, Double pLat )
-    {
-        
-        List <FarmaciaEntity> pFarmacias= persistence.findAll();
-        for (int i = 0 ; i< pFarmacias.size(); i++)
-        {
-            FarmaciaEntity temp =pFarmacias.get(i);
-            if (temp.getLongitud() == pLong && temp.getLatitud() == pLat)
-            {
-                return false;
-            }
-        }
-        
-        return true;
-    }
-    
     private boolean validateLongitud (Double pLongitud)
     {
         return (pLongitud !=null && pLongitud>= -79.374594 && pLongitud <= -66.853233 );
