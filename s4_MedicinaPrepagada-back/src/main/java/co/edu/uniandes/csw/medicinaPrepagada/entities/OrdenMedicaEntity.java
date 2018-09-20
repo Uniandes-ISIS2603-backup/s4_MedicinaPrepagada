@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
+import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -26,10 +29,17 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class OrdenMedicaEntity extends BaseEntity implements Serializable
 {
     private String firmaMedico; 
-    @Temporal(TemporalType.DATE)
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaExpedicion; 
+    
     private String comentarios; 
-    @Temporal(TemporalType.DATE)
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PodamStrategyValue(DateStrategy.class)
     private Date validaHasta; 
     
     @ManyToOne(cascade = CascadeType.PERSIST)
