@@ -136,10 +136,10 @@ public class HistoriaClinicaResource
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
         pHistoria.setId(histClinicaId);
         
-        if (histLogic.getHistoriaClinica(histClinicaId) == null) 
+        /**if (histLogic.getHistoriaClinica(histClinicaId) == null) 
         {
-            throw new WebApplicationException("La orden medica con ese id" + histClinicaId + mensaje, 404);
-        }
+            throw new WebApplicationException("La orden medica con ese id" + histClinicaId +mensaje, 404);
+        }*/
         
         HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO( histLogic.updateHistoriaClinica(histClinicaId, pHistoria.toEntity()));        
         LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto);
