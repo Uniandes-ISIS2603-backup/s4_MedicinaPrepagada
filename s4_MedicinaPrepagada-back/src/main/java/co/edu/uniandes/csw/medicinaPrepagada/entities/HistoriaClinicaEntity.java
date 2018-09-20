@@ -43,26 +43,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "historias",fetch=FetchType.LAZY)
     private List<OrdenMedicaEntity> ordenesMedicas;
     
-    /**
-     * Obtiene el atributo id.
-     * @return atributo id.
-     */
-    
-//    public Long getId() 
-//    {
-//        return id;
-//    }
-//
-//    /**
-//     * Establece el valor del atributo id.
-//     * @param id nuevo valor del atributo
-//     */
-//    
-//    public void setId(Long id) 
-//    {
-//        this.id = id;
-//    }
-    
+  
      /**
      * Obtiene la fecha
      * @return atributo fecha.
