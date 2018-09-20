@@ -8,6 +8,9 @@ delete from EspecialidadEntity;
 delete from TARJETACREDITOENTITY;
 delete from PACIENTEENTITY;
 
+delete from LaboratorioEntity;
+delete from CitaLaboratorioEntity;
+delete from FacturaEntity;
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -97,9 +100,41 @@ insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MED
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (2,'Laboratorio Heisenberg','Calle 167 # 43-32',4561795,'Lunes a Viernes de 8:00 a 10:00am',-73.2,10.00);
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (3,'Laboratorio El Campin','Cra 17#04-15',4535298,'Lunes a Viernes de 8:00 a 10:00am',-74.01,2.354);
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (4,'Laboratorio GOAT','Cra 7#34-25',4595198,'Lunes a Viernes de 8:00 a 10:00am',-73.5,4.5);
+
+insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomendaciones,paciente_id,laboratorio_id)
+values (156,'2018-10-22 08:00:00','Examen de sangre', 'Paciente alergico a acetaminofen','Ayunas de minimo 3 horas',1,1);
+
+insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomendaciones,paciente_id,laboratorio_id)
+values (157,'2018-10-25 08:30:00','Examen de orina', 'Ninguna','Ayunas de minimo 3 horas',2,4);
+
+insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomendaciones,paciente_id,laboratorio_id)
+values (158,'2018-10-17 08:00:00','Coprologia', 'Ninguna','Ayunas de minimo 3 horas',3,2);
+
+insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomendaciones,paciente_id,laboratorio_id)
+values (15,'2018-10-22 09:00:00','Examen de sangre', 'Paciente con anemia','Ayunas de minimo 3 horas',4,3);
+
+insert into FacturaEntity (id,idCliente,fecha,valor,concepto,pagada,paciente_id)
+values (1,1,'2018-10-22 09:00:00 ',123500,'Cita Laboratorio Examen de Sangre', 1,1);
+
+insert into FacturaEntity (id,idCliente,fecha,valor,concepto,pagada,paciente_id)
+values (2,5,'2018-10-22 09:00:00',80500,'Cita Laboratorio Examen de orina', 1,5);
+
+insert into FacturaEntity (id,idCliente,fecha,valor,concepto,pagada,paciente_id)
+values (3,1,'2018-10-24 09:00:00',115000,'Cita Laboratorio Examen coprologico', 1,1);
+
+insert into FacturaEntity (id,idCliente,fecha,valor,concepto,pagada,paciente_id)
+values (4,3,'2018-10-22 09:00:00',100000,'Cita Laboratorio Examen de Sangre', 1,3);
 
 
 
