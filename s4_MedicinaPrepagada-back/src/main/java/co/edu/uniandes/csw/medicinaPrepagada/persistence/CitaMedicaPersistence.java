@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -95,8 +96,16 @@ public class CitaMedicaPersistence {
         TypedQuery query = em.createQuery("Select e From CitaMedicaEntity e where e.fecha = :fecha and e.pacienteAAtender.id = :idPaciente", CitaMedicaEntity.class);
         query.setParameter("fecha", fecha);
         query.setParameter("idPaciente", idPaciente);
-        List<CitaMedicaEntity> respuesta = query.getResultList();
-        return respuesta.get(0);
+        try{
+            List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta != null || respuesta.size()>0){
+                return respuesta.get(0);
+            }
+        }
+        catch(NoResultException e2){
+            return null;
+        }
+        return null;
     }
     
     public CitaMedicaEntity findByFechaYMedico(Date fechaInicio, Date fechaFin, Long idMedico){
@@ -105,9 +114,14 @@ public class CitaMedicaPersistence {
         query.setParameter("fechaInicio", fechaInicio);
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idMedico", idMedico);
-        List<CitaMedicaEntity> respuesta = query.getResultList();
-        if(respuesta != null || respuesta.size()>0){
-            return respuesta.get(0);
+        try{
+            List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta != null || respuesta.size()>0){
+                return respuesta.get(0);
+            }
+        }
+        catch(NoResultException e2){
+            return null;
         }
         return null;
     }
@@ -118,9 +132,14 @@ public class CitaMedicaPersistence {
         query.setParameter("fechaInicio", fechaInicio);
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idConsultorio", idConsultorio);
-        List<CitaMedicaEntity> respuesta = query.getResultList();
-        if(respuesta != null || respuesta.size()>0){
-            return respuesta.get(0);
+        try{
+            List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta != null || respuesta.size()>0){
+                return respuesta.get(0);
+            }
+        }
+        catch(NoResultException e2){
+            return null;
         }
         return null;
     }
@@ -132,9 +151,14 @@ public class CitaMedicaPersistence {
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idSede", idConsultorio);
         query.setParameter("idMedico", idMedico);
-        List<HorarioAtencionEntity> respuesta = query.getResultList();
-        if(respuesta != null || respuesta.size()>0){
-            return respuesta.get(0);
+        try{
+            List<HorarioAtencionEntity> respuesta = query.getResultList();
+            if(respuesta != null || respuesta.size()>0){
+                return respuesta.get(0);
+            }
+        }
+        catch(NoResultException e2){
+            return null;
         }
         return null;
     }
