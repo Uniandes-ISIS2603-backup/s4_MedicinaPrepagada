@@ -7,10 +7,10 @@ delete from MedicoEntity;
 delete from EspecialidadEntity;
 
 delete from TARJETACREDITOENTITY;
-delete from PACIENTEENTITY;
 
 
-delete from LaboratorioEntity;
+
+
 delete from CitaLaboratorioEntity;
 delete from FacturaEntity;
 
@@ -21,7 +21,8 @@ delete from OrdenMedicaEntity;
 delete from MedicamentoEntity;
 delete from FarmaciaEntity;
 delete from ExamenMedicoEntity;
-
+delete from LaboratorioEntity;
+delete from PACIENTEENTITY;
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -115,9 +116,6 @@ insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MED
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 
-insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
-values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
-
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Carlos12', 'carlitos12', 'Administrador'); 
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
@@ -128,21 +126,23 @@ insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Laura1', 'laurita56', 'Paciente'); 
 
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018/10/08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
+values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018/07/20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
+values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018/10/26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
+values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (400, 'Pedro Franco', '2018/10/19', 'Examen de sangre', '2018/12/19'); 
+values (400, 'Pedro Franco', '2018-10-19', 'Examen de sangre', '2018-12-19'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (300, 'Pedro Franco', '2018/10/24', 'Paracetamol 400', '2018/12/24'); 
+values (300, 'Pedro Franco', '2018-10-24', 'Paracetamol 400', '2018-12-24'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (200, 'Carlos Estupiñan', '2018/10/01', 'Dolex gripa', '2018/12/01'); 
+values (200, 'Carlos Estupiñan', '2018-10-01', 'Dolex gripa', '2018-12-01'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
-values (100, 'Claudia Forero', '2018/09/07', 'Mucha agua', '2018/11/07'); 
+values (100, 'Claudia Forero', '2018-09-07', 'Mucha agua', '2018-11-07'); 
 
+insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
+values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
 
 insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
 values (2,'Laboratorio Heisenberg','Calle 167 # 43-32',4561795,'Lunes a Viernes de 8:00 a 10:00am',-73.2,10.00);
