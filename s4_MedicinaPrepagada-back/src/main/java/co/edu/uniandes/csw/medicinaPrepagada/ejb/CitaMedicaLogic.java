@@ -36,15 +36,15 @@ public class CitaMedicaLogic {
         }
         Date fechaInicio = citaMedicaEntity.getFecha();
         Date fechaFin = mas20Minutos(fechaInicio);
-//        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
-//            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
-//        }
+        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
+            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
+            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
+            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
+        }
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }

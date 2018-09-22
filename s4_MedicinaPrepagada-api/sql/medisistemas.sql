@@ -5,6 +5,7 @@ delete from SedeEntity;
 
 delete from MedicoEntity;
 delete from EspecialidadEntity;
+delete from CitaMedicaEntity;
 
 delete from TARJETACREDITOENTITY;
 
@@ -23,6 +24,7 @@ delete from FarmaciaEntity;
 delete from ExamenMedicoEntity;
 delete from LaboratorioEntity;
 delete from PACIENTEENTITY;
+
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -115,6 +117,17 @@ values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,100 );
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
+insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
+values (2000, '2018-09-23 08:00:00','Excelente cita médica', 1, 600 );
+
+insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
+values (2001, '2018-09-23 08:20:00','Excelente cita médica', 2, 600 );
+
+insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
+values (2002, '2018-09-23 08:40:00','Excelente cita médica', 3, 600 );
+
+insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
+values (2003, '2018-09-23 09:00:00','Excelente cita médica', 4, 600 );
 
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Carlos12', 'carlitos12', 'Administrador'); 
@@ -190,7 +203,6 @@ insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, corre
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Biopsia', 120000, 'Venir con acompanante');
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Rayos X', 12000, 'Es preferible no estar en estado de embarazo');
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Ecografia', 140000, 'Venir con ropa ligera');
-
 
 
 
