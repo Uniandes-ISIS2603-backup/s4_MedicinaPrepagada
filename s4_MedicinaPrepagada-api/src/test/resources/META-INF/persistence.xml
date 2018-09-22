@@ -21,7 +21,6 @@
     <class>co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity</class>
     <class>co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity</class>
     <class>co.edu.uniandes.csw.medicinaPrepagada.entities.UsuarioEntity</class>
-  </persistence-unit>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
  <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
