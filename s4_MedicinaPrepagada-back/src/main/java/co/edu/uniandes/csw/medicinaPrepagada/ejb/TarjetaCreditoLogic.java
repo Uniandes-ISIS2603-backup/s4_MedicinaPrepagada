@@ -43,13 +43,15 @@ public class TarjetaCreditoLogic {
         if(!validarNumeroConFranquicia(tarjetaCreditoEntity.getNumero(), tarjetaCreditoEntity.getFranquicia())){
             throw new BusinessLogicException("En numero no coincide con la franquicia");
         }
-        SimpleDateFormat format = new SimpleDateFormat("MM/yy");
+        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
         Calendar nowCal = Calendar.getInstance();
         Date now = nowCal.getTime();
         nowCal.add(Calendar.YEAR, 20);
         Date veinteYrs = nowCal.getTime(); 
         try {
-            Date fechaExpiracionEntidad = format.parse(tarjetaCreditoEntity.getFechaExpiracion());
+            String[] fechaForm = tarjetaCreditoEntity.getFechaExpiracion().split("/");
+            String fechaCompleta = fechaForm[0]+"/20"+fechaForm[1];
+            Date fechaExpiracionEntidad = format.parse(fechaCompleta);
             if(fechaExpiracionEntidad.compareTo(now) < 0){
                 throw new BusinessLogicException("La tarjeta de credito ya esta vencida");
             }
@@ -144,9 +146,6 @@ public class TarjetaCreditoLogic {
         if(primerNum == 4 && franquicia.equals("Visa")){
             return true;
         }
-        if(primerNum == 5 && franquicia.equals("MasterCard")){
-            return true;
-        }
-        return false;
+        return primerNum == 5 && franquicia.equals("MasterCard");
     }
 }
