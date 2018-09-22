@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="MedisistemasPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.EspecialidadEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.FarmaciaEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity</class>
+    <class>co.edu.uniandes.csw.medicinaPrepagada.entities.UsuarioEntity</class>
+  </persistence-unit>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+ <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.target-database" value="Derby"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/medisistemasDB"/>
+      <property name="javax.persistence.jdbc.user" value="APP"/>
+      <property name="javax.persistence.jdbc.password" value="APP"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
