@@ -343,7 +343,6 @@ public class MedicoLogicTest {
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(data.get(2).getId(), pojoEntity);
-
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -377,9 +376,7 @@ public class MedicoLogicTest {
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
-
         MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
-
     }
     
     
@@ -397,9 +394,7 @@ public class MedicoLogicTest {
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
-
         MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
-
     }
     
     
@@ -417,9 +412,7 @@ public class MedicoLogicTest {
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
-
         MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
-
     }
     
     
@@ -437,9 +430,7 @@ public class MedicoLogicTest {
         pojoEntity.setId(entity.getId());
 
         medicoLogic.updateMedico(pojoEntity.getId(), pojoEntity);
-
         MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
-
     }
     /**
      * Prueba para eliminar una medico clinica
