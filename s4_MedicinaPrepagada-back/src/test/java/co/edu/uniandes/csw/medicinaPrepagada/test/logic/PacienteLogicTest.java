@@ -307,9 +307,26 @@ public class PacienteLogicTest {
      * @throws BusinessLogicException 
      */
     @Test(expected = BusinessLogicException.class)
-    public void crearPacienteConLoginQueNoCumpleFormato() throws BusinessLogicException{
+    public void crearPacienteConLoginQueNoCumpleFormatoVacio() throws BusinessLogicException{
         PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
         newEntity.setLogin("");
+        newEntity.setFechaNacimiento("01/30/2008");
+        newEntity.setMail("abdcd@udad.com");
+        newEntity.setNombre("Miguel Hoyos Ruge");
+        newEntity.setDireccion("Cra 22#104-82");
+        newEntity.setEps("Sura");
+        newEntity.setNumeroContacto(new Long(1234567890));
+        pacienteLogic.createPaciente(newEntity);
+    }
+    
+         /**
+     * Prueba para crear un paciente con un login que no cumple el formato null
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearPacienteConLoginQueNoCumpleFormatoNull() throws BusinessLogicException{
+        PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
+        newEntity.setLogin(null);
         newEntity.setFechaNacimiento("01/30/2008");
         newEntity.setMail("abdcd@udad.com");
         newEntity.setNombre("Miguel Hoyos Ruge");
@@ -401,10 +418,11 @@ public class PacienteLogicTest {
     
      /**
      * Prueba para crear un paciente con un documento no valido
+     * no se puede probar con nulo debido a que lanza un null pointer excepton
      * @throws BusinessLogicException 
      */
     @Test(expected = BusinessLogicException.class)
-    public void crearPacienteConDocumentoNoValido() throws BusinessLogicException{
+    public void crearPacienteConDocumentoNoValidoCero() throws BusinessLogicException{
         PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
         newEntity.setFechaNacimiento("10/08/2008");
         newEntity.setMail("abdcd@udad.com");
@@ -415,4 +433,5 @@ public class PacienteLogicTest {
         newEntity.setDocumentoIdentidad(0L);
         pacienteLogic.createPaciente(newEntity);
     }
+
 }

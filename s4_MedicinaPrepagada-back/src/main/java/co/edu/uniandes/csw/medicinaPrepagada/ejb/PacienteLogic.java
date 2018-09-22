@@ -50,14 +50,9 @@ public class PacienteLogic {
             throw new BusinessLogicException("La fecha de nacimiento no cumple el formato");
         }
         
-        //falta revisar que la eps exista
-        if(validarReglasComunes(pacienteEntity)){
-            return persistence.create(pacienteEntity);
-        }
-        else{
-            throw new BusinessLogicException("No se pudo validar una regla de negocio");
-        }
-        
+        validarReglasComunes(pacienteEntity);
+        return persistence.create(pacienteEntity);
+                
     }
     
     /**
@@ -98,12 +93,9 @@ public class PacienteLogic {
                 }
             }
         }
-        if(validarReglasComunes(pacienteEntity)){
-            return persistence.update(pacienteEntity);
-        }
-        else{
-            throw new BusinessLogicException("No se cumplio alguna regla de negocio");
-        }
+        
+        validarReglasComunes(pacienteEntity);
+        return persistence.update(pacienteEntity);
         
     }
     
