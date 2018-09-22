@@ -98,14 +98,11 @@ public class CitaMedicaPersistence {
         query.setParameter("idPaciente", idPaciente);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
-            if(respuesta != null || respuesta.size()>0){
-                return respuesta.get(0);
-            }
+            return respuesta.get(0);
         }
         catch(NoResultException e2){
             return null;
         }
-        return null;
     }
     
     public CitaMedicaEntity findByFechaYMedico(Date fechaInicio, Date fechaFin, Long idMedico){
@@ -116,14 +113,11 @@ public class CitaMedicaPersistence {
         query.setParameter("idMedico", idMedico);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
-            if(respuesta != null || respuesta.size()>0){
-                return respuesta.get(0);
-            }
+            return respuesta.get(0);
         }
         catch(NoResultException e2){
             return null;
         }
-        return null;
     }
     
     public CitaMedicaEntity findByFechaYConsultorio(Date fechaInicio, Date fechaFin, Long idConsultorio){
@@ -134,14 +128,11 @@ public class CitaMedicaPersistence {
         query.setParameter("idConsultorio", idConsultorio);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
-            if(respuesta != null || respuesta.size()>0){
-                return respuesta.get(0);
-            }
+            return respuesta.get(0);
         }
         catch(NoResultException e2){
             return null;
         }
-        return null;
     }
     
     public HorarioAtencionEntity findByLimitesFechaInicioFechaFinSedeYMedico(Date fechaInicio, Date fechaFin, Long idConsultorio, Long idMedico){
@@ -153,14 +144,11 @@ public class CitaMedicaPersistence {
         query.setParameter("idMedico", idMedico);
         try{
             List<HorarioAtencionEntity> respuesta = query.getResultList();
-            if(respuesta != null || respuesta.size()>0){
-                return respuesta.get(0);
-            }
+            return respuesta.get(0);
         }
         catch(NoResultException e2){
             return null;
         }
-        return null;
     }
     
 }
