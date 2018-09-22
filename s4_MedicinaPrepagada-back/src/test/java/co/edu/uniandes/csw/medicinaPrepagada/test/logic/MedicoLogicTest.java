@@ -98,8 +98,9 @@ public class MedicoLogicTest {
     
     private void clearData() 
     {
+        em.createQuery("delete from HorarioAtencionEntity").executeUpdate();
         em.createQuery("delete from MedicoEntity").executeUpdate();
-//        em.createQuery("delete from HorarioAtencionEntity").executeUpdate();
+
 //        em.createQuery("delete from CitaMedicaEntity").executeUpdate();
     }
 
@@ -110,14 +111,14 @@ public class MedicoLogicTest {
     
     private void insertData() 
     {
-        for (int i = 0; i < 3; i++) 
+        for (int i = 0; i < 4; i++) 
         {
             MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
             entity.setDocumentoMedico(i);
             em.persist(entity);
             data.add(entity);
         }
-        MedicoEntity enti = factory.manufacturePojo(MedicoEntity.class);
+        MedicoEntity enti = data.get(3);
         enti.setDocumentoMedico(3);
         enti.setHorariosAtencion(new ArrayList<>());
         for(int i = 0; i < 10; i++){
@@ -125,17 +126,20 @@ public class MedicoLogicTest {
 //        CitaMedicaEntity cita = factory.manufacturePojo(CitaMedicaEntity.class);
 //        horario.setCitasMedicas(new ArrayList<>());
 //        horario.getCitasMedicas().add(cita);
+        
+        enti.getHorariosAtencion().add(horario);
+        horario.setMedico(enti);
         em.persist(horario);
+        
 //        cita.setHorarioAtencionAsignado(horario);
 //        em.persist(cita);
-        enti.getHorariosAtencion().add(horario);     
+             
         }
-        em.persist(enti);
+        em.merge(enti);
 //        em.merge(horario);
 //        em.merge(cita);
 //        em.merge(enti);
-        data.add(enti);
-        
+        data.set(3, enti);
     }
     
     /**
@@ -451,10 +455,11 @@ public class MedicoLogicTest {
         Assert.assertNull(deleted);
     }
     
-    @Test
+    @Test(expected = BusinessLogicException.class)
     public void deleteMedicoHayCitasPendientesTest() throws BusinessLogicException 
     {
         MedicoEntity entity = data.get(3);
+        System.out.println("*****************************************" +  entity.getId());
         medicoLogic.deleteMedico(entity.getId());
         MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
         Assert.assertNull(deleted);
