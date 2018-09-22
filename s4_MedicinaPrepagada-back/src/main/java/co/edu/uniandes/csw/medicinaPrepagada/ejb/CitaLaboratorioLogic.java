@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.CitaLaboratorioPersistence;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -45,15 +47,11 @@ public class CitaLaboratorioLogic {
         if (!validateComentarios(citaLabEntity.getComentarios())) {
             throw new BusinessLogicException("Comentarios no pueden ser vacios");
         }
-        String nameValidationPattern = "([A-Z][a-z]+ ){2,3}([A-Z][a-z]+)";
-        Pattern patternName = Pattern.compile(nameValidationPattern);
-        Matcher matchName = patternName.matcher(citaLabEntity.getEspecialidad());
-        if (!matchName.matches()) {
-            throw new BusinessLogicException("El formato de la especialidad no es valida.");
-        }
-        if (citaLabEntity.getPaciente() == null) {
-            throw new BusinessLogicException("El usuario no existe");
-        }
+       if(!validateEspecialidad(citaLabEntity.getEspecialidad()))
+       {
+           throw new BusinessLogicException("El formato de la especialidad no es valido");
+       }
+       
         CitaLaboratorioEntity newCitaLabEntity = citaPersistence.create(citaLabEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la cita de laboratorio");
 
@@ -96,13 +94,10 @@ public class CitaLaboratorioLogic {
         {
             throw new BusinessLogicException("La fecha no puede ser vacia ni anterior a la fecha actual");
         }
-        
-        String nameValidationPattern = "([A-Z][a-z]+ ){2,3}([A-Z][a-z]+)";
-        Pattern patternName = Pattern.compile(nameValidationPattern);
-        Matcher matchName = patternName.matcher(citaLabEntity.getEspecialidad());
-        if (!matchName.matches()) {
-            throw new BusinessLogicException("El formato de la especialidad no es valida.");
-        }
+         if(!validateEspecialidad(citaLabEntity.getEspecialidad()))
+       {
+           throw new BusinessLogicException("El formato de la especialidad no es valido");
+       }
         
         CitaLaboratorioEntity newCitaEntity = citaPersistence.update(citaLabEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la cita de laboratorio con id = {0}", citaId);
@@ -114,10 +109,17 @@ public class CitaLaboratorioLogic {
         citaPersistence.delete(citaId);
     }
 
-    private boolean validateFecha(Date pFecha) {
-
-        Date x = new Date();
+    private boolean validateFecha(Date pFecha) 
+    {
+       
+        Date x = new Date().from(Instant.now());
+        
         return !(pFecha == null || pFecha.before(x));
+    }
+    
+     private boolean validateEspecialidad (String pEspec)
+    {
+        return !(pEspec == null || pEspec.isEmpty());
     }
 
     private boolean validateComentarios(String pComentarios) {

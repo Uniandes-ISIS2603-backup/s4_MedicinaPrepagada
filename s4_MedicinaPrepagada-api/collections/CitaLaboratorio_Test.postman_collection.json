@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "fac42ee8-e24a-4697-85fa-c4fd3defe2c6",
+		"name": "CitaLaboratorio_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL CitaLab",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaLaboratorio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaLaboratorio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Cita",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaLaboratorio/157",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaLaboratorio",
+						"157"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

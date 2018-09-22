@@ -109,15 +109,10 @@ public class HistoriaClinicaLogic
             throw new BusinessLogicException("No se puede modificar el id. ");
         }
         
-        if (!persistence.find(historiaId).getAlergias().equals(historiaEntity.getAlergias()))
+        /**if (persistence.find(historiaId).getAlergias() != null && !persistence.find(historiaId).getAlergias().equals(historiaEntity.getAlergias()))
         {
             throw new BusinessLogicException("No se pueden modificar las alergias");
-        }
-        
-        if (!persistence.find(historiaId).getFecha().equals(historiaEntity.getFecha()))
-        {
-            throw new BusinessLogicException("No se puede modificar la fecha");
-        }
+        }*/
 
         HistoriaClinicaEntity newEntity = persistence.update(historiaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la historia clinica con id = {0}", historiaEntity.getId());

@@ -37,7 +37,13 @@ public class FacturaDTO implements Serializable{
     {
         
     }    
-    
+    /**
+     * Crea un objeto FacturaDTO a partir de un objetoFacturaEntity.
+     *
+     * @param pFacturaEntity FacturaEntity desde la cual se va a crear el
+     * nuevo DTO.
+     *
+     */
      public FacturaDTO(FacturaEntity pFacturaEntity) {
         if (pFacturaEntity != null) {
             this.idFactura = pFacturaEntity.getId();

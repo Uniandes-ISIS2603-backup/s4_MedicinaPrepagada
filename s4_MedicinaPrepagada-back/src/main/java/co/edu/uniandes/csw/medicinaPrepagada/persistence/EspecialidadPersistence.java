@@ -31,12 +31,12 @@ public class EspecialidadPersistence {
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     
-    public EspecialidadEntity create(EspecialidadEntity EspecialidadEntity) 
+    public EspecialidadEntity create(EspecialidadEntity especialidadEntity) 
     {
         LOGGER.log(Level.INFO, "Creando una nueva Especialidad");
-        em.persist(EspecialidadEntity);
+        em.persist(especialidadEntity);
         LOGGER.log(Level.INFO, "Especialidad creada");
-        return EspecialidadEntity;
+        return especialidadEntity;
     }
     
     /**

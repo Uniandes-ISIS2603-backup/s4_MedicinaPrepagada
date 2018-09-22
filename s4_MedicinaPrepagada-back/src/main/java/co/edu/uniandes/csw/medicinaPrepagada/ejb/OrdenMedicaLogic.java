@@ -9,8 +9,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.OrdenMedicaPersistence;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -43,16 +42,14 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la orden medica");
         
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date d1 = Date.from(Instant.now());
-
-        if(persistence.find(ordenEntity.getId()) != null) 
-        {
-            throw new BusinessLogicException("Ya existe una orden medica con el id \"" + ordenEntity.getId() + "\"");
-        }
-        
+        Date d1 = Date.from(Instant.now());        
         Date fechaValidoHasta = ordenEntity.getValidaHasta() ;
         
+         /**if(persistence.find(ordenEntity.getId()) != null)
+         {
+              throw new WebApplicationException("Ya existe una orden con ese id");
+         }*/
+         
         try
         {
             if(fechaValidoHasta.compareTo(d1) < 0)
@@ -122,10 +119,10 @@ public class OrdenMedicaLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la orden medica con id = {0}", ordenId);
         
-        if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
+        /**if (!persistence.find(ordenId).getFirmaMedico().equals(ordenEntity.getFirmaMedico()))
         {
             throw new BusinessLogicException("No se puede modificar la firma del medico");
-        }
+        }*/
         
         if (!persistence.find(ordenId).getFechaExpedicion().equals(ordenEntity.getFechaExpedicion()))
         {

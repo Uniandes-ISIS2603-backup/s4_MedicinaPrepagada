@@ -6,12 +6,16 @@
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaMedicaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.SedeDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.CitaMedicaLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -36,7 +40,8 @@ public class CitaMedicaResource
 {
     private static final Logger LOGGER = Logger.getLogger(CitaMedicaResource.class.getName());
 
-
+    @Inject
+    private CitaMedicaLogic citaMedicaLogic;
     /**
      * Crea una nueva CitaMedica con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -50,16 +55,11 @@ public class CitaMedicaResource
      * Error de lógica que se genera cuando ya existe la CitaMedica.
      */
     @POST
-    public CitaMedicaDTO createCitaMedica(CitaMedicaDTO CitaMedica) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: input: {0}", CitaMedica.toString());
-        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        //CitaMedicaEntity editorialEntity = CitaMedica.toEntity();
-        // Invoca la lógica para crear la CitaMedica nueva
-        //CitaMedicaEntity nuevoCitaMedicaEntity = CitaMedicaLogic.createCitaMedica(editorialEntity);
-        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        CitaMedicaDTO nuevoCitaMedicaDTO = new CitaMedicaDTO();
-        LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: output: {0}", nuevoCitaMedicaDTO.toString());
-        return nuevoCitaMedicaDTO;
+    public CitaMedicaDTO createCitaMedica(CitaMedicaDTO citaMedica) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: input: {0}", citaMedica.toString());
+        CitaMedicaDTO citaMedicaDTO = new CitaMedicaDTO(citaMedicaLogic.createCitaMedica(citaMedica.toEntity()));
+        LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: output: {0}", citaMedicaDTO.toString());
+        return citaMedicaDTO;
     }
     
 
@@ -72,7 +72,7 @@ public class CitaMedicaResource
     @GET
     public List<CitaMedicaDTO> getCitaMedicas() {
         LOGGER.info("CitaMedicaResource getCitaMedicas: input: void");
-        List<CitaMedicaDTO> listaCitaMedicas = listEntity2DetailDTO(); //Paramtero List<CitaMedicaEntity> entityList
+        List<CitaMedicaDTO> listaCitaMedicas = listEntity2DetailDTO(citaMedicaLogic.getCitasMedicas());
         LOGGER.log(Level.INFO, "CitaMedicaResource getCitaMedicas: output: {0}", listaCitaMedicas.toString());
         return listaCitaMedicas;
     }
@@ -90,11 +90,11 @@ public class CitaMedicaResource
     @Path("{CitaMedicasId: \\d+}")
     public CitaMedicaDTO getCitaMedica(@PathParam("CitaMedicasId") Long CitaMedicasId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "CitaMedicaResource getCitaMedica: input: {0}", CitaMedicasId);
-//        CitaMedicaEntity editorialEntity = CitaMedicaLogic.getCitaMedica(CitaMedicasId);
-//        if (CitaMedicaEntity == null) {
-//            throw new WebApplicationException("El recurso /CitaMedicas/" + CitaMedicasId + " no existe.", 404);
-//        }
-        CitaMedicaDTO detailDTO = new CitaMedicaDTO();
+        CitaMedicaEntity citaMedicaEntity = citaMedicaLogic.getCitaMedica(CitaMedicasId);
+        if (citaMedicaEntity == null) {
+            throw new WebApplicationException("El recurso /CitaMedicas/" + CitaMedicasId + " no existe.", 404);
+        }
+        CitaMedicaDTO detailDTO = new CitaMedicaDTO(citaMedicaEntity);
         LOGGER.log(Level.INFO, "CitaMedicaResource getCitaMedica: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -113,13 +113,13 @@ public class CitaMedicaResource
      */
     @PUT
     @Path("{CitaMedicasId: \\d+}")
-    public CitaMedicaDTO updateCitaMedica(@PathParam("CitaMedicasId") Long CitaMedicasId, CitaMedicaDTO CitaMedica) throws WebApplicationException {
-        LOGGER.log(Level.INFO, "CitaMedicaResource updateCitaMedica: input: id:{0} , CitaMedica: {1}", new Object[]{CitaMedicasId, CitaMedica.toString()});
-//        CitaMedica.setId(CitaMedicasId);
-//        if (CitaMedicaLogic.getCitaMedica(CitaMedicasId) == null) {
-//            throw new WebApplicationException("El recurso /editorials/" + CitaMedicasId + " no existe.", 404);
-//        }
-        CitaMedicaDTO detailDTO = new CitaMedicaDTO(); //Parametro = CitaMedicaLogic.updateCitaMedica(CitaMedicasId, CitaMedica.toEntity())
+    public CitaMedicaDTO updateCitaMedica(@PathParam("CitaMedicasId") Long CitaMedicasId, CitaMedicaDTO citaMedica) throws WebApplicationException, BusinessLogicException {
+        LOGGER.log(Level.INFO, "CitaMedicaResource updateCitaMedica: input: id:{0} , CitaMedica: {1}", new Object[]{CitaMedicasId, citaMedica.toString()});
+        citaMedica.setIdCitaMedica(CitaMedicasId);
+        if(citaMedicaLogic.getCitaMedica(CitaMedicasId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + CitaMedicasId + " no existe.", 404);
+        }
+        CitaMedicaDTO detailDTO = new CitaMedicaDTO(citaMedicaLogic.updateCitaMedica(CitaMedicasId, citaMedica.toEntity()));
         LOGGER.log(Level.INFO, "CitaMedicaResource updateCitaMedica: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -136,12 +136,12 @@ public class CitaMedicaResource
      */
     @DELETE
     @Path("{CitaMedicasId: \\d+}")
-    public void deleteCitaMedica(@PathParam("CitaMedicasId") Long CitaMedicasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "CitaMedicaResource deleteCitaMedica: input: {0}", CitaMedicasId);
-//        if (CitaMedicaLogic.getCitaMedica(CitaMedicasId) == null) {
-//            throw new WebApplicationException("El recurso /editorials/" + CitaMedicasId + " no existe.", 404);
-//        }
-//        CitaMedicaLogic.deleteCitaMedica(CitaMedicasId);
+    public void deleteCitaMedica(@PathParam("CitaMedicasId") Long citaMedicasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "CitaMedicaResource deleteCitaMedica: input: {0}", citaMedicasId);
+        if (citaMedicaLogic.getCitaMedica(citaMedicasId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + citaMedicasId + " no existe.", 404);
+        }
+        citaMedicaLogic.deleteCitaMedica(citaMedicasId);
         LOGGER.info("CitaMedicaResource deleteCitaMedica: output: void");
     }
 
@@ -155,11 +155,11 @@ public class CitaMedicaResource
      * que vamos a convertir a DTO.
      * @return la lista de editoriales en forma DTO (json)
      */
-    private List<CitaMedicaDTO> listEntity2DetailDTO() { //paramtero: List<CitaMedicaEntity> entityList
+    private List<CitaMedicaDTO> listEntity2DetailDTO(List<CitaMedicaEntity> entityList){
         List<CitaMedicaDTO> list = new ArrayList<>();
-//        for (CitaMedicaEntity entity : entityList) {
-//            list.add(new CitaMedicaDTO(entity));
-//        }
+        for (CitaMedicaEntity entity : entityList) {
+            list.add(new CitaMedicaDTO(entity));
+        }
         return list;
     }
 }

@@ -57,16 +57,17 @@ public class MedicamentoResource {
      */
     @POST
     public MedicamentoDTO createMedicamento(MedicamentoDTO pMedicamento) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: input: {0}", pMedicamento.toString());
+        LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: input: {0}", pMedicamento);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         MedicamentoEntity medicamentoEntity = pMedicamento.toEntity();
-        // Invoca la lógica para crear el nuevo medicamento
+        // Invoca la lógica para crear la medicamento nueva
         MedicamentoEntity nuevoMedicamentoEntity = medicamentoLogic.createMedicamento(medicamentoEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         MedicamentoDTO nuevoMedicamentoDTO = new MedicamentoDTO(nuevoMedicamentoEntity);
-        LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO.toString());
-        return pMedicamento;
+        LOGGER.log(Level.INFO, "MedicamentoResource createMedicamento: output: {0}", nuevoMedicamentoDTO);
+        return nuevoMedicamentoDTO;
     }
+    
     
 
     /**
@@ -79,30 +80,29 @@ public class MedicamentoResource {
     public List<MedicamentoDetailDTO> getMedicamentos() {
         LOGGER.info("MedicamentoResource getMedicamentos: input: void");
         List<MedicamentoDetailDTO> listaMedicamentos = listEntity2DetailDTO(medicamentoLogic.getMedicamentos());
-        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamentos: output: {0}", listaMedicamentos.toString());
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamentos: output: {0}", listaMedicamentos);
         return listaMedicamentos;
    }
 
     /**
-     * Busca el medicamento con el id asociado recibido en la URL y lo devuelve.
+     * Busca la medicamento con el id asociado recibido en la URL y la devuelve.
      *
-     * @param medicamentosId Identificador del medicamento que se esta buscando.
+     * @param medicamentosId Identificador de la medicamento que se esta buscando.
      * Este debe ser una cadena de dígitos.
-     * @return JSON {@link MedicamentoDTO} - El medicamento buscado
+     * @return JSON {@link MedicamentoDTO} - La medicamento buscada
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el medicamento.
+     * Error de lógica que se genera cuando no se encuentra la medicamento.
      */
     @GET
     @Path("{medicamentosId: \\d+}")
-    public MedicamentoDTO getMedicamento(@PathParam("pMedicamentosId") Long pMedicamentosId) throws WebApplicationException 
-    {
-         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", pMedicamentosId);
-        MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(pMedicamentosId);
+    public MedicamentoDTO getMedicamento(@PathParam("medicamentosId") Long medicamentosId) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", medicamentosId);
+        MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(medicamentosId);
         if (medicamentoEntity == null) {
-            throw new WebApplicationException("El recurso /medicamentos/" + pMedicamentosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
         }
-        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(medicamentoEntity);
-        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO.toString());
+        MedicamentoDTO detailDTO = new MedicamentoDTO(medicamentoEntity);
+        LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -121,13 +121,13 @@ public class MedicamentoResource {
     @PUT
     @Path("{medicamentosId: \\d+}")
    public MedicamentoDTO updateMedicamento(@PathParam("medicamentosId") Long medicamentosId, MedicamentoDetailDTO pMedicamento) throws WebApplicationException, BusinessLogicException {
-        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: input: id:{0} , medicamento: {1}", new Object[]{medicamentosId, pMedicamento.toString()});
+        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: input: id:{0} , medicamento: {1}", new Object[]{medicamentosId, pMedicamento});
         pMedicamento.setId(medicamentosId);
         if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
             throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
         }
         MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(medicamentoLogic.updateMedicamento(medicamentosId, pMedicamento.toEntity()));
-        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "MedicamentoResource updateMedicamento: output: {0}", detailDTO);
         return detailDTO;
    }
 

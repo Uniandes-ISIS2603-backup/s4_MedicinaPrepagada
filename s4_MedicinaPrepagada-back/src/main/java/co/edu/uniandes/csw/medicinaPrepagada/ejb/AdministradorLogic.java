@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.AdministradorPersistence;
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,18 +46,24 @@ public class AdministradorLogic
         }
         
         //Regla de negocio 2: El login no puede ser vacio
-        if( admiEntity.getLogin().isEmpty() )
+        if( admiEntity.getLogin() == null || admiEntity.getLogin().equals("") )
         {
             throw new BusinessLogicException("El Login no puede ser vacio");
         }
         
         //Regla de negocio 3: La contraseña no puede ser null
-        if( admiEntity.getContrasena().isEmpty() )
+        if( admiEntity.getContrasena() == null || admiEntity.getContrasena().equals("") )
         {
             throw new BusinessLogicException("La contraseña no puede ser vacia");
         }
         
+        //Regla de negocio 4: El tipo de usuario no puede ser null
+        if( admiEntity.getTipoUsuario() == null || admiEntity.getTipoUsuario().equals("") )
+        {
+            throw new BusinessLogicException("El tipo de usuario no puede ser vacia");
+        }
         //validarFormatoContrasena(admiEntity);
+      
         
         persistence.create(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del administrador");
@@ -84,7 +91,9 @@ public class AdministradorLogic
     
     public AdministradorEntity getAdministrador(Long admiId) 
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el administrador con id = {0}", admiId);
+        return persistence.find(admiId); 
+    
+        /**LOGGER.log(Level.INFO, "Inicia proceso de consultar el administrador con id = {0}", admiId);
         AdministradorEntity admiEntity = persistence.find(admiId);
         
         if (admiEntity == null) 
@@ -92,7 +101,7 @@ public class AdministradorLogic
             LOGGER.log(Level.SEVERE, "El administrador con el id = {0} no existe", admiId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el administrador con id = {0}", admiId);
-        return admiEntity;
+        return admiEntity;*/
     }
     
     /**

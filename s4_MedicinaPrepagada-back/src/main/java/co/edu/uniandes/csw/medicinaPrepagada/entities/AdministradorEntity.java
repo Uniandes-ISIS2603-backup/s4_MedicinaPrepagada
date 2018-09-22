@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  *
@@ -17,28 +16,6 @@ import javax.persistence.Id;
 @Entity 
 public class AdministradorEntity extends UsuarioEntity implements Serializable 
 {
-    //@Id
-    //private Long cedula;
+  
     
-
-    
-    /**
-     * Devuelve el identificador del administrador.
-     * @return El id
-     */
-    
-    //public Long getCedula() 
-    //{
-    //    return cedula;
-    //}
-
-    /**
-     * Modifica el identificador del administrador.
-     * @param pId El id a poner
-     */
- 
-    //public void setCedula(Long pCedula) 
-    //{        
-    //    this.cedula = pCedula;
-    //}
 }
