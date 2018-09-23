@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicoLogic;
-import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;

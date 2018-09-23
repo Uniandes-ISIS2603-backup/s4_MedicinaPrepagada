@@ -36,15 +36,15 @@ public class CitaMedicaLogic {
         }
         Date fechaInicio = citaMedicaEntity.getFecha();
         Date fechaFin = mas20Minutos(fechaInicio);
-//        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
-//            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
-//        }
+        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
+            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
+            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
+            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
+        }
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }
@@ -90,31 +90,38 @@ public class CitaMedicaLogic {
      */
     public CitaMedicaEntity updateCitaMedica(Long citaMedicasId, CitaMedicaEntity citaMedicaEntity) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la citaMedica con id = {0}", citaMedicasId);
+        CitaMedicaEntity citaExistente = persistence.find(citaMedicasId);
+        if(citaExistente == null){
+            throw new BusinessLogicException("La cita no existe. ");
+        }
         PacienteEntity pacienteAnterior = persistence.find(citaMedicasId).getPacienteAAtender();
         PacienteEntity pacienteNuevo = citaMedicaEntity.getPacienteAAtender();
         if(citaMedicaEntity.getFecha() == null){
             throw new BusinessLogicException("Debe ingresarse una fecha. ");
         }
-//        if(citaMedicasId != citaMedicaEntity.getId()){
-//            throw new BusinessLogicException("No se puede modificar el id. ");
-//        }
-//        if(pacienteAnterior.getId() != pacienteNuevo.getId()){
-//            throw new BusinessLogicException("No se puede modificar el paciente. ");
-//        }
+        if(!citaMedicasId.equals(citaMedicaEntity.getId())){
+            throw new BusinessLogicException("No se puede modificar el id. ");
+        }
+        if(pacienteNuevo==null){
+            throw new BusinessLogicException("No existe el paciente para asignar la cita. ");
+        }
+        if(!pacienteAnterior.getId().equals(pacienteNuevo.getId())){
+            throw new BusinessLogicException("No se puede modificar el paciente. ");
+        }
         Date fechaInicio = citaMedicaEntity.getFecha();
         Date fechaFin = mas20Minutos(fechaInicio);
         if(fechaInicio.compareTo(masUnaHora(new Date()))<0){
             throw new BusinessLogicException("No se puede modificar la cita con menos de una hora de anticipación. ");
         }
-//        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null){
-//            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
-//        }
-//        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
-//            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
-//        }
+        if(persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId())!=null && !persistence.findByFechaYConsultorio(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId()).getId().equals(citaMedicaEntity.getId())){
+            throw new BusinessLogicException("Ya existe una cita en el consultorio a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())!=null && !persistence.findByFechaYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId()).getId().equals(citaMedicaEntity.getId())){
+            throw new BusinessLogicException("Ya existe una cita con el médico a una hora que impide esta reserva. ");
+        }
+        if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
+            throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
+        }
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }
