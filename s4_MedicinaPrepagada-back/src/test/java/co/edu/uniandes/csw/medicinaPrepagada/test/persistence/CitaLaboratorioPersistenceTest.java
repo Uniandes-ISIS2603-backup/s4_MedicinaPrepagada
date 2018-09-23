@@ -146,6 +146,23 @@ public class CitaLaboratorioPersistenceTest {
 
         CitaLaboratorioEntity resp = em.find(CitaLaboratorioEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getDate(), resp.getDate());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     } 
+    
+    @Test 
+    public void updateLaboratorioTest()
+    {
+        CitaLaboratorioEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        CitaLaboratorioEntity newEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
+        
+        newEntity.setLaboratorio(entity.getLaboratorio());
+        
+        citaLaboratorioPersistence.update(newEntity);
+        
+        CitaLaboratorioEntity resp = em.find(CitaLaboratorioEntity.class, entity.getId());
+        
+        Assert.assertEquals(newEntity.getLaboratorio(),resp.getLaboratorio());
+        
+    }
 }

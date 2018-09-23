@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.HorarioAtencionLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.EspecialidadEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import java.util.ArrayList;
@@ -94,24 +96,43 @@ public class HorarioAtencionLogicTest
      */
     private void clearData() 
     {
+        em.createQuery("delete from HorarioAtencionEntity").executeUpdate();
         em.createQuery("delete from ConsultorioEntity").executeUpdate();
         em.createQuery("delete from SedeEntity").executeUpdate();
-        em.createQuery("delete from HorarioAtencionEntity").executeUpdate();
-        em.createQuery("delete from MedicoEntity").executeUpdate();     
+      
+        em.createQuery("delete from MedicoEntity").executeUpdate(); 
+        em.createQuery("delete from EspecialidadEntity").executeUpdate();
+
     }
     
             /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
-    private void insertData() {
-        for (int i = 0; i < 4; i++) 
+    private void insertData() 
+    {
+         EspecialidadEntity esp1 = factory.manufacturePojo(EspecialidadEntity.class); 
+        esp1.setNombre("Endocrinologia");
+        em.merge(esp1);
+        
+        SedeEntity entitySede = factory.manufacturePojo(SedeEntity.class);
+        entitySede.setId(1L);
+        em.persist (entitySede);
+        
+        for (int i = 0; i < 3; i++) 
         {
             HorarioAtencionEntity entity = factory.manufacturePojo(HorarioAtencionEntity.class);
             ConsultorioEntity entityConsultorio = factory.manufacturePojo(ConsultorioEntity.class);
             MedicoEntity entityMedico = factory.manufacturePojo(MedicoEntity.class);
             em.persist (entityConsultorio);
             em.persist (entityMedico);
+            
+            entityConsultorio.setEspecialidad(esp1);
+            entityConsultorio.setSede(entitySede);
+            em.merge(entityConsultorio);
+            
+            entityMedico.setEspecialidad(esp1);
+            em.merge(entityMedico);
             
             entity.setConsultorio(entityConsultorio);
             entity.setMedico(entityMedico);
