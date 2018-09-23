@@ -42,7 +42,7 @@ public class HorarioAtencionLogic
     @Inject 
     private SedePersistence sedePersistence;
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss"); 
     
     
          /**
@@ -50,13 +50,12 @@ public class HorarioAtencionLogic
      *
      * @param horarioAtencionEntity Objeto de HorarioAtencionEntity con los datos nuevos
      * @param sedeEntity
-     * @param idMedico
      * @return Objeto de HorarioAtencionEntity con los datos nuevos y su ID.
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion" + horarioAtencionEntity.toString());
         Long idMedico = horarioAtencionEntity.getMedico().getId();
         
         //Valida que la fecha sea despues de la actual
@@ -220,12 +219,12 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split(" ");
+        String[] partsInicio = inicio.split("T");
         String[] partsInicio2 = partsInicio[1].split(":");
         int horaInicio =Integer.parseInt(partsInicio2[0]);
         
         //Particion de fin
-        String[] partsFin = fin.split(" ");
+        String[] partsFin = fin.split("T");
         String[] partsFin2 = partsFin[1].split(":");
         int horaFin =Integer.parseInt(partsFin2[0]);
         
@@ -245,12 +244,12 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split(" ");
+        String[] partsInicio = inicio.split("T");
         String[] partsInicio2 = partsInicio[1].split(":");
         int horaInicio =Integer.parseInt(partsInicio2[1]);
         
         //Particion de fin
-        String[] partsFin = fin.split(" ");
+        String[] partsFin = fin.split("T");
         String[] partsFin2 = partsFin[1].split(":");
         int horaFin =Integer.parseInt(partsFin2[1]);
         
@@ -273,13 +272,13 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split(" ");
-        String[] partsInicio2 = partsInicio[0].split("/");
+        String[] partsInicio = inicio.split("T");
+        String[] partsInicio2 = partsInicio[0].split("-");
         //int horaInicio =Integer.parseInt(partsInicio2[1]);
         
         //Particion de fin
-        String[] partsFin = fin.split(" ");
-        String[] partsFin2 = partsFin[0].split("/");
+        String[] partsFin = fin.split("T");
+        String[] partsFin2 = partsFin[0].split("-");
         //int horaFin =Integer.parseInt(partsFin2[1]); 
         
         int cont=0;
@@ -303,7 +302,7 @@ public class HorarioAtencionLogic
     public boolean validatePostActual (Date pHoraInicio)
     {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -5);
+        calendar.add(Calendar.HOUR_OF_DAY, 0);
         Date dateActual =  calendar.getTime();
         
         return (pHoraInicio.after(dateActual));
@@ -320,7 +319,7 @@ public class HorarioAtencionLogic
     {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, +1);
-        calendar.add(Calendar.HOUR_OF_DAY, -5);
+        calendar.add(Calendar.HOUR_OF_DAY, 0);
         Date dateMax =  calendar.getTime();  
         
         return (pHoraFin.before(dateMax));

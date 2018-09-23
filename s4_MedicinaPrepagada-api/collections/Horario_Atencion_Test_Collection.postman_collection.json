@@ -145,7 +145,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{}"
+					"raw": "{\n        \"consultorio\": {\n            \n            \"sede\": \n            {\n                \n                \"id\": 300\n            }\n        },\n        \"fechaFin\": \"2018-09-30T10:00:00-05:00\",\n        \"fechaInicio\": \"2018-09-30T08:00:00-05:00\",\n        \"medico\": \n        {\n            \"idMedico\": 100\n        }\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion",
@@ -188,10 +188,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{}"
+					"raw": "{\n       \"consultorio\": {\n\n           \"sede\":\n           {\n\n               \"id\": 300\n           }\n       },\n       \"fechaFin\": \"2018-09-29T10:00:00-05:00\",\n       \"fechaInicio\": \"2018-09-29T08:00:00-05:00\",\n       \"medico\":\n       {\n           \"idMedico\": 100\n       }\n   }"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -201,7 +201,51 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"horariosAtencion",
-						"1"
+						"100"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "PUt Horarios Atencion No existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "884d4dc3-35d4-4079-88ed-8e839351ac05",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"consultorio\": {\n\n           \"sede\":\n           {\n\n               \"id\": 300\n           }\n       },\n       \"fechaFin\": \"2018-09-29T10:00:00-05:00\",\n       \"fechaInicio\": \"2018-09-29T08:00:00-05:00\",\n       \"medico\":\n       {\n           \"idMedico\": 100\n       }\n   }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/2000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"2000"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
