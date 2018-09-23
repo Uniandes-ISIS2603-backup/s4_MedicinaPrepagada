@@ -1,3 +1,5 @@
+delete from CitaMedicaEntity;
+
 delete from HorarioAtencionEntity;
 delete from ConsultorioEntity;
 delete from SedeEntity;
@@ -5,7 +7,6 @@ delete from SedeEntity;
 
 delete from MedicoEntity;
 delete from EspecialidadEntity;
-delete from CitaMedicaEntity;
 
 delete from TARJETACREDITOENTITY;
 
@@ -31,6 +32,7 @@ insert into EspecialidadEntity (nombre) values ('Endocrinologia');
 
 insert into EspecialidadEntity (nombre) values ('Cardiologia');
 
+
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo) 
 values (100, 'super sede 1', 'Calle 153 # 15 - 13', 2, 'Super buena sede', 2, -69.2, 98999423, 'pepito12@hotmail.com' );
 
@@ -42,6 +44,10 @@ values (300, 'super sede 3', 'Calle 53 # 14 - 12', 2, 'Super buena sede superx2'
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo) 
 values (400, 'super sede 4', 'Calle 111 # 44 - 21', 1, 'Super buena sede superx2 megax', 2.8, -70.8, 98975423, 'pepitoSupermanSantafe@gmail.com' );
+
+
+
+
 
 insert into ConsultorioEntity (id, edificio, noficina, sede_id, especialidad_nombre)
 values (100, 'lleras' , 2, 100, 'Cardiologia');
@@ -64,6 +70,10 @@ values (600, 'Samuel' , 7, 300, 'Endocrinologia');
 insert into ConsultorioEntity (id, edificio, noficina, sede_id , especialidad_nombre)
 values (700, 'Adios' , 20, 300, 'Endocrinologia');
 
+
+
+
+
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
 values(1,1234564,'Alfredo Torres Figueroa','Cra 18 #124-80','21/11/1997','Compensar','a.torres123@gmail.com',3219896969,'ale2C','a.torres','Paciente');
 
@@ -80,6 +90,9 @@ INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIEN
 values(5,1739221,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cmp@gmial.com',889797796,'4792342ied','cmpg','Paciente');
 
 
+
+
+
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (5100171235475198, 'Hartley Lamberts', 725, '22/73', 'mastercard');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3565828670929210, 'Marlo McMorland', 490, '55/46', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3567173574390047, 'Teodoor Klinck', 922, '33/29', 'jcb');
@@ -90,6 +103,9 @@ insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fech
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3558450459779002, 'Bartholomeo Fader', 097, '84/09', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3585861946780451, 'Aurea Marsh', 412, '00/21', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (5602235051148099, 'Lucas Jenik', 849, '23/76', 'bankcard');
+
+
+
 
 insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
 values (100, 'JuliTo98', 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'megaJulito984', 'Julio Alberto' , 98739279, 'basico', 'Endocrinologia' );
@@ -117,6 +133,9 @@ values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,100 );
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
+
+
+
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
 values (2000, '2018-09-23 08:00:00','Excelente cita médica', 1, 600 );
 
@@ -129,6 +148,8 @@ values (2002, '2018-09-23 08:40:00','Excelente cita médica', 3, 600 );
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
 values (2003, '2018-09-23 09:00:00','Excelente cita médica', 4, 600 );
 
+
+
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Carlos12', 'carlitos12', 'Administrador'); 
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
@@ -138,12 +159,18 @@ values('Perdo24', 'pedrito12', 'Paciente');
 insert into AdministradorEntity (login, contrasena, tipoUsuario)
 values('Laura1', 'laurita56', 'Paciente'); 
 
+
+
+
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
 values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
 values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
 values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
+
+
+
 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
 values (400, 'Pedro Franco', '2018-10-19', 'Examen de sangre', '2018-12-19'); 
@@ -153,6 +180,9 @@ insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, va
 values (200, 'Carlos Estupiñan', '2018-10-01', 'Dolex gripa', '2018-12-01'); 
 insert into OrdenMedicaEntity (id, firmaMedico, fechaExpedicion, comentarios, validaHasta)
 values (100, 'Claudia Forero', '2018-09-07', 'Mucha agua', '2018-11-07'); 
+
+
+
 
 insert into LaboratorioEntity (id,nombre,direccion,telefono,horarioAtencion,longitud,latitud)
 values (1,'Laboratorio Dios Me Ampare','Cra 17#34-25',4561798,'Lunes a Viernes de 8:00 a 10:00am',-74.0817500,4.6097100);
