@@ -146,27 +146,27 @@ public class HorarioAtencionLogicTest
     }
     
     
-//             /**
-//     * Prueba para consultar la lista de HorarioAtencions.
-//     */
-//    @Test
-//    public void getHorariosAtencionsTest() 
-//    {
-//        List<HorarioAtencionEntity> list = horarioAtencionLogic.getHorarioAtencions();
-//        Assert.assertEquals(data.size(), list.size());
-//        for (HorarioAtencionEntity entity : list) 
-//        {
-//            boolean found = false;
-//            for (HorarioAtencionEntity storedEntity : data) 
-//            {
-//                if (entity.getId().equals(storedEntity.getId()))
-//                {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
+     /**
+     * Prueba para consultar la lista de HorarioAtencions.
+     */
+    @Test
+    public void getHorariosAtencionsTest() 
+    {
+        List<HorarioAtencionEntity> list = horarioAtencionLogic.getHorarioAtencions();
+        Assert.assertEquals(data.size(), list.size());
+        for (HorarioAtencionEntity entity : list) 
+        {
+            boolean found = false;
+            for (HorarioAtencionEntity storedEntity : data) 
+            {
+                if (entity.getId().equals(storedEntity.getId()))
+                {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
     
     
@@ -203,22 +203,22 @@ public class HorarioAtencionLogicTest
    
     }
     
-//    
-//    
-//    
-//         /**
-//     * Prueba para eliminar un HorarioAtencion
-//     *
-//     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
-//     */
-//    @Test
-//    public void deleteHorarioAtencionTest() throws BusinessLogicException 
-//    {
-//        HorarioAtencionEntity entity = data.get(0);
-//        horarioAtencionLogic.deleteHorarioAtencion(entity.getId());
-//        HorarioAtencionEntity deleted = em.find(HorarioAtencionEntity.class, entity.getId());
-//        Assert.assertNull(deleted);
-//    }
+    
+    
+    
+         /**
+     * Prueba para eliminar un HorarioAtencion
+     *
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test
+    public void deleteHorarioAtencionTest() throws BusinessLogicException 
+    {
+        HorarioAtencionEntity entity = data.get(0);
+        horarioAtencionLogic.deleteHorarioAtencion(entity.getId());
+        HorarioAtencionEntity deleted = em.find(HorarioAtencionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
     
     
         
