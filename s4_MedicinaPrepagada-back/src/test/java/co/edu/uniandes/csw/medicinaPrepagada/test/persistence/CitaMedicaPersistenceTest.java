@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.CitaMedicaPersistence;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +53,12 @@ public class CitaMedicaPersistenceTest {
     private ConsultorioEntity consultorioEntityAdicional;
     
     private PodamFactory factory = new PodamFactoryImpl();
+    
+    private PacienteEntity paciente;
+    
+    private SedeEntity sede;
+    
+    private List<HorarioAtencionEntity> dataHorario = new ArrayList<>();
 
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -150,6 +158,9 @@ public class CitaMedicaPersistenceTest {
             em.merge(entit);
             
             data.add(entit);
+            
+            crearPrueba1();
+            crearPrueba2();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -166,19 +177,11 @@ public class CitaMedicaPersistenceTest {
             Date fechaConHora = sdf.parse(stringFechaConHora);
             entity.setFecha(fechaConHora);
             em.persist(entity);
-            MedicoEntity medico = factory.manufacturePojo(MedicoEntity.class);
-            HorarioAtencionEntity horario = factory.manufacturePojo(HorarioAtencionEntity.class);
-            horario.setCitasMedicas(new ArrayList<>());
-            horario.getCitasMedicas().add(entity);
-            entity.setHorarioAtencionAsignado(horario);
-            em.persist(horario);
-            em.merge(entity);
-            medicoEntityAdicional = medico;
-            medicoEntityAdicional.setHorariosAtencion(new ArrayList<>());
-            horario.setMedico(medico);
-            medicoEntityAdicional.getHorariosAtencion().add(horario);
-            em.persist(medicoEntityAdicional);
-            em.merge(horario);
+            paciente = factory.manufacturePojo(PacienteEntity.class);
+            paciente.setCitasMedicas(new ArrayList<>());
+            paciente.getCitasMedicas().add(entity);
+            entity.setPacienteAAtender(paciente);
+            em.persist(paciente);
             em.merge(entity);
             
             data.add(entity);
@@ -188,6 +191,43 @@ public class CitaMedicaPersistenceTest {
         }
     }
 
+    public void crearPrueba2(){
+        try{
+            HorarioAtencionEntity entity = factory.manufacturePojo(HorarioAtencionEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHoraInicio = "2019-18-01 00:00:00";
+            String stringFechaConHoraFin = "2019-18-01 00:20:00";
+            Date fechaConHoraInicio = sdf.parse(stringFechaConHoraInicio);
+            Date fechaConHoraFin = sdf.parse(stringFechaConHoraFin);
+            entity.setFechaInicio(fechaConHoraInicio);
+            entity.setFechaFin(fechaConHoraFin);
+            em.persist(entity);
+            ConsultorioEntity consultorio = factory.manufacturePojo(ConsultorioEntity.class);
+            consultorio.setHorariosAtencion(new ArrayList<>());
+            consultorio.getHorariosAtencion().add(entity);
+            entity.setConsultorio(consultorio);
+            em.persist(consultorio);
+            em.merge(entity);
+            SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
+            sede.setConsultorios(new ArrayList<>());
+            sede.getConsultorios().add(consultorio);
+            consultorio.setSede(sede);
+            em.persist(sede);
+            em.merge(consultorio);
+            em.merge(entity);
+            
+            medicoEntityAdicional.setHorariosAtencion(new ArrayList<>());
+            medicoEntityAdicional.getHorariosAtencion().add(entity);
+            entity.setMedico(medicoEntityAdicional);
+            em.persist(medicoEntityAdicional);
+            em.merge(entity);
+            
+            dataHorario.add(entity);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Prueba para crear un CitaMedica.
      */
@@ -306,20 +346,37 @@ public class CitaMedicaPersistenceTest {
         }
     }
     
-//    @Test
-//    public void getFindByFechaYConsultorioTest() {
-//        try{
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String stringFechaConHoraInicio = "2019-02-01 00:00:00";
-//            String stringFechaConHoraFin = "2019-02-01 00:20:00";
-//            Date fechaConHoraInicio = sdf.parse(stringFechaConHoraInicio);
-//            Date fechaConHoraFin = sdf.parse(stringFechaConHoraFin);
-//            CitaMedicaEntity respuesta = citaMedicaPersistence.findByFechaYConsultorio(fechaConHoraInicio, fechaConHoraFin, consultorioEntityAdicional.getId());
-//            Assert.assertNotNull(respuesta);
-//            Assert.assertEquals(respuesta.getId(), data.get(4));
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void getFindByFechaYPacienteTest() {
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHoraInicio = "2019-01-01 00:00:00";
+            Date fechaConHoraInicio = sdf.parse(stringFechaConHoraInicio);
+            CitaMedicaEntity respuesta = citaMedicaPersistence.findByFechaYPaciente(fechaConHoraInicio, paciente.getId());
+            Assert.assertNotNull(respuesta);
+            Assert.assertEquals(respuesta.getId(), data.get(5).getId());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    @Test
+    public void getFindByLimitesFechaInicioFechaFinSedeYMedico() {
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHoraInicio = "2019-18-01 00:00:00";
+            String stringFechaConHoraFin = "2019-18-01 00:20:00";
+            Date fechaConHoraInicio = sdf.parse(stringFechaConHoraInicio);
+            Date fechaConHoraFin = sdf.parse(stringFechaConHoraFin);
+            Long idConsultorio = consultorioEntityAdicional.getId();
+            Long idMedico = medicoEntityAdicional.getId();
+            HorarioAtencionEntity respuesta = citaMedicaPersistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaConHoraInicio, fechaConHoraFin, idConsultorio, idMedico);
+            Assert.assertNotNull(respuesta);
+            Assert.assertEquals(respuesta.getId(), dataHorario.get(0));
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
