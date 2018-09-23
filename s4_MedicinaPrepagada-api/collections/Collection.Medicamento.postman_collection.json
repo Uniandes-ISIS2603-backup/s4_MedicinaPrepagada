@@ -75,7 +75,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -85,7 +85,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"medicamentos",
-						"1"
+						"3"
 					]
 				},
 				"description": "Elimina un medicamento"
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -121,7 +121,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"medicamentos",
-						"1"
+						"4"
 					]
 				},
 				"description": "Retorna un medicamento dado un id"
@@ -129,7 +129,7 @@
 			"response": []
 		},
 		{
-			"name": "Put medicamento",
+			"name": "Update medicamento",
 			"event": [
 				{
 					"listen": "test",
@@ -152,7 +152,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"No se administra via oral\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+					"raw": "{\"nombre\":\"Advil\",\r\n\r\n\"cantidad\":\"50 mg\",\r\n\r\n\"descripcion\":\"No se administra via oral\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"Pfizer\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/1",
@@ -204,6 +204,49 @@
 					]
 				},
 				"description": "Retorna todos los medicamentos existentes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update medicamento descripcion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35996ead-94a3-40ad-b079-1d58ec43773f",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Debe generar error en el PUT\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Aspirina\",\r\n\r\n\"cantidad\":\"70 mg\",\r\n\r\n\"descripcion\":\"1234567\",\r\n\r\n\"costo\":12000,\r\n\r\n\"elaboradoPor\": \"Bayer\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medicamentos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos",
+						"2"
+					]
+				}
 			},
 			"response": []
 		}

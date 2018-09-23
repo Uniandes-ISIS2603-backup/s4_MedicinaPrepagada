@@ -95,13 +95,13 @@ public class MedicamentoResource {
      */
     @GET
     @Path("{medicamentosId: \\d+}")
-    public MedicamentoDTO getMedicamento(@PathParam("medicamentosId") Long medicamentosId) throws WebApplicationException {
+    public MedicamentoDetailDTO getMedicamento(@PathParam("medicamentosId") Long medicamentosId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: input: {0}", medicamentosId);
         MedicamentoEntity medicamentoEntity = medicamentoLogic.getMedicamento(medicamentosId);
         if (medicamentoEntity == null) {
             throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
         }
-        MedicamentoDTO detailDTO = new MedicamentoDTO(medicamentoEntity);
+        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(medicamentoEntity);
         LOGGER.log(Level.INFO, "MedicamentoResource getMedicamento: output: {0}", detailDTO);
         return detailDTO;
     }
@@ -112,7 +112,7 @@ public class MedicamentoResource {
      *
      * @param medicamentosId Identificador del medicamento que se desea
      * actualizar. Este debe ser una cadena de dígitos.
-     * @param medicamento {@link MedicamentoDTO} El medicamento que se desea guardar.
+     * @param pMedicamento {@link MedicamentoDTO} El medicamento que se desea guardar.
      * @return JSON {@link MedicamentoDTO} - El medicamento guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el medicamento a

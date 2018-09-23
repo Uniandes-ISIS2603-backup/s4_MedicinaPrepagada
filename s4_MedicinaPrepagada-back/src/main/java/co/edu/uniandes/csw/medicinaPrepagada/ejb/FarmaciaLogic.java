@@ -134,9 +134,6 @@ public class FarmaciaLogic {
          //Verifica que el nombre sea valido
         if (!validateNombre(farmaciaEntity.getNombre()))
            throw new BusinessLogicException ("El nombre no puede ser vacío.");
-        //Verifica que no exista otra farmacia con el mismo nombre
-        if (persistence.findByNombre(farmaciaEntity.getNombre())!=null)
-            throw new BusinessLogicException("Ya existe una farmacia con este nombre");
        
         validarCondiciones(farmaciaEntity);
         FarmaciaEntity newEntity = persistence.update(farmaciaEntity);
