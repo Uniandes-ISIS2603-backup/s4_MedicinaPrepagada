@@ -98,6 +98,9 @@ public class CitaMedicaPersistence {
         query.setParameter("idPaciente", idPaciente);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta.size()==0){
+                return null;
+            }
             return respuesta.get(0);
         }
         catch(NoResultException e2){
@@ -113,6 +116,9 @@ public class CitaMedicaPersistence {
         query.setParameter("idMedico", idMedico);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta.size()==0){
+                return null;
+            }
             return respuesta.get(0);
         }
         catch(NoResultException e2){
@@ -122,12 +128,15 @@ public class CitaMedicaPersistence {
     
     public CitaMedicaEntity findByFechaYConsultorio(Date fechaInicio, Date fechaFin, Long idConsultorio){
         LOGGER.log(Level.INFO, "Consultando editorial por idConsultorio y fecha ", idConsultorio);
-        TypedQuery query = em.createQuery("Select e From CitaMedicaEntity e where e.fecha >= :fechaInicio and e.fecha <= :fechaFin e.horarioAtencionAsignado.consultorio.id = :idConsultorio", CitaMedicaEntity.class);
+        TypedQuery query = em.createQuery("Select e From CitaMedicaEntity e where e.fecha >= :fechaInicio and e.fecha <= :fechaFin and e.horarioAtencionAsignado.consultorio.id = :idConsultorio", CitaMedicaEntity.class);
         query.setParameter("fechaInicio", fechaInicio);
         query.setParameter("fechaFin", fechaFin);
         query.setParameter("idConsultorio", idConsultorio);
         try{
             List<CitaMedicaEntity> respuesta = query.getResultList();
+            if(respuesta.size()==0){
+                return null;
+            }
             return respuesta.get(0);
         }
         catch(NoResultException e2){
@@ -140,10 +149,13 @@ public class CitaMedicaPersistence {
         TypedQuery query = em.createQuery("Select e From HorarioAtencionEntity e where e.fechaInicio <= :fechaInicio and e.fechaFin >= :fechaFin and e.consultorio.id = :idConsultorio and e.medico.id = :idMedico", HorarioAtencionEntity.class);
         query.setParameter("fechaInicio", fechaInicio);
         query.setParameter("fechaFin", fechaFin);
-        query.setParameter("idSede", idConsultorio);
+        query.setParameter("idConsultorio", idConsultorio);
         query.setParameter("idMedico", idMedico);
         try{
             List<HorarioAtencionEntity> respuesta = query.getResultList();
+            if(respuesta.size()==0){
+                return null;
+            }
             return respuesta.get(0);
         }
         catch(NoResultException e2){
