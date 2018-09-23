@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.AdministradorEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.AdministradorPersistence;
-import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,7 +61,15 @@ public class AdministradorLogic
         {
             throw new BusinessLogicException("El tipo de usuario no puede ser vacia");
         }
-        //validarFormatoContrasena(admiEntity);
+        
+        /**try
+        {
+            validarFormatoContrasena(admiEntity);
+        }
+        catch( BusinessLogicException e )
+        {
+            
+        }*/
       
         
         persistence.create(admiEntity);
@@ -122,7 +129,14 @@ public class AdministradorLogic
             throw new BusinessLogicException("La contraseña no puede ser vacia");
         }
         
-        //validarFormatoContrasena(admiEntity);
+       /**try
+        {
+            validarFormatoContrasena(admiEntity);
+        }
+        catch( BusinessLogicException e )
+        {
+            
+        }*/
 
         AdministradorEntity newEntity = persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
@@ -183,9 +197,9 @@ public class AdministradorLogic
                         + " y composición"); 
               } 
         }
-        else 
+        /**else 
         {
             throw new BusinessLogicException("La contraseña no puede tener caracteres especiales como %-&-$.");
-        }
+        }*/
     }
 }
