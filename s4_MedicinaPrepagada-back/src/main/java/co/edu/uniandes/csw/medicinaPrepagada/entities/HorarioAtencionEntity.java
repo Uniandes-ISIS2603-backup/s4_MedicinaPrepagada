@@ -39,13 +39,13 @@ public class HorarioAtencionEntity implements Serializable
 
      //En logic "yyyy/MM/dd HH:mm:ss"
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaInicio;
     
     
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaFin;
      
