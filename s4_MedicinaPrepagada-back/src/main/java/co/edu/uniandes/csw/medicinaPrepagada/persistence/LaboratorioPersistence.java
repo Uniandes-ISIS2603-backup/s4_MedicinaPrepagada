@@ -94,7 +94,7 @@ public class LaboratorioPersistence {
      
      public void delete (Long labId)
      {
-         LOGGER.log(Level.INFO,"Borrando laboratorio con id=(0)",labId);
+         LOGGER.log(Level.INFO,"Borrando laboratorio con id={0}",labId);
          LaboratorioEntity labEntity = em.find(LaboratorioEntity.class,labId);
          em.remove(labEntity);
      }

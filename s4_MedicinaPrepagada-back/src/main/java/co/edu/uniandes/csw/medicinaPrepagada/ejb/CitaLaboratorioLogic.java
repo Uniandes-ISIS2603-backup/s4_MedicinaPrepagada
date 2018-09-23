@@ -9,14 +9,13 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.CitaLaboratorioPersistence;
-import java.text.SimpleDateFormat;
+
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -104,7 +103,7 @@ public class CitaLaboratorioLogic {
         return newCitaEntity;
     }
     
-    public void deleteCitaLab(Long citaId)throws BusinessLogicException
+    public void deleteCitaLab(Long citaId)
     {
         citaPersistence.delete(citaId);
     }
