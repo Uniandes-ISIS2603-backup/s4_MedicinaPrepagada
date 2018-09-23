@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.AdministradorPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -129,6 +131,10 @@ public class AdministradorLogicTest
         newEntity.setContrasena("12345678909");
         AdministradorEntity result = admiLogic.createAdministrador(newEntity);
         Assert.assertNotNull(result);
+        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getLogin(), entity.getLogin());
+        Assert.assertEquals(newEntity.getContrasena(), entity.getContrasena());
+        Assert.assertEquals(newEntity.getTipoUsuario(), entity.getTipoUsuario());
     }
     
     /**
@@ -141,19 +147,19 @@ public class AdministradorLogicTest
         List<AdministradorEntity> list = admiLogic.getAdministradores();
         Assert.assertEquals(data.size(), list.size());
         
-        /**for(AdministradorEntity entity : list) 
+        for(AdministradorEntity entity : list) 
         {
             boolean found = false;
             
             for(AdministradorEntity storedEntity : data) 
             {
-                //if (entity.getCedula().equals(storedEntity.getCedula())) 
-                //{
-                //    found = true;
-                //}
+                if (entity.getId().equals(storedEntity.getId())) 
+                {
+                    found = true;
+                }
             }
             Assert.assertTrue(found);
-        }*/
+        }
     }
     
     /**
@@ -164,12 +170,12 @@ public class AdministradorLogicTest
     public void getAdministradorTest() 
     {
         AdministradorEntity entity = data.get(0);
-        //AdministradorEntity resultEntity = admiLogic.getAdministrador(entity.getCedula());
-        //Assert.assertNotNull(resultEntity);
-        //Assert.assertEquals(entity.getCedula(), resultEntity.getCedula());
-        //Assert.assertEquals(entity.getLogin(), resultEntity.getLogin());
-        //Assert.assertEquals(entity.getContrasena(), resultEntity.getContrasena());
-        //Assert.assertEquals(entity.getTipoUsuario(), resultEntity.getTipoUsuario());
+        AdministradorEntity resultEntity = admiLogic.getAdministrador(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getLogin(), resultEntity.getLogin());
+        Assert.assertEquals(entity.getContrasena(), resultEntity.getContrasena());
+        Assert.assertEquals(entity.getTipoUsuario(), resultEntity.getTipoUsuario());
     }
     
     /**
@@ -182,16 +188,23 @@ public class AdministradorLogicTest
         AdministradorEntity entity = data.get(0);
         AdministradorEntity pojoEntity = factory.manufacturePojo(AdministradorEntity.class);
 
-        //pojoEntity.setCedula(entity.getCedula());
+        pojoEntity.setId(entity.getId());
 
-        //admiLogic.updateAdministrador(pojoEntity.getCedula(), pojoEntity);
+        try 
+        {
+            admiLogic.updateAdministrador(pojoEntity.getId(), pojoEntity);
+        } 
+        catch (BusinessLogicException ex) 
+        {
+            Logger.getLogger(AdministradorLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        //AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getCedula());
+        AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
 
-        //Assert.assertEquals(pojoEntity.getCedula(), resp.getCedula());
-        //Assert.assertEquals(pojoEntity.getLogin(), resp.getLogin());
-        //Assert.assertEquals(pojoEntity.getContrasena(), resp.getContrasena());
-        //Assert.assertEquals(pojoEntity.getTipoUsuario(), resp.getTipoUsuario() ); 
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getLogin(), resp.getLogin());
+        Assert.assertEquals(pojoEntity.getContrasena(), resp.getContrasena());
+        Assert.assertEquals(pojoEntity.getTipoUsuario(), resp.getTipoUsuario() ); 
     }
     
     /**
@@ -203,9 +216,9 @@ public class AdministradorLogicTest
     public void deleteAdministradorTest() throws BusinessLogicException 
     {
         AdministradorEntity entity = data.get(0);
-        //admiLogic.deleteAdministrador(entity.getCedula());
-        //AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getCedula());
-        //Assert.assertNull(deleted);
+        admiLogic.deleteAdministrador(entity.getId());
+        AdministradorEntity deleted = em.find(AdministradorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }
