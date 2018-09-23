@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
 import java.text.ParseException;
@@ -53,8 +54,10 @@ public class CitaMedicaLogicTest {
     private UserTransaction utx;
 
     private List<CitaMedicaEntity> data = new ArrayList<>();
-    
+        
     private HorarioAtencionEntity horario;
+    
+    private PacienteEntity paciente;
 //    
 //    /**
 //     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -133,7 +136,13 @@ public class CitaMedicaLogicTest {
             horario.setFechaFin(fechaConHora);
             horario.setConsultorio(pConsultorio);
             horario.setMedico(medico);
-            em.persist(horario);            
+            em.persist(horario);
+            ConsultorioEntity consultorio = factory.manufacturePojo(ConsultorioEntity.class);
+            consultorio.setHorariosAtencion(new ArrayList<>());
+            consultorio.getHorariosAtencion().add(horario);
+            horario.setConsultorio(consultorio);
+            em.persist(consultorio);
+            em.merge(horario);
             
             CitaMedicaEntity entity = factory.manufacturePojo(CitaMedicaEntity.class);
             stringFechaConHora = "2019-01-01 00:00:00";
@@ -152,12 +161,31 @@ public class CitaMedicaLogicTest {
             data.add(entit);
             
             CitaMedicaEntity enti = factory.manufacturePojo(CitaMedicaEntity.class);
-            stringFechaConHora = "2019-01-01 00:00:00";
+            stringFechaConHora = "2019-05-01 00:00:00";
             fechaConHora = sdf.parse(stringFechaConHora);
             enti.setFecha(fechaConHora);
             enti.setHorarioAtencionAsignado(horario);
             em.persist(enti);
+            paciente = factory.manufacturePojo(PacienteEntity.class);
+            enti.setPacienteAAtender(paciente);
+            paciente.setCitasMedicas(new ArrayList<>());
+            paciente.getCitasMedicas().add(enti);
+            em.persist(paciente);
+            em.merge(enti);
+            horario.getCitasMedicas().add(enti);
+            enti.setHorarioAtencionAsignado(horario);
+            
             data.add(enti);
+            
+            CitaMedicaEntity entityNoAnticipada = factory.manufacturePojo(CitaMedicaEntity.class);
+            entityNoAnticipada.setHorarioAtencionAsignado(horario);
+            long constanteMinutos = 3500000;
+            long ahora = (new Date()).getTime();
+            Date despues = new Date(ahora+constanteMinutos);
+            entityNoAnticipada.setFecha(despues);
+            em.persist(entityNoAnticipada);
+            
+            data.add(entityNoAnticipada);
             
         }catch(ParseException e){
             e.printStackTrace();
@@ -174,10 +202,114 @@ public class CitaMedicaLogicTest {
             Date fechaConHora = sdf.parse(stringFechaConHora);
             newEntity.setFecha(fechaConHora);
             newEntity.setHorarioAtencionAsignado(horario);
-            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
             Assert.assertNotNull(result);
-        
-            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCitaMedicaFechaNullTest() throws BusinessLogicException 
+    {
+        try{
+            CitaMedicaEntity newEntity = factory.manufacturePojo(CitaMedicaEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHora = "2019-01-02 00:00:00";
+            Date fechaConHora = sdf.parse(stringFechaConHora);
+            newEntity.setFecha(null);
+            newEntity.setHorarioAtencionAsignado(horario);
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
+            Assert.assertNotNull(result);
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCitaMedicaFechaYConsultorioExistentesTest() throws BusinessLogicException 
+    {
+        try{
+            CitaMedicaEntity newEntity = factory.manufacturePojo(CitaMedicaEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHora = "2019-01-01 00:00:00";
+            Date fechaConHora = sdf.parse(stringFechaConHora);
+            newEntity.setFecha(fechaConHora);
+            newEntity.setHorarioAtencionAsignado(horario);
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
+            Assert.assertNotNull(result);
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCitaMedicaFechaYMedicoExistentesTest() throws BusinessLogicException 
+    {
+        try{
+            CitaMedicaEntity newEntity = factory.manufacturePojo(CitaMedicaEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHora = "2019-01-01 00:00:00";
+            Date fechaConHora = sdf.parse(stringFechaConHora);
+            newEntity.setFecha(fechaConHora);
+            HorarioAtencionEntity hor = horario;
+            ConsultorioEntity consultorio = factory.manufacturePojo(ConsultorioEntity.class);
+            hor.setConsultorio(consultorio);
+            newEntity.setHorarioAtencionAsignado(hor);            
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
+            Assert.assertNotNull(result);
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCitaMedicaHorarioInalcanzableTest() throws BusinessLogicException 
+    {
+        try{
+            CitaMedicaEntity newEntity = factory.manufacturePojo(CitaMedicaEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHora = "2021-01-02 00:00:00";
+            Date fechaConHora = sdf.parse(stringFechaConHora);
+            newEntity.setFecha(fechaConHora);
+            newEntity.setHorarioAtencionAsignado(horario);
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
+            Assert.assertNotNull(result);
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCitaMedicaFechaPasadaTest() throws BusinessLogicException 
+    {
+        try{
+            CitaMedicaEntity newEntity = factory.manufacturePojo(CitaMedicaEntity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String stringFechaConHora = "2010-01-02 00:00:00";
+            Date fechaConHora = sdf.parse(stringFechaConHora);
+            newEntity.setFecha(fechaConHora);
+            newEntity.setHorarioAtencionAsignado(horario);
+            CitaMedicaEntity result = citaMedicaLogic.createCitaMedica(newEntity);        
+            CitaMedicaEntity entity = em.find(CitaMedicaEntity.class, result.getId());           
+            
+            Assert.assertNotNull(result);
             Assert.assertEquals(newEntity.getId(), entity.getId());
         }catch(ParseException e){
             e.printStackTrace();
@@ -212,19 +344,125 @@ public class CitaMedicaLogicTest {
     @Test
     public void updateCitaMedicaTest() throws BusinessLogicException
     {
-        CitaMedicaEntity entity = data.get(0);
+        CitaMedicaEntity entity = data.get(2);
         entity.setComentarios("Buen trabajo");
         citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
         MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaFechaNullTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setFecha(null);
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaDiferenteIdTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setId(Long.MIN_VALUE);
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaNoExistenteTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = factory.manufacturePojo(CitaMedicaEntity.class);
+        entity.setComentarios("Buen trabajo");
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaPacienteNuevoNullTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setPacienteAAtender(null);
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaPacienteNuevoDistintoTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        PacienteEntity paciente = factory.manufacturePojo(PacienteEntity.class);
+        entity.setPacienteAAtender(paciente);
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaFechaYconsultorioConflictoTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setPacienteAAtender(paciente);
+        entity.setFecha(data.get(0).getFecha());
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaFechaYMedicoConflictoTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setPacienteAAtender(paciente);
+        HorarioAtencionEntity hor = horario;
+        hor.setConsultorio(factory.manufacturePojo(ConsultorioEntity.class));
+        entity.setHorarioAtencionAsignado(hor);
+        entity.setFecha(data.get(0).getFecha());
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateCitaMedicaNuevaFechaPasadaTest() throws BusinessLogicException
+    {
+        CitaMedicaEntity entity = data.get(2);
+        entity.setComentarios("Buen trabajo");
+        entity.setPacienteAAtender(paciente);
+        long tiempo = 10000;
+        long ahora = (new Date()).getTime();
+        entity.setFecha(new Date(ahora-tiempo));
+        citaMedicaLogic.updateCitaMedica(entity.getId(), entity);
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+    }
+    
     @Test
-    public void deleteMedicoTest() throws BusinessLogicException 
+    public void deleteCitaMedicaTest() throws BusinessLogicException 
     {
         CitaMedicaEntity entity = data.get(0);
+        CitaMedicaEntity deleted = citaMedicaLogic.getCitaMedica(entity.getId());
         citaMedicaLogic.deleteCitaMedica(entity.getId());
-        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        Assert.assertEquals(deleted.getId(), entity.getId());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void deleteCitaMedicaCitaNoExistenteTest() throws BusinessLogicException 
+    {
+        CitaMedicaEntity entity = factory.manufacturePojo(CitaMedicaEntity.class);
+        CitaMedicaEntity deleted = citaMedicaLogic.getCitaMedica(entity.getId());
+        citaMedicaLogic.deleteCitaMedica(entity.getId());
+        Assert.assertEquals(deleted, entity);
+    }   
+    
+    @Test(expected = BusinessLogicException.class)
+    public void deleteCitaMedicaMenosDeUnaHoraAnticipadaTest() throws BusinessLogicException 
+    {
+        CitaMedicaEntity entity = data.get(3);
+        CitaMedicaEntity deleted = citaMedicaLogic.getCitaMedica(entity.getId());
+        citaMedicaLogic.deleteCitaMedica(entity.getId());
+        Assert.assertEquals(deleted.getId(), entity.getId());
     }
     
 }
