@@ -11,8 +11,6 @@ delete from EspecialidadEntity;
 delete from TARJETACREDITOENTITY;
 
 
-
-
 delete from CitaLaboratorioEntity;
 delete from FacturaEntity;
 
@@ -225,14 +223,19 @@ values (4,3,'2018-10-22 09:00:00',100000,'Cita Laboratorio Examen de Sangre', 1,
 insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Advil', '50 mg', 'No apto para menores de edad', 'Pfizer', 15000);
 insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Aspirina', '70 mg', 'No apto para menores de edad', 'Bayer', 12000);
 insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Amoxicilina', '100 mg', 'Tomar abundante agua', 'Tecnoquimicas', 170000);
+insert into MedicamentoEntity(nombre, cantidad, descripcion, elaboradoPor, costo) values ('Ibuprofeno', '800 mg', 'No usar durante el embarazo', 'MK', 17000);
+
 
 insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Farmatodo', 'Calle 30 # 45-67', 2345678, -72.03, 4.05, 'servicio@farmatodo.com');
 insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Cruz Verde', 'Calle 20 # 35-77', 1245678, -72.05, 4.08, 'servicio@cruzverde.com');
 insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Drogas la Rebaja', 'Calle 36 # 65-17', 2347878, -72.13, 4.15, 'servicio@rebaja.com');
+insert into FarmaciaEntity(nombre, ubicacion, telefono, longitud, latitud, correo) values ('Drogueria Alemana', 'Calle 56 # 15-17', 2437878, -72.11, 4.16, 'servicio@alemana.com');
+
 
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Biopsia', 120000, 'Venir con acompanante');
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Rayos X', 12000, 'Es preferible no estar en estado de embarazo');
 insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Ecografia', 140000, 'Venir con ropa ligera');
+insert into ExamenMedicoEntity(nombre, costo, recomendaciones) values ('Examen de orina', 15000, 'Venir en ayunas');
 
 
 
