@@ -146,7 +146,7 @@ insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORAR
 values (2002, '2018-09-23 08:40:00','Excelente cita médica', 3, 600 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
-values (2003, '2018-09-23 09:00:00','Excelente cita médica', 4, 600 );
+values (2003, '2018-09-23 09:00:00','Excelente cita médica', 3, 600 );
 
 
 
@@ -206,7 +206,7 @@ insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomen
 values (158,'2018-10-17 08:00:00','Coprologia', 'Ninguna','Ayunas de minimo 3 horas',3,2);
 
 insert into CitaLaboratorioEntity (id, fecha, especialidad, comentarios, recomendaciones,paciente_id,laboratorio_id)
-values (15,'2018-10-22 09:00:00','Examen de sangre', 'Paciente con anemia','Ayunas de minimo 3 horas',4,3);
+values (15,'2018-10-22 09:00:00','Examen de sangre', 'Paciente con anemia','Ayunas de minimo 3 horas',3,3);
 
 insert into FacturaEntity (id,idCliente,fecha,valor,concepto,pagada,paciente_id)
 values (1,1,'2018-10-22 09:00:00 ',123500,'Cita Laboratorio Examen de Sangre', 1,1);
