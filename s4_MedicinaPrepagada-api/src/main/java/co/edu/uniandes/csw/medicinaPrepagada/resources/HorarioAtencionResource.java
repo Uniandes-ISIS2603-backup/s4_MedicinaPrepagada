@@ -60,14 +60,14 @@ public class HorarioAtencionResource
      */   
        
     @POST
-    public HorarioAtencionDTO createHorarioAtencion(HorarioAtencionSedeDTO pHorarioAtencion) throws BusinessLogicException //, SedeDTO pSede
+    public HorarioAtencionDTO createHorarioAtencion(HorarioAtencionDTO pHorarioAtencion) throws BusinessLogicException //, SedeDTO pSede
     {
         LOGGER.log(Level.INFO, "HorarioAtencionResource createHorarioAtencion: input: {0}", pHorarioAtencion.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
 
         // Invoca la lógica para crear el horario de atencion  nuevo
         HorarioAtencionEntity pHorEntityt = pHorarioAtencion.toEntity();
-        SedeEntity pSedeEntity = pHorarioAtencion.getSede().toEntity();
+       // SedeEntity pSedeEntity = pHorarioAtencion.getSede().toEntity();
         
         HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO ();//(horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
