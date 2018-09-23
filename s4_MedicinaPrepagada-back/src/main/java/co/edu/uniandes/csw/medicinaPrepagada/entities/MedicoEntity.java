@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class MedicoEntity extends UsuarioEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "medico", fetch=FetchType.LAZY)// , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HorarioAtencionEntity> horariosAtencion;
-
+    
     public EspecialidadEntity getEspecialidad() {
         return especialidad;
     }

@@ -135,9 +135,9 @@ public class MedicoLogic {
         MedicoEntity medico = persistence.find(medicosId);
         List<HorarioAtencionEntity> horarios = medico.getHorariosAtencion();
         int numero = horarios.size();
-        
+        System.out.println("FFFFFFFFFFFFFF " + medicosId + " - " + numero);
         if(!horarios.isEmpty()){
-            throw new BusinessLogicException("El médico tiene horarios de atencion pendientes 2 ");
+            throw new BusinessLogicException("El médico tiene horarios de atencion pendientes " + numero);
         }
 //        for(int i = 0; i<horarios.size();i++){
 //            if(horarios.get(i).getCitasMedicas().size()>0){
