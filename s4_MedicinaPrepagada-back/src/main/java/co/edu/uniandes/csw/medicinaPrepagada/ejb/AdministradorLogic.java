@@ -61,17 +61,9 @@ public class AdministradorLogic
         {
             throw new BusinessLogicException("El tipo de usuario no puede ser vacia");
         }
-        
-        /**try
-        {
-            validarFormatoContrasena(admiEntity);
-        }
-        catch( BusinessLogicException e )
-        {
-            
-        }*/
-      
-        
+     
+        validarFormatoContrasena(admiEntity);
+       
         persistence.create(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del administrador");
         return admiEntity;
@@ -128,16 +120,9 @@ public class AdministradorLogic
         {
             throw new BusinessLogicException("La contraseña no puede ser vacia");
         }
-        
-       /**try
-        {
-            validarFormatoContrasena(admiEntity);
-        }
-        catch( BusinessLogicException e )
-        {
-            
-        }*/
 
+        validarFormatoContrasena(admiEntity);
+      
         AdministradorEntity newEntity = persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
         return newEntity;
@@ -158,48 +143,24 @@ public class AdministradorLogic
     /**
      * Valida que la contraseña cumpla con el formato
      * @param admiEntity
+     * @return 
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     
-    public void validarFormatoContrasena( AdministradorEntity admiEntity ) throws BusinessLogicException
+    public boolean validarFormatoContrasena( AdministradorEntity admiEntity ) throws BusinessLogicException
     {
         String contrasena = admiEntity.getContrasena(); 
-                
-        String pas1 = contrasena.trim();
+        boolean validada = false; 
         
-        if(pas1.matches("^[A-Za-z0-9]{8,20}$"))
+        if(contrasena.matches("^[A-Za-z0-9]{8,20}$"))
         {
-            char clave;
-            byte contLetra = 0; 
-            byte conNumero = 0;
-            
-            for(byte i = 0; i <= pas1.length(); i++)
-            {
-                clave = pas1.charAt(i);
-                String pas2 = String.valueOf(clave);
-                
-                if(pas2.matches("[a-zA-Z]"))
-                {
-                    contLetra++;
-                }
-                else if(pas2.matches("[0-9]"))
-                {
-                    conNumero++;
-                }
-            }
-            
-            int sumaLetrasYnumeros = conNumero + contLetra; 
-                        
-            if(conNumero == 0 || conNumero == sumaLetrasYnumeros || contLetra == 0 ||
-               contLetra == sumaLetrasYnumeros )
-              {
-                    throw new BusinessLogicException("La contraseña no cumple con los lineamientos de longitud"
-                        + " y composición"); 
-              } 
+            validada = true; 
         }
-        /**else 
+        else 
         {
             throw new BusinessLogicException("La contraseña no puede tener caracteres especiales como %-&-$.");
-        }*/
+        }
+        
+        return validada; 
     }
 }
