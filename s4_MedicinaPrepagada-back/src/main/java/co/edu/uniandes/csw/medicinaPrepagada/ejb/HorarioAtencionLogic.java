@@ -42,7 +42,7 @@ public class HorarioAtencionLogic
     @Inject 
     private SedePersistence sedePersistence;
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss"); 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
     
     
          /**
@@ -219,12 +219,12 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split("T");
+        String[] partsInicio = inicio.split(" ");
         String[] partsInicio2 = partsInicio[1].split(":");
         int horaInicio =Integer.parseInt(partsInicio2[0]);
         
         //Particion de fin
-        String[] partsFin = fin.split("T");
+        String[] partsFin = fin.split(" ");
         String[] partsFin2 = partsFin[1].split(":");
         int horaFin =Integer.parseInt(partsFin2[0]);
         
@@ -244,12 +244,12 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split("T");
+        String[] partsInicio = inicio.split(" ");
         String[] partsInicio2 = partsInicio[1].split(":");
         int horaInicio =Integer.parseInt(partsInicio2[1]);
         
         //Particion de fin
-        String[] partsFin = fin.split("T");
+        String[] partsFin = fin.split(" ");
         String[] partsFin2 = partsFin[1].split(":");
         int horaFin =Integer.parseInt(partsFin2[1]);
         
@@ -272,12 +272,12 @@ public class HorarioAtencionLogic
         String fin = dateFormat.format( pHoraFin); 
         
         //Particion de inicio
-        String[] partsInicio = inicio.split("T");
+        String[] partsInicio = inicio.split(" ");
         String[] partsInicio2 = partsInicio[0].split("-");
         //int horaInicio =Integer.parseInt(partsInicio2[1]);
         
         //Particion de fin
-        String[] partsFin = fin.split("T");
+        String[] partsFin = fin.split(" ");
         String[] partsFin2 = partsFin[0].split("-");
         //int horaFin =Integer.parseInt(partsFin2[1]); 
         
