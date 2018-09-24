@@ -113,6 +113,8 @@ values (100, 'JuliTo98', 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmaun
 insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
 values (200, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
 
+insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (300, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89955593, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99988673, 'basico', 'Cardiologia' );
 
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
@@ -134,19 +136,20 @@ insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MED
 values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 
-
-
-insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
-values (2000, '2018-09-23 08:00:00','Excelente cita médica', 1, 600 );
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (700, '2018-10-22 10:00:00' , '2018-10-22 08:00:00',300 ,200 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
-values (2001, '2018-09-23 08:20:00','Excelente cita médica', 2, 600 );
+values (2000, '2018-10-22 08:00:00','Excelente cita médica', 1, 700 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
-values (2002, '2018-09-23 08:40:00','Excelente cita médica', 3, 600 );
+values (2001, '2018-10-22 08:20:00','Excelente cita médica', 2, 700 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
-values (2003, '2018-09-23 09:00:00','Excelente cita médica', 4, 600 );
+values (2002, '2018-10-22 08:40:00','Excelente cita médica', 3, 700 );
+
+insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
+values (2003, '2018-10-22 09:00:00','Excelente cita médica', 4, 700 );
 
 
 
@@ -162,7 +165,7 @@ values('Laura1', 'laurita56', 'Paciente');
 
 
 
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
+    insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
 values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
 values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');

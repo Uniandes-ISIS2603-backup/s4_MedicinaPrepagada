@@ -69,7 +69,7 @@ public class MedicoPersistence {
     public MedicoEntity findByDocumento(int medicoDocumento)
     {
         LOGGER.log(Level.INFO, "Consultando medico por documento ", medicoDocumento);
-        TypedQuery query = em.createQuery("Select e From MedicoEntity e where e.documentoMedico >= :medicoDocumento", MedicoEntity.class);
+        TypedQuery query = em.createQuery("Select e From MedicoEntity e where e.documentoMedico = :medicoDocumento", MedicoEntity.class);
         query.setParameter("medicoDocumento", medicoDocumento);
         List<MedicoEntity> respuesta = query.getResultList();
         if(respuesta.isEmpty()){
