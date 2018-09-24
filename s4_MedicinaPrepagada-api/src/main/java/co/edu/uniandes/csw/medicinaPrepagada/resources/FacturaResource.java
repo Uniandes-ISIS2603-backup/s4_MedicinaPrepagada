@@ -38,7 +38,6 @@ public class FacturaResource {
     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
     @Inject
     private FacturaLogic facturaLogic;
-    
     @POST
      public FacturaDTO createFactura (FacturaDTO Factura) throws BusinessLogicException
     {
@@ -78,7 +77,7 @@ public class FacturaResource {
     
     @PUT
     @Path("{FacturaId:\\d+}")
-    public FacturaDTO updateFactura(@PathParam("facturaId") Long FacturaId, FacturaDTO pFactura) throws WebApplicationException, BusinessLogicException
+    public FacturaDTO updateFactura(@PathParam("facturaId") Long FacturaId, FacturaDTO pFactura) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "FacturaResource updateFactura: input: id:{0} , factura: {1}", new Object[]{FacturaId, pFactura.toString()});
         pFactura.setIdFactura(FacturaId);
