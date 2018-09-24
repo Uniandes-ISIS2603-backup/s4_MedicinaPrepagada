@@ -14,6 +14,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -119,6 +120,7 @@ public class HorarioAtencionLogicTest
         entitySede.setId(1L);
         em.persist (entitySede);
         
+
         for (int i = 0; i < 3; i++) 
         {
             HorarioAtencionEntity entity = factory.manufacturePojo(HorarioAtencionEntity.class);
@@ -137,15 +139,277 @@ public class HorarioAtencionLogicTest
             entity.setConsultorio(entityConsultorio);
             entity.setMedico(entityMedico);
             entity.setCitasMedicas(new ArrayList<>());
+            
+            entity.setFechaInicio(new Date (1539608400000L));
+            entity.setFechaFin(new Date(1539615600000L));
             em.persist (entity);
             data.add(entity);           
-        }
-
+        } 
         
+        
+        EspecialidadEntity esp2 = factory.manufacturePojo(EspecialidadEntity.class); 
+        esp2.setNombre("Cardiologia");
+        em.merge(esp2);
+        SedeEntity entitySede2 = factory.manufacturePojo(SedeEntity.class);
+        entitySede2.setId(2L);
+        em.persist (entitySede2);
+        
+        
+       ConsultorioEntity entityConsultorio2 = factory.manufacturePojo(ConsultorioEntity.class);
+       MedicoEntity entityMedico2 = factory.manufacturePojo(MedicoEntity.class);
+       
+       em.persist (entityConsultorio2);
+       em.persist (entityMedico2);
+       
+       entityConsultorio2.setEspecialidad(esp2);
+       entityConsultorio2.setSede(entitySede2);
+       em.merge(entityConsultorio2);
+            
+       entityMedico2.setEspecialidad(esp2);
+       em.merge(entityMedico2);
+      
+      HorarioAtencionEntity horario2 = factory.manufacturePojo(HorarioAtencionEntity.class); 
+         
+            horario2.setConsultorio(entityConsultorio2);
+            horario2.setMedico(entityMedico2);
+            horario2.setCitasMedicas(new ArrayList<>());
+            
+            horario2.setFechaInicio(new Date (1539608400000L));
+            horario2.setFechaFin(new Date(1539615600000L));
+            em.persist (horario2);
+            data.add(horario2);         
         
     }
     
     
+    
+    
+    
+        
+     /**
+     * Prueba para crear un HorarioAtencion.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test
+    public void createHorarioAtencionTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(0).getConsultorio());
+        newEntity.setMedico(data.get(0).getMedico());
+        
+       Date incio = new Date (1538312400000L);
+       Date fin = new Date (1538319600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        
+                //Test Atributos
+        Assert.assertEquals(newEntity.getFechaInicio(), entity.getFechaInicio());
+        Assert.assertEquals(newEntity.getFechaFin(), entity.getFechaFin());
+                //Test relaciones
+
+        Assert.assertEquals(newEntity.getMedico(), entity.getMedico());
+        Assert.assertEquals(newEntity.getConsultorio(), entity.getConsultorio());
+        
+     
+    }
+    
+    
+    
+         /**
+     * Prueba para crear un HorarioAtencion con fecha anterior a la actual.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionFechaAnteriorTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(1).getConsultorio());
+        newEntity.setMedico(data.get(1).getMedico());
+        
+       Date incio = new Date (1537448400000L);
+       Date fin = new Date (1537455600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+             /**
+     * Prueba para crear un HorarioAtencion con fecha de iniciofuera del horario laboral.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionFechaFueraInicioDeRangoTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(1).getConsultorio());
+        newEntity.setMedico(data.get(1).getMedico());
+        
+       Date incio = new Date (1538352000000L);
+       Date fin = new Date (1538355600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+    
+        
+     /**
+     * Prueba para crear un HorarioAtencion con fecha de fin fuera del horario laboral.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionFechaFueraFinDeRangoTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(1).getConsultorio());
+        newEntity.setMedico(data.get(1).getMedico());
+        
+       Date incio = new Date (1538337600000L);
+       Date fin = new Date (1538355600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+    
+    
+         /**
+     * Prueba para crear un HorarioAtencion con fecha posterior a un mes de la actual.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionFechaFueraDeRangoMesTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(1).getConsultorio());
+        newEntity.setMedico(data.get(1).getMedico());
+        
+       Date incio = new Date (1569848400000L);
+       Date fin = new Date (1569855600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+             /**
+     * Prueba para crear un HorarioAtencion con fecha de inicio y fin en diferentes dias.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionIniFinDiferenteDiaTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(1).getConsultorio());
+        newEntity.setMedico(data.get(1).getMedico());
+        
+       Date incio = new Date (1538226000000L);
+       Date fin = new Date (1538312400000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+                 /**
+     * Prueba para crear un HorarioAtencion con fecha de inicio y fin que no terminan en 00, 20 o 40.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionIniMalFormatoTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(2).getConsultorio());
+        newEntity.setMedico(data.get(2).getMedico());
+        
+       Date incio = new Date (1538313000000L);
+       Date fin = new Date (1538320200000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+                 /**
+     * Prueba para crear un HorarioAtencion que se cruza con otro existente .
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createHorarioAtencionQueSeCruzaTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(0).getConsultorio());
+        newEntity.setMedico(data.get(0).getMedico());
+        
+       Date incio = new Date (1539610800000L);
+       Date fin = new Date (1539614400000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity, newEntity.getConsultorio().getSede());
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
+    
+    /**
+     * Prueba para crear un HorarioAtencion que y no encuentra consultorio .
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test  (expected = BusinessLogicException.class)
+    public void createHorarioAtencionSinConsultorioDispoTest() throws BusinessLogicException
+    {
+        HorarioAtencionEntity newEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        newEntity.setConsultorio(data.get(0).getConsultorio());
+        newEntity.setMedico(data.get(0).getMedico());
+        
+         
+        
+       Date incio = new Date (1539176400000L);
+       Date fin = new Date (1539183600000L);
+       newEntity.setFechaInicio(incio);
+       newEntity.setFechaFin(fin);
+        
+       SedeEntity entitySde = data.get(3).getConsultorio().getSede();
+        HorarioAtencionEntity result = horarioAtencionLogic.createHorarioAtencion(newEntity,entitySde );
+        Assert.assertNotNull(result);
+        HorarioAtencionEntity entity = em.find(HorarioAtencionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+
+    }
      /**
      * Prueba para consultar la lista de HorarioAtencions.
      */

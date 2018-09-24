@@ -173,7 +173,7 @@ public class HorarioAtencionLogic
         }
         else
         {
-            throw new BusinessLogicException("No es posible cambiar su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
+            throw new BusinessLogicException("No es posible cambiar su horario ya que no se encontro un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
         }
         
         
