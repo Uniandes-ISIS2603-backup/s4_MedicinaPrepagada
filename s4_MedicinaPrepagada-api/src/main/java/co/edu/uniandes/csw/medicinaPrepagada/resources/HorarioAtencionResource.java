@@ -67,9 +67,9 @@ public class HorarioAtencionResource
 
         // Invoca la lógica para crear el horario de atencion  nuevo
         HorarioAtencionEntity pHorEntityt = pHorarioAtencion.toEntity();
-       // SedeEntity pSedeEntity = pHorarioAtencion.getSede().toEntity();
-        
-        HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO ();//(horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
+        SedeEntity pSedeEntity = pHorarioAtencion.getConsultorio().getSede().toEntity();
+        LOGGER.log(Level.INFO, "Las entidades 0909090" + pHorEntityt.toString() + "SEDE" + pSedeEntity.toString() );
+        HorarioAtencionDTO  nuevoHorarioAtencionDTO = new HorarioAtencionDTO (horarioAtencionLogic.createHorarioAtencion(pHorEntityt, pSedeEntity));
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         LOGGER.log(Level.INFO, "HorarioAtencionResource createHorarioAtencion: output: {0}", nuevoHorarioAtencionDTO.toString());
         return nuevoHorarioAtencionDTO;

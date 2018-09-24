@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -62,8 +63,19 @@ public class LaboratorioPersistence {
      }
      public LaboratorioEntity findByNombre(String pNombre)
     {
-        LOGGER.log(Level.INFO, "Consultando el laboratorio con nombre={0}", pNombre);
-        return em.find(LaboratorioEntity.class, pNombre);
+        LOGGER.log(Level.INFO, "Consultando el lab con nombre={0}", pNombre);
+        
+        
+       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.nombre = :nombre", LaboratorioEntity.class);
+        q = q.setParameter("nombre", pNombre);       
+        try 
+        {
+            return (LaboratorioEntity) q.getSingleResult();
+        }
+        catch (NoResultException excp)
+        {
+            return null;
+        }
     }
      
      public LaboratorioEntity update (LaboratorioEntity labEntity)
@@ -76,20 +88,50 @@ public class LaboratorioPersistence {
         
     public LaboratorioEntity findByDireccion(String pDireccion)
     {
-        LOGGER.log(Level.INFO, "Consultando el laboratorio con direccion={0}", pDireccion);
-        return em.find(LaboratorioEntity.class, pDireccion);
+        LOGGER.log(Level.INFO, "Consultando el lab con direccion={0}", pDireccion);
+        
+       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.direccion = :direccion", LaboratorioEntity.class);
+        q = q.setParameter("direccion", pDireccion);       
+        try 
+        {
+            return (LaboratorioEntity) q.getSingleResult();
+        }
+        catch (NoResultException excp)
+        {
+            return null;
+        }
     }
      
     public LaboratorioEntity findByLongitud(Double pLongitud)
     {
-        LOGGER.log(Level.INFO, "Consultando el laboratorio con longitud={0}", pLongitud);
-        return em.find(LaboratorioEntity.class, pLongitud);
+       LOGGER.log(Level.INFO, "Consultando el lab con longitud={0}", pLongitud);
+        
+       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.longitud = :longitud", LaboratorioEntity.class);
+        q = q.setParameter("longitud", pLongitud);       
+        try 
+        {
+            return (LaboratorioEntity) q.getSingleResult();
+        }
+        catch (NoResultException excp)
+        {
+            return null;
+        }
     }
     
-    public LaboratorioEntity findByLatitud(Double pLongitud)
+    public LaboratorioEntity findByLatitud(Double pLatitud)
     {
-        LOGGER.log(Level.INFO, "Consultando el laboratorio con latitud={0}", pLongitud);
-        return em.find(LaboratorioEntity.class, pLongitud);
+        LOGGER.log(Level.INFO, "Consultando el lab con latitu={0}", pLatitud);
+        
+       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.latitud = :latitud", LaboratorioEntity.class);
+        q = q.setParameter("latitud", pLatitud);       
+        try 
+        {
+            return (LaboratorioEntity) q.getSingleResult();
+        }
+        catch (NoResultException e1)
+        {
+            return null;
+        }
     }
      
      public void delete (Long labId)

@@ -42,7 +42,7 @@ public class HorarioAtencionLogic
     @Inject 
     private SedePersistence sedePersistence;
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
     
     
          /**
@@ -50,13 +50,12 @@ public class HorarioAtencionLogic
      *
      * @param horarioAtencionEntity Objeto de HorarioAtencionEntity con los datos nuevos
      * @param sedeEntity
-     * @param idMedico
      * @return Objeto de HorarioAtencionEntity con los datos nuevos y su ID.
      * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
     public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion" );
         Long idMedico = horarioAtencionEntity.getMedico().getId();
         
         //Valida que la fecha sea despues de la actual
@@ -174,7 +173,7 @@ public class HorarioAtencionLogic
         }
         else
         {
-            throw new BusinessLogicException("No es posible cambiar su horario ya que no ahi un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
+            throw new BusinessLogicException("No es posible cambiar su horario ya que no se encontro un consultorio disponible en la sede. Pruebe una sede diferente o un horario");
         }
         
         
@@ -274,13 +273,11 @@ public class HorarioAtencionLogic
         
         //Particion de inicio
         String[] partsInicio = inicio.split(" ");
-        String[] partsInicio2 = partsInicio[0].split("/");
-        //int horaInicio =Integer.parseInt(partsInicio2[1]);
+        String[] partsInicio2 = partsInicio[0].split("-");
         
         //Particion de fin
         String[] partsFin = fin.split(" ");
-        String[] partsFin2 = partsFin[0].split("/");
-        //int horaFin =Integer.parseInt(partsFin2[1]); 
+        String[] partsFin2 = partsFin[0].split("-");
         
         int cont=0;
         while (cont <3)
@@ -303,7 +300,7 @@ public class HorarioAtencionLogic
     public boolean validatePostActual (Date pHoraInicio)
     {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -5);
+        calendar.add(Calendar.HOUR_OF_DAY, 0);
         Date dateActual =  calendar.getTime();
         
         return (pHoraInicio.after(dateActual));
@@ -320,7 +317,7 @@ public class HorarioAtencionLogic
     {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, +1);
-        calendar.add(Calendar.HOUR_OF_DAY, -5);
+        calendar.add(Calendar.HOUR_OF_DAY, 0);
         Date dateMax =  calendar.getTime();  
         
         return (pHoraFin.before(dateMax));

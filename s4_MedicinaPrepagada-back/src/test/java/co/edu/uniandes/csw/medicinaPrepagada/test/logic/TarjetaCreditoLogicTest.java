@@ -171,11 +171,47 @@ public class TarjetaCreditoLogicTest {
      * @throws BusinessLogicException 
      */
     @Test(expected = BusinessLogicException.class)
-    public void crearTarjetaCreditoTestConNumeroQueNoCoincidaConLaFranquicia() throws BusinessLogicException{
+    public void crearTarjetaCreditoTestConNumeroQueNoCoincidaConLaFranquiciaVisa() throws BusinessLogicException{
         TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
         
         newEntity.setNumero(5555555555554444L);
         newEntity.setFranquicia("Visa");
+        newEntity.setFechaExpiracion("11/21");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+     /**
+     * Prueba para crear una tarjeta de credito con un numero que no coincida con la franquicia
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConNumeroQueNoCoincidaConLaFranquiciaMasterCard() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(4787311605412578L);
+        newEntity.setFranquicia("MasterCard");
+        newEntity.setFechaExpiracion("11/21");
+        newEntity.setCodigoSeguridad(123);
+        newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
+        
+        TarjetaCreditoEntity result = tarjetaCreditoLogic.createTarjetaCredito(newEntity);
+
+    }
+    
+         /**
+     * Prueba para crear una tarjeta de credito con un numero que no coincida con la franquicia
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void crearTarjetaCreditoTestConNumeroQueNoCoincidaConLaFranquiciaAmericanExpress() throws BusinessLogicException{
+        TarjetaCreditoEntity newEntity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+        
+        newEntity.setNumero(4787311605412578L);
+        newEntity.setFranquicia("AmericanExpress");
         newEntity.setFechaExpiracion("11/21");
         newEntity.setCodigoSeguridad(123);
         newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
@@ -212,7 +248,7 @@ public class TarjetaCreditoLogicTest {
         
         newEntity.setNumero(5555555555554444L);
         newEntity.setFranquicia("MasterCard");
-        newEntity.setFechaExpiracion("11/50");
+        newEntity.setFechaExpiracion("11/2050");
         newEntity.setCodigoSeguridad(123);
         newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
         
@@ -230,7 +266,7 @@ public class TarjetaCreditoLogicTest {
         
         newEntity.setNumero(5555555555554444L);
         newEntity.setFranquicia("MasterCard");
-        newEntity.setFechaExpiracion("1150");
+        newEntity.setFechaExpiracion("111/50");
         newEntity.setCodigoSeguridad(123);
         newEntity.setNombreEnTarjeta("NICOLAS MARTOJO TIEROOJIL");
         

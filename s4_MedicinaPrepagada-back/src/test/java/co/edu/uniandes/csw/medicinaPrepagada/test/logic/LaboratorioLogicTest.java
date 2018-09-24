@@ -119,6 +119,8 @@ public class LaboratorioLogicTest {
        Assert.assertNotNull(result);
        LaboratorioEntity entity = em.find(LaboratorioEntity.class, result.getId());
        Assert.assertEquals(newLabEntity.getId(), entity.getId());
+       Assert.assertEquals(newLabEntity.getLatitud(), entity.getLatitud(),0);
+       Assert.assertEquals(newLabEntity.getLongitud(), entity.getLongitud(),0);
        
        
     }
