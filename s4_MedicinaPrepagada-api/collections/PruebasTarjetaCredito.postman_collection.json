@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "112bf18e-255e-4b79-8b41-35da1f3076a3",
+		"_postman_id": "1a74bab4-7338-455e-ac85-37db94a4699a",
 		"name": "PruebasTarjetaCredito",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -70,7 +70,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5100171235475198",
 					"protocol": "http",
@@ -105,7 +108,10 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5602235051148099",
 					"protocol": "http",
@@ -126,6 +132,18 @@
 		},
 		{
 			"name": "crearTarjetaConNumeroNoValido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b35721c-63c3-4ab1-9da0-fb1299dfeb3e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Genera error por que el numero de la tarjeta es invalido\"] = responseCode.code == 412;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [

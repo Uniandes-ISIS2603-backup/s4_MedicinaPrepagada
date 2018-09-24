@@ -83,45 +83,6 @@
 			"response": []
 		},
 		{
-			"name": "DELET Horarios Atencion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "89547466-ae3b-4450-8e84-b85141c00842",
-						"type": "text/javascript",
-						"exec": [
-							"tests [\"No genera error en el DELET\"] = responseCode.code === 204;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/100",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"horariosAtencion",
-						"100"
-					]
-				},
-				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
-			},
-			"response": []
-		},
-		{
 			"name": "POST Horarios Atencion",
 			"event": [
 				{
@@ -214,10 +175,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "884d4dc3-35d4-4079-88ed-8e839351ac05",
+						"id": "678551af-14ad-414b-95e9-af5f2ad483aa",
 						"type": "text/javascript",
 						"exec": [
-							"tests [\"No genera error en el POST\"] = responseCode.code === 200;"
+							"tests [\"No genera error en el POST\"] = responseCode.code === 404;"
 						]
 					}
 				}
@@ -246,6 +207,45 @@
 						"api",
 						"horariosAtencion",
 						"2000"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89547466-ae3b-4450-8e84-b85141c00842",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"100"
 					]
 				},
 				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"

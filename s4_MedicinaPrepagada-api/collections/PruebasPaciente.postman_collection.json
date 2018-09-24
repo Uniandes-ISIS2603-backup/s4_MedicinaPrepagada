@@ -1,10 +1,170 @@
 {
 	"info": {
-		"_postman_id": "1ce19d66-3ceb-4ddd-8fe9-aa220f71ccd9",
+		"_postman_id": "d90fb7dd-6271-407f-b1c1-3e4bb67d302e",
 		"name": "PruebasPaciente",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "getPaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6dd76365-4181-4532-a7ad-457c98ce6f5f",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPacientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "beda770f-aa34-4d55-8b02-63de1feffd4a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3ef5f4d-3617-4f9f-94e2-db58b486a888",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"login\":\"djdsd\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/10/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePacienteConNuevaFechaNacimiento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bda04894-be93-480e-bfcc-4ef7a79457ac",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Genera error por que no se puede cambiar la fecha de nacimiento\"] = responseCode.code == 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":5,\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "crearPaciente",
 			"event": [
@@ -55,76 +215,6 @@
 			"response": []
 		},
 		{
-			"name": "getPaciente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "6dd76365-4181-4532-a7ad-457c98ce6f5f",
-						"type": "text/javascript",
-						"exec": [
-							"",
-							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"pacientes",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getPacientes",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "beda770f-aa34-4d55-8b02-63de1feffd4a",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"pacientes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "deletePaciente",
 			"event": [
 				{
@@ -141,7 +231,10 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/4",
 					"protocol": "http",
@@ -154,78 +247,6 @@
 						"api",
 						"pacientes",
 						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updatePaciente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b3ef5f4d-3617-4f9f-94e2-db58b486a888",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\":5,\n\t\"login\":\"djdsd\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/10/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"pacientes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updatePacienteConNuevaFechaNacimiento",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\":5,\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"pacientes"
 					]
 				}
 			},
