@@ -206,6 +206,18 @@
 		},
 		{
 			"name": "Update examen medico con recomendacion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98b6636b-8a96-4e0a-8b78-2c87dd95bac4",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Debe generar error en el PUT\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [

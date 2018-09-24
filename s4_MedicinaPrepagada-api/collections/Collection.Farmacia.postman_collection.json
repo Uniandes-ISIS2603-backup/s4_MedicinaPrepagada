@@ -210,6 +210,18 @@
 		},
 		{
 			"name": "Update farmacia con latitud invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89d67f1d-0a5a-446d-b519-39e04499fa1c",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Debe generar error en el PUT\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
