@@ -98,6 +98,7 @@ public class LaboratorioPersistenceTest {
         Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
         Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
         Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
+        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
     }
     
     @Test
@@ -130,21 +131,28 @@ public class LaboratorioPersistenceTest {
         Assert.assertNotNull(newEntity);
        
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(newEntity.getExamenMedico(),entity.getExamenMedico());
+        Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
+        Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
+        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
+         Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
     }
     
     @Test
-    public void updateLaboratorioTest() {
+    public void updateLaboratorioTest() 
+    {
         LaboratorioEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         LaboratorioEntity newEntity = factory.manufacturePojo(LaboratorioEntity.class);
-
         newEntity.setId(entity.getId());
-
         laboratorioPersistence.update(newEntity);
+        LaboratorioEntity entityResp = em.find(LaboratorioEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getNombre(), entityResp.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), entityResp.getDireccion());
 
-        LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
-
-        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
-        Assert.assertEquals(newEntity.getDireccion(), resp.getDireccion());
+        Assert.assertEquals(newEntity.getLatitud(), entityResp.getLatitud(), 0);
+        Assert.assertEquals(newEntity.getLongitud(), entityResp.getLongitud(),0);
+        Assert.assertEquals(newEntity.getTelefono(), entityResp.getTelefono());
+   
     } 
 }
