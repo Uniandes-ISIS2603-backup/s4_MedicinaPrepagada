@@ -55,7 +55,7 @@ public class HorarioAtencionLogic
      */
     public HorarioAtencionEntity createHorarioAtencion(HorarioAtencionEntity horarioAtencionEntity, SedeEntity sedeEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion" + horarioAtencionEntity.toString());
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del horarioAtencion" );
         Long idMedico = horarioAtencionEntity.getMedico().getId();
         
         //Valida que la fecha sea despues de la actual
@@ -274,12 +274,10 @@ public class HorarioAtencionLogic
         //Particion de inicio
         String[] partsInicio = inicio.split(" ");
         String[] partsInicio2 = partsInicio[0].split("-");
-        //int horaInicio =Integer.parseInt(partsInicio2[1]);
         
         //Particion de fin
         String[] partsFin = fin.split(" ");
         String[] partsFin2 = partsFin[0].split("-");
-        //int horaFin =Integer.parseInt(partsFin2[1]); 
         
         int cont=0;
         while (cont <3)
