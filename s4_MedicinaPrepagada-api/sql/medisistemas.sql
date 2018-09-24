@@ -151,14 +151,15 @@ values (2003, '2018-10-22 09:00:00','Excelente cita médica', 4, 700 );
 
 
 
-insert into AdministradorEntity (login, contrasena, tipoUsuario)
-values('Carlos12', 'carlitos12', 'Administrador'); 
-insert into AdministradorEntity (login, contrasena, tipoUsuario)
-values('Esteban', 'esteban12', 'Administrador'); 
-insert into AdministradorEntity (login, contrasena, tipoUsuario)
-values('Perdo24', 'pedrito12', 'Paciente'); 
-insert into AdministradorEntity (login, contrasena, tipoUsuario)
-values('Laura1', 'laurita56', 'Paciente'); 
+insert into AdministradorEntity (id,login, contrasena, tipoUsuario)
+values(100,'Carlos12', 'carlitos12', 'Administrador'); 
+insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
+values(200, 'Esteban', 'esteban12', 'Administrador'); 
+insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
+values(300, 'Perdo24', 'pedrito12', 'Paciente'); 
+insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
+values(400 , 'Laura1', 'laurita56', 'Paciente'); 
+
 
 
 
