@@ -145,5 +145,6 @@ public class LaboratorioPersistenceTest {
         LaboratorioEntity resp = em.find(LaboratorioEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), resp.getDireccion());
     } 
 }

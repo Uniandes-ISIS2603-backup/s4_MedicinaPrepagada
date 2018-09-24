@@ -83,6 +83,7 @@ public class CitaLaboratorioDTO implements Serializable {
         citaLabEntity.setId(this.getId());
         citaLabEntity.setComentarios(this.comentarios);
         citaLabEntity.setDate(this.fecha);
+        citaLabEntity.setRecomendaciones(this.recomendaciones);
         citaLabEntity.setEspecialidad(this.especialidad);
         citaLabEntity.setLaboratorio(this.laboratorio.toEntity());
         citaLabEntity.setPaciente(this.paciente.toEntity());
