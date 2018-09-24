@@ -11,11 +11,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "073e7797-e409-40d6-bfc8-467ae0fe82d0",
+						"id": "c85c8eb7-f801-4612-a056-e959274e910e",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody); ",
-							"postman.setGlobalVariable(\"new_id_e\", data.id); ",
+							"postman.setGlobalVariable(\"new_login_e\", data.login); ",
+							"postman.setGlobalVariable(\"new_contrasena_e\", data.contrasena);",
+							"postman.setGlobalVariable(\"new_tipoUsuario_e\", data.tipoUsuario);",
 							"tests[\"no genera error en el post\"] = responseCode.code == 200; "
 						]
 					}
@@ -31,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\": 15}"
+					"raw": "{\"id\": 100,\n \"login\": \"Carlos12\",\n \"contrasena\": \"carlitos12\",\n \"tipoUsuario\": \"Administrador\"}\n \n "
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador",
@@ -68,7 +70,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador/15",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,7 +80,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"administrador",
-						"15"
+						"11"
 					]
 				}
 			},
@@ -103,7 +105,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador/15",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +115,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"administrador",
-						"15"
+						"11"
 					]
 				}
 			},
@@ -135,8 +137,16 @@
 			],
 			"request": {
 				"method": "PUT",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"contrasena\": \"nestor123\" }"
+				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/administrador/15",
 					"protocol": "http",
