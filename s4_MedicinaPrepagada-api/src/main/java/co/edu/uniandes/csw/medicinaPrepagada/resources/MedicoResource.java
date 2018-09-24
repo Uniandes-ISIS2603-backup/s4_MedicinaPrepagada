@@ -140,7 +140,7 @@ public class MedicoResource {
     public void deleteMedico(@PathParam("medicosId") Long medicosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MedicoResource deleteMedico: input: {0}", medicosId);
         if (medicoLogic.getMedico(medicosId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + medicosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /medico/" + medicosId + " no existe.", 404);
         }
         medicoLogic.deleteMedico(medicosId);
         LOGGER.info("MedicoResource deleteMedico: output: void");
