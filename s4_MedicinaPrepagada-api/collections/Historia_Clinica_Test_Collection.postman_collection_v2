@@ -39,7 +39,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\": 15, \"fecha\": \"20/08/1995\"}"
+					"raw": "{\"fecha\": \"20/08/1995\",\n\"peso\": 50,\n\"estatura\": 150,\n\"descripcionDiagnostico\": \"Terminal\",\n\"alergias\": \" \",\n\"fuma\": false,\n\"bebe\": true,\n\"operaciones\": \"\"}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica",
@@ -76,7 +76,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,7 +86,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"historiaClinica",
-						"15"
+						"4"
 					]
 				}
 			},
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -121,7 +121,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"historiaClinica",
-						"15"
+						"1"
 					]
 				}
 			},
@@ -151,10 +151,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\"peso\": 60, \"estatura\": 170 }"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/15",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/historiaClinica/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -164,7 +164,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"historiaClinica",
-						"15"
+						"6"
 					]
 				}
 			},

@@ -11,15 +11,15 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0a4885d6-18b6-4fd9-8ec1-a05fc0dd2df9",
+						"id": "711b8f8a-625d-4e9d-9772-eca03ac1491d",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody); ",
 							"postman.setGlobalVariable(\"new_id_e\", data.id); ",
 							"postman.setGlobalVariable(\"new_firma_medico_e\", data.firmaMedico); ",
-							"postman.setGlobalVariable(\"new_fecha_expedicion_e\", data.fechaExpedicion);",
+							"postman.setGlobalVariable(\"new_fechaExpedicion_e\", data.fechaExpedicion);",
 							"postman.setGlobalVariable(\"new_comentarios_e\", data.comentarios);",
-							"postman.setGlobalVariable(\"new_valida_hasta_e\", data.validaHasta);",
+							"postman.setGlobalVariable(\"new_validaHasta_e\", data.validaHasta);",
 							"tests[\"no genera error en el post\"] = responseCode.code == 200; "
 						]
 					}
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\": 45, \"firmaMedico\": \"Nestor Ivan\"}"
+					"raw": "{\"id\": 1, \n\"firmaMedico\": \"ivan\",\n\"fechaExpedicion\": \"19/09/20018\",\n\"comentarios\": \"cuidar alimentacion\",\n\"validaHasta\": \"20/08/2019\" }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica",
@@ -72,7 +72,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"ordenMedica",
-						"45"
+						"8"
 					]
 				}
 			},
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -117,7 +117,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"ordenMedica",
-						"45"
+						"1"
 					]
 				}
 			},
@@ -147,10 +147,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n        \"comentarios\": \"Paracetamol 400\"\n}\n"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/45",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/ordenMedica/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -160,7 +160,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"ordenMedica",
-						"45"
+						"1"
 					]
 				}
 			},
