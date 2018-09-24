@@ -177,7 +177,18 @@ public class HorarioAtencionLogicTest
             horario2.setFechaInicio(new Date (1539608400000L));
             horario2.setFechaFin(new Date(1539615600000L));
             em.persist (horario2);
-            data.add(horario2);         
+            data.add(horario2);   
+            
+      HorarioAtencionEntity horario3 = factory.manufacturePojo(HorarioAtencionEntity.class); 
+      horario2.setConsultorio(entityConsultorio2);
+      horario3.setMedico(entityMedico2);
+      horario3.setCitasMedicas(new ArrayList<>());
+      horario3.setFechaInicio(new Date (1539878400000L));
+            horario3.setFechaFin(new Date(1539892800000L));
+            em.persist (horario3);
+            data.add(horario3); 
+      
+      
         
     }
     
@@ -468,8 +479,205 @@ public class HorarioAtencionLogicTest
     }
     
     
+     /**
+     * Prueba para actualizar un HorarioAtencion.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test
+    public void updateHorarioAtencionTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539694800000L));
+        pojoEntity.setFechaFin(new Date(1539702000000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
     
     
+           /**
+     * Prueba para actualizar un HorarioAtencion que no existe.
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionInexistenteTest() throws BusinessLogicException 
+    {
+        HorarioAtencionEntity entity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        horarioAtencionLogic.updateHorarioAtencion(999999L, entity);
+    } 
+    
+             /**
+     * Prueba para actualizar un HorarioAtencion cambiando su id.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test  (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionCambiaIdTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+        pojoEntity.setId(data.get(2).getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539694800000L));
+        pojoEntity.setFechaFin(new Date(1539702000000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(entity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertNull(resp);
+    }
+    
+    
+    
+    
+     /**
+     * Prueba para actualizar un HorarioAtencion poniendo una fecha mas vieja de la actual.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionFechaAntesDeActualTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1537102800000L));
+        pojoEntity.setFechaFin(new Date(1537106400000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+    
+         /**
+     * Prueba para actualizar un HorarioAtencion poniendo una fecha cuya hora de inicio o fin estan fuera de rango 6am-6pm.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionFechaFueraDeRangoTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539806400000L));
+        pojoEntity.setFechaFin(new Date(1539824400000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+    
+             /**
+     * Prueba para actualizar un HorarioAtencion poniendo una fecha mayor a un mes de la actual.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionFechaFueraDeRangoMesTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1571230800000L));
+        pojoEntity.setFechaFin(new Date(1571238000000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+               /**
+     * Prueba para actualizar un HorarioAtencion poniendo una que empieza y termina en diferente dia.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionIniFinDiferneteDiaTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539788400000L));
+        pojoEntity.setFechaFin(new Date(1539874800000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+                  /**
+     * Prueba para actualizar un HorarioAtencion poniendo una que empieza y termina en diferente dia.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionMalFormatoTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539869400000L));
+        pojoEntity.setFechaFin(new Date(1539876600000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+                      /**
+     * Prueba para actualizar un HorarioAtencion poniendo una que empieza y termina en diferente dia.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateHorarioAtencionGeneraConflictoTest() throws BusinessLogicException 
+     {
+        HorarioAtencionEntity entity = data.get(3);
+        HorarioAtencionEntity pojoEntity = factory.manufacturePojo(HorarioAtencionEntity.class);
+        
+         pojoEntity.setId(entity.getId());
+        pojoEntity.setConsultorio(data.get(3).getConsultorio());
+        pojoEntity.setMedico(data.get(3).getMedico());
+        pojoEntity.setFechaInicio(new Date (1539882000000L));
+        pojoEntity.setFechaFin(new Date(1539885600000L));
+
+        horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
+
+        HorarioAtencionEntity resp = em.find(HorarioAtencionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
          /**
      * Prueba para eliminar un HorarioAtencion
      *
