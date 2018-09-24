@@ -102,38 +102,6 @@ public class LaboratorioPersistence {
         }
     }
      
-    public LaboratorioEntity findByLongitud(Double pLongitud)
-    {
-       LOGGER.log(Level.INFO, "Consultando el lab con longitud={0}", pLongitud);
-        
-       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.longitud = :longitud", LaboratorioEntity.class);
-        q = q.setParameter("longitud", pLongitud);       
-        try 
-        {
-            return (LaboratorioEntity) q.getSingleResult();
-        }
-        catch (NoResultException excp)
-        {
-            return null;
-        }
-    }
-    
-    public LaboratorioEntity findByLatitud(Double pLatitud)
-    {
-        LOGGER.log(Level.INFO, "Consultando el lab con latitu={0}", pLatitud);
-        
-       TypedQuery q = em.createQuery("Select e from LaboratorioEntity e where e.latitud = :latitud", LaboratorioEntity.class);
-        q = q.setParameter("latitud", pLatitud);       
-        try 
-        {
-            return (LaboratorioEntity) q.getSingleResult();
-        }
-        catch (NoResultException e1)
-        {
-            return null;
-        }
-    }
-     
      public void delete (Long labId)
      {
          LOGGER.log(Level.INFO,"Borrando laboratorio con id={0}",labId);
