@@ -239,6 +239,7 @@ insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, c
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (1, 'Biopsia', 120000, 'Venir con acompanante');
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (2, 'Rayos X', 12000, 'Es preferible no estar en estado de embarazo');
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (3, 'Ecografia', 140000, 'Venir con ropa ligera');
+
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (4, 'Examen de orina', 15000, 'Venir en ayunas');
 
 
