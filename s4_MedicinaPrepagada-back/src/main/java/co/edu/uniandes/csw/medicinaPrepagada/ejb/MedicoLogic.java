@@ -81,7 +81,7 @@ public class MedicoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el medico con id = {0}", medicosId);
         MedicoEntity medicoEntity = persistence.find(medicosId);
         if (medicoEntity == null) {
-            LOGGER.log(Level.SEVERE, "La medico con el id = {0} no existe", medicosId);
+            LOGGER.log(Level.SEVERE, "El medico con el id = {0} no existe", medicosId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el medico con id = {0}", medicosId);
         return medicoEntity;

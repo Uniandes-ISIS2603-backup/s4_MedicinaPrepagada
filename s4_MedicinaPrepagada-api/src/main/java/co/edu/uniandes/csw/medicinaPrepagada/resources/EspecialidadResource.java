@@ -86,7 +86,7 @@ public class EspecialidadResource {
      */
     @GET
     @Path("{especialidadsId: [a-zA-Z][a-zA-Z]*}")
-    public EspecialidadDTO getEspecialidad(@PathParam("EspecialidadsId") String EspecialidadsId) throws WebApplicationException {
+    public EspecialidadDTO getEspecialidad(@PathParam("especialidadsId") String EspecialidadsId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "EspecialidadResource getEspecialidad: input: {0}", EspecialidadsId);
         EspecialidadEntity especialidadEntity = especialidadLogic.getEspecialidad(EspecialidadsId);
         if (especialidadEntity == null) {
@@ -113,10 +113,7 @@ public class EspecialidadResource {
     @Path("{especialidadsId: [a-zA-Z][a-zA-Z]*}")
     public EspecialidadDTO updateEspecialidad(@PathParam("especialidadsId") String especialidadsId, EspecialidadDTO especialidad) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "EspecialidadResource updateEspecialidad: input: id:{0} , Especialidad: {1}", new Object[]{especialidadsId, especialidad.toString()});
-        especialidad.setNombre(especialidadsId);
-        if (especialidadLogic.getEspecialidad(especialidadsId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + especialidadsId + " no existe.", 404);
-        }
+       
         EspecialidadDTO detailDTO = new EspecialidadDTO(especialidadLogic.updateEspecialidad(especialidadsId, especialidad.toEntity()));
         LOGGER.log(Level.INFO, "EspecialidadResource updateEspecialidad: output: {0}", detailDTO.toString());
         return detailDTO;
@@ -134,7 +131,7 @@ public class EspecialidadResource {
      */
     @DELETE
     @Path("{especialidadsId: [a-zA-Z][a-zA-Z]*}")
-    public void deleteEspecialidad(@PathParam("EspecialidadsId") String especialidadsId) throws BusinessLogicException {
+    public void deleteEspecialidad(@PathParam("especialidadsId") String especialidadsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "EspecialidadResource deleteEspecialidad: input: {0}", especialidadsId);
         if (especialidadLogic.getEspecialidad(especialidadsId) == null) {
             throw new WebApplicationException("El recurso /editorials/" + especialidadsId + " no existe.", 404);

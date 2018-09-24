@@ -114,21 +114,7 @@ public class SedePersistence
         
     }
      
-    public SedeEntity findByLongitud(Double pLongitud)
-    {
-        LOGGER.log(Level.INFO, "Consultando el sede con longitud={0}", pLongitud);
-        
-       TypedQuery q = em.createQuery("Select e from SedeEntity e where e.direccion = :direccion", SedeEntity.class);
-        q = q.setParameter("direccion", pLongitud);       
-        try 
-        {
-            return (SedeEntity) q.getSingleResult();
-        }
-        catch (NoResultException e1)
-        {
-            return null;
-        }
-    }
+
         /**
      * Actualiza una sede.
      *

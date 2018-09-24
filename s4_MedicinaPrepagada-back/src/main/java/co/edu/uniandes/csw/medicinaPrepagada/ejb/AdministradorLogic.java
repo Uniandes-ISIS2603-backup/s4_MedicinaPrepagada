@@ -122,7 +122,7 @@ public class AdministradorLogic
         }
 
         validarFormatoContrasena(admiEntity);
-      
+
         AdministradorEntity newEntity = persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
         return newEntity;
