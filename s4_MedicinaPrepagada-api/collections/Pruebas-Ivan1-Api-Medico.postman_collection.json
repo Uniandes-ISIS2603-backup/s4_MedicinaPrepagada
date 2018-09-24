@@ -11,141 +11,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "06adb75d-9251-4da0-b4c3-5943ed3c9c6b",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"medico",
-						"1"
-					]
-				},
-				"description": "Elimina un medico del sistema"
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ba09d121-0f38-4ea5-9192-0b2fcd69cdd8",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"nombre\":\"Cesar\"}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"medico",
-						""
-					]
-				},
-				"description": "Agrega un medico al sistema"
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "56af3466-05e8-40ff-87f9-d4fd70216e41",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"nombre\":\"Cesar\"}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"medico",
-						"1"
-					]
-				},
-				"description": "Actualiza un medico del sistema"
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
 						"id": "248133d5-efa4-4dbf-b89f-89c30302b899",
 						"type": "text/javascript",
 						"exec": [
@@ -168,7 +33,7 @@
 					"raw": "{\"nombre\":\"Cesar\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -178,7 +43,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"medico",
-						"1"
+						"100"
 					]
 				},
 				"description": "Consulta un medico del sistema"
@@ -227,6 +92,276 @@
 					]
 				},
 				"description": "Consulta todos los medicos del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56af3466-05e8-40ff-87f9-d4fd70216e41",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulito@hotmail.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7878493,\n        \"especialidad\": {\n            \"nombre\": \"Endocrinologia\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"idMedico\": 100,\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739279\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"100"
+					]
+				},
+				"description": "Actualiza un medico del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ba09d121-0f38-4ea5-9192-0b2fcd69cdd8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulito@gmail.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7000100,\n        \"especialidad\": {\n            \"nombre\": \"Endocrinologia\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"idMedico\": 110,\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739289\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "Agrega un medico al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac1e8720-ac57-4018-963b-2a5976b3527f",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis204\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"300"
+					]
+				},
+				"description": "No se pueden eliminar médicos que tengan horarios pendientes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dabe39db-aeda-468b-977f-b2fd2646ed93",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis412\"] = responseCode.code=== 412;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulitohotmail.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7878493,\n        \"especialidad\": {\n            \"nombre\": \"Endocrinologia\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"idMedico\": 100,\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739279\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"100"
+					]
+				},
+				"description": "El correo debe mantener su estructura"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84265b01-c662-4479-893f-27463fd5cee8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis412\"] = responseCode.code=== 412;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulitoil.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7000100,\n        \"especialidad\": {\n            \"nombre\": \"Endocrinologia\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"idMedico\": 110,\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739289\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "El correo debe ser válido para ingresar un médico"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e4d022a-1e6c-4fd2-abee-1f28512cde3b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis404\"] = responseCode.code=== 404;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/110",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"110"
+					]
+				},
+				"description": "Elimina un medico del sistema"
 			},
 			"response": []
 		}

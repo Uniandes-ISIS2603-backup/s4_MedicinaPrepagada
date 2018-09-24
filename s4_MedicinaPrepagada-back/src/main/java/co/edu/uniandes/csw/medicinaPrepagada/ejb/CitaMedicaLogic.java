@@ -30,7 +30,7 @@ public class CitaMedicaLogic {
     private CitaMedicaPersistence persistence;
    
     public CitaMedicaEntity createCitaMedica(CitaMedicaEntity citaMedicaEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la médico");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la cita medica");
         if(citaMedicaEntity.getFecha() == null){
             throw new BusinessLogicException("Debe ingresarse una fecha. ");
         }
@@ -45,6 +45,7 @@ public class CitaMedicaLogic {
         if(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId())==null){
             throw new BusinessLogicException("No existe un horario de atención disponible para esta nueva cita. ");
         }
+        citaMedicaEntity.setHorarioAtencionAsignado(persistence.findByLimitesFechaInicioFechaFinSedeYMedico(fechaInicio, fechaFin, citaMedicaEntity.getHorarioAtencionAsignado().getConsultorio().getId(), citaMedicaEntity.getHorarioAtencionAsignado().getMedico().getId()));
         if(fechaInicio.compareTo(new Date())<0){
             throw new BusinessLogicException("En la fecha no es posible agendar una cita ");
         }
