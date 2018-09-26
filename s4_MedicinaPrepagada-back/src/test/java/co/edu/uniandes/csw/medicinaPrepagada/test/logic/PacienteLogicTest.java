@@ -161,7 +161,7 @@ public class PacienteLogicTest {
     public void updatePacienteTest() throws BusinessLogicException {
         PacienteEntity entity = data.get(1);
         PacienteEntity pojoEntity = factory.manufacturePojo(PacienteEntity.class);
-
+        pojoEntity.setLogin(entity.getLogin());
         pojoEntity.setId(entity.getId());
         pojoEntity.setNombre("Pepito Andres Perez Rojas");
         pojoEntity.setMail("abdcd@udad.com");
@@ -211,9 +211,8 @@ public class PacienteLogicTest {
      * @throws BusinessLogicException 
      */
     @Test(expected = BusinessLogicException.class)
-    public void updatePacienteConLoginRepetido() throws BusinessLogicException{
+    public void updatePacienteConNuevoLogin() throws BusinessLogicException{
         PacienteEntity newEntity = factory.manufacturePojo(PacienteEntity.class);
-        newEntity.setLogin(data.get(0).getLogin());
         newEntity.setId(data.get(1).getId());
         newEntity.setFechaNacimiento("21/10/1997");
         newEntity.setMail("abdcd@udad.com");
