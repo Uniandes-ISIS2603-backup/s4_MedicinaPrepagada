@@ -34,12 +34,12 @@
 					"raw": "{\n\t\"numero\":4111111111111111,\n\t\"fechaExpiracion\":\"12/22\",\n\t\"nombreEnTarjeta\":\"ALEJADNRO OSPINA R\",\n\t\"franquicia\":\"Visa\",\n\t\"codigoSeguridad\":666\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/tarjetascredito",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -71,12 +71,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -109,12 +109,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -153,12 +153,12 @@
 					"raw": "{\n\t\"numero\":4111111111111101,\n\t\"fechaExpiracion\":\"12/22\",\n\t\"nombreEnTarjeta\":\"ALEJADNRO OSPINA R\",\n\t\"franquicia\":\"Visa\",\n\t\"codigoSeguridad\":666\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/tarjetascredito",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",

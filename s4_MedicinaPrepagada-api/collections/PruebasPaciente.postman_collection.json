@@ -35,12 +35,12 @@
 					"raw": "{\n\t\"login\":{{$randomInt}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -73,12 +73,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -111,12 +111,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -153,12 +153,12 @@
 					"raw": "{\n\t\"id\":{{new_id_p}},\n\t\"login\":{{new_login_p}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -195,12 +195,12 @@
 					"raw": "{\n\t\"id\":{{new_id_p}},\n\t\"login\":{{new_login_p}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
@@ -232,12 +232,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_MedicinaPrepagada-api",
 						"api",
