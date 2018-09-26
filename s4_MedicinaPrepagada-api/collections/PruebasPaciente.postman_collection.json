@@ -1,10 +1,55 @@
 {
 	"info": {
-		"_postman_id": "d90fb7dd-6271-407f-b1c1-3e4bb67d302e",
+		"_postman_id": "434f56f5-1906-41df-9632-137a75468070",
 		"name": "PruebasPaciente",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "crearPaciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "980c0e30-20be-4f8f-ac75-6eff51396854",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_login_p\", data.login)",
+							"postman.setGlobalVariable(\"new_id_p\", data.id)",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\":{{$randomInt}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "getPaciente",
 			"event": [
@@ -28,7 +73,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/2",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -38,7 +83,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"pacientes",
-						"2"
+						"{{new_id_p}}"
 					]
 				}
 			},
@@ -105,7 +150,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":5,\n\t\"login\":\"djdsd\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/10/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
+					"raw": "{\n\t\"id\":{{new_id_p}},\n\t\"login\":{{new_login_p}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
@@ -147,56 +192,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":5,\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s4_MedicinaPrepagada-api",
-						"api",
-						"pacientes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "crearPaciente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "58e01528-f455-414e-886d-8813ab30c19e",
-						"type": "text/javascript",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_nombre_e\", data.nombre);",
-							"postman.setGlobalVariable(\"new_fechanacimiento_e\", data.fechanacimiento);",
-							"postman.setGlobalVariable(\"new_direccion_e\", data.direccion);",
-							"postman.setGlobalVariable(\"new_numerocontacto_e\", data.numerocontacto);",
-							"postman.setGlobalVariable(\"new_mail_e\", data.mail);",
-							"postman.setGlobalVariable(\"new_eps_e\", data.eps);",
-							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"login\":\"mits\",\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
+					"raw": "{\n\t\"id\":{{new_id_p}},\n\t\"login\":{{new_login_p}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"20/09/1965\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\",\n\t\"citasMedicas\":[]\n}\n"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes",
@@ -236,7 +232,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/4",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/pacientes/{{new_id_p}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -246,7 +242,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"pacientes",
-						"4"
+						"{{new_id_p}}"
 					]
 				}
 			},

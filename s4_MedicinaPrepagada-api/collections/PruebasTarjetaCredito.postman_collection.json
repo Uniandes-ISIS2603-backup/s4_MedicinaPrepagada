@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1a74bab4-7338-455e-ac85-37db94a4699a",
+		"_postman_id": "ec3f2d2d-7ae9-4d31-8e1b-9c75918ee754",
 		"name": "PruebasTarjetaCredito",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -113,7 +113,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5602235051148099",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -123,7 +123,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"tarjetascredito",
-						"5602235051148099"
+						"{{new_numero_tr}}"
 					]
 				},
 				"description": "elimina una Tarjeta de credito"

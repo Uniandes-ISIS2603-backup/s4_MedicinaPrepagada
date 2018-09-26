@@ -69,6 +69,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable{
      * @param pacienteEntity: es la entidad para convertir en DTO
      */
     public PacienteDTO(PacienteEntity pacienteEntity){
+        super(pacienteEntity);
         if(pacienteEntity != null){
             this.id = pacienteEntity.getId();
             this.nombre = pacienteEntity.getNombre();

@@ -39,6 +39,10 @@ public class PacienteLogic {
      * @throws BusinessLogicException: se lanza cada vez que una regla de negocio no se cumpla
      */
     public PacienteEntity createPaciente(PacienteEntity pacienteEntity) throws BusinessLogicException{
+        if(persistence.existePacienteByLogin(pacienteEntity.getLogin())){
+            throw new BusinessLogicException("El login dado ya existe");
+        }
+
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date now = Date.from(Instant.now());
         try {
@@ -83,6 +87,9 @@ public class PacienteLogic {
         if(!pacienteEntity.getFechaNacimiento().equals(oldEntity.getFechaNacimiento())){
             throw new BusinessLogicException("No se puede actualizar la fecha de nacimiento");
         }
+        if(!pacienteEntity.getLogin().equals(oldEntity.getLogin())){
+            throw new BusinessLogicException("No se puede actualizar el login");
+        }
         
         List<CitaMedicaEntity> oldCitasMedicas = pacienteEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
@@ -109,9 +116,6 @@ public class PacienteLogic {
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
 
-        if(persistence.existePacienteByLogin(pacienteEntity.getLogin())){
-            throw new BusinessLogicException("El login dado ya existe");
-        }
 
         if(pacienteEntity.getLogin() == null || pacienteEntity.getLogin().equals("")){
             throw new BusinessLogicException("El login no puede ser vacio o nulo");
