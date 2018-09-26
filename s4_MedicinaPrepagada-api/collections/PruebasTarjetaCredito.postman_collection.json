@@ -11,15 +11,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a2965977-77c6-4bd3-90f8-b1040802a1b5",
+						"id": "01c10cea-668c-44a8-a695-221f496bbc96",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_numero_e\", data.numero);",
-							"postman.setGlobalVariable(\"new_nombreentarjeta_e\", data.nombreentarjeta);",
-							"postman.setGlobalVariable(\"new_fechaexpiracion_e\", data.fechaexpiracion);",
-							"postman.setGlobalVariable(\"new_franquicia_e\", data.franquicia);",
-							"postman.setGlobalVariable(\"new_codigoseguridadl_e\", data.codigoseguridad);",
+							"postman.setGlobalVariable(\"new_numero_tr\", data.numero);",
 							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
 						]
 					}
@@ -75,7 +71,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/5100171235475198",
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/tarjetascredito/{{new_numero_tr}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -85,7 +81,7 @@
 						"s4_MedicinaPrepagada-api",
 						"api",
 						"tarjetascredito",
-						"5100171235475198"
+						"{{new_numero_tr}}"
 					]
 				}
 			},
