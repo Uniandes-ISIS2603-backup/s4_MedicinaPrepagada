@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "68d409e0-362c-475a-9775-79b1564aea87",
+		"name": "Consultorio_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Sedes paraConsultorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e7d8204-a92e-4786-bd3a-a190bf8a93f7",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_sedeConsultorio\", data.id)",
+							"tests[\"no genera error en el post de Sede\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"sedeOne\",\r\n   \"direccion\":\"calle 14 # 13 - 12\",\r\n   \"tipoSede\":2,\r\n   \"descripcion\":\"La buena sede\",\r\n   \"latitud\":1.0,\r\n   \"longitud\":-70.3,\r\n   \"telefono\":78965467,\r\n   \"correo\":\"pepito@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Especialidad para consultorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25384b15-23b4-4123-b96e-2179ba78a73e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_nombre_especialidadConsultorio\", data.nombre)",
+							"tests[\"no genera error en el post de Sede\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Cardiologia\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad"
+					]
+				},
+				"description": "Agrega una especialidad al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea0864ee-39f9-4728-b484-e9f0c6efdc3e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_consultorio\", data.id)",
+							"tests[\"no genera error en el post de Consultorio\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"{{new_nombre_especialidadConsultorio}}\"\n    },    \"sede\": \n{\n    \"correo\": \"pepito@gmail.com\",\n    \"descripcion\": \"La buena sede\",\n    \"direccion\": \"calle 14 # 13 - 12\",\n    \"id\": {{new_id_sedeConsultorio}},\n    \"latitud\": 1,\n    \"longitud\": -70.3,\n    \"nombre\": \"sedeOne\",\n    \"telefono\": 78965467,\n    \"tipoSede\": 2\n}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios Con misma Sede, Oficina y edifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8deb664-c696-453b-bd1c-36ce2dba908e",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error esperado en el POST de consultorio\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"{{new_nombre_especialidadConsultorio}}\"\n    },    \"sede\": \n{\n    \"correo\": \"pepito@gmail.com\",\n    \"descripcion\": \"La buena sede\",\n    \"direccion\": \"calle 14 # 13 - 12\",\n    \"id\": {{new_id_sedeConsultorio}},\n    \"latitud\": 1,\n    \"longitud\": -70.3,\n    \"nombre\": \"sedeOne\",\n    \"telefono\": 78965467,\n    \"tipoSede\": 2\n}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ddead380-0535-432e-b590-968a437c85bf",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET consultorio\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios/{{new_id_consultorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"{{new_id_consultorio}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultorios All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a00c68a0-09d0-4c8b-b1ee-ea974407aad4",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all consultorios\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultorios que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e6548cd-dc7d-4241-9228-12dc386b0f3e",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error esperado en el GET consultorio \"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios/9999999",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"9999999"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b081bae-9935-4eb2-8642-b8e137b9c69b",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT de consultorio\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 9,\n    \"edificio\": \"llerasmegaRemastered\",\n    \"especialidad\": \n    {\n        \"nombre\": \"{{new_nombre_especialidadConsultorio}}\"\n    },   \n    \n    \"sede\": \n{\n    \"correo\": \"pepito@gmail.com\",\n    \"descripcion\": \"La buena sede\",\n    \"direccion\": \"calle 14 # 13 - 12\",\n    \"id\": {{new_id_sedeConsultorio}},\n    \"latitud\": 1,\n    \"longitud\": -70.3,\n    \"nombre\": \"sedeOne\",\n    \"telefono\": 78965467,\n    \"tipoSede\": 2\n}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios/{{new_id_consultorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"{{new_id_consultorio}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Consultorios ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ecd6cad7-a503-4186-8a42-16db27a589b6",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de consultorio\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios/{{new_id_consultorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"{{new_id_consultorio}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Especialidad para consultorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0b9ea82-d708-485b-a1e3-5e5801e48b29",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el DELET de especialidad\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_nombre_especialidadConsultorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_nombre_especialidadConsultorio}}"
+					]
+				},
+				"description": "Borra la especialidad usada para el consultorio"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Sedes del consultorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d325ed55-cce6-4f17-897d-3a5fe2adb939",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de sede \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/{{new_id_sedeConsultorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"{{new_id_sedeConsultorio}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes/1"
+			},
+			"response": []
+		}
+	]
+}
