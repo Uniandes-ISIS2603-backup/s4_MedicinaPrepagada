@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "1f9b1943-4333-4bd8-b992-80eaf4c2552e",
+		"name": "Collection.Farmacia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post farmacia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cbf24502-9fd2-442b-822a-a4f347c461d0",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"postman.setGlobalVariable(\"new_id_far\", data.id);",
+							"postman.setGlobalVariable(\"new_nombre_e\", data.name);",
+							"postman.setGlobalVariable(\"new_telefono_e\", data.telefono);",
+							"postman.setGlobalVariable(\"new_ubicacion_e\", data.ubicacion);",
+							"postman.setGlobalVariable(\"new_latitud_e\", data.latitud);",
+							"postman.setGlobalVariable(\"new_longitud_e\", data.longitud);",
+							"postman.setGlobalVariable(\"new_correo_e\", data.correo);",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Droguerias Acuna\",\r\n\r\n\"ubicacion\":\"carrera 38 # 25-10\",\r\n\r\n\"telefono\":1234567,\r\n\r\n\"longitud\":-72.09,\r\n\r\n\"latitud\":4.04,\r\n\r\n\"correo\":\"serviciocliente@acuna.com\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias"
+					]
+				},
+				"description": "Crea una farmacia\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get farmacia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d24f4cfa-7e53-4da3-b182-108d0897ca87",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias/{{new_id_far}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias",
+						"{{new_id_far}}"
+					]
+				},
+				"description": "Obtiene una farmacia dada por id"
+			},
+			"response": []
+		},
+		{
+			"name": "Get farmacias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3e92020-5237-4920-a3d1-6e7c7aa8b795",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias"
+					]
+				},
+				"description": "Obtiene todas las farmacias"
+			},
+			"response": []
+		},
+		{
+			"name": "Update farmacia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fa1a9b6-9dfe-4fab-8938-b26c4f6eb666",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"correo\": \"serviciocliente@acuna.com\",\n    \n    \"latitud\": 4.04,\n    \"longitud\": -72.09,\n    \"nombre\": \"Droguerias Acuna\",\n    \"telefono\": 1543678,\n    \"ubicacion\": \"carrera 38 # 25-10\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias/{{new_id_far}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias",
+						"{{new_id_far}}"
+					]
+				},
+				"description": "Modifica la información de una farmacia"
+			},
+			"response": []
+		},
+		{
+			"name": "Update farmacia con latitud invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89d67f1d-0a5a-446d-b519-39e04499fa1c",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Debe generar error en el PUT\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"correo\": \"serviciocliente@acuna.com\",\n    \n    \"latitud\": 104.04,\n    \"longitud\": -72.09,\n    \"nombre\": \"Droguerias Acuna\",\n    \"telefono\": 1543678,\n    \"ubicacion\": \"carrera 38 # 25-10\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias/{{new_id_far}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias",
+						"{{new_id_far}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete farmacia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69019921-f954-40fb-b3c6-9fb7d79f0c95",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELETE \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/farmacias/{{new_id_far}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"farmacias",
+						"{{new_id_far}}"
+					]
+				},
+				"description": "Elimina una farmacia"
+			},
+			"response": []
+		}
+	]
+}
