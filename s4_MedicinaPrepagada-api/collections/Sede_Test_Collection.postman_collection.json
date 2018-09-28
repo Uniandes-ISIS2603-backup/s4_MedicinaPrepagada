@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "9bd55987-4d15-42ad-8030-c4bcf05af4b0",
+		"name": "Sede_Test_Collection",
+		"description": "Collecton de tests para el recurso SEde",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Sedes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "035852b0-ada3-469b-a98a-b9ae14df3c0d",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_sede\", data.id)",
+							"tests[\"no genera error en el post de Sede\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"sedeOne\",\r\n   \"direccion\":\"calle 14 # 13 - 12\",\r\n   \"tipoSede\":2,\r\n   \"descripcion\":\"La buena sede\",\r\n   \"latitud\":1.0,\r\n   \"longitud\":-70.3,\r\n   \"telefono\":78965467,\r\n   \"correo\":\"pepito@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Sedes NombreRepetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e08acfdc-6759-4352-b25f-932a8fc4c095",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error en el POST nombre repetido\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"sedeOne\",\r\n   \"direccion\":\"calle 14 # 13 - 12\",\r\n   \"tipoSede\":2,\r\n   \"descripcion\":\"La buena sede\",\r\n   \"latitud\":1.0,\r\n   \"longitud\":-70.3,\r\n   \"telefono\":78965467,\r\n   \"correo\":\"pepito@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Sedes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6791756c-b42b-4039-8673-28ed1e0b6ed3",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET de sedes\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/{{new_id_sede}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"{{new_id_sede}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Sedes All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f16abfd2-a2a2-4c22-9c4f-90e3d8cb6f50",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all de sedes\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Sedes que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2cea7bff-1e38-4e4d-a07f-21c795366334",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Genera error esperado en el GET sede\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/99999",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"99999"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Sedes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d98fb92-9699-419d-94dc-0d3651a0b9bd",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT de sede\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \"nombre\":\"sedeOneRemastered\",\n   \"direccion\":\"calle 14 # 13 - 12\",\n   \"tipoSede\":2,\n   \"descripcion\":\"La buena sede\",\n   \"latitud\":1.0,\n   \"longitud\":-70.3,\n   \"telefono\":78965467,\n   \"correo\":\"pepito@gmail.com\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/{{new_id_sede}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"{{new_id_sede}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Sedes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d325ed55-cce6-4f17-897d-3a5fe2adb939",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de sede \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/{{new_id_sede}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"{{new_id_sede}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes/1"
+			},
+			"response": []
+		}
+	]
+}

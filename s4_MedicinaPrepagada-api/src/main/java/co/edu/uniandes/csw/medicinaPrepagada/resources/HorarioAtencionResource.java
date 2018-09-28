@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionDetailDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.HorarioAtencionSedeDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.HorarioAtencionLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.HorarioAtencionEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
