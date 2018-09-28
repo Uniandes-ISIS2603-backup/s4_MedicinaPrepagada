@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "1e3b731d-8543-4ee5-b11c-c85c27f1e613",
+		"name": "Collection.Medicamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create medicamento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42ce25b4-c69d-40f6-a18f-d99756184d01",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"postman.setGlobalVariable(\"new_id_med\", data.id);",
+							"postman.setGlobalVariable(\"new_nombre_e\", data.nombre);",
+							"postman.setGlobalVariable(\"new_costo_e\", data.costo);",
+							"postman.setGlobalVariable(\"new_descripcion_e\", data.descripcion);",
+							"postman.setGlobalVariable(\"new_elaboradoPor_e\", data.elaboradoPor);",
+							"postman.setGlobalVariable(\"new_cantidad_e\", data.cantidad);",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\r\n\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Se administra via oral\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos"
+					]
+				},
+				"description": "Crea un nuevo medicamento"
+			},
+			"response": []
+		},
+		{
+			"name": "Get medicamento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ccb94e7-361b-4fd9-bfa2-1ef1e3413e50",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos/{{new_id_med}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos",
+						"{{new_id_med}}"
+					]
+				},
+				"description": "Retorna un medicamento dado un id"
+			},
+			"response": []
+		},
+		{
+			"name": "Get medicamentos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9688b440-cb33-4b87-97f5-a642460c9e09",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos"
+					]
+				},
+				"description": "Retorna todos los medicamentos existentes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update medicamento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "477edc67-7f63-4109-8365-cac5c83f5cea",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"Se administra via intravenosa\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos/{{new_id_med}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos",
+						"{{new_id_med}}"
+					]
+				},
+				"description": "Modifica un medicamento"
+			},
+			"response": []
+		},
+		{
+			"name": "Update medicamento descripcion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35996ead-94a3-40ad-b079-1d58ec43773f",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Debe generar error en el PUT\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Dolex\",\r\n\r\n\"cantidad\":\"250 mg\",\r\n\r\n\"descripcion\":\"123456789\",\r\n\r\n\"costo\":15000,\r\n\r\n\"elaboradoPor\": \"GlaxoSmithKline\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos/{{new_id_med}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos",
+						"{{new_id_med}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete medicamento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f4ec7a47-cfb0-43f5-a014-9ebebaff44f9",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELETE \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medicamentos/{{new_id_med}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medicamentos",
+						"{{new_id_med}}"
+					]
+				},
+				"description": "Elimina un medicamento"
+			},
+			"response": []
+		}
+	]
+}
