@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "75e1bd7c-7a3a-4cc9-89d1-9fdde1f6cdad",
+		"name": "Horario_Atencion_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Sedes paraHorarioAtencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bfdb33b5-51d1-42aa-8e4d-d9785d98e07e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_sedeHorario\", data.id)",
+							"tests[\"no genera error en el post de Sede\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"sedeOne\",\r\n   \"direccion\":\"calle 14 # 13 - 12\",\r\n   \"tipoSede\":2,\r\n   \"descripcion\":\"La buena sede\",\r\n   \"latitud\":1.0,\r\n   \"longitud\":-70.3,\r\n   \"telefono\":78965467,\r\n   \"correo\":\"pepito@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Especialidad para Horario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "684078e2-e247-45a4-86c4-1010808423c5",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_nombre_especialidadHorario\", data.nombre)",
+							"tests[\"no genera error en el post de Especialidad\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Cardiologia\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad"
+					]
+				},
+				"description": "Agrega una especialidad al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios para Horario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8808d1a-363d-4dc0-bda4-cf1e7c792b93",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_consultorioHorario\", data.id)",
+							"tests[\"no genera error en el post de Consultorio\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n    },    \"sede\": \n{\n    \"correo\": \"pepito@gmail.com\",\n    \"descripcion\": \"La buena sede\",\n    \"direccion\": \"calle 14 # 13 - 12\",\n    \"id\": {{new_id_sedeHorario}},\n    \"latitud\": 1,\n    \"longitud\": -70.3,\n    \"nombre\": \"sedeOne\",\n    \"telefono\": 78965467,\n    \"tipoSede\": 2\n}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Medico para HorarioAtencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "036ebb4e-2467-406c-8530-907f11bb5110",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_medicoHorario\", data.idMedico)",
+							"tests[\"no genera error en el post de Medico\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulito@gmail.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7000100,\n        \"especialidad\": {\n            \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739289\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "Agrega un medico al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "409aab20-d740-49b9-acad-39d7466b3b65",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_horarioAtencion\", data.id)",
+							"tests[\"no genera error en el post de Horario Atencion\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"consultorio\": {\n            \n            \"sede\": \n            {\n                \n                \"id\": {{new_id_sedeHorario}}\n            }\n        },\n        \"fechaFin\": \"2018-10-28T10:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-28T08:00:00-05:00\",\n        \"medico\": \n        {\n            \"idMedico\": {{new_id_medicoHorario}}\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "472e3273-7f3a-4fc4-8776-d7f27196f10b",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET de horarioAtencion\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion/{{new_id_horarioAtencion}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"{{new_id_horarioAtencion}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea08c648-8483-4ac6-9dfd-083ea3d83ea1",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all de horarioAtencion\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "PUt Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67a390ba-311d-405f-b806-d38b480d35b0",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT dehorarioAtencion\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"consultorio\": {\n            \n            \"sede\": \n            {\n                \n                \"id\": {{new_id_sedeHorario}}\n            }\n        },\n        \"fechaFin\": \"2018-10-28T12:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-28T11:00:00-05:00\",\n        \"medico\": \n        {\n            \"idMedico\": {{new_id_medicoHorario}}\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion/{{new_id_horarioAtencion}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"{{new_id_horarioAtencion}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "PUt Horarios Atencion No existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69cd40fa-6409-4530-aee8-c86be0dc5fb3",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error esperado en el PUT de horarioAtencion\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"consultorio\": {\n\n           \"sede\":\n           {\n\n               \"id\": 300\n           }\n       },\n       \"fechaFin\": \"2018-09-29T10:00:00-05:00\",\n       \"fechaInicio\": \"2018-09-29T08:00:00-05:00\",\n       \"medico\":\n       {\n           \"idMedico\": 100\n       }\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion/99999",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"99999"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Horarios Atencion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "429afcfe-eda5-468c-91e0-0a49880ee083",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de HorarioAtencion\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion/{{new_id_horarioAtencion}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion",
+						"{{new_id_horarioAtencion}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET MedicodeHorario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d2feabf8-b3ef-4384-be99-3166e848b4f4",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"No genera error el DELET de medico\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_MedicinaPrepagada-api/api/medico/{{new_id_medicoHorario}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						"{{new_id_medicoHorario}}"
+					]
+				},
+				"description": "Elimina el medico "
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Consultorios  de Horario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ecd6cad7-a503-4186-8a42-16db27a589b6",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de consultorio\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios/{{new_id_consultorioHorario}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios",
+						"{{new_id_consultorioHorario}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Especialidad para Horario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0b9ea82-d708-485b-a1e3-5e5801e48b29",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"no genera error en el DELET de especialidad\"] = responseCode.code == 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_nombre_especialidadHorario}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_nombre_especialidadHorario}}"
+					]
+				},
+				"description": "Borra la especialidad usada para el consultorio"
+			},
+			"response": []
+		},
+		{
+			"name": "DELET Sedes de Horario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d325ed55-cce6-4f17-897d-3a5fe2adb939",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELET de sede \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes/{{new_id_sedeHorario}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes",
+						"{{new_id_sedeHorario}}"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes/1"
+			},
+			"response": []
+		}
+	]
+}
