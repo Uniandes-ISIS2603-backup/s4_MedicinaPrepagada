@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2e7d8204-a92e-4786-bd3a-a190bf8a93f7",
+						"id": "dd29802f-2f58-4386-af4c-575aa7fd8688",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",

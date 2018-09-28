@@ -85,7 +85,7 @@ public class HorarioAtencionDTO implements Serializable
        this.id = pId;
    }
    
-   public Long getId  ()
+   public long getId  ()
    {
         return this.id;
    }
