@@ -1,0 +1,640 @@
+{
+	"info": {
+		"_postman_id": "e3642d25-016a-4eaf-bdd7-cb752a1cf508",
+		"name": "Pruebas-Api-Citamedica",
+		"description": "Estas son las pruebas iniciales para el rescurso citaMedica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Especialidad para Horario Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "684078e2-e247-45a4-86c4-1010808423c5",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_nombre_especialidadHorario\", data.nombre)",
+							"tests[\"no genera error en el post de Especialidad\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Cardiologia\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad"
+					]
+				},
+				"description": "Agrega una especialidad al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Sedes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9731692-6ab9-4932-93c5-86e32a3c64fd",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_sedeHorario2\", data.id)",
+							"tests[\"no genera error en el post de Sede\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"sedeOne\",\r\n   \"direccion\":\"calle 14 # 13 - 12\",\r\n   \"tipoSede\":2,\r\n   \"descripcion\":\"La buena sede\",\r\n   \"latitud\":1.0,\r\n   \"longitud\":-70.3,\r\n   \"telefono\":78965467,\r\n   \"correo\":\"pepito@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/sedes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"sedes"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/sedes"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Consultorios para Horario Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dde3508c-70b6-4185-ac8a-76556733ccdb",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_consultorioHorario\", data.id)",
+							"tests[\"no genera error en el post de Consultorio\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NOficina\": 7,\n    \"edificio\": \"llerasmega\",\n    \"especialidad\": \n    {\n        \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n    },    \"sede\": \n{\n    \"correo\": \"pepito@gmail.com\",\n    \"descripcion\": \"La buena sede\",\n    \"direccion\": \"calle 14 # 13 - 12\",\n    \"id\": {{new_id_sedeHorario2}},\n    \"latitud\": 1,\n    \"longitud\": -70.3,\n    \"nombre\": \"sedeOne\",\n    \"telefono\": 78965467,\n    \"tipoSede\": 2\n}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/consultorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"consultorios"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/consultorios"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Medico para HorarioAtencion Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d35ec931-6a33-4f2d-a73e-c7ee4afca8eb",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_medicoHorario\", data.idMedico)",
+							"tests[\"no genera error en el post de Medico\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"medicoDTO\",\n        \"correo\": \"eljulito@gmail.com\",\n        \"descripcion\": \"mal medico\",\n        \"documentoMedico\": 7000100,\n        \"especialidad\": {\n            \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n        },\n        \"firma\": \"mifirmauno\",\n        \"nombre\": \"Julio Alberto\",\n        \"telefono\": 98739289\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/medico/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"medico",
+						""
+					]
+				},
+				"description": "Agrega un medico al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Horarios Atencion Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "409aab20-d740-49b9-acad-39d7466b3b65",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_horarioAtencion\", data.id)",
+							"tests[\"no genera error en el post de Horario Atencion\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"consultorio\": {\n            \n            \"sede\": \n            {\n                \n                \"id\": {{new_id_sedeHorario2}}\n            }\n        },\n        \"fechaFin\": \"2018-10-28T10:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-28T08:00:00-05:00\",\n        \"medico\": \n        {\n            \"idMedico\": {{new_id_medicoHorario}}\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/horariosAtencion",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"horariosAtencion"
+					]
+				},
+				"description": "http://localhost:8080/s4_MedicinaPrepagada-api/api/horariosAtencion"
+			},
+			"response": []
+		},
+		{
+			"name": "crearPaciente Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "980c0e30-20be-4f8f-ac75-6eff51396854",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_login_p\", data.login)",
+							"postman.setGlobalVariable(\"new_id_p\", data.id)",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\":{{$randomInt}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/ Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15766a33-f748-4d16-9552-3f8dd839d79c",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_citaMedica\", data.id)",
+							"tests[\"no genera error en el post de Cita Medica\"] = responseCode.code == 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comentarios\": \"Excelente cita médica\",\n    \"fecha\": \"2018-10-28T09:00:00\",\n    \"horarioAtencionAsignado\": \n    {\n        \"consultorio\": \n        {\n            \"NOficina\": 1,\n            \"edificio\": \"Alberto\",\n            \"especialidad\": \n            {\n                \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n            },\n            \"id\": {{new_id_consultorioHorario}},\n            \"sede\": \n            {\n                \"correo\": \"pepitoJav@hotmail.com\",\n                \"descripcion\": \"Super buena sede mega\",\n                \"direccion\": \"Calle 133 # 90 - 01\",\n                \"id\": {{new_id_consultorioHorario}},\n                \"latitud\": 1.3,\n                \"longitud\": -70.19,\n                \"nombre\": \"super sede 2\",\n                \"telefono\": 98761233,\n                \"tipoSede\": 1\n            }\n        },\n        \"fechaFin\": \"2018-10-28T10:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-27T08:00:00-05:00\",\n        \"medico\": \n        {\n            \"correo\": \"andrux@hotmail.com\",\n            \"descripcion\": \"super medico\",\n            \"documentoMedico\": 89998493,\n            \"especialidad\": {\n                \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n            },\n            \"firma\": \"mifirmados\",\n            \"idMedico\": {{new_id_medicoHorario}},\n            \"nombre\": \"Andres Lleras\",\n            \"telefono\": 99908673\n        }\n    },\n    \"pacienteAAtender\": {\n        \"direccion\": \"Cra 57#70-90\",\n        \"eps\": \"Coomeva\",\n        \"fechaNacimiento\": \"08/10/1965\",\n        \"id\": {{new_id_p}},\n        \"mail\": \"ml@gmial.com\",\n        \"nombre\": \"Mario Laserna Alv\",\n        \"numeroContacto\": 889768996\n    }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica"
+					]
+				},
+				"description": "No se puede agregar un cita médica en una fecha que ya pasó"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80fc055d-2aff-4d5f-8d90-581504c15c78",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica"
+					]
+				},
+				"description": "Consulta todas las citas medicas "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc98b5e6-1c62-4bdf-8dca-a3f4900d5c63",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica/{{new_id_citaMedica}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"{{new_id_citaMedica}}"
+					]
+				},
+				"description": "Consulta una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc1242bd-5fba-4591-a68e-2c44c15a3da4",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis405\"] = responseCode.code=== 405;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comentarios\": \"Excelente cita médica, mala atención inicial\",\n    \"fecha\": \"2018-10-28T09:00:00\",\n    \"horarioAtencionAsignado\": \n    {\n        \"consultorio\": \n        {\n            \"NOficina\": 1,\n            \"edificio\": \"Alberto\",\n            \"especialidad\": \n            {\n                \"nombre\":\"{{new_nombre_especialidadHorario}}\"\n            },\n            \"id\": {{new_id_consultorioHorario}},\n            \"sede\": \n            {\n                \"correo\": \"pepitoJav@hotmail.com\",\n                \"descripcion\": \"Super buena sede mega\",\n                \"direccion\": \"Calle 133 # 90 - 01\",\n                \"id\": {{new_id_consultorioHorario}},\n                \"latitud\": 1.3,\n                \"longitud\": -70.19,\n                \"nombre\": \"super sede 2\",\n                \"telefono\": 98761233,\n                \"tipoSede\": 1\n            }\n        },\n        \"fechaFin\": \"2018-10-28T10:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-27T08:00:00-05:00\",\n        \"medico\": \n        {\n            \"correo\": \"andrux@hotmail.com\",\n            \"descripcion\": \"super medico\",\n            \"documentoMedico\": 89998493,\n            \"especialidad\": {\n                \"nombre\": \"{{new_nombre_especialidadHorario}}\"\n            },\n            \"firma\": \"mifirmados\",\n            \"idMedico\": {{new_id_medicoHorario}},\n            \"nombre\": \"Andres Lleras\",\n            \"telefono\": 99908673\n        }\n    },\n    \"pacienteAAtender\": {\n        \"direccion\": \"Cra 57#70-90\",\n        \"eps\": \"Coomeva\",\n        \"fechaNacimiento\": \"08/10/1965\",\n        \"id\": {{new_id_p}},\n        \"mail\": \"ml@gmial.com\",\n        \"nombre\": \"Mario Laserna Alv\",\n        \"numeroContacto\": 889768996\n    }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica/{{new_id_citaMedica}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"{{new_id_citaMedica}}"
+					]
+				},
+				"description": "Actualiza una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "318051cd-9d72-4ce7-b03d-30871d6400fb",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis405\"] = responseCode.code=== 405;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica/{{new_id_citaMedica}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"{{new_id_citaMedica}}"
+					]
+				},
+				"description": "Elimina una cita medica"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a108e17d-cf19-4fe7-b57a-66b935d385e2",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis404\"] = responseCode.code=== 404;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comentarios\": \"Muy mala cita médica\",\n    \"fecha\": \"2018-10-22T08:20:00-05:00\",\n    \"horarioAtencionAsignado\": {\n        \"consultorio\": {\n            \"NOficina\": 1,\n            \"edificio\": \"Alberto\",\n            \"especialidad\": {\n                \"nombre\": \"Cardiologia\"\n            },\n            \"id\": 300,\n            \"sede\": {\n                \"correo\": \"pepitoJav@hotmail.com\",\n                \"descripcion\": \"Super buena sede mega\",\n                \"direccion\": \"Calle 133 # 90 - 01\",\n                \"id\": 200,\n                \"latitud\": 1.3,\n                \"longitud\": -70.19,\n                \"nombre\": \"super sede 2\",\n                \"telefono\": 98761233,\n                \"tipoSede\": 1\n            }\n        },\n        \"fechaFin\": \"2018-10-22T08:00:00-05:00\",\n        \"fechaInicio\": \"2018-10-22T10:00:00-05:00\",\n        \"medico\": {\n            \"correo\": \"andrux@hotmail.com\",\n            \"descripcion\": \"super medico\",\n            \"documentoMedico\": 89998493,\n            \"especialidad\": {\n                \"nombre\": \"Cardiologia\"\n            },\n            \"firma\": \"mifirmados\",\n            \"idMedico\": 200,\n            \"nombre\": \"Andres Lleras\",\n            \"telefono\": 99908673\n        }\n    },\n    \"idCitaMedica\": 2001,\n    \"pacienteAAtender\": {\n        \"direccion\": \"Cra 21 #70-90\",\n        \"eps\": \"Coomeva\",\n        \"fechaNacimiento\": \"31/10/1997\",\n        \"id\": 1,\n        \"mail\": \"n.novos@gmial.com\",\n        \"nombre\": \"Nicolas Novoa Arciniegas\",\n        \"numeroContacto\": 890896969\n    }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica/2001",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"2001"
+					]
+				},
+				"description": "No se puede modificar el paciente de la cita"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6db0aab6-5c98-46c0-b889-7aa3822889ad",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis412\"] = responseCode.code=== 412;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"comentarios\": \"Excelente cita médica\",\n        \"fecha\": \"2017-10-22T09:40:00-05:00\",\n        \"horarioAtencionAsignado\": {\n            \"consultorio\": {\n                \"NOficina\": 1,\n                \"edificio\": \"Alberto\",\n                \"especialidad\": {\n                    \"nombre\": \"Cardiologia\"\n                },\n                \"id\": 300,\n                \"sede\": {\n                    \"correo\": \"pepitoJav@hotmail.com\",\n                    \"descripcion\": \"Super buena sede mega\",\n                    \"direccion\": \"Calle 133 # 90 - 01\",\n                    \"id\": 200,\n                    \"latitud\": 1.3,\n                    \"longitud\": -70.19,\n                    \"nombre\": \"super sede 2\",\n                    \"telefono\": 98761233,\n                    \"tipoSede\": 1\n                }\n            },\n            \"fechaFin\": \"2018-10-22T08:00:00-05:00\",\n            \"fechaInicio\": \"2018-09-23T10:00:00-05:00\",\n            \"medico\": {\n                \"correo\": \"andrux@hotmail.com\",\n                \"descripcion\": \"super medico\",\n                \"documentoMedico\": 89998493,\n                \"especialidad\": {\n                    \"nombre\": \"Cardiologia\"\n                },\n                \"firma\": \"mifirmados\",\n                \"idMedico\": 200,\n                \"nombre\": \"Andres Lleras\",\n                \"telefono\": 99908673\n            }\n        },\n        \"idCitaMedica\": 2007,\n        \"pacienteAAtender\": {\n            \"direccion\": \"Cra 18 #124-80\",\n            \"eps\": \"Compensar\",\n            \"fechaNacimiento\": \"21/11/1997\",\n            \"id\": 1,\n            \"mail\": \"a.torres123@gmail.com\",\n            \"nombre\": \"Alfredo Torres Figueroa\",\n            \"numeroContacto\": 3219896969\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica"
+					]
+				},
+				"description": "No se puede agregar un cita médica en una fecha que ya pasó"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/citaMedica/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49c54db2-b207-4e71-90c1-d17a03bd9591",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis404\"] = responseCode.code=== 404;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/citaMedica/10",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"citaMedica",
+						"10"
+					]
+				},
+				"description": "No se puede eliminar una cita inexistente"
+			},
+			"response": []
+		}
+	]
+}

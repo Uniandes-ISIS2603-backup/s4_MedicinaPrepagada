@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "4f9923b2-1034-4693-9159-66cb0aa02ffe",
+		"name": "Pruebas-Ivan1-Api-Especialidad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fed2e6cc-c654-41a9-814b-a602dde88332",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_especialidad4\", data.nombre)",
+							"tests[\"no genera error en el post de Medico\"] = responseCode.code == 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Pediatria\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad"
+					]
+				},
+				"description": "Agrega una especialidad al sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eff61951-48b9-4867-91bb-8796d7586041",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis412\"] = responseCode.code=== 412;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Pediatria\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad"
+					]
+				},
+				"description": "No se puede agregar una especialidad que ya existe"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2decae0-ad12-4e5e-be97-a25292c6a461",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis412\"] = responseCode.code=== 412;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Pediatria\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_especialidad4}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_especialidad4}}"
+					]
+				},
+				"description": "No se puede actualizar a una especialidad ya existente"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91ba144a-41d1-4e65-a5fb-f871e4565de8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Oftalmologia\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_especialidad4}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_especialidad4}}"
+					]
+				},
+				"description": "Actualiza la informacion de una especialidad"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e0a9a66-b239-42dc-b107-c9f18bf5ed3d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_especialidad4}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_especialidad4}}"
+					]
+				},
+				"description": "Consulta una especialidad del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62ee46a3-62db-4a35-8af0-ecd41f2e5f0b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cesar\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						""
+					]
+				},
+				"description": "Consulta todas las especialidades del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94f3af88-3645-4561-b591-ce287f87d0ff",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis200\"] = responseCode.code=== 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/{{new_especialidad4}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"{{new_especialidad4}}"
+					]
+				},
+				"description": "Elimina una especialidad del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/s4_MedicinaPrepagada-api/api/especialidad/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce77b86e-c59f-4f98-b9e1-1af55f307701",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status codeis404\"] = responseCode.code=== 404;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/especialidad/Tecnologia",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"especialidad",
+						"Tecnologia"
+					]
+				},
+				"description": "No se puede eliminar una especialidad que no existe"
+			},
+			"response": []
+		}
+	]
+}
