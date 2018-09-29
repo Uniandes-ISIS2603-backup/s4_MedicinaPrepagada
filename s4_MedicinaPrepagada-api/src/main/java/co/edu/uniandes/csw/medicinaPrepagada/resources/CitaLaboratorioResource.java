@@ -45,11 +45,11 @@ public class CitaLaboratorioResource {
     @POST
     public CitaLaboratorioDTO createCitaLaboratorio (CitaLaboratorioDTO pCitaLaboratorio) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: input: {0}", pCitaLaboratorio.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource createCitaLaboratorio: input: {0}", pCitaLaboratorio.toString());
         
         CitaLaboratorioDTO nuevoCitaLabDTO = new CitaLaboratorioDTO(citaLogic.createCitaLaboratorio(pCitaLaboratorio.toEntity()));
         
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource CreateCitaLaboratorio: output: {0}", nuevoCitaLabDTO.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource createCitaLaboratorio: output: {0}", nuevoCitaLabDTO.toString());
         
         return nuevoCitaLabDTO;
     }

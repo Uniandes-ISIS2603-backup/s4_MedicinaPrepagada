@@ -65,6 +65,7 @@ public class LaboratorioDTO implements Serializable {
      * @return Nueva objeto LaboratorioEntity.
      *
      */
+    
     public LaboratorioEntity toEntity() {
         LaboratorioEntity labEntity = new LaboratorioEntity();
 
