@@ -22,15 +22,14 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Santiago Rojas
  */
 @Entity
-public class CitaLaboratorioEntity implements Serializable
+public class CitaLaboratorioEntity  implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @PodamExclude
-    @OneToOne 
-   
+    @ManyToOne
     private LaboratorioEntity laboratorio;
     
     @PodamExclude

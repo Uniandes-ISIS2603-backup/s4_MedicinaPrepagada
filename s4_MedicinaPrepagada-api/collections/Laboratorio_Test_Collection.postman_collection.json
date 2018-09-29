@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "aa7738dc-eeba-4ec0-8c08-fb69e29fbb6c",
+		"name": "Laboratorio_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Lab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7ce249a2-6eca-417b-a232-1c7d9705613a",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_laboratorio\", data.id)",
+							"tests[\"no genera error en el post de Laboratorio\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"LaboratorioDios\",\r\n   \"direccion\":\"Cra 17#34-25\",\r\n   \"latitud\":4.6097100,\r\n   \"longitud\":-74.0817500,\r\n   \"telefono\":4561798,\r\n   \"horarioAtencion\":\"Lunes a Viernes de 8:00 a 10:00am\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST LabNombreRepetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b44dbb11-eb09-4ffb-aa98-1ca39cbbc1c2",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"Si genera error en el POST nombre repetido\"] = responseCode.code === 412;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"\",\r\n   \"direccion\":\"Cra 17#34-25\",\r\n   \"latitud\":4.6097100,\r\n   \"longitud\":-74.0817500,\r\n   \"telefono\":4561798,\r\n   \"horarioAtencion\":\"Lunes a Viernes de 8:00 a 10:00am\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL Lab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "648f4372-deaa-4e16-8377-302dff6df34d",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET all de laboratorios\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"LaboratorioPio\",\r\n   \"direccion\":\"Cra 17#34-25\",\r\n   \"latitud\":4.6097100,\r\n   \"longitud\":-74.0817500,\r\n   \"telefono\":4561798,\r\n   \"horarioAtencion\":\"Lunes a Viernes de 8:00 a 10:00am\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Lab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cfe89ac-8361-4424-98a5-966fbd804bac",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el GET de laboratorios\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"LaboratorioPio\",\r\n   \"direccion\":\"Cra 17#34-25\",\r\n   \"latitud\":4.6097100,\r\n   \"longitud\":-74.0817500,\r\n   \"telefono\":4561798,\r\n   \"horarioAtencion\":\"Lunes a Viernes de 8:00 a 10:00am\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios/{{new_id_laboratorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"{{new_id_laboratorio}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Lab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c85bc1dd-3762-4af6-a4a5-0fdcd75590d6",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el PUT de laboratorios\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"nombre\":\"LaboratorioASDFG\",\r\n   \"direccion\":\"Cra 17#34-25\",\r\n   \"latitud\":4.6097100,\r\n   \"longitud\":-74.0817500,\r\n   \"telefono\":4561798,\r\n   \"horarioAtencion\":\"Lunes a Viernes de 8:00 a 10:00am\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios/{{new_id_laboratorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"{{new_id_laboratorio}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Lab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1771272-7fb4-457c-94d7-ae1b1dd84b89",
+						"type": "text/javascript",
+						"exec": [
+							"tests [\"No genera error en el DELETE de laboratorio \"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/laboratorios/{{new_id_laboratorio}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"laboratorios",
+						"{{new_id_laboratorio}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

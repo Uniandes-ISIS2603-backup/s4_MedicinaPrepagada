@@ -37,7 +37,6 @@ public class LaboratorioEntity implements Serializable
     
     @PodamExclude
     @ManyToOne
-    
     private ExamenMedicoEntity examenMedico;
     
     private String nombre;

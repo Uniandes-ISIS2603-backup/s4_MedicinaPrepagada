@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "394b73e4-024b-4029-b1d9-dc6a7046eade",
+		"name": "Factura_Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST pacienteFactura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "980c0e30-20be-4f8f-ac75-6eff51396854",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_login_p\", data.login)",
+							"postman.setGlobalVariable(\"new_id_p\", data.id)",
+							"tests[\"no genera error en el post\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\":{{$randomInt}},\n\t\"contrasena\":\"bhug\",\n\t\"tipoUsuario\":\"Paciente\",\n\t\"documentoIdentidad\":102801280,\n\t\"fechaNacimiento\":\"23/11/1999\",\n\t\"nombre\" : \"Miguel Hoyos Ruge\",\n\t\"direccion\":\"Cra 7#134-80\",\n\t\"numeroContacto\":123456,\n\t\"mail\":\"holo@hooli.com\",\n\t\"eps\":\"Colsanitas\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e38b8eb-08bb-42f1-8b22-ee8a145f8546",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_factura\", data.id)",
+							"tests[\"no genera error en el post de factura\"] = responseCode.code == 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"concepto\": \"Cita Laboratorio Examen de Sangre\",\n    \"date\": \"2018-10-29T19:44:57.333-05:00\",\n    \"idCliente\": {{new_id_p}},\n    \"pagada\": true,\n    \"valor\": 123500\n\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Factura",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/facturas/{{new_id_factura}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"facturas",
+						"{{new_id_factura}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL Facturas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_MedicinaPrepagada-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_MedicinaPrepagada-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
