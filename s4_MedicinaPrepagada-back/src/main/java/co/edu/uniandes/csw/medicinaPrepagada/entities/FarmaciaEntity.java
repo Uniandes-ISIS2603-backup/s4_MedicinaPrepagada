@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -26,10 +29,10 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
     private double longitud;
     private String correo;
     
-    
     @PodamExclude
-    @ManyToOne
-    private MedicamentoEntity medicamento;
+    @ManyToMany(mappedBy = "farmacias")
+    private List<MedicamentoEntity> medicamentos = new ArrayList<>(); 
+
     
     
     /**
@@ -37,8 +40,8 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
      *
      * @return medicamento
      */
-    public MedicamentoEntity getMedicamento() {
-        return medicamento;
+    public List<MedicamentoEntity> getMedicamentos() {
+        return medicamentos;
     }
 
     /**
@@ -46,8 +49,8 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
      *
      * @param parametro el medicamento a asignar
      */
-    public void setMedicamento(MedicamentoEntity parametro) {
-        this.medicamento = parametro;
+    public void setMedicamentos(List<MedicamentoEntity> parametro) {
+        this.medicamentos = parametro;
     }
 
     /**
@@ -158,3 +161,4 @@ public class FarmaciaEntity extends BaseEntity implements Serializable  {
         this.longitud = parametro;
     }
 }
+

@@ -121,7 +121,7 @@ public class FarmaciaPersistenceTest {
         Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
         Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
         
-        Assert.assertEquals(newEntity.getMedicamento(), entity.getMedicamento());
+        Assert.assertEquals(newEntity.getMedicamentos(), entity.getMedicamentos());
     }
 
     /**
@@ -157,7 +157,7 @@ public class FarmaciaPersistenceTest {
         Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
         Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
         
-        Assert.assertEquals(entity.getMedicamento(), newEntity.getMedicamento());
+        Assert.assertEquals(entity.getMedicamentos(), newEntity.getMedicamentos());
     }
 
     /**
@@ -193,7 +193,7 @@ public class FarmaciaPersistenceTest {
         Assert.assertEquals(newEntity.getLatitud(), resp.getLatitud(),0);
         Assert.assertEquals(newEntity.getLongitud(), resp.getLongitud(),0);
         
-        Assert.assertEquals(newEntity.getMedicamento(), entity.getMedicamento());
+        Assert.assertEquals(newEntity.getMedicamentos(), entity.getMedicamentos());
         
         
     }
@@ -214,7 +214,7 @@ public class FarmaciaPersistenceTest {
         Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
         Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
         
-        Assert.assertEquals(entity.getMedicamento(), newEntity.getMedicamento());
+        Assert.assertEquals(entity.getMedicamentos(), newEntity.getMedicamentos());
 
         newEntity = farmaciaPersistence.findByNombre(null);
         Assert.assertNull(newEntity);
