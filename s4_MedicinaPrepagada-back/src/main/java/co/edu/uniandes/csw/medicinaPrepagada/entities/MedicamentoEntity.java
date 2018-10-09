@@ -8,10 +8,9 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -29,12 +28,9 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     private Double costo;
     private String elaboradoPor;
     
-    
     @PodamExclude
-    @OneToMany(
-            mappedBy ="medicamento",     
-            fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-           private List<FarmaciaEntity> farmacias = new ArrayList<>();
+    @ManyToMany 
+    private List<FarmaciaEntity> farmacias = new ArrayList<FarmaciaEntity>();
     
     @PodamExclude
     @ManyToOne
