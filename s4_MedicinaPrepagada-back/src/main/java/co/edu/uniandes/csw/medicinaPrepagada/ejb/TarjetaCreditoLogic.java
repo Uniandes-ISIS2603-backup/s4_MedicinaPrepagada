@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.ejb.Stateless;
@@ -85,6 +86,10 @@ public class TarjetaCreditoLogic {
      */
     public TarjetaCreditoEntity getTarjetaCredito(Long id){
         return persistence.find(id);
+    }
+    
+    public List<TarjetaCreditoEntity> getTarjetasDeCredito(){
+        return persistence.findAll();
     }
     
     /**
