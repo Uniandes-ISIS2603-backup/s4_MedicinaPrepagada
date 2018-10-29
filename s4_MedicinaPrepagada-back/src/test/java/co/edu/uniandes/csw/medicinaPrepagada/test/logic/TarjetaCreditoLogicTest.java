@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.TarjetaCreditoPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -132,6 +133,24 @@ public class TarjetaCreditoLogicTest {
         tarjetaCreditoLogic.deleteTarjetaCredito(entity.getNumero());
         TarjetaCreditoEntity deleted = em.find(TarjetaCreditoEntity.class, entity.getNumero());
                 
+    }
+    
+    /**
+     * Prueba para consultar todas las tarjetas de credito
+     */ 
+    @Test
+    public void getTarjetasCreditoTest(){
+        List<TarjetaCreditoEntity> list = tarjetaCreditoLogic.getTarjetasDeCredito();
+        Assert.assertEquals(list.size(), data.size());
+        for(TarjetaCreditoEntity entity : list){
+            boolean found = false;
+            for(TarjetaCreditoEntity storedEntity : data){
+                if(Objects.equals(entity.getNumero(), storedEntity.getNumero())){
+                   found = true; 
+                }
+            }
+          Assert.assertTrue(found);
+        }
     }
     
     /**
