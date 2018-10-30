@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.TarjetaCreditoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
+import java.util.LinkedList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -77,5 +79,18 @@ public class TarjetaCreditoResource {
         return new TarjetaCreditoDTO(entity);
     }
     
+     /**
+     * Encuentra todas las tarjetas de credito
+     * @return JSON del paciente buscado
+     */
+    @GET
+    public LinkedList<TarjetaCreditoDTO> getTarjetaCredito(){
+        LinkedList<TarjetaCreditoDTO> rta = new LinkedList<>();
+        List<TarjetaCreditoEntity> lista = tarjetaCreditoLogic.getTarjetasDeCredito();
+        for(TarjetaCreditoEntity ent : lista){
+            rta.add(new TarjetaCreditoDTO(ent));
+        }
+        return rta;
+    }
 
 }

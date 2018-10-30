@@ -150,7 +150,7 @@ public class PacienteLogic {
         }
         
         String numeroContactoString = pacienteEntity.getNumeroContacto().toString();
-        String numeroContactoValidationPattern = "([0-9]{10}|[0-9]{6})";
+        String numeroContactoValidationPattern = "([0-9]{10}|[0-9]{7})";
         Pattern patternNumeroContacto = Pattern.compile(numeroContactoValidationPattern);
         Matcher matchNumeroContacto = patternNumeroContacto.matcher(numeroContactoString);
         if(!matchNumeroContacto.matches()){

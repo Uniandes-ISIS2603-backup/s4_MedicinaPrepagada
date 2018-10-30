@@ -95,7 +95,6 @@ insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fech
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3565828670929210, 'Marlo McMorland', 490, '55/46', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3567173574390047, 'Teodoor Klinck', 922, '33/29', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (6376268016415909, 'Cirstoforo Joust', 498, '93/46', 'instapayment');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (56102814006070778, 'Desi Insull', 499, '11/43', 'china-unionpay');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3536535204091005, 'Lorenzo Plimmer', 300, '39/79', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3550791653030546, 'Hobie Enticknap', 995, '53/69', 'jcb');
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3558450459779002, 'Bartholomeo Fader', 097, '84/09', 'jcb');
