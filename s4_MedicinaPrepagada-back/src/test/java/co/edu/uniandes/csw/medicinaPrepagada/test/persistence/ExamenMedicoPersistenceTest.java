@@ -117,7 +117,7 @@ public class ExamenMedicoPersistenceTest {
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(newEntity.getCosto(), entity.getCosto(),0);
         Assert.assertEquals(newEntity.getRecomendaciones(), entity.getRecomendaciones());
-        Assert.assertEquals(newEntity.getOrdenMedica(), entity.getOrdenMedica());
+        Assert.assertEquals(newEntity.getOrdenesMedicas(), entity.getOrdenesMedicas());
 
         Assert.assertEquals(newEntity.getLaboratorios().size(), entity.getLaboratorios().size());
         for (int i=0;i<newEntity.getLaboratorios().size();i++)
@@ -155,7 +155,7 @@ public class ExamenMedicoPersistenceTest {
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(),0);
         Assert.assertEquals(entity.getRecomendaciones(), newEntity.getRecomendaciones());
-        Assert.assertEquals(entity.getOrdenMedica(), newEntity.getOrdenMedica());
+        Assert.assertEquals(entity.getOrdenesMedicas(), newEntity.getOrdenesMedicas());
 
         Assert.assertEquals(entity.getLaboratorios().size(), newEntity.getLaboratorios().size());
         for (int i=0;i<entity.getLaboratorios().size();i++)
@@ -193,7 +193,7 @@ public class ExamenMedicoPersistenceTest {
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
         Assert.assertEquals(newEntity.getCosto(), resp.getCosto(),0);
         Assert.assertEquals(newEntity.getRecomendaciones(), resp.getRecomendaciones());
-        Assert.assertEquals(newEntity.getOrdenMedica(), resp.getOrdenMedica());
+        Assert.assertEquals(newEntity.getOrdenesMedicas(), resp.getOrdenesMedicas());
 
         Assert.assertEquals(newEntity.getLaboratorios().size(), resp.getLaboratorios().size());
         for (int i=0;i<newEntity.getLaboratorios().size();i++)
@@ -213,7 +213,7 @@ public class ExamenMedicoPersistenceTest {
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(),0);
         Assert.assertEquals(entity.getRecomendaciones(), newEntity.getRecomendaciones());
-        Assert.assertEquals(entity.getOrdenMedica(), newEntity.getOrdenMedica());
+        Assert.assertEquals(entity.getOrdenesMedicas(), newEntity.getOrdenesMedicas());
 
         Assert.assertEquals(entity.getLaboratorios().size(), newEntity.getLaboratorios().size());
         for (int i=0;i<entity.getLaboratorios().size();i++)

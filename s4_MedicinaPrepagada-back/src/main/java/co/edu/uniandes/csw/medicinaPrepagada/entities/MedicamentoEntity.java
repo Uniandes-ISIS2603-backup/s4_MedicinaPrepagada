@@ -33,8 +33,8 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     private List<FarmaciaEntity> farmacias = new ArrayList<FarmaciaEntity>();
     
     @PodamExclude
-    @ManyToOne
-    private OrdenMedicaEntity ordenMedica;
+    @ManyToMany(mappedBy = "medicamentos")
+    private List<OrdenMedicaEntity> ordenes = new ArrayList<>(); 
     
     /**
      * Devuelve las farmacias del medicamentoEntity.
@@ -55,21 +55,21 @@ public class MedicamentoEntity extends BaseEntity implements Serializable {
     }
     
      /**
-     * Devuelve la orden medica del medicamentoEntity.
+     * Devuelve la ordenes medicas del medicamentoEntity.
      *
      * @return ordenMedica
      */
-    public OrdenMedicaEntity getOrdenMedica() {
-        return ordenMedica;
+    public List<OrdenMedicaEntity> getOrdenesMedicas() {
+        return ordenes;
     }
 
     /**
-     * Modifica la orden medica del medicamentoEntity.
+     * Modifica las ordenes medicas del medicamentoEntity.
      *
      * @param pOrden the orden medica to set
      */
-    public void setOrdenMedica(OrdenMedicaEntity pOrden) {
-        this.ordenMedica = pOrden;
+    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrden) {
+        this.ordenes = pOrden;
     }
 
     /**

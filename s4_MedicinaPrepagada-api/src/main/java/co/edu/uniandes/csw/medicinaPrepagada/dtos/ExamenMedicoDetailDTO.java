@@ -11,6 +11,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
  */
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ExamenMedicoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class ExamenMedicoDetailDTO extends ExamenMedicoDTO implements Serializab
     
     private List<LaboratorioDTO> laboratorios;
     
-    
+    // relación  cero o muchos medicamentos
+    private List<OrdenMedicaDTO> ordenes;
     
     
     public ExamenMedicoDetailDTO() 
@@ -38,10 +40,15 @@ public class ExamenMedicoDetailDTO extends ExamenMedicoDTO implements Serializab
      */
     public ExamenMedicoDetailDTO(ExamenMedicoEntity examenMedicoEntity) {
         super(examenMedicoEntity);
-        if (examenMedicoEntity != null && examenMedicoEntity.getLaboratorios() != null) {
+        if (examenMedicoEntity != null && examenMedicoEntity.getLaboratorios() != null && examenMedicoEntity.getOrdenesMedicas() != null) {
                 laboratorios = new ArrayList<>();
                 for (LaboratorioEntity entityLaboratorio : examenMedicoEntity.getLaboratorios()) {
                     laboratorios.add(new LaboratorioDTO(entityLaboratorio));
+                }
+                
+                ordenes = new ArrayList<>();
+                for(OrdenMedicaEntity entityOrden : examenMedicoEntity.getOrdenesMedicas()) {
+                    ordenes.add(new OrdenMedicaDTO(entityOrden));
                 }
             }
         }
@@ -57,6 +64,18 @@ public class ExamenMedicoDetailDTO extends ExamenMedicoDTO implements Serializab
     {
         return this.laboratorios;
     }
+    
+    public void setOrdenes(List<OrdenMedicaDTO> pOrdenes)
+    {
+        this.ordenes = pOrdenes;
+    }
+    
+    
+    public List<OrdenMedicaDTO> getOrdenes ()
+    {
+        return this.ordenes;
+    }
+    
     
     
         @Override

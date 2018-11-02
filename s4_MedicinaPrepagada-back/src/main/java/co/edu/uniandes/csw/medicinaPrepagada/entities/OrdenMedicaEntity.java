@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -45,12 +46,16 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     @ManyToOne(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
+ //   @PodamExclude
+ //   @OneToMany
+ //   private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
+    
     @PodamExclude
-    @OneToMany
+    @ManyToMany 
     private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
     
     @PodamExclude
-    @OneToMany
+    @ManyToMany
     private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
     
     /**
