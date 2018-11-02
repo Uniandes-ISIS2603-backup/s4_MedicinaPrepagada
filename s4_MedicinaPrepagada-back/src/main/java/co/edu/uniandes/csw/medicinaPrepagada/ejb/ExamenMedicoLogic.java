@@ -146,7 +146,7 @@ public class ExamenMedicoLogic {
     
     private boolean validateString (String pString)
     {
-        String validationPattern = "([A-Za-z]*|([A-Za-z]+\\s))+[A-Za-z]*";
+        String validationPattern = "([ñA-Za-z]|([ñA-Za-z0-9]+\\s))+([ñA-Za-z0-9])*";
         Pattern patternNombre = Pattern.compile(validationPattern);
         Matcher matchNombre = patternNombre.matcher(pString);
         return matchNombre.matches();

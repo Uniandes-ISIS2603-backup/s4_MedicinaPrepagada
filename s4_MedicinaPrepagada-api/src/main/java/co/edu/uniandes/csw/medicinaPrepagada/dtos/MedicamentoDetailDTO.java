@@ -11,6 +11,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.dtos;
  */
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FarmaciaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class MedicamentoDetailDTO extends MedicamentoDTO implements Serializable
     
     private List<FarmaciaDTO> farmacias;
     
-    
+    // relación  cero o muchos medicamentos
+    private List<OrdenMedicaDTO> ordenes;
     
     
     public MedicamentoDetailDTO() 
@@ -38,10 +40,15 @@ public class MedicamentoDetailDTO extends MedicamentoDTO implements Serializable
      */
     public MedicamentoDetailDTO(MedicamentoEntity medicamentoEntity) {
         super(medicamentoEntity);
-        if (medicamentoEntity != null && medicamentoEntity.getFarmacias() != null) {
+        if (medicamentoEntity != null && medicamentoEntity.getFarmacias() != null && medicamentoEntity.getOrdenesMedicas() != null) {
                 farmacias = new ArrayList<>();
                 for (FarmaciaEntity entityFarmacia : medicamentoEntity.getFarmacias()) {
                     farmacias.add(new FarmaciaDTO(entityFarmacia));
+                }
+                
+                ordenes = new ArrayList<>();
+                for(OrdenMedicaEntity entityOrden : medicamentoEntity.getOrdenesMedicas()) {
+                    ordenes.add(new OrdenMedicaDTO(entityOrden));
                 }
             }
         }
@@ -62,6 +69,14 @@ public class MedicamentoDetailDTO extends MedicamentoDTO implements Serializable
             }
             medicamentoEntity.setFarmacias(farmaciasEntity);
         }
+        
+        if (ordenes != null) {
+            List<OrdenMedicaEntity> ordenesEntity = new ArrayList<>();
+            for (OrdenMedicaDTO dtoOrden : ordenes) {
+                ordenesEntity.add(dtoOrden.toEntity());
+            }
+            medicamentoEntity.setOrdenesMedicas(ordenesEntity);
+        }
         return medicamentoEntity;
     }
 
@@ -75,6 +90,17 @@ public class MedicamentoDetailDTO extends MedicamentoDTO implements Serializable
     public List<FarmaciaDTO> getFarmacias ()
     {
         return this.farmacias;
+    }
+    
+    public void setOrdenes(List<OrdenMedicaDTO> pOrdenes)
+    {
+        this.ordenes = pOrdenes;
+    }
+    
+    
+    public List<OrdenMedicaDTO> getOrdenes ()
+    {
+        return this.ordenes;
     }
     
     
