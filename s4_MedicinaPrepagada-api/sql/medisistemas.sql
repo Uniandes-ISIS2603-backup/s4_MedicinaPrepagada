@@ -91,15 +91,15 @@ values(5,1739221,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cm
 
 
 
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (5100171235475198, 'Hartley Lamberts', 725, '22/73', 'mastercard');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3565828670929210, 'Marlo McMorland', 490, '55/46', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3567173574390047, 'Teodoor Klinck', 922, '33/29', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (6376268016415909, 'Cirstoforo Joust', 498, '93/46', 'instapayment');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3536535204091005, 'Lorenzo Plimmer', 300, '39/79', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3550791653030546, 'Hobie Enticknap', 995, '53/69', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3558450459779002, 'Bartholomeo Fader', 097, '84/09', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (3585861946780451, 'Aurea Marsh', 412, '00/21', 'jcb');
-insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia) values (5602235051148099, 'Lucas Jenik', 849, '23/76', 'bankcard');
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia, paciente_id) values (5100171235475198, 'Hartley Lamberts', 725, '22/73', 'mastercard',1);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia, paciente_id) values (3565828670929210, 'Marlo McMorland', 490, '55/46', 'jcb',1);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (3567173574390047, 'Teodoor Klinck', 922, '33/29', 'jcb',2);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (6376268016415909, 'Cirstoforo Joust', 498, '93/46', 'instapayment',2);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (3536535204091005, 'Lorenzo Plimmer', 300, '39/79', 'jcb',3);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (3550791653030546, 'Hobie Enticknap', 995, '53/69', 'jcb',3);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (3558450459779002, 'Bartholomeo Fader', 097, '84/09', 'jcb',4);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (3585861946780451, 'Aurea Marsh', 412, '00/21', 'jcb',4);
+insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (5602235051148099, 'Lucas Jenik', 849, '23/76', 'bankcard',5);
 
 
 
@@ -163,12 +163,12 @@ values(400 , 'Laura1', 'laurita56', 'Paciente');
 
 
 
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna',2);
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis',3);
 
 
 

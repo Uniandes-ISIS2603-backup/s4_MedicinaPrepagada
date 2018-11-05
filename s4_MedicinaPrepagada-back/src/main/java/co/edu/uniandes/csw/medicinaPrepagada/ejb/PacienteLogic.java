@@ -5,10 +5,15 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.ejb;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
+import com.sun.javafx.scene.text.HitInfo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -112,6 +117,65 @@ public class PacienteLogic {
      */
     public void deletePaciente(Long id){
         persistence.delete(id);
+    }
+    
+    /**
+     * Retorna las tarjetas de credito de un paciente
+     * @param idPaciente: id del paciente
+     * @return lista de tarjetas de credito del paciente
+     */
+    public List<TarjetaCreditoEntity> getTarjetasCreditoPaciente(Long idPaciente){
+        return persistence.find(idPaciente).getTarjetasCredito();
+    }
+    
+    /**
+     * agrega una tarjeta de credito al paciente
+     * @param idPaciente: id del paciente al que se le agrega la tarjeta
+     * @param tarjeta: entity de la tarjeta que se le asocia al paciente
+     * @return tarjeta creada
+     */
+    public TarjetaCreditoEntity agregarTarjetaCreditoAPaciente(Long idPaciente, TarjetaCreditoEntity tarjeta){
+        PacienteEntity ent = persistence.find(idPaciente);
+        ent.getTarjetasCredito().add(tarjeta);
+        persistence.update(ent);
+        return tarjeta;
+    }
+    
+    /**
+     * da todas las citas de laboratorio de un paciente
+     * @param idPaciente: id del paciente
+     * @return 
+     * @return: lista con todas las citas laboratorio de un paciente
+     */
+    public List<CitaLaboratorioEntity> darCitasLaboratorio(Long idPaciente){
+        return persistence.find(idPaciente).getCitasLaboratorio();
+    }
+    
+    /**
+     * da todas las facturas de un paciente
+     * @param idPaciente: id del paciente
+     * @return lista de todas las facturas de un paciente
+     */
+    public List<FacturaEntity> darFacturasPaciente(Long idPaciente){
+        return persistence.find(idPaciente).getFacturas();
+    }
+    
+    /**
+     * da todas las citas medicas de un paciente
+     * @param idPaciente: id del paciente
+     * @return una lista con todas las citas medicas
+     */
+    public List<CitaMedicaEntity> darCitasMedicas(Long idPaciente){
+        return persistence.find(idPaciente).getCitasMedicas();
+    }
+    
+    /**
+     * da todas las historias clinicas de un paciente
+     * @param idPaciente: id del paciente
+     * @return una lista con todas las historias clinicas del paciente
+     */
+    public List<HistoriaClinicaEntity> darHistoriasClinicas(Long idPaciente){
+        return persistence.find(idPaciente).getHistoriasClinicas();
     }
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
