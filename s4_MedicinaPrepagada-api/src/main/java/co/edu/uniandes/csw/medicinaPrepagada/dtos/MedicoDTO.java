@@ -38,6 +38,7 @@ public class MedicoDTO extends UsuarioDTO implements Serializable{
     }
     
     public MedicoDTO (MedicoEntity medicoEntity){
+        super(medicoEntity);
         if (medicoEntity != null){
            this.idMedico =medicoEntity.getId();
            this.nombre = medicoEntity.getNombre();
@@ -60,7 +61,10 @@ public class MedicoDTO extends UsuarioDTO implements Serializable{
     public MedicoEntity toEntity() 
     {
         MedicoEntity medicoEntity = new MedicoEntity();
-        
+        medicoEntity.setLogin(super.toEntity().getLogin());
+        medicoEntity.setContrasena(super.toEntity().getContrasena());
+        medicoEntity.setTipoUsuario(super.toEntity().getTipoUsuario());
+        medicoEntity.setDocumentoIdentidad(super.toEntity().getDocumentoIdentidad());
         medicoEntity.setId(this.getIdMedico());
         medicoEntity.setNombre(this.getNombre());
         medicoEntity.setTelefono(this.getTelefono());

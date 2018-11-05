@@ -51,7 +51,8 @@ public class MedicoLogic {
         Pattern patronDeCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         String email = medicoEntity.getCorreo();
         Matcher mather = patronDeCorreo.matcher(email);
-        if (mather.find() == false) {
+        if (!mather.matches()) {
+//        if(!medicoEntity.getCorreo().contains("@")){
             throw new BusinessLogicException("La correo no es un correo válido. ");
         }
         persistence.create(medicoEntity);
