@@ -163,12 +163,12 @@ values(400 , 'Laura1', 'laurita56', 'Paciente');
 
 
 
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo');
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna');
-insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones  )
-values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis');
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-10-08', 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-07-20', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna',2);
+insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values('2018-10-26', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis',3);
 
 
 
