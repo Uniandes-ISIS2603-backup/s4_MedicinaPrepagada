@@ -5,9 +5,17 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaLaboratorioDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaMedicaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.FacturaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
@@ -112,6 +120,70 @@ public class PacienteResource {
         for(PacienteEntity ent:listaEntity){
             PacienteDetailDTO  dto = new PacienteDetailDTO(ent);
             rta.add(dto);
+        }
+        return rta;
+    }
+    
+    /**
+     * retorna todas las citas de laboratorio de un paciente
+     * @param pacienteId: id del paciente
+     * @return una lista con todas las citas laboratorio de un paciente
+     */
+    @GET
+    @Path("{pacienteId: \\d+}/citaslaboratorio")
+    public List<CitaLaboratorioDTO> darCitasLaboratorioPaciente(@PathParam("pacienteId") Long pacienteId){
+        List<CitaLaboratorioDTO> rta = new LinkedList<>();
+        List<CitaLaboratorioEntity> lista = pacienteLogic.darCitasLaboratorio(pacienteId);
+        for(CitaLaboratorioEntity ent: lista){
+            rta.add(new CitaLaboratorioDTO(ent));
+        }
+        return rta;
+    }
+    
+    /**
+     * da todas las facturas de un paciente
+     * @param pacienteId: id del paciente
+     * @return una lista con todas las factuars de un paciente
+     */
+    @GET
+    @Path("{pacienteId: \\d+}/facturas")
+    public List<FacturaDTO> darFacturasPaciente(@PathParam("pacienteId") Long pacienteId){
+        List<FacturaDTO> rta = new LinkedList<>();
+        List<FacturaEntity> lista = pacienteLogic.darFacturasPaciente(pacienteId);
+        for(FacturaEntity ent :lista){
+            rta.add(new FacturaDTO(ent));
+        }
+        return rta;
+    }
+    
+    /**
+     * da todas las citas medicas de un paciente
+     * @param pacienteId: id del paciente
+     * @return una lista con todas las citas medicas del paciente
+     */
+    @GET
+    @Path("{pacienteId: \\d++}/citasmedicas")
+    public List<CitaMedicaDTO> darCitasMedicasPaciente(@PathParam("pacienteId") Long pacienteId){
+        List<CitaMedicaDTO> rta = new LinkedList<>();
+        List<CitaMedicaEntity> lista = pacienteLogic.darCitasMedicas(pacienteId);
+        for(CitaMedicaEntity ent : lista){
+            rta.add(new CitaMedicaDTO(ent));
+        }
+        return rta;
+    }
+    
+    /**
+     * da todas las historias clinicas de un paciente
+     * @param pacienteId: id del paciente
+     * @return una lista con todas las historias clinicas de un paciente
+     */
+    @GET
+    @Path("{pacienteId: \\d++}/historiasclinicas")
+    public List<HistoriaClinicaDTO> darHistoriasClinicasPaciente(@PathParam("pacienteId") Long pacienteId){
+        List<HistoriaClinicaDTO> rta = new LinkedList<>();
+        List<HistoriaClinicaEntity> lista = pacienteLogic.darHistoriasClinicas(pacienteId);
+        for(HistoriaClinicaEntity ent : lista){
+            rta.add(new HistoriaClinicaDTO(ent));
         }
         return rta;
     }
