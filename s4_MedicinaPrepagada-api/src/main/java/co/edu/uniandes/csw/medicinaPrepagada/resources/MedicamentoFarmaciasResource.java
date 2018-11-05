@@ -28,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "medicamentos/{id}/farmacias".
  *
- * @farmacia ncobos
+ * @author ncobos
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
