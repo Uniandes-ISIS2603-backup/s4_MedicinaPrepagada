@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -36,8 +37,8 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
            private List<LaboratorioEntity> laboratorios = new ArrayList<>();
     
     @PodamExclude
-    @ManyToOne
-    private OrdenMedicaEntity ordenMedica;
+    @ManyToMany(mappedBy = "examenesMedicos")
+    private List<OrdenMedicaEntity> ordenes = new ArrayList<>(); 
     
     /**
      * Devuelve los laboratorios del examenMedicoEntity.
@@ -62,8 +63,8 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
      *
      * @return ordenMedica
      */
-    public OrdenMedicaEntity getOrdenMedica() {
-        return ordenMedica;
+    public List<OrdenMedicaEntity> getOrdenesMedicas() {
+        return ordenes;
     }
 
     /**
@@ -71,8 +72,8 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
      *
      * @param pOrden the orden medica to set
      */
-    public void setOrdenMedica(OrdenMedicaEntity pOrden) {
-        this.ordenMedica = pOrden;
+    public void setOrdenesMedicas(List<OrdenMedicaEntity> pOrden) {
+        this.ordenes = pOrden;
     }
 
     /**

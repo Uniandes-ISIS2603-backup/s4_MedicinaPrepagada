@@ -120,7 +120,7 @@ public class MedicamentoPersistenceTest {
         Assert.assertEquals(newEntity.getElaboradoPor(), entity.getElaboradoPor());
         Assert.assertEquals(newEntity.getCosto(), entity.getCosto(),0);
         Assert.assertEquals(newEntity.getElaboradoPor(), entity.getElaboradoPor());
-        Assert.assertEquals(newEntity.getOrdenMedica(), entity.getOrdenMedica());
+        Assert.assertEquals(newEntity.getOrdenesMedicas(), entity.getOrdenesMedicas());
 
         Assert.assertEquals(newEntity.getFarmacias().size(), entity.getFarmacias().size());
         for (int i=0;i<newEntity.getFarmacias().size();i++)
@@ -164,7 +164,7 @@ public class MedicamentoPersistenceTest {
         Assert.assertEquals(newEntity.getElaboradoPor(), entity.getElaboradoPor());
         Assert.assertEquals(newEntity.getCosto(), entity.getCosto(),0);
         Assert.assertEquals(newEntity.getElaboradoPor(), entity.getElaboradoPor());
-        Assert.assertEquals(newEntity.getOrdenMedica(), entity.getOrdenMedica());
+        Assert.assertEquals(newEntity.getOrdenesMedicas(), entity.getOrdenesMedicas());
 
         Assert.assertEquals(newEntity.getFarmacias().size(), entity.getFarmacias().size());
         for (int i=0;i<newEntity.getFarmacias().size();i++)
@@ -205,7 +205,7 @@ public class MedicamentoPersistenceTest {
         Assert.assertEquals(newEntity.getElaboradoPor(), resp.getElaboradoPor());
         Assert.assertEquals(newEntity.getCosto(), resp.getCosto(),0);
         Assert.assertEquals(newEntity.getElaboradoPor(), resp.getElaboradoPor());
-        Assert.assertEquals(newEntity.getOrdenMedica(), resp.getOrdenMedica());
+        Assert.assertEquals(newEntity.getOrdenesMedicas(), resp.getOrdenesMedicas());
 
         Assert.assertEquals(newEntity.getFarmacias().size(), resp.getFarmacias().size());
         for (int i=0;i<newEntity.getFarmacias().size();i++)
@@ -228,7 +228,7 @@ public class MedicamentoPersistenceTest {
         Assert.assertEquals(entity.getElaboradoPor(), newEntity.getElaboradoPor());
         Assert.assertEquals(entity.getCosto(), newEntity.getCosto(),0);
         Assert.assertEquals(entity.getElaboradoPor(), newEntity.getElaboradoPor());
-        Assert.assertEquals(entity.getOrdenMedica(), newEntity.getOrdenMedica());
+        Assert.assertEquals(entity.getOrdenesMedicas(), newEntity.getOrdenesMedicas());
 
         newEntity = medicamentoPersistence.findByNombre(null);
         Assert.assertNull(newEntity);
