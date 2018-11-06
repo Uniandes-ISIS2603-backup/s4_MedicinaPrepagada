@@ -38,6 +38,8 @@ public class AdministradorDTO extends UsuarioDTO implements Serializable
     
     public AdministradorDTO(AdministradorEntity administradorEntity) 
     {
+        super(administradorEntity);
+        
         if (administradorEntity != null) 
         {
             this.id = administradorEntity.getId(); 
