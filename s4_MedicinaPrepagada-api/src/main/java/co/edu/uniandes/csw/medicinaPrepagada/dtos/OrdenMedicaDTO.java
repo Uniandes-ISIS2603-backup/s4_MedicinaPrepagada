@@ -20,9 +20,9 @@ public class OrdenMedicaDTO implements Serializable
 {
     private Long id; 
     private String firmaMedico; 
-    private Date fechaExpedicion; 
+    private String fechaExpedicion; 
     private String comentarios; 
-    private Date validaHasta; 
+    private String validaHasta; 
     
     /**
      * Constructor vacio
@@ -41,6 +41,7 @@ public class OrdenMedicaDTO implements Serializable
     
     public OrdenMedicaDTO(OrdenMedicaEntity ordenMedicaEntity) 
     {
+        
         if (ordenMedicaEntity != null) 
         {
             this.id = ordenMedicaEntity.getId();
@@ -114,7 +115,7 @@ public class OrdenMedicaDTO implements Serializable
      * @return atributo fechaExpedicion.
      */
     
-    public Date getFechaExpedicion() 
+    public String getFechaExpedicion() 
     {
         return fechaExpedicion;
     }
@@ -124,7 +125,7 @@ public class OrdenMedicaDTO implements Serializable
      * @param pFechaExpedicion nuevo valor del atributo
      */
     
-    public void setFechaExpedicion(Date pFechaExpedicion) 
+    public void setFechaExpedicion(String pFechaExpedicion) 
     {
         this.fechaExpedicion = pFechaExpedicion;
     }
@@ -154,7 +155,7 @@ public class OrdenMedicaDTO implements Serializable
      * @return El validaHasta
      */
     
-    public Date getValidaHasta() 
+    public String getValidaHasta() 
     {
         return validaHasta;
     }   
@@ -164,7 +165,7 @@ public class OrdenMedicaDTO implements Serializable
      * @param pValidaHasta atributo a implemnetar
      */
     
-    public void setValidaHasta(Date pValidaHasta) 
+    public void setValidaHasta(String pValidaHasta) 
     {
         this.validaHasta = pValidaHasta;
     }
