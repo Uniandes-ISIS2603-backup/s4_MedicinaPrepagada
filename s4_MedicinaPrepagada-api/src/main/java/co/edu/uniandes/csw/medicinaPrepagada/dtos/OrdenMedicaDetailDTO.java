@@ -118,7 +118,18 @@ public class OrdenMedicaDetailDTO extends OrdenMedicaDTO implements Serializable
             
             ordenesEntity.setExamenesMedicos(examenesEntity);
         }
-
-        return histEntity;
+        
+        if (medicamentos != null)
+        {
+            List <MedicamentoEntity> medicamentosEntity = new ArrayList<>();
+            
+            for (MedicamentoDTO medicamwntoDto : medicamentos)
+            {
+                medicamentosEntity.add(medicamwntoDto.toEntity());
+            }
+            
+            ordenesEntity.setMedicamentos(medicamentosEntity);
+        }
+        return ordenesEntity;
     }
 }
