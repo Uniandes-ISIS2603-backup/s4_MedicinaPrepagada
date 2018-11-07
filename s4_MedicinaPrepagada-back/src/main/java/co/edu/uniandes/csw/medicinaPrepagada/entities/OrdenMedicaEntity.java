@@ -34,7 +34,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     private String comentarios; 
     private String validaHasta; 
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne//(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
  //   @PodamExclude
