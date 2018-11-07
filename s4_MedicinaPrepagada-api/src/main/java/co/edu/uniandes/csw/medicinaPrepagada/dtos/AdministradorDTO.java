@@ -59,7 +59,7 @@ public class AdministradorDTO extends UsuarioDTO implements Serializable
     {
         AdministradorEntity administradorEntity = new AdministradorEntity();
         
-        administradorEntity.setId(this.getId());
+        administradorEntity.setId(super.toEntity().getId());
         administradorEntity.setLogin(this.getLogin());
         administradorEntity.setContrasena(this.getContrasena());
         administradorEntity.setTipoUsuario(this.getTipoUsuario());
