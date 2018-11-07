@@ -101,4 +101,24 @@ public class OrdenMedicaDetailDTO extends OrdenMedicaDTO implements Serializable
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+    
+    @Override
+    public OrdenMedicaEntity toEntity() 
+    {
+        OrdenMedicaEntity ordenesEntity = super.toEntity();
+        
+        if (examenesMedicos != null)
+        {
+            List <ExamenMedicoEntity> examenesEntity = new ArrayList<>();
+            
+            for (ExamenMedicoDTO examenesDto : examenesMedicos)
+            {
+                examenesEntity.add(examenesDto.toEntity());
+            }
+            
+            ordenesEntity.setExamenesMedicos(examenesEntity);
+        }
+
+        return histEntity;
+    }
 }
