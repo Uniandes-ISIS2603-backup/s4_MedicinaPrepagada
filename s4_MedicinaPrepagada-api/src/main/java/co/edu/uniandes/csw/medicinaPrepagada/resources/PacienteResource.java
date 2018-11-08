@@ -61,7 +61,7 @@ public class PacienteResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public PacienteDTO createPaciente(PacienteDetailDTO paciente)
+    public PacienteDTO createPaciente(PacienteDetailDTO paciente) throws WebApplicationException
     {
        PacienteEntity entity = paciente.toEntity();
        PacienteEntity nuevaEntity;
@@ -70,7 +70,7 @@ public class PacienteResource {
             return  new PacienteDTO(nuevaEntity);
         } catch (BusinessLogicException ex) {
             Logger.getLogger(PacienteResource.class.getName()).log(Level.SEVERE, null, ex);
-            throw new WebApplicationException();
+            throw new WebApplicationException(ex.getMessage() + "412");
         }
     }
     

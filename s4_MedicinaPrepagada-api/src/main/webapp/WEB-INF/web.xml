@@ -7,4 +7,8 @@
         <filter-name>CORSFilter</filter-name>
         <filter-class>co.edu.uniandes.csw.medicinaPrepagada.filters.CORSFilter</filter-class>
     </filter>
+    <filter-mapping>
+        <filter-name>CORSFilter</filter-name>
+        <url-pattern>/s4_MedicinaPrepagada-api/api/*</url-pattern>
+    </filter-mapping>
 </web-app>
