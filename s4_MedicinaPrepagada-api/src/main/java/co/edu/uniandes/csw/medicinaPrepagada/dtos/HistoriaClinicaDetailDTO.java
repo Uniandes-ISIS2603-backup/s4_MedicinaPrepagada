@@ -74,4 +74,23 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO implements Seri
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
+    @Override
+    public HistoriaClinicaEntity toEntity() 
+    {
+        HistoriaClinicaEntity histEntity = super.toEntity();
+        
+        if (ordenesMedicas != null)
+        {
+            List <OrdenMedicaEntity> ordenesEntity = new ArrayList<>();
+            
+            for (OrdenMedicaDTO ordenesDto : ordenesMedicas)
+            {
+                ordenesEntity.add(ordenesDto.toEntity());
+            }
+            histEntity.setOrdenesMedicas(ordenesEntity);
+        }
+
+        return histEntity;
+    }
+    
 }

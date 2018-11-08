@@ -30,20 +30,11 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class OrdenMedicaEntity extends BaseEntity implements Serializable
 {
     private String firmaMedico; 
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PodamStrategyValue(DateStrategy.class)
-    private Date fechaExpedicion; 
-    
+    private String fechaExpedicion; 
     private String comentarios; 
+    private String validaHasta; 
     
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PodamStrategyValue(DateStrategy.class)
-    private Date validaHasta; 
-    
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne//(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
  //   @PodamExclude
@@ -83,7 +74,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return atributo fechaExpedicion.
      */
     
-    public Date getFechaExpedicion() 
+    public String getFechaExpedicion() 
     {
         return fechaExpedicion;
     }
@@ -93,7 +84,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pFechaExpedicion nuevo valor del atributo
      */
     
-    public void setFechaExpedicion(Date pFechaExpedicion) 
+    public void setFechaExpedicion(String pFechaExpedicion) 
     {
         this.fechaExpedicion = pFechaExpedicion;
     }
@@ -123,7 +114,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @return El validaHasta
      */
     
-    public Date getValidaHasta() 
+    public String getValidaHasta() 
     {
         return validaHasta;
     }   
@@ -133,7 +124,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
      * @param pValidaHasta atributo a implemnetar
      */
     
-    public void setValidaHasta(Date pValidaHasta) 
+    public void setValidaHasta(String pValidaHasta) 
     {
         this.validaHasta = pValidaHasta;
     }
