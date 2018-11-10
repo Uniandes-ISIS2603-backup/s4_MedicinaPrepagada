@@ -31,7 +31,7 @@ public class EspecialidadEntity implements Serializable{
     private List<ConsultorioEntity> consultorios;
     
     @PodamExclude
-    @OneToMany(mappedBy = "especialidad", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "especialidad", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<MedicoEntity> medicos;
     
     public String getNombre() {
