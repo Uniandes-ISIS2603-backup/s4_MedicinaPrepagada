@@ -30,10 +30,8 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Simon Guzman
  */
-@Path("consultorios")
 @Produces("application/json")
 @Consumes("application/json")
-@RequestScoped
 public class ConsultorioResource 
 {
        private static final Logger LOGGER = Logger.getLogger(ConsultorioResource.class.getName());
@@ -56,7 +54,7 @@ public class ConsultorioResource
      */   
        
     @POST
-    public ConsultorioDTO createConsultorio(ConsultorioDTO pConsultorio) throws BusinessLogicException, WebApplicationException 
+    public ConsultorioDTO createConsultorio(@PathParam("sedeId") Long sedeId, ConsultorioDTO pConsultorio) throws BusinessLogicException, WebApplicationException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource createConsultorio: input: {0}", pConsultorio.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
@@ -64,7 +62,7 @@ public class ConsultorioResource
         // Invoca la lógica para crear el consultorio  nuevo
         
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        ConsultorioDTO nuevoConsultorioDTO = new ConsultorioDTO(consultorioLogic.createConsultorio(pConsultorio.toEntity()));
+        ConsultorioDTO nuevoConsultorioDTO = new ConsultorioDTO(consultorioLogic.createConsultorio(pConsultorio.toEntity(), sedeId));
         LOGGER.log(Level.INFO, "ConsultorioResource createConsultorio: output: {0}", nuevoConsultorioDTO.toString());
         return nuevoConsultorioDTO;
     }
@@ -78,10 +76,10 @@ public class ConsultorioResource
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<ConsultorioDTO> getConsultorios()
+    public List<ConsultorioDTO> getConsultorios(@PathParam("sedeId") Long sedeId)
     {
         LOGGER.info("ConsultorioResource getConsultorios: input: void");
-        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO(consultorioLogic.getConsultorios());
+        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO(consultorioLogic.getConsultorios(sedeId));
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorios: output: {0}", listaConsultorios.toString());
         return listaConsultorios;
     }
@@ -99,10 +97,10 @@ public class ConsultorioResource
      */
     @GET
     @Path("{consultorioId: \\d+}")
-    public ConsultorioDetailDTO getConsultorio(@PathParam("consultorioId") Long pConsultorioId) throws WebApplicationException 
+    public ConsultorioDetailDTO getConsultorio(@PathParam("sedeId") Long sedeId, @PathParam("consultorioId") Long pConsultorioId) throws WebApplicationException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorio: input: {0}", pConsultorioId);
-        ConsultorioEntity consultorioEntity = consultorioLogic.getConsultorio(pConsultorioId);
+        ConsultorioEntity consultorioEntity = consultorioLogic.getConsultorio(sedeId, pConsultorioId);
         if (consultorioEntity == null) 
         {
             throw new WebApplicationException("El recurso /consultorio/" + pConsultorioId + " no existe .", 404);
@@ -130,11 +128,11 @@ public class ConsultorioResource
      */
     @PUT
     @Path("{consultorioId: \\d+}")
-    public ConsultorioDTO updateConsultorio(@PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException, BusinessLogicException 
+    public ConsultorioDTO updateConsultorio(@PathParam("sedeId") Long sedeId, @PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException, BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: input: id:{0} , consultorio: {1}", new Object[]{pConsultorioId, pConsultorio.toString()});
         pConsultorio.setId(pConsultorioId);
-        if (consultorioLogic.getConsultorio(pConsultorioId) == null) 
+        if (consultorioLogic.getConsultorio(sedeId, pConsultorioId) == null) 
         {
             throw new WebApplicationException("El recurso /consultorio/ que desea actualizar" + pConsultorioId + " no existe.", 404);
         }
@@ -159,14 +157,14 @@ public class ConsultorioResource
      */
     @DELETE
     @Path("{consultorioId: \\d+}")
-    public void deleteConsultorio(@PathParam("consultorioId") Long consultorioId) throws BusinessLogicException 
+    public void deleteConsultorio(@PathParam("sedeId") Long sedeId, @PathParam("consultorioId") Long consultorioId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ConsultorioResource deleteConsultorio: input: {0}", consultorioId);
-        if (consultorioLogic.getConsultorio(consultorioId) == null) 
+        if (consultorioLogic.getConsultorio(sedeId, consultorioId) == null) 
         {
             throw new WebApplicationException("El recurso /consultorio/ que desea eliminar" + consultorioId + " no existe.", 404);
         }
-        consultorioLogic.deleteConsultorio(consultorioId);
+        consultorioLogic.deleteConsultorio(sedeId, consultorioId);
         LOGGER.info("ConsultorioResource deleteConsultorio: output: void");
     }
     
