@@ -28,10 +28,11 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PodamStrategyValue(DateStrategy.class)
-    private Date fecha; 
+    private Date fecha;  
     
     private String descripcionDiagnostico; 
     private String alergias; 

@@ -31,7 +31,7 @@ import javax.ws.rs.WebApplicationException;
  * @author ni.ramirez10
  */
 
-@Path("historiaClinica")
+@Path("historiasClinicas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

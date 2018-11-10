@@ -31,7 +31,7 @@ import javax.ws.rs.WebApplicationException;
  * @author ni.ramirez10
  */
 
-@Path("administrador")
+@Path("administradores")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

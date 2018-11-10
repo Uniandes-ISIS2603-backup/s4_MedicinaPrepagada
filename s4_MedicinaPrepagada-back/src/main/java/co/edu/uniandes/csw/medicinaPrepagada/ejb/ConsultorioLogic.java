@@ -43,15 +43,17 @@ public class ConsultorioLogic
      * @param consultorioEntity Objeto de ConsultorioEntity con los datos nuevos
      * @return Objeto de ConsultorioEntity con los datos nuevos y su ID.
      */
-    public ConsultorioEntity createConsultorio(ConsultorioEntity consultorioEntity) throws BusinessLogicException
+    public ConsultorioEntity createConsultorio(ConsultorioEntity consultorioEntity, Long sedeId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del consultorio");
+        
+        //Verifica que tenga una sede
+        if (!validateSede(persistenceSede.find(sedeId)))
+            throw new BusinessLogicException("Un consultorio debe tener una sede");
+               
         //Verifica que el edificio sea valido
         if (!validateEdificio(consultorioEntity.getEdificio()))
            throw new BusinessLogicException ("EL edificio no puede ser vacio ");
-        //Verifica que tenga una sede
-        if (!validateSede(consultorioEntity.getSede()))
-            throw new BusinessLogicException("Un consultorio debe tener una sede");
         //Verifica que la sede exista
         if (persistenceSede.find(consultorioEntity.getSede().getId())== null)
             throw new BusinessLogicException("La sede del consultorio no existe");
@@ -73,10 +75,11 @@ public class ConsultorioLogic
      *
      * @return Colección de objetos de ConsultorioEntity.
      */
-    public List<ConsultorioEntity> getConsultorios() 
+    public List<ConsultorioEntity> getConsultorios(Long sedeId) 
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los consultorioes");
-        List<ConsultorioEntity> lista = persistence.findAll();
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los consultorioes de la sede con id= {0}", sedeId);
+        SedeEntity pSedeEntity = persistenceSede.find(sedeId);
+        List<ConsultorioEntity> lista = pSedeEntity.getConsultorios();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los consultorioes");
         return lista;
     }
@@ -87,10 +90,10 @@ public class ConsultorioLogic
      * @param consultoriosId Identificador de la instancia a consultar
      * @return Instancia de ConsultorioEntity con los datos del Consultorio consultado.
      */
-    public ConsultorioEntity getConsultorio(Long consultoriosId) 
+    public ConsultorioEntity getConsultorio(Long sedeId, Long consultoriosId) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el consultorio con id = {0}", consultoriosId);
-        ConsultorioEntity consultorioEntity = persistence.find(consultoriosId);
+        ConsultorioEntity consultorioEntity = persistence.find(sedeId, consultoriosId);
         if (consultorioEntity == null)
         {
             LOGGER.log(Level.SEVERE, "La consultorio con el id = {0} no existe", consultoriosId);
@@ -103,27 +106,25 @@ public class ConsultorioLogic
             /**
      * Actualiza la información de una instancia de Consultorio.
      *
-     * @param consultoriosId Identificador de la instancia a actualizar
+     * @param sedeId
      * @param consultorioEntity Instancia de ConsultorioEntity con los nuevos datos.
      * @return Instancia de ConsultorioEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
      */
-    public ConsultorioEntity updateConsultorio(Long consultoriosId, ConsultorioEntity consultorioEntity) throws BusinessLogicException
+    public ConsultorioEntity updateConsultorio(Long sedeId, ConsultorioEntity consultorioEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el consultorio con id = {0}", consultoriosId);
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el consultorio con id = {0}", consultorioEntity.getId());
         
-        ConsultorioEntity pConsultorioOld = persistence.find(consultoriosId);
+        ConsultorioEntity pConsultorioOld = persistence.find(sedeId, consultorioEntity.getId());
+        consultorioEntity.setSede(persistenceSede.find(sedeId));
         //Verifica que la consultorio que se intenta modificar exista
         if (pConsultorioOld == null)
             throw new BusinessLogicException ("El consultorio que intenta modificar no existe");
-        //Verifica que no se intente cambiar el Id
-        if (consultorioEntity.getId() != consultoriosId)
-            throw new BusinessLogicException("No se puede cambiar el id de la consultorio");
+       
          //Verifica que el edificio sea valido
         if (!validateEdificio(consultorioEntity.getEdificio()))
            throw new BusinessLogicException ("EL edificio no puede ser vacio ");
-         //Verifica que la sede no cambie
-        if (!persistence.find(consultoriosId).getSede().equals(consultorioEntity.getSede()))
-            throw new BusinessLogicException("Un consultorio no puede cambiar de sede");
+        
          //Verifica que la sede, edificio y oficna no sena la misma
         if (!validateSedeEdificioOficina(consultorioEntity))
             throw new BusinessLogicException("Un consultorio no puede tener la misma Sde, edificio y numero de oficina");
@@ -135,7 +136,7 @@ public class ConsultorioLogic
         
   
         ConsultorioEntity newConsultorioEntity = persistence.update(consultorioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el consultorio con id = {0}", consultoriosId);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el consultorio con id = {0}", consultorioEntity.getId());
         return newConsultorioEntity;
     }
 
@@ -145,13 +146,13 @@ public class ConsultorioLogic
      * @param consultoriosId Identificador de la instancia a eliminar.
      * @throws BusinessLogicException si el consultorio tiene libros asociados.
      */
-    public void deleteConsultorio(Long consultoriosId) throws BusinessLogicException 
+    public void deleteConsultorio(Long sedeId, Long consultoriosId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el consultorio con id = {0}", consultoriosId);
   
         
         //Verifica que la consultorio que se intenta modificar exista
-        if (persistence.find(consultoriosId) == null)
+        if (persistence.find(sedeId, consultoriosId) == null)
             throw new BusinessLogicException ("El consultorio que intenta eliminar no existe");
         
         persistence.delete(consultoriosId);
