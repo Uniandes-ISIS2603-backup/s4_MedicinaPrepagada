@@ -7,12 +7,15 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
+import co.edu.uniandes.csw.medicinaPrepagada.ejb.TarjetaCreditoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,6 +33,9 @@ public class PacienteTarjetaCreditoResource {
     @Inject
     private PacienteLogic pacienteLogic;
     
+    @Inject
+    private TarjetaCreditoLogic tarjetaLogic;
+    
     /**
      * da todas las tarjetas de credito de un paciente
      * @param pacienteId: id del paciente
@@ -44,6 +50,20 @@ public class PacienteTarjetaCreditoResource {
             rta.add(new TarjetaCreditoDTO(ent));
         }
         return rta;
+    }
+    
+    /**
+     * agrega la tarjeta de credito a la base de datos y la asocia con el id del paciente que llega
+     * @param: id del paciente
+     * @param tarjetaCreditoDTO: tarjeta de credito
+     * @return la tarjeta de credito creada
+     */
+    @POST
+    @Path("{pacienteId: \\d+}/tarjetascredito")
+    public TarjetaCreditoDTO agregarTarjetaAPaciente(@PathParam("pacienteId") Long pacienteId, TarjetaCreditoDTO tarjetaCreditoDTO) throws BusinessLogicException{
+        tarjetaLogic.createTarjetaCredito(tarjetaCreditoDTO.toEntity());
+        pacienteLogic.agregarTarjetaCreditoAPaciente(pacienteId, tarjetaCreditoDTO.toEntity());
+        return tarjetaCreditoDTO;
     }
     
 

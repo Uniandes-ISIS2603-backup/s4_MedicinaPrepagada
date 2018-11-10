@@ -13,7 +13,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
-import com.sun.javafx.scene.text.HitInfo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -36,7 +35,7 @@ public class PacienteLogic {
     
     @Inject
     private PacientePersistence persistence;
-    
+     
     /**
      * Guardar un nuevo Paciente
      * @param pacienteEntity: el paciente a guardar
@@ -176,6 +175,17 @@ public class PacienteLogic {
      */
     public List<HistoriaClinicaEntity> darHistoriasClinicas(Long idPaciente){
         return persistence.find(idPaciente).getHistoriasClinicas();
+    }
+    
+    /**
+     * le asigna una tarjeta de credito a un paciente
+     * @param pacienteId: id del paciente
+     * @param tarjeta entidad de tarjeta que se le va  aagregar al paciente
+     */
+    public void asignarTarjetaAPaciente(Long pacienteId, TarjetaCreditoEntity tarjeta){
+        PacienteEntity pac = persistence.find(pacienteId);
+        pac.getTarjetasCredito().add(tarjeta);
+        persistence.update(pac);
     }
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
