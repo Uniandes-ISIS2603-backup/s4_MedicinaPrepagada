@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.ConsultorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.ConsultorioPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,8 @@ public class ConsultorioTest
 
     private List<ConsultorioEntity> data = new ArrayList<>();
     
+    
+     private List<SedeEntity> dataSede = new ArrayList<>();
     
      /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -95,6 +98,7 @@ public class ConsultorioTest
     private void clearData()
     {
         em.createQuery("delete from ConsultorioEntity").executeUpdate();
+        em.createQuery("delete from SedeEntity").executeUpdate();
     }
 
     /**
@@ -104,10 +108,23 @@ public class ConsultorioTest
     private void insertData() 
     {
         PodamFactory factory = new PodamFactoryImpl();
+        // Creo las sedes
+        
+        for (int i = 0; i < 3; i++) 
+        {
+            SedeEntity entity = factory.manufacturePojo(SedeEntity.class);
+
+            em.persist(entity);
+            dataSede.add(entity);
+        }
+        
+        
         for (int i = 0; i < 3; i++) 
         {
             ConsultorioEntity entity = factory.manufacturePojo(ConsultorioEntity.class);
-
+            if (i == 0) {
+                entity.setSede(dataSede.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -181,7 +198,7 @@ public class ConsultorioTest
     public void getConsultorioTest()
     {
         ConsultorioEntity entity = data.get(0);
-        ConsultorioEntity newEntity = consultorioPersistence.find(entity.getId());
+        ConsultorioEntity newEntity = consultorioPersistence.find(entity.getSede().getId(),entity.getId());
         Assert.assertNotNull(newEntity);
         //Test Atributos
         Assert.assertEquals(newEntity.getEdificio(), entity.getEdificio());
