@@ -163,6 +163,33 @@ public class SedeResource
         sedeLogic.deleteSede(sedeId);
         LOGGER.info("SedeResource deleteSede: output: void");
     }
+    
+    
+    /**
+     * Conexión con el servicio de consultorios  para una sede. {@link ConsultoriosResource}
+     *
+     * Este método conecta la ruta de /sedes con las rutas de /consultorios que
+     * dependen del sede, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las consultorios.
+     *
+     * @param sedeId El ID del sede con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de consultorio para ese sede en paricular.\
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el sede.
+     */
+    
+    @Path("{sedeId: \\d+}/consultorios")
+    public Class<ConsultorioResource> getConsultorioResource(@PathParam("sedeId") Long sedeId)
+    {
+        if (sedeLogic.getSede(sedeId) == null) {
+            throw new WebApplicationException("El recurso /sedes/" + sedeId + "/ consultorios no existe.", 404);
+        }
+        return ConsultorioResource.class;
+    }
+    
+    
+    
     /**
      * Convierte una lista de entidades a DTO.
      *
