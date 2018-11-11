@@ -88,6 +88,10 @@ public class TarjetaCreditoLogic {
         return persistence.find(id);
     }
     
+    /**
+     * da todas las tarjetas del sistema
+     * @return 
+     */
     public List<TarjetaCreditoEntity> getTarjetasDeCredito(){
         return persistence.findAll();
     }
@@ -98,6 +102,15 @@ public class TarjetaCreditoLogic {
      */
     public void deleteTarjetaCredito(Long id){
         persistence.delete(id);
+    }
+    
+    /**
+     * asocia un atarjeta a un paciente
+     * @param idPaciente: id del paciente
+     * @param idTarjeta: id de la tarjeta
+     */
+    public void agregarPacienteATarjeta(Long idPaciente, Long idTarjeta){
+        persistence.setPacienteToTarjeta(idPaciente, idTarjeta);
     }
     
     /**
