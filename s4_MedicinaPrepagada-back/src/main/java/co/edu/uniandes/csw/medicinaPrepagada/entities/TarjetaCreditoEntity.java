@@ -97,5 +97,20 @@ public class TarjetaCreditoEntity implements Serializable{
     public void setCodigoSeguridad(Integer codigoSeguridad) {
         this.codigoSeguridad = codigoSeguridad;
     }
+    
+     /**
+     * @return the paciente
+     */
+    public PacienteEntity getPaciente() {
+        return paciente;
+    }
+
+    /**
+     * @param paciente the paciente to set
+     */
+    public void setPaciente(PacienteEntity paciente) {
+        this.paciente = paciente;
+    }
+
 
 }

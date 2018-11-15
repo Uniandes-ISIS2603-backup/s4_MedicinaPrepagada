@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
+import co.edu.uniandes.csw.medicinaPrepagada.persistence.TarjetaCreditoPersistence;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -35,6 +36,9 @@ public class PacienteLogic {
     
     @Inject
     private PacientePersistence persistence;
+    
+    @Inject
+    private TarjetaCreditoPersistence tarjetaPersistence;
      
     /**
      * Guardar un nuevo Paciente
@@ -94,15 +98,21 @@ public class PacienteLogic {
         if(!pacienteEntity.getLogin().equals(oldEntity.getLogin())){
             throw new BusinessLogicException("No se puede actualizar el login");
         }
+        if(pacienteEntity.getTarjetasCredito() == null || pacienteEntity.getTarjetasCredito().isEmpty()){
+            pacienteEntity.setTarjetasCredito(oldEntity.getTarjetasCredito());
+        }
         
-        List<CitaMedicaEntity> oldCitasMedicas = pacienteEntity.getCitasMedicas();
+        
+        List<CitaMedicaEntity> oldCitasMedicas = oldEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
-        for (CitaMedicaEntity ent : oldCitasMedicas) {
+        if(newCitasMedicas != null || !newCitasMedicas.isEmpty()){
+            for (CitaMedicaEntity ent : oldCitasMedicas) {
             for (CitaMedicaEntity ent2 : newCitasMedicas) {
                 if(ent.getId() != ent2.getId() && ent.getFecha().compareTo(ent2.getFecha()) == 0){
                     throw  new BusinessLogicException("No se puede tener dos citas medicas al tiempo");
                 }
             }
+        }
         }
         
         validarReglasComunes(pacienteEntity);
@@ -185,7 +195,9 @@ public class PacienteLogic {
     public void asignarTarjetaAPaciente(Long pacienteId, TarjetaCreditoEntity tarjeta){
         PacienteEntity pac = persistence.find(pacienteId);
         pac.getTarjetasCredito().add(tarjeta);
+        tarjeta.setPaciente(pac);
         persistence.update(pac);
+        tarjetaPersistence.update(tarjeta);
     }
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
