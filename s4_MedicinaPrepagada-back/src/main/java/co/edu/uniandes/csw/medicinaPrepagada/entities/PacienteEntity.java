@@ -21,11 +21,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PacienteEntity extends UsuarioEntity implements Serializable{
     
     @PodamExclude    
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CitaLaboratorioEntity> citasLaboratorio;
     
     @PodamExclude  
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<FacturaEntity> facturas;
     
     @PodamExclude
@@ -33,16 +33,15 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
     private List<TarjetaCreditoEntity> tarjetasCredito;
     
     @PodamExclude    
-    @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CitaMedicaEntity> citasMedicas;
    
     @PodamExclude    
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<HistoriaClinicaEntity> historiasClinicas;
  
 
     private String nombre;
-//    @PodamStrategyValue()
     private String fechaNacimiento;
     private String direccion;
     private Long numeroContacto;
