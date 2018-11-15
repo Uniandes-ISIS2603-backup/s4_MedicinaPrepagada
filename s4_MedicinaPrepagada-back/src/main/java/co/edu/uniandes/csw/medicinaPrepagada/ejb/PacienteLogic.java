@@ -160,6 +160,8 @@ public class PacienteLogic {
         PacienteEntity ent = persistence.find(idPaciente);
         ent.getTarjetasCredito().add(tarjeta);
         persistence.update(ent);
+        tarjeta.setPaciente(ent);
+        tarjetaPersistence.update(tarjeta);
         return tarjeta;
     }
     
