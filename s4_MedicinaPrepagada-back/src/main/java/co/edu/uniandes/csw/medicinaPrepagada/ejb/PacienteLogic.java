@@ -105,7 +105,7 @@ public class PacienteLogic {
         
         List<CitaMedicaEntity> oldCitasMedicas = oldEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
-        if(newCitasMedicas != null && !newCitasMedicas.isEmpty()){
+        if(newCitasMedicas != null || !newCitasMedicas.isEmpty()){
             for (CitaMedicaEntity ent : oldCitasMedicas) {
             for (CitaMedicaEntity ent2 : newCitasMedicas) {
                 if(ent.getId() != ent2.getId() && ent.getFecha().compareTo(ent2.getFecha()) == 0){
