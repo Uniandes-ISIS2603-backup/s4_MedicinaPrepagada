@@ -32,6 +32,7 @@ import javax.ws.rs.WebApplicationException;
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Path("/medicamentos")
 public class MedicamentoFarmaciasResource {
 
     private static final Logger LOGGER = Logger.getLogger(MedicamentoFarmaciasResource.class.getName());
@@ -52,7 +53,7 @@ public class MedicamentoFarmaciasResource {
      * Error de lógica que se genera cuando no se encuentra la farmacia.
      */
     @POST
-    @Path("{farmaciasId: \\d+}")
+    @Path("{medicamentosId: \\d+}/farmacias/{farmaciasId: \\d+}")
     public FarmaciaDetailDTO addFarmacia(@PathParam("medicamentosId") Long medicamentosId, @PathParam("farmaciasId") Long farmaciasId) {
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource addFarmacia: input: medicamentosId {0} , farmaciasId {1}", new Object[]{medicamentosId, farmaciasId});
         if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
@@ -71,6 +72,7 @@ public class MedicamentoFarmaciasResource {
      * medicamento. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+    @Path("{medicamentosId: \\d+}/farmacias")
     public List<FarmaciaDetailDTO> getFarmacias(@PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource getFarmacias: input: {0}", medicamentosId);
         List<FarmaciaDetailDTO> lista = farmaciasListEntity2DTO(medicamentoFarmaciaLogic.getFarmacias(medicamentosId));
@@ -89,7 +91,7 @@ public class MedicamentoFarmaciasResource {
      * Error de lógica que se genera cuando no se encuentra la farmacia.
      */
     @GET
-    @Path("{farmaciasId: \\d+}")
+    @Path("{medicamentosId: \\d+}/farmacias/{farmaciasId: \\d+}")
     public FarmaciaDetailDTO getFarmacia(@PathParam("medicamentosId") Long medicamentosId, @PathParam("farmaciasId") Long farmaciasId) {
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource getFarmacia: input: medicamentosId {0} , farmaciasId {1}", new Object[]{medicamentosId, farmaciasId});
         if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
@@ -100,30 +102,7 @@ public class MedicamentoFarmaciasResource {
         return detailDTO;
     }
 
-    /**
-     * Actualiza la lista de autores de un medicamento con la lista que se recibe en
-     * el cuerpo.
-     *
-     * @param medicamentosId El ID del medicamento al cual se le va a asociar la lista de
-     * autores
-     * @param farmacias JSONArray {@link FarmaciaDetailDTO} - La lista de autores
-     * que se desea guardar.
-     * @return JSONArray {@link FarmaciaDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
-     * Error de lógica que se genera cuando no se encuentra la farmacia.
-     */
-    @PUT
-    public List<FarmaciaDetailDTO> replaceFarmacias(@PathParam("medicamentosId") Long medicamentosId, List<FarmaciaDetailDTO> farmacias) {
-        LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource replaceFarmacias: input: medicamentosId {0} , farmacias {1}", new Object[]{medicamentosId, farmacias.toString()});
-        for (FarmaciaDetailDTO farmacia : farmacias) {
-            if (farmaciaLogic.getFarmacia(farmacia.getId()) == null) {
-                throw new WebApplicationException("El recurso /farmacias/" + farmacia.getId() + " no existe.", 404);
-            }
-        }
-        List<FarmaciaDetailDTO> lista = farmaciasListEntity2DTO(medicamentoFarmaciaLogic.replaceFarmacias(medicamentosId, farmaciasListDTO2Entity(farmacias)));
-        LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource replaceFarmacias: output:{0}", lista.toString());
-        return lista;
-    }
+   
 
     /**
      * Elimina la conexión entre la farmacia y el medicamento recibidos en la URL.
@@ -134,7 +113,7 @@ public class MedicamentoFarmaciasResource {
      * Error de lógica que se genera cuando no se encuentra la farmacia.
      */
     @DELETE
-    @Path("{farmaciasId: \\d+}")
+    @Path("{medicamentosId: \\d+}/farmacias/{farmaciasId: \\d+}")
     public void removeFarmacia(@PathParam("medicamentosId") Long medicamentosId, @PathParam("farmaciasId") Long farmaciasId) {
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource removeFarmacia: input: medicamentosId {0} , farmaciasId {1}", new Object[]{medicamentosId, farmaciasId});
         if (farmaciaLogic.getFarmacia(farmaciasId) == null) {
@@ -148,7 +127,7 @@ public class MedicamentoFarmaciasResource {
      * Convierte una lista de FarmaciaEntity a una lista de FarmaciaDetailDTO.
      *
      * @param entityList Lista de FarmaciaEntity a convertir.
-     * @return Lista de FarmaciaDetailDTO convertida.
+     * @return Lista de FarmaciaDetailDTO convertida.   
      */
     private List<FarmaciaDetailDTO> farmaciasListEntity2DTO(List<FarmaciaEntity> entityList) {
         List<FarmaciaDetailDTO> list = new ArrayList<>();

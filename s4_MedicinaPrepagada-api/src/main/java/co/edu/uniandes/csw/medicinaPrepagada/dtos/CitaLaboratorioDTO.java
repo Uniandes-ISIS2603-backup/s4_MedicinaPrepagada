@@ -65,8 +65,12 @@ public class CitaLaboratorioDTO implements Serializable {
             this.especialidad= pCitaLaboratorioEntity.getEspecialidad();
             this.fecha=pCitaLaboratorioEntity.getDate();
             this.recomendaciones=pCitaLaboratorioEntity.getRecomendaciones();
-            this.paciente = new PacienteDTO(pCitaLaboratorioEntity.getPaciente());
-            this.laboratorio = new LaboratorioDTO(pCitaLaboratorioEntity.getLaboratorio());
+            if(pCitaLaboratorioEntity.getPaciente() != null){
+                this.paciente = new PacienteDTO(pCitaLaboratorioEntity.getPaciente());
+            }
+            if(pCitaLaboratorioEntity.getLaboratorio() != null){
+                this.laboratorio = new LaboratorioDTO(pCitaLaboratorioEntity.getLaboratorio());
+            }
         }
 
     }
@@ -85,9 +89,12 @@ public class CitaLaboratorioDTO implements Serializable {
         citaLabEntity.setDate(this.fecha);
         citaLabEntity.setRecomendaciones(this.recomendaciones);
         citaLabEntity.setEspecialidad(this.especialidad);
-        citaLabEntity.setLaboratorio(this.laboratorio.toEntity());
-        citaLabEntity.setPaciente(this.paciente.toEntity());
-      
+        if(this.paciente != null){
+            citaLabEntity.setPaciente(this.paciente.toEntity());
+        }
+        if(this.laboratorio != null){
+           citaLabEntity.setLaboratorio(this.laboratorio.toEntity()); 
+        }
 
         return citaLabEntity;
     }

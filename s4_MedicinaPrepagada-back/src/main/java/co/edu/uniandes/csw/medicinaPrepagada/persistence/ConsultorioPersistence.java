@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -64,17 +65,41 @@ public class ConsultorioPersistence
      * @param consultorioId: id correspondiente a la consultorio buscada.
      * @return un consultorio.
      */
-    public ConsultorioEntity find(Long consultorioId)
+    public ConsultorioEntity find(Long sedeId, Long consultorioId)
     {
-        LOGGER.log(Level.INFO, "Consultando el consultorio con id={0}", consultorioId);
-        return em.find(ConsultorioEntity.class, consultorioId);
+        LOGGER.log(Level.INFO, "Consultando el consultorio con id = {0} de la sede con id = " + sedeId, consultorioId);     
+
+        
+        TypedQuery<ConsultorioEntity> q = em.createQuery("select p from ConsultorioEntity p where (p.sede.id = :sedeid) and (p.id = :consultorioId)", ConsultorioEntity.class);
+        q.setParameter("sedeid", sedeId);
+        q.setParameter("consultorioId", consultorioId);
+        List<ConsultorioEntity> results = q.getResultList();
+        ConsultorioEntity consultorio = null;
+        
+        try {
+            if (results == null) {
+            consultorio = null;
+        } else if (results.isEmpty()) {
+            consultorio = null;
+        } else if (results.size() >= 1) {
+            consultorio = results.get(0);
+        }
+        }
+        catch (NoResultException e1)
+        {
+            return null;
+        }
+        
+        
+        
+        
+        
+        LOGGER.log(Level.INFO, "Saliendo de consultar el consultorio con id = {0} del libro con id =" + sedeId, consultorioId);
+        return consultorio;
+   
     }
     
-       public ConsultorioEntity findBySede(SedeEntity pSede)
-    {
-        LOGGER.log(Level.INFO, "Consultando el consultorio con id={0}", pSede.toString());
-        return em.find(ConsultorioEntity.class, pSede);
-    }
+
      
         /**
      * Actualiza una consultorio.

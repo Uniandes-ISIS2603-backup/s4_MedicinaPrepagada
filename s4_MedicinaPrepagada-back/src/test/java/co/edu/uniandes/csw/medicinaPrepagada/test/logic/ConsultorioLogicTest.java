@@ -48,7 +48,8 @@ public class ConsultorioLogicTest
 
     private List<ConsultorioEntity> data = new ArrayList<>();
     
-    
+        private List<SedeEntity> dataSede = new ArrayList<>();
+
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
@@ -153,7 +154,7 @@ public class ConsultorioLogicTest
         newEntity.setSede(data.get(0).getSede());
         newEntity.setEspecialidad(data.get(0).getEspecialidad());
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -181,7 +182,7 @@ public class ConsultorioLogicTest
         newEntity.setEspecialidad(data.get(0).getEspecialidad());
         newEntity.setEdificio("");
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -197,7 +198,7 @@ public class ConsultorioLogicTest
         ConsultorioEntity newEntity = factory.manufacturePojo(ConsultorioEntity.class);
         newEntity.setEspecialidad(data.get(0).getEspecialidad());
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, 99999999999L);
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -215,7 +216,7 @@ public class ConsultorioLogicTest
         newEntity.setEspecialidad(data.get(0).getEspecialidad());
         newEntity.setSede(newSede);
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -236,7 +237,7 @@ public class ConsultorioLogicTest
         newEntity.setNOficina(data.get(1).getNOficina());
         
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -254,7 +255,7 @@ public class ConsultorioLogicTest
         newEntity.setEspecialidad(newEspecialidad);
         newEntity.setSede(data.get(1).getSede());
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -267,12 +268,15 @@ public class ConsultorioLogicTest
     @Test
     public void getConsultoriosTest() 
     {
-        List<ConsultorioEntity> list = consultorioLogic.getConsultorios();
-        Assert.assertEquals(data.size(), list.size());
+        Long idSede = data.get(0).getSede().getId();
+        SedeEntity pSedeTemp = em.find(SedeEntity.class, idSede );
+        List<ConsultorioEntity> list = consultorioLogic.getConsultorios(idSede);
+        System.out.println(" ADASDSWDFSGFDGSFDSDSF sede.consultorios.size "+ pSedeTemp.getConsultorios().size() + " /n list.size " + list.size() );
+        Assert.assertEquals(pSedeTemp.getConsultorios().size(), list.size());
         for (ConsultorioEntity entity : list) 
         {
             boolean found = false;
-            for (ConsultorioEntity storedEntity : data) 
+            for (ConsultorioEntity storedEntity : pSedeTemp.getConsultorios()) 
             {
                 if (entity.getId().equals(storedEntity.getId()))
                 {
@@ -291,7 +295,7 @@ public class ConsultorioLogicTest
     public void getConsultorioTest() 
     {
         ConsultorioEntity entity = data.get(0);
-        ConsultorioEntity resultEntity = consultorioLogic.getConsultorio(entity.getId());
+        ConsultorioEntity resultEntity = consultorioLogic.getConsultorio(entity.getSede().getId(), entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         
@@ -311,7 +315,8 @@ public class ConsultorioLogicTest
     @Test // (expected = BusinessLogicException.class)
     public void getConsultorioInexistenteTest() 
     {
-        ConsultorioEntity resultEntity = consultorioLogic.getConsultorio(999999L);
+        Long idSede = data.get(0).getSede().getId();
+        ConsultorioEntity resultEntity = consultorioLogic.getConsultorio(idSede, 999999L);
        Assert.assertNull(resultEntity);
 
     } 
@@ -330,7 +335,7 @@ public class ConsultorioLogicTest
         pojoEntity.setSede(data.get(2).getSede());
         pojoEntity.setEspecialidad(data.get(0).getEspecialidad());
 
-        consultorioLogic.updateConsultorio(pojoEntity.getId(), pojoEntity);
+        consultorioLogic.updateConsultorio(pojoEntity.getSede().getId(), pojoEntity);
 
         ConsultorioEntity resp = em.find(ConsultorioEntity.class, entity.getId());
 
@@ -346,29 +351,7 @@ public class ConsultorioLogicTest
         ConsultorioEntity entity = factory.manufacturePojo(ConsultorioEntity.class);
         consultorioLogic.updateConsultorio(999999L, entity);
     } 
-    
-        
-         /**
-     * Prueba para actualizar un Consultorio cambiando su id.
-     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
-     */
-    @Test (expected = BusinessLogicException.class)
-    public void updateConsultorioCambiaIdTest() throws BusinessLogicException 
-     {
-        ConsultorioEntity entity = data.get(2);
-        ConsultorioEntity pojoEntity = factory.manufacturePojo(ConsultorioEntity.class);
-        
-         pojoEntity.setId(data.get(1).getId());
-        pojoEntity.setSede(data.get(2).getSede());
-        pojoEntity.setEspecialidad(data.get(0).getEspecialidad());
 
-        consultorioLogic.updateConsultorio(entity.getId(), pojoEntity);
-
-        ConsultorioEntity resp = em.find(ConsultorioEntity.class, entity.getId());
-
-        Assert.assertNull(resp);
-    }
-    
     
         /**
      * Prueba para actualizar un Consultorio con edificio vacio.
@@ -392,27 +375,7 @@ public class ConsultorioLogicTest
     }
     
     
-        
-        /**
-     * Prueba para actualizar un Consultorio con edificio vacio.
-     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
-     */
-    @Test (expected = BusinessLogicException.class)
-    public void updateConsultorioCambioSedeTest() throws BusinessLogicException
-    {
-        ConsultorioEntity entity = data.get(2);
-        ConsultorioEntity newEntity = factory.manufacturePojo(ConsultorioEntity.class);
-        SedeEntity newSede = factory.manufacturePojo(SedeEntity.class);
-
-         newEntity.setId(data.get(2).getId());
-        newEntity.setSede(newSede);
-        newEntity.setEspecialidad(data.get(0).getEspecialidad());
-
-        ConsultorioEntity result = consultorioLogic.updateConsultorio(entity.getId(), newEntity);
-        Assert.assertNotNull(result);
-        ConsultorioEntity entity2 = em.find(ConsultorioEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity2.getId());    
-    }
+      
     
     /**
      * Prueba para actualizar un Consultorio que tiene la misma sede, edificio y numero 
@@ -430,7 +393,7 @@ public class ConsultorioLogicTest
         newEntity.setNOficina(data.get(2).getNOficina());
         
         
-        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity);
+        ConsultorioEntity result = consultorioLogic.createConsultorio(newEntity, newEntity.getSede().getId());
         Assert.assertNotNull(result);
         ConsultorioEntity entity = em.find(ConsultorioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());    
@@ -445,7 +408,7 @@ public class ConsultorioLogicTest
     public void deleteConsultorioTest() throws BusinessLogicException 
     {
         ConsultorioEntity entity = data.get(0);
-        consultorioLogic.deleteConsultorio(entity.getId());
+        consultorioLogic.deleteConsultorio(entity.getSede().getId(), entity.getId());
         ConsultorioEntity deleted = em.find(ConsultorioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -457,8 +420,9 @@ public class ConsultorioLogicTest
      */
     @Test (expected = BusinessLogicException.class)
     public void deleteConsultorioInexistenteTest() throws BusinessLogicException 
-    {
-        consultorioLogic.deleteConsultorio(99999999L);
+    {   
+        ConsultorioEntity entity = data.get(0);
+        consultorioLogic.deleteConsultorio(entity.getSede().getId(),99999999L);
         ConsultorioEntity deleted = em.find(ConsultorioEntity.class, 99999999L );
         Assert.assertNull(deleted);
     }
