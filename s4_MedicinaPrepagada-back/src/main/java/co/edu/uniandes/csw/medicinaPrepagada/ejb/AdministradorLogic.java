@@ -115,6 +115,13 @@ public class AdministradorLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el administrador con id = {0}", admiId);
         
+        AdministradorEntity admiEnt = persistence.find(admiId); 
+        
+        if (admiEnt == null)
+        {
+            throw new BusinessLogicException ("El administrador que intenta modificar no existe");
+        }
+        
         //Regla de negocio 1: La contraseña no puede ser null
         if( admiEntity.getContrasena().isEmpty() )
         {
@@ -123,9 +130,9 @@ public class AdministradorLogic
 
         validarFormatoContrasena(admiEntity);
 
-        AdministradorEntity newEntity = persistence.update(admiEntity);
+        persistence.update(admiEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", admiEntity.getId());
-        return newEntity;
+        return admiEntity;
     }
     
      /**

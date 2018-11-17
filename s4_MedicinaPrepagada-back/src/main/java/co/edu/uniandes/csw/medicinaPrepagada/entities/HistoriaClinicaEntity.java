@@ -30,7 +30,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
 
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;  
     

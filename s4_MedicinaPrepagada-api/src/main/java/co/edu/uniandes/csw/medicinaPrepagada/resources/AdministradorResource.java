@@ -143,10 +143,10 @@ public class AdministradorResource
         {
             throw new WebApplicationException("El administrador con id " + administradorId + mensaje, 404);
         }
-        
-        AdministradorDetailDTO modificarDetailDto = new AdministradorDetailDTO (admiLogic.updateAdministrador(administradorId, pAdmi.toEntity()));        
-        LOGGER.log(Level.INFO,"AdministradorResource modificarAdministrador: output: (0)", modificarDetailDto);
-        return modificarDetailDto;
+
+        admiLogic.updateAdministrador(administradorId, pAdmi.toEntity()); 
+        return pAdmi; 
+
     }
     
     private List<AdministradorDTO> listEntity2DetailDTO(List<AdministradorEntity> entityList) 
