@@ -124,6 +124,7 @@ public class FacturaLogic {
     }
     private boolean validarIdCliente (Long pIdCliente)
     {
+        
         return !(pIdCliente == null&& pIdCliente>0);
     }
      private boolean validateConcepto (String pConcepto)

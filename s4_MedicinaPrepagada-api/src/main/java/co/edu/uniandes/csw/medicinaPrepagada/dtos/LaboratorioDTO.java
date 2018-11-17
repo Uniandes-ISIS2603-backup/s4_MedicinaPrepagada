@@ -16,18 +16,33 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class LaboratorioDTO implements Serializable {
 
+    /**
+     * Id del laboratorio
+     */
     private Long id;
-
+    /**
+     * Nombre del laboratorio
+     */
     private String nombre;
-
+    /**
+     * Telefono del laboratorio
+     */
     private Long telefono;
-
+    /**
+     * Direccion del laboratorio
+     */
     private String direccion;
-
+    /**
+     * Horario de atencion en el que trabaja/atiende el laboratorio
+     */
     private String horarioDeAtencion;
-
+    /**
+     * Latitud del laboratorio
+     */
     private double latitud;
-
+    /**
+     * Longitud del laboratorio
+     */
     private double longitud;
     
     
@@ -81,59 +96,104 @@ public class LaboratorioDTO implements Serializable {
         return labEntity;
     }
 
+    /**
+     * Asigna el id del laboratorio
+     * @param pId 
+     */
     public void setId(Long pId) {
         this.id = pId;
     }
 
+    /**
+     * Retorna el id del laboratorio
+     * @return nombre
+     */
     public Long getId() {
         return this.id;
     }
-
+    /**
+     * Asigna el nombre del laboratorio
+     * @param pNombre 
+     */
     public void setNombre(String pNombre) {
         this.nombre = pNombre;
     }
-
+    /**
+     * Retorna el nombre del laboratorio
+     * @return nombre
+     */
     public String getNombre() {
         return this.nombre;
     }
 
-    
+    /**
+     * Asigna el telefono del laboratorio
+     * @param pTelefono 
+     */
     public void setTelefono(Long pTelefono) {
         this.telefono = pTelefono;
     }
-
+    
+    /**
+     * Retorna el telefono del laboratorio
+     * @return telefono
+     */
     public Long getTelefono() {
         return this.telefono;
     }
-
+    /**
+     * Asigna la direccion del laboratorio
+     * @param pDireccion 
+     */
     public void setDireccion(String pDireccion) {
         this.direccion = pDireccion;
     }
-
+    /**
+     * Retorna la direccion del laboratorio
+     * @return direccion
+     */
     public String getDireccion() {
         return this.direccion;
     }
-
+    /**
+     * Asigna el horario de atencion
+     * @param pHorario 
+     */
     public void setHorario(String pHorario) {
         this.horarioDeAtencion = pHorario;
     }
-
+    /**
+     * Retorna el horario de atencion del laboratorio
+     * @return horarioDeAtencion
+     */
     public String getHorario() {
         return this.horarioDeAtencion;
     }
-
+    /**
+     * Asigna la latitud del laboratorio
+     * @param pLatitud 
+     */
     public void setLatitud(double pLatitud) {
         this.latitud = pLatitud;
     }
-
+    /**
+     * Obtiene la latitud del laboratorio
+     * @return latitud
+     */
     public double getLatitud() {
         return this.latitud;
     }
-
+    /**
+     * Asigna la longitud del laboratorio
+     * @param pLongitud 
+     */
     public void setLongitud(double pLongitud) {
         this.longitud = pLongitud;
     }
-
+    /**
+     * Retorna la longitud del laboratorio
+     * @return longitud
+     */
     public double getLongitud() {
         return this.longitud;
     }
