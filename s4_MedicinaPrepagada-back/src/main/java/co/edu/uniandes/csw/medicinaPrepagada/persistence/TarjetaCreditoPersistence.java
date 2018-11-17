@@ -72,4 +72,16 @@ public class TarjetaCreditoPersistence {
         em.remove(entity);
     }
     
+    /**
+     * le asocia un paciente a una tarjeta de credito
+     * @param pacienteId: id del paciente
+     * @param numero: numero de la tarjeta
+     */
+    public void setPacienteToTarjeta(Long pacienteId, Long numero){
+        Query q = em.createQuery("UPDATE TARJETACREDITOENTITY SET PACIENTE_ID = pid WHERE NUMERO = tnum");
+        q.setParameter("pid", pacienteId);
+        q.setParameter("tnum", numero);
+        q.executeUpdate();
+    }
+    
 }

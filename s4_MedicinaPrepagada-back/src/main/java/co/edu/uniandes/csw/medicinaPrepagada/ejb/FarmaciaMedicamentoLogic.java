@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * Clase que implementa la conexion con la persistencia para la relación entre
  * la entidad de Farmacia y Medicamento.
  *
- * @farmacia ncobos
+ * @author ncobos
  */
 @Stateless
 public class FarmaciaMedicamentoLogic {
