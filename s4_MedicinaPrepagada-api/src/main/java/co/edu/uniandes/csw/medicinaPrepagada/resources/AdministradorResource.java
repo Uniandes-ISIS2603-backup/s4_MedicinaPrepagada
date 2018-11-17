@@ -134,9 +134,9 @@ public class AdministradorResource
     
     @PUT
     @Path("{administradorId: \\d+}")
-    public AdministradorDTO updateAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDetailDTO pAdmi) throws BusinessLogicException
+    public AdministradorDTO updateAdministrador(@PathParam ("administradorId") Long administradorId, AdministradorDTO pAdmi) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0)", administradorId);
+        LOGGER.log(Level.INFO, "AdministradorResource modificarAdministrador: input:(0),  administrador: {1}", new Object[]{administradorId, pAdmi.toString()});
         pAdmi.setId(administradorId);
         
         if (admiLogic.getAdministrador(administradorId) == null)
@@ -144,8 +144,9 @@ public class AdministradorResource
             throw new WebApplicationException("El administrador con id " + administradorId + mensaje, 404);
         }
 
-        admiLogic.updateAdministrador(administradorId, pAdmi.toEntity()); 
-        return pAdmi; 
+        AdministradorDTO detailDTO = new AdministradorDTO(admiLogic.updateAdministrador(administradorId, pAdmi.toEntity()));
+        LOGGER.log(Level.INFO, "AdministradorResource updateAdministrador: output: {0}", detailDTO);
+        return detailDTO;
 
     }
     

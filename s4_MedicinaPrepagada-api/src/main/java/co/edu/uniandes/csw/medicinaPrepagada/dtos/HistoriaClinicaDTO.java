@@ -69,6 +69,7 @@ public class HistoriaClinicaDTO implements Serializable
     public HistoriaClinicaEntity toEntity() 
     {
         HistoriaClinicaEntity historiaClinicaEntity = new HistoriaClinicaEntity();
+        
         historiaClinicaEntity.setId(this.getId());
         historiaClinicaEntity.setFecha(this.getFecha());
         historiaClinicaEntity.setDescripcionDiagnostico(this.getDescripcionDiagnostico());

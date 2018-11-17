@@ -113,7 +113,7 @@ public class AdministradorLogic
     
     public AdministradorEntity updateAdministrador(Long admiId, AdministradorEntity admiEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el administrador con id = {0}", admiId);
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el administrador con id = {0} Logic", admiId);
         
         AdministradorEntity admiEnt = persistence.find(admiId); 
         
