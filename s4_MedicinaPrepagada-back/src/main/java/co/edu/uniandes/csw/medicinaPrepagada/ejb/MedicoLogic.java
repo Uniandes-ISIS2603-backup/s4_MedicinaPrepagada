@@ -100,6 +100,7 @@ public class MedicoLogic {
         if(medicosId!=medicoEntity.getId()){
             throw new BusinessLogicException("Debe ingresar el id existente del médico.");
         }
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         int documentoMedico = persistence.find(medicosId).getDocumentoMedico();
         int documentoNuevo = medicoEntity.getDocumentoMedico();
         if(documentoMedico != documentoNuevo){
