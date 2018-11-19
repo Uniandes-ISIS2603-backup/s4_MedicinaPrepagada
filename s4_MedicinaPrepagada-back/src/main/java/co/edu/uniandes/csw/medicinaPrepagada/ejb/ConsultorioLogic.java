@@ -47,6 +47,8 @@ public class ConsultorioLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del consultorio");
         
+        
+        
         //Verifica que tenga una sede
         if (!validateSede(persistenceSede.find(sedeId)))
             throw new BusinessLogicException("Un consultorio debe tener una sede");
@@ -64,6 +66,13 @@ public class ConsultorioLogic
         if (persistenceEspecialidad.find(consultorioEntity.getEspecialidad().getNombre())== null)
             throw new BusinessLogicException("La especialidad que intenta asignar no existe");
         
+       // SedeEntity pSdeUpdate = persistenceSede.find(sedeId);
+      //  pSdeUpdate.getConsultorios().add(consultorioEntity);
+        
+       // persistenceSede.update(pSdeUpdate);
+       
+       consultorioEntity.setSede(persistenceSede.find(sedeId));
+    
         ConsultorioEntity newConsultorioEntity = persistence.create(consultorioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del consultorio");
         return newConsultorioEntity;
