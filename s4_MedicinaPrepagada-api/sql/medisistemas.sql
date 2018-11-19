@@ -73,19 +73,19 @@ values (700, 'Adios' , 20, 300, 'Endocrinologia');
 
 
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(1,1234564,'Alfredo Torres Figueroa','Cra 18 #124-80','21/11/1997','Compensar','a.torres123@gmail.com',3219896969,'ale2C','a.torres','Paciente');
+values(1,1234564,'Alfredo Torres Figueroa','Cra 18#124-80','21/11/1997','Compensar','atorres123@gmail.com',3102454978,'ale2C','a.torres','Paciente');
 
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(2,1234789,'Nicolas Novoa Arciniegas','Cra 21 #70-90','31/10/1997','Coomeva','n.novos@gmial.com',890896969,'perrito','n.nov','Paciente');
+values(2,1234789,'Nicolas Novoa Arciniegas','Cra 21#70-90','31/10/1997','Coomeva','nsnovos@gmial.com',3014394958,'perrito','n.nov','Paciente');
 
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(3,1272039,'pepito Perez Moreno','Cll 64#13-90','19/02/1998','Coomeva','pperezs@gmial.com',56885886,'perrito2','peerex','Paciente');
+values(3,1272039,'pepito Perez Moreno','Cll 64#13-90','19/02/1998','Coomeva','pperezs@gmial.com',2154530,'perrito2','peerex','Paciente');
 
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(4,127789686,'Mario Laserna Alv','Cra 57#70-90','08/10/1965','Coomeva','ml@gmial.com',889768996,'givvu7897','mhhkgg','Paciente');
+values(4,127789686,'Mario Laserna Alv','Cra 57#70-90','08/10/1965','Coomeva','ml@gmial.com',2768916,'givvu7897','mhhkgg','Paciente');
 
 INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(5,1739221,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cmp@gmial.com',889797796,'4792342ied','cmpg','Paciente');
+values(5,1739221,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cmp@gmial.com',6050505,'4792342ied','cmpg','Paciente');
 
 
 
@@ -167,11 +167,11 @@ values(400 , 'Laura1', 'laurita56', 'Paciente');
 
 
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
-values( to_date('08/10/2018') 'DD/MM/YYYY' , 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
+values( to_date('08/10/2018', 'DD/MM/YYYY') , 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
-values(to_date('07/20/2018') 'DD/MM/YYYY', 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna',2);
+values(to_date('07/20/2018', 'DD/MM/YYYY'), 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna',2);
 insert into HistoriaClinicaEntity ( fecha, descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
-values(to_date('26/10/2018')  'DD/MM/YYYY', 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis',3);
+values(to_date('26/10/2018',  'DD/MM/YYYY'), 'Migraña', 'Ninguna', 68, 173, 0, 1, 'Apendicitis',3);
 
 
 

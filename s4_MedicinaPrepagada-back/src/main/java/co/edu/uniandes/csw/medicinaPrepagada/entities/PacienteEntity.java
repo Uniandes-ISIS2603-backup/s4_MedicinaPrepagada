@@ -21,7 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PacienteEntity extends UsuarioEntity implements Serializable{
     
     @PodamExclude    
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CitaLaboratorioEntity> citasLaboratorio;
     
     @PodamExclude  
@@ -42,7 +42,6 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
  
 
     private String nombre;
-//    @PodamStrategyValue()
     private String fechaNacimiento;
     private String direccion;
     private Long numeroContacto;
