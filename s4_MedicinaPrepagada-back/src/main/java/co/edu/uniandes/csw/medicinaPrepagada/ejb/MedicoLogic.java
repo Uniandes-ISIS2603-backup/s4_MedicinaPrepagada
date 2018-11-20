@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersistence;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.MedicoPersistence;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -97,7 +98,7 @@ public class MedicoLogic {
      */
     public MedicoEntity updateMedico(Long medicosId, MedicoEntity medicoEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el medico con id = {0}", medicosId);
-        if(medicosId!=medicoEntity.getId()){
+        if(!Objects.equals(medicosId, medicoEntity.getId())){
             throw new BusinessLogicException("Debe ingresar el id existente del médico.");
         }
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
