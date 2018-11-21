@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.SedeEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.SedePersistence;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -126,7 +127,7 @@ public class SedeLogic
         if (pSedeOld == null)
             throw new BusinessLogicException ("La sede que intenta modificar no existe");
         //Verifica que no se intente cambiar el Id
-        if (sedeEntity.getId() != sedesId)
+        if ( !Objects.equals(sedesId, sedeEntity.getId()))
             throw new BusinessLogicException("No se puede cambiar el id de la sede");
         //Verifica que no se intente cambiar la longitud de la sede
         if (sedeEntity.getLongitud() != pSedeOld.getLongitud())
