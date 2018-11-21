@@ -62,7 +62,9 @@ public class FacturaDTO implements Serializable{
             this.idCliente= pFacturaEntity.getIdCliente();
             this.concepto= pFacturaEntity.getConcepto();
             this.fecha= pFacturaEntity.getFecha();
-            this.paciente =new PacienteDTO (pFacturaEntity.getPaciente());
+            if(pFacturaEntity.getPaciente() != null){
+                this.paciente = new PacienteDTO(pFacturaEntity.getPaciente());
+            }
             this.pagada = pFacturaEntity.getPagada();
             this.valor = pFacturaEntity.getValor();
         }
@@ -81,8 +83,10 @@ public class FacturaDTO implements Serializable{
         facturaEntity.setIdCliente(this.idCliente);
         facturaEntity.setConcepto(this.concepto);
         facturaEntity.setFecha(this.fecha);
-        if(paciente!=null){
-        facturaEntity.setPaciente(this.paciente.toEntity());}
+        if(paciente!=null)
+        {
+            facturaEntity.setPaciente(this.paciente.toEntity());
+        }
         facturaEntity.setPagada(this.pagada);
         facturaEntity.setValor(this.valor);
       
