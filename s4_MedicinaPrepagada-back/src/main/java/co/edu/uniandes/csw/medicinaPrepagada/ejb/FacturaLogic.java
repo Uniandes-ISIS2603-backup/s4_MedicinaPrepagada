@@ -56,26 +56,25 @@ public class FacturaLogic {
 
     }
     
+    /**
+     * retorna una lista con todas las facturas
+     * @return todas las facturas
+     */
     public List<FacturaEntity> getFacturas() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las facturas");
-        List<FacturaEntity> lista = facturaPersistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todas las facturas");
-        return lista;
+        return facturaPersistence.findAll();
     }
 
-    public FacturaEntity getFactura(Long facturaId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la factura con id = {0}", facturaId);
-        FacturaEntity facturaEntity = facturaPersistence.find(facturaId);
-        if (facturaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La factura con el id = {0} no existe", facturaId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la citaLab con id = {0}", facturaId);
-        return facturaEntity;
+    /**
+     * Busca un factura por el id
+     * @param id: el id a buscar
+     * @return: una factura con el id dado por param
+     */
+    public FacturaEntity getFactura(Long id){
+        return facturaPersistence.find(id);
     }
     
     public FacturaEntity updateFactura (Long FacturaId,FacturaEntity facturaEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la factura con id = {0}", FacturaId);
         
         FacturaEntity facVieja = facturaPersistence.find(facturaEntity.getId());
         
@@ -83,23 +82,19 @@ public class FacturaLogic {
         {
             throw new BusinessLogicException("La factura que intenta cambiar no existe");
         }
-        if (!facturaPersistence.find(FacturaId).getId().equals(facturaEntity.getId()))
-        {
-            throw new BusinessLogicException("No puede cambiar el Id");
-        }
-        if (!facturaPersistence.find(FacturaId).getConcepto().equals(facturaEntity.getConcepto()))
+        if (!facturaEntity.getConcepto().equals(facVieja.getConcepto()))
         {
             throw new BusinessLogicException("No se puede cambiar el concepto");
         }
-        if(!facturaPersistence.find(FacturaId).getIdCliente().equals(facturaEntity.getIdCliente()))
+        if(!facturaEntity.getIdCliente().equals(facVieja.getIdCliente()))
         {
             throw new BusinessLogicException("No se puede cambiar el id cliente");
         }
-        if(!facturaPersistence.find(FacturaId).getFecha().equals(facturaEntity.getFecha()))
+        if(!facturaEntity.getFecha().equals(facVieja.getFecha()))
         {
             throw new BusinessLogicException("No se puede cambiar la fecha");
         }
-        if(!(facturaPersistence.find(FacturaId).getValor()==facturaEntity.getValor()))
+        if(facturaEntity.getValor()!=(facVieja.getValor()))
         {
             throw new BusinessLogicException("No se puede cambiar el valor");
         }
@@ -124,6 +119,7 @@ public class FacturaLogic {
     }
     private boolean validarIdCliente (Long pIdCliente)
     {
+        
         return !(pIdCliente == null&& pIdCliente>0);
     }
      private boolean validateConcepto (String pConcepto)
