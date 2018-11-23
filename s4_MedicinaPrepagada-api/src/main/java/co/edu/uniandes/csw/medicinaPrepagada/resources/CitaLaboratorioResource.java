@@ -42,6 +42,18 @@ public class CitaLaboratorioResource {
     @Inject
     private CitaLaboratorioLogic citaLogic;
     
+    /**
+     * Crea una nueva CitaLaboratorio con la informacion que se recibe en el cuerpo de
+     * la petición y se regresa un objeto identico con un id auto-generado por
+     * la base de datos.
+     *
+     * @param CitaLaboratorio {@link CitaLaboratorioDTO} - La CitaLaboratorio que se desea
+     * guardar.
+     * @return JSON {@link CitaMedicaDTO} - La CitaMedica guardada con el atributo
+     * id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe la CitaMedica.
+     */
     @POST
     public CitaLaboratorioDTO createCitaLaboratorio (CitaLaboratorioDTO pCitaLaboratorio) throws BusinessLogicException
     {
@@ -54,6 +66,15 @@ public class CitaLaboratorioResource {
         return nuevoCitaLabDTO;
     }
     
+     /**
+     * Busca la CitaLaboratorio con el id asociado recibido en la URL y la devuelve.
+     *
+     * @param CitaLaboratorioId Identificador de la CitaLaboratorio que se esta buscando.
+     * Este debe ser una cadena de dígitos.
+     * @return JSON {@link CitaLaboratorioDTO} - La CitaLabroatorio buscada
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la CitaLaboratorio.
+     */
     
     @GET
     @Path("{CitaLaboratorioId: \\d+}")
@@ -71,6 +92,13 @@ public class CitaLaboratorioResource {
         return citaLabDTO;
     }
     
+    
+    /**
+     * Busca y devuelve todas las citas de laboratorio que existen en la aplicacion.
+     *
+     * @return JSONArray {@link CitaLaboratorioDTO} - Las citas laboratorio encontradas en
+     * la aplicación. Si no hay ninguna retorna una lista vacía.
+     */
     @GET
     
     public List <CitaLaboratorioDTO> getCitasLaboratorio ()
@@ -81,6 +109,8 @@ public class CitaLaboratorioResource {
         return listaCitasLab;
     }
 
+   
+    
     @DELETE
     @Path("{CitaLaboratorioId:\\d+}")
     public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException

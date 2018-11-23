@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -43,7 +44,8 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private String operaciones; 
     
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
+    @JoinColumn(nullable=true)
     private PacienteEntity paciente; 
     
     @PodamExclude

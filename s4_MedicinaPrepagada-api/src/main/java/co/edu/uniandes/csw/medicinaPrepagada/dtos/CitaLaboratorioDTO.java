@@ -99,69 +99,115 @@ public class CitaLaboratorioDTO implements Serializable {
         return citaLabEntity;
     }
     
+    /**
+     * Asigna el id de la cita
+     * @param pId 
+     */
     public void setId (Long pId)
     {
         this.id = pId;
     }
-    
+    /**
+     * Recibe el id de la cita
+     * @return citaId
+     */
     public Long getId ()
     {
         return this.id;
     }
-    
+    /**
+     * Asigna la fecha de la cita
+     * @param pFecha 
+     */
     public void setDate (Date pFecha)
     {
         this.fecha = pFecha;
     }
-            
+    /**
+     * Recibe la fecha de la cita
+     * @return fecha
+     */
     public Date getDate ()
     {
          return this.fecha;
     }
-    
+    /**
+     * Asigna la especialidad de la fecha
+     * @param pEspecialidad 
+     */
     public void setEspecialidad (String pEspecialidad)
     {
         this.especialidad = pEspecialidad;
     }
-    
+    /**
+     * Recibe la especialidad de la cita
+     * @return especialidad
+     */
     public String getEspecialidad ()
     {
         return this.especialidad;
     }
-    
+    /**
+     * Asigna los comentarios de la cita
+     * @param pComentarios 
+     */
     public void setComentarios (String pComentarios)
     {
         this.comentarios = pComentarios;
     }
+    /**
+     * Recibe los comentarios de la cita
+     * @return comentarios
+     */
     
     public String getComentarios ()
     {
         return this.comentarios;
     }
-    
+    /**
+     * Asigna las recomendaciones de la cita
+     * @param pRecomendaciones 
+     */
     public void setRecomendaciones (String pRecomendaciones)
     {
         this.recomendaciones = pRecomendaciones;
     }
-    
+    /**
+     * Recibe las recomendaciones de la cita
+     * @return recomendaciones
+     */
     public String getRecomendaciones ()
     {
         return this.recomendaciones;
     }
-    
+    /**
+     * Asigna el paciente de la cita 
+     * @param pPaciente 
+     */
     public void setPaciente(PacienteDTO pPaciente)
     {
         this.paciente=pPaciente;
     }
+    /**
+     * Recibe el paciente de la cita
+     * @return paciente
+     */
     public PacienteDTO getPaciente()
     {
         return this.paciente;
     }
-    
+    /**
+     * Asigna el laboratorio donde se va a llevar a cabo la cita
+     * @param pLab 
+     */
     public void setLaboratorio(LaboratorioDTO pLab)
     {
         this.laboratorio=pLab;
     }
+    /**
+     * Recibe el laboratorio donde se llevarà a cabo la cita
+     * @return laboratorio
+     */
     public LaboratorioDTO getLab()
     {
         return this.laboratorio;

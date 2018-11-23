@@ -125,6 +125,19 @@ public class PacienteLogic {
      * @param id: el id del paciente que se desea eliminar
      */
     public void deletePaciente(Long id){
+        PacienteEntity pac = persistence.find(id);
+        List<HistoriaClinicaEntity> historiasClinicas = pac.getHistoriasClinicas();
+        for(HistoriaClinicaEntity hist: historiasClinicas){
+            hist.setPaciente(null);
+        }
+        List<CitaMedicaEntity> citasMed = pac.getCitasMedicas();
+        for(CitaMedicaEntity citMed: citasMed){
+            citMed.setPacienteAAtender(null);
+        }
+        List<FacturaEntity> facturas = pac.getFacturas();
+        for(FacturaEntity fac : facturas){
+            fac.setPaciente(null);
+        }
         persistence.delete(id);
     }
     
@@ -147,6 +160,8 @@ public class PacienteLogic {
         PacienteEntity ent = persistence.find(idPaciente);
         ent.getTarjetasCredito().add(tarjeta);
         persistence.update(ent);
+        tarjeta.setPaciente(ent);
+        tarjetaPersistence.update(tarjeta);
         return tarjeta;
     }
     
