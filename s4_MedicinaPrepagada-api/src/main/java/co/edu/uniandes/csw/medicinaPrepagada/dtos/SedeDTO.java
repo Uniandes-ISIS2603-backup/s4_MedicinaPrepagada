@@ -34,7 +34,8 @@ public class SedeDTO implements Serializable
     private Long telefono;
     //Correo de la sedeDTO
     private String correo;
-    
+    //Imagen de la sedeDTO
+    private String imagen;
     
   /**
    * Constructor vacio de la sedeDTO
@@ -64,6 +65,7 @@ public class SedeDTO implements Serializable
            this.longitud = pSedeEntity.getLongitud();
            this.telefono = pSedeEntity.getTelefono();
            this.correo = pSedeEntity.getCorreo();
+           this.imagen = pSedeEntity.getImagen();
        }
        
    }
@@ -86,6 +88,7 @@ public class SedeDTO implements Serializable
         sedeEntity.setLongitud(this.longitud);
         sedeEntity.setTelefono(this.telefono);
         sedeEntity.setCorreo(this.correo);
+        sedeEntity.setImagen(this.imagen);
         
         return sedeEntity;
     }
@@ -241,6 +244,24 @@ public class SedeDTO implements Serializable
    public String getCorreo  ()
    {
        return this.correo;
+   }
+   
+      /**
+     * Pone la imagen de la sedeEntity
+     * @param pImagen 
+     */
+    public void setImagen (String pImagen)
+   {
+       this.imagen = pImagen;
+   }
+   
+    /**
+     * Recibe el nombre del sedeEntity
+     * @return string del nombre
+     */
+   public String getImagen  ()
+   {
+       return this.imagen;
    }
    
    /**
