@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.ejb.CitaMedicaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaMedicaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,7 @@ public class PacienteCitaMedicaLogicTest {
      * prueba para obtener las citas lab de un paciente
      */
     @Test
-    public void getCitasMedicasTest(){
+    public void getCitasMedicasTest() throws BusinessLogicException{
         List<CitaMedicaEntity> citasMed = data.get(0).getCitasMedicas();
         List<CitaMedicaEntity> foundCitasmed = pacienteLogic.darCitasMedicas(data.get(0).getId());
         Assert.assertEquals(3, foundCitasmed.size());
