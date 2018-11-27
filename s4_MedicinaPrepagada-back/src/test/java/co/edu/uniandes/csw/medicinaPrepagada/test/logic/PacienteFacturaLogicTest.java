@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.ejb.FacturaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FacturaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +115,7 @@ public class PacienteFacturaLogicTest {
      * prueba para obtener las citas lab de un paciente
      */
     @Test
-    public void getfacturasTest(){
+    public void getfacturasTest() throws BusinessLogicException{
         List<FacturaEntity> facturas = data.get(0).getFacturas();
         List<FacturaEntity> foundFacturas = pacienteLogic.darFacturasPaciente(data.get(0).getId());
         Assert.assertEquals(facturas.size(), foundFacturas.size());
