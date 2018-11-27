@@ -35,7 +35,7 @@ public class LaboratorioDTO implements Serializable {
     /**
      * Horario de atencion en el que trabaja/atiende el laboratorio
      */
-    private String horarioDeAtencion;
+    private String horarioAtencion;
     /**
      * Latitud del laboratorio
      */
@@ -68,7 +68,7 @@ public class LaboratorioDTO implements Serializable {
             this.telefono = pLaboratorioEntity.getTelefono();
             this.latitud = pLaboratorioEntity.getLatitud();
             this.longitud = pLaboratorioEntity.getLongitud();
-            this.horarioDeAtencion = pLaboratorioEntity.getHorarioAtencion();
+            this.horarioAtencion = pLaboratorioEntity.getHorarioAtencion();
             
         }
 
@@ -90,7 +90,7 @@ public class LaboratorioDTO implements Serializable {
         labEntity.setTelefono(this.telefono);
         labEntity.setLatitud(this.latitud);
         labEntity.setLongitud(this.longitud);
-        labEntity.setHorarioAtencion(this.horarioDeAtencion);
+        labEntity.setHorarioAtencion(this.horarioAtencion);
         
 
         return labEntity;
@@ -159,15 +159,15 @@ public class LaboratorioDTO implements Serializable {
      * Asigna el horario de atencion
      * @param pHorario 
      */
-    public void setHorario(String pHorario) {
-        this.horarioDeAtencion = pHorario;
+    public void setHorarioAtencion(String pHorario) {
+        this.horarioAtencion = pHorario;
     }
     /**
      * Retorna el horario de atencion del laboratorio
      * @return horarioDeAtencion
      */
-    public String getHorario() {
-        return this.horarioDeAtencion;
+    public String getHorarioAtencion() {
+        return this.horarioAtencion;
     }
     /**
      * Asigna la latitud del laboratorio

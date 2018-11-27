@@ -29,6 +29,13 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence facturaPersistence;
 
+    /**
+     * Se encarga de crear un Sede en la base de datos.
+     *
+     * @param facturaEntity Objeto de FacturaEntity con los datos nuevos
+     * @return Objeto de FacturaEntity con los datos nuevos.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
     public FacturaEntity createFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de una factura");
 
@@ -73,6 +80,14 @@ public class FacturaLogic {
         return facturaPersistence.find(id);
     }
     
+    /**
+     * Actualiza la información de una instancia de Laboratorio.
+     *
+     * @param FacturaId Identificador de la instancia a actualizar
+     * @param facturaEntity Instancia de FacturaEntity con los nuevos datos.
+     * @return Instancia de FacturaEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException
+     */
     public FacturaEntity updateFactura (Long FacturaId,FacturaEntity facturaEntity) throws BusinessLogicException
     {
         
@@ -86,7 +101,7 @@ public class FacturaLogic {
         {
             throw new BusinessLogicException("No se puede cambiar el concepto");
         }
-        if(!facturaEntity.getIdCliente().equals(facVieja.getIdCliente()))
+        if(facturaEntity.getIdCliente()!=(facVieja.getIdCliente()))
         {
             throw new BusinessLogicException("No se puede cambiar el id cliente");
         }
