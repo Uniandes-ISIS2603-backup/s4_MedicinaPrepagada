@@ -75,22 +75,7 @@ public class MedicamentoFarmaciaLogic {
         return null;
     }
 
-    /**
-     * Remplaza las instancias de Farmacia asociadas a una instancia de Medicamento
-     *
-     * @param medicamentosId Identificador de la instancia de Medicamento
-     * @param list Colección de instancias de FarmaciaEntity a asociar a instancia
-     * de Medicamento
-     * @return Nueva colección de FarmaciaEntity asociada a la instancia de Medicamento
-     */
-    public List<FarmaciaEntity> replaceFarmacias(Long medicamentosId, List<FarmaciaEntity> list) {
-        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar las farmacias del medicamento con id = {0}", medicamentosId);
-        MedicamentoEntity medicamentoEntity = medicamentoPersistence.find(medicamentosId);
-        medicamentoEntity.setFarmacias(list);
-        LOGGER.log(Level.INFO, "Termina proceso de reemplazar las farmacias del medicamento con id = {0}", medicamentosId);
-        return medicamentoPersistence.find(medicamentosId).getFarmacias();
-    }
-
+    
     /**
      * Desasocia un Farmacia existente de un Medicamento existente
      *
