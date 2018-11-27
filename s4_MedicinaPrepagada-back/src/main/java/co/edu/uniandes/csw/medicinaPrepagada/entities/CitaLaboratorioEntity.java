@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,11 +30,11 @@ public class CitaLaboratorioEntity  implements Serializable
     private Long id;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private LaboratorioEntity laboratorio;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private PacienteEntity paciente;
     
     
@@ -45,73 +46,127 @@ public class CitaLaboratorioEntity  implements Serializable
     private String recomendaciones;
     
     
+    /**
+     *  Asigna el paciente a la cita
+     * @param pPaciente 
+     */
     public void setPaciente (PacienteEntity pPaciente)
     {
         this.paciente = pPaciente;
     }
     
+    /**
+     * Retorna el paciente de la cita
+     * @return Paciente
+     */
     public PacienteEntity getPaciente ()
     {
         return this.paciente;
     }
     
-    
+    /**
+     * 
+     * @param pId 
+     */
     public void setId (Long pId)
     {
         this.id= pId;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Long getId ()
     {
         return this.id;
     }
     
-     public void setLaboratorio (LaboratorioEntity pLab)
+    /**
+     * 
+     * @param pLab 
+     */
+    public void setLaboratorio (LaboratorioEntity pLab)
     {
         this.laboratorio = pLab;
     }
+    
+    /**
+     * 
+     * @return 
+     */
     public LaboratorioEntity getLaboratorio ()
     {
         return this.laboratorio;
     }
     
-   
-    
-    public void setDate (Date pDate)
+    /**
+     * 
+     * @param pDate 
+     */
+    public void setFecha (Date pDate)
     {
         this.fecha = pDate;
     }
     
-    public Date getDate()
+    /**
+     * 
+     * @return 
+     */
+    public Date getFecha()
     {
         return this.fecha;
     }
     
-     public void setEspecialidad (String pEspecialidad)
+    /**
+     * 
+     * @param pEspecialidad 
+     */
+    public void setEspecialidad (String pEspecialidad)
     {
         this.especialidad = pEspecialidad;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getEspecialidad()
     {
         return this.especialidad;
     }
     
-     public void setComentarios (String pComentarios)
+    /**
+     * 
+     * @param pComentarios 
+     */
+    public void setComentarios (String pComentarios)
     {
         this.comentarios = pComentarios;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getComentarios()
     {
         return this.comentarios;
     }
     
+    /**
+     * 
+     * @param pRecomendaciones 
+     */
     public void setRecomendaciones (String pRecomendaciones)
     {
         this.recomendaciones = pRecomendaciones;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getRecomendaciones()
     {
         return this.recomendaciones;
