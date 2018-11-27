@@ -77,18 +77,9 @@ public class FacturaResource {
     
     @PUT
     @Path("{FacturaId:\\d+}")
-    public FacturaDTO updateFactura(@PathParam("facturaId") Long FacturaId, FacturaDTO pFactura) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "FacturaResource updateFactura: input: id:{0} , factura: {1}", new Object[]{FacturaId, pFactura.toString()});
-        pFactura.setIdFactura(FacturaId);
-        if (facturaLogic.getFactura(FacturaId) == null)
-        {
-            throw new WebApplicationException("El recurso /factura/ que quiere editar con id" + FacturaId + " no existe.", 404);
-        }
-        FacturaDTO nuevoDTO = new FacturaDTO(facturaLogic.updateFactura(FacturaId,pFactura.toEntity()));
-        LOGGER.log(Level.INFO, "FacturaResource updateFactura: output: {0}", nuevoDTO.toString());
-        return nuevoDTO;
- 
+    public FacturaDTO updateFactura(FacturaDTO factura) throws BusinessLogicException{
+        FacturaEntity entityAct = facturaLogic.updateFactura(factura.toEntity().getId(),factura.toEntity());
+        return new FacturaDTO(entityAct);
     }
     
     

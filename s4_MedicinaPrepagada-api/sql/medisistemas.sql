@@ -104,14 +104,14 @@ insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fech
 
 
 
-insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (100, 'JuliTo98', 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'megaJulito984', 'Julio Alberto' , 98739279, 'basico', 'Endocrinologia' );
+insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (100, 'JuliTo98', 12345, 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'megaJulito984', 'Julio Alberto' , 98739279, 'basico', 'Endocrinologia' );
 
-insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (200, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
+insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (200, 'megaMan847', 3148739, 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
 
-insert into MEDICOENTITY (id, contrasena, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (300, 'megaMan847', 'andrux@hotmail.com', 'super medico', 89955593, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99988673, 'basico', 'Cardiologia' );
+insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
+values (300, 'megaMan847', 7981239, 'andrux@hotmail.com', 'super medico', 89955593, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99988673, 'basico', 'Cardiologia' );
 
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
@@ -135,6 +135,9 @@ values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
 values (700, '2018-10-22 10:00:00' , '2018-10-22 08:00:00',300 ,200 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (800, '2018-11-20 08:00:00' , '2018-11-20 10:00:00',700 ,100 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
 values (2000, '2018-10-22 08:00:00','Excelente cita médica', 1, 700 );
@@ -163,8 +166,8 @@ values(400 , 'Laura1', 'laurita56', 'Paciente');
 
 
 
-insert into HistoriaClinicaEntity (  descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
-values(  'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
+insert into HistoriaClinicaEntity ( descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
+values( 'Gripa', 'Ninguna', 55, 178, 0, 0, 'Fractura pie izquierdo',1);
 insert into HistoriaClinicaEntity ( descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)
 values( 'Dolor de cabeza', 'Mani', 70, 170, 1, 1, 'Ninguna',2);
 insert into HistoriaClinicaEntity (  descripcionDiagnostico, alergias, peso, estatura, fuma, bebe, operaciones, paciente_id)

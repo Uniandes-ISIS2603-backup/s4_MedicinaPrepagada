@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -31,10 +30,8 @@ public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     
     
     @PodamExclude
-    @OneToMany(
-            mappedBy ="examenMedico",     
-            fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST)
-           private List<LaboratorioEntity> laboratorios = new ArrayList<>();
+    @ManyToMany 
+    private List<LaboratorioEntity> laboratorios = new ArrayList<LaboratorioEntity>();
     
     @PodamExclude
     @ManyToMany(mappedBy = "examenesMedicos")

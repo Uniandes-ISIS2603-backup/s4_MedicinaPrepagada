@@ -19,7 +19,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class HistoriaClinicaDTO implements Serializable  
 {
     private Long id; 
-    private Date fecha; 
+    private String fecha; 
     private String descripcionDiagnostico; 
     private String alergias; 
     private Double peso; 
@@ -69,6 +69,7 @@ public class HistoriaClinicaDTO implements Serializable
     public HistoriaClinicaEntity toEntity() 
     {
         HistoriaClinicaEntity historiaClinicaEntity = new HistoriaClinicaEntity();
+        
         historiaClinicaEntity.setId(this.getId());
         historiaClinicaEntity.setFecha(this.getFecha());
         historiaClinicaEntity.setDescripcionDiagnostico(this.getDescripcionDiagnostico());
@@ -107,7 +108,7 @@ public class HistoriaClinicaDTO implements Serializable
      * @return atributo fecha.
      */
     
-    public Date getFecha() 
+    public String getFecha() 
     {
         return fecha;
     }
@@ -117,7 +118,7 @@ public class HistoriaClinicaDTO implements Serializable
      * @param fecha nuevo valor del atributo
      */
     
-    public void setFecha(Date fecha ) 
+    public void setFecha(String fecha ) 
     {
         this.fecha = fecha;
     }

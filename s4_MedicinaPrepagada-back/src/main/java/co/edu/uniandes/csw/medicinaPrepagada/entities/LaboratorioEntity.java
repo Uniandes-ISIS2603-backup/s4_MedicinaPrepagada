@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -36,8 +37,8 @@ public class LaboratorioEntity implements Serializable
     private List<CitaLaboratorioEntity> citasLaboratorio = new ArrayList<>();
     
     @PodamExclude
-    @ManyToOne
-    private ExamenMedicoEntity examenMedico;
+    @ManyToMany(mappedBy = "laboratorios")
+    private List<ExamenMedicoEntity> examenes = new ArrayList<>(); 
     
     private String nombre;
     private String direccion;
@@ -127,12 +128,12 @@ public class LaboratorioEntity implements Serializable
         this.citasLaboratorio = citasLaboratorio;
     }
 
-    public ExamenMedicoEntity getExamenMedico() {
-        return examenMedico;
+    public List<ExamenMedicoEntity> getExamens() {
+        return examenes;
     }
 
-    public void setExamenMedico(ExamenMedicoEntity examenMedico) {
-        this.examenMedico = examenMedico;
+    public void setExamens(List<ExamenMedicoEntity> examenMedico) {
+        this.examenes = examenMedico;
     }
     
     

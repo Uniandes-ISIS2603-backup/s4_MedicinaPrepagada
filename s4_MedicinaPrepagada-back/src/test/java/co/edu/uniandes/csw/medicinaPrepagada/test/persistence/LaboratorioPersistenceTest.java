@@ -94,7 +94,7 @@ public class LaboratorioPersistenceTest {
         LaboratorioEntity entity = em.find(LaboratorioEntity.class, result.getId());
         
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-        Assert.assertEquals(newEntity.getExamenMedico(),entity.getExamenMedico());
+        Assert.assertEquals(newEntity.getExamens(),entity.getExamens());
         Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
         Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
         Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
@@ -131,7 +131,7 @@ public class LaboratorioPersistenceTest {
         Assert.assertNotNull(newEntity);
        
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
-        Assert.assertEquals(newEntity.getExamenMedico(),entity.getExamenMedico());
+        Assert.assertEquals(newEntity.getExamens(),entity.getExamens());
         Assert.assertEquals(newEntity.getLatitud(), entity.getLatitud(),0);
         Assert.assertEquals(newEntity.getLongitud(), entity.getLongitud(),0);
         Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
