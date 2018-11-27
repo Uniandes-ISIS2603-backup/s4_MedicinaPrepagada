@@ -93,7 +93,7 @@ public class TarjetaCreditoResource {
      * @return JSON del paciente buscado
      */
     @GET
-    public LinkedList<TarjetaCreditoDTO> getTarjetaCredito(){
+    public List<TarjetaCreditoDTO> getTarjetaCredito(){
         LinkedList<TarjetaCreditoDTO> rta = new LinkedList<>();
         List<TarjetaCreditoEntity> lista = tarjetaCreditoLogic.getTarjetasDeCredito();
         for(TarjetaCreditoEntity ent : lista){
