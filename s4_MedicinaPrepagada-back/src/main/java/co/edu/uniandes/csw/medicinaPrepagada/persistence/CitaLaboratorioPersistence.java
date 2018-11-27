@@ -36,7 +36,7 @@ public class CitaLaboratorioPersistence {
     
      public List<CitaLaboratorioEntity> findAll() 
     {
-        LOGGER.log(Level.INFO, "Consultando todas las CitaaMedicaes");
+        LOGGER.log(Level.INFO, "Consultando todas las CitaLaboratorio");
         TypedQuery query = em.createQuery("select c from CitaLaboratorioEntity c", CitaLaboratorioEntity.class);
         return query.getResultList();
     }

@@ -108,7 +108,7 @@ public class CitaLaboratorioLogicTest
     {
        Date nueva = new Date(System.currentTimeMillis()+24*60*60*1000);
        CitaLaboratorioEntity newEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-       newEntity.setDate(nueva);
+       newEntity.setFecha(nueva);
        citaLabLogic.createCitaLaboratorio(newEntity);
        Assert.assertNotNull(newEntity);
      
@@ -145,7 +145,7 @@ public class CitaLaboratorioLogicTest
         Date nueva = new Date(System.currentTimeMillis()-24*60*60*1000);
         
         CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-        entity.setDate(nueva);
+        entity.setFecha(nueva);
         citaLabLogic.createCitaLaboratorio(entity);
         
     }
@@ -155,7 +155,7 @@ public class CitaLaboratorioLogicTest
     {
         String espec = "";
         CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
+        entity.setFecha(new Date(System.currentTimeMillis()+24*60*60*1000));
         entity.setEspecialidad(espec);
         citaLabLogic.createCitaLaboratorio(entity);
     } 
@@ -165,7 +165,7 @@ public class CitaLaboratorioLogicTest
     {
         String comments = "";
         CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
+        entity.setFecha(new Date(System.currentTimeMillis()+24*60*60*1000));
         entity.setComentarios(comments);
         citaLabLogic.createCitaLaboratorio(entity);
     } 
@@ -174,7 +174,7 @@ public class CitaLaboratorioLogicTest
     {
         String recom = "";
         CitaLaboratorioEntity entity = factory.manufacturePojo(CitaLaboratorioEntity.class);
-        entity.setDate(new Date(System.currentTimeMillis()+24*60*60*1000));
+        entity.setFecha(new Date(System.currentTimeMillis()+24*60*60*1000));
         entity.setRecomendaciones(recom);
         citaLabLogic.createCitaLaboratorio(entity);
     } 
@@ -185,7 +185,7 @@ public class CitaLaboratorioLogicTest
         CitaLaboratorioEntity entity = citaLabList.get(0);
         CitaLaboratorioEntity pojoEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
         
-        pojoEntity.setDate(nueva);
+        pojoEntity.setFecha(nueva);
         pojoEntity.setId(entity.getId());
         
         citaLabLogic.updateCitaLaboratorio(pojoEntity.getId(), pojoEntity);
@@ -201,7 +201,7 @@ public class CitaLaboratorioLogicTest
         CitaLaboratorioEntity entity = citaLabList.get(0);
         CitaLaboratorioEntity pojoEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
         
-        pojoEntity.setDate(nueva);
+        pojoEntity.setFecha(nueva);
         pojoEntity.setId(entity.getId());
         
         citaLabLogic.updateCitaLaboratorio(pojoEntity.getId(), pojoEntity);
@@ -218,7 +218,7 @@ public class CitaLaboratorioLogicTest
         CitaLaboratorioEntity entity = citaLabList.get(0);
         CitaLaboratorioEntity pojoEntity = factory.manufacturePojo(CitaLaboratorioEntity.class);
         
-        pojoEntity.setDate(nueva);
+        pojoEntity.setFecha(nueva);
         pojoEntity.setId(entity.getId());
         pojoEntity.setEspecialidad("");
         

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaLaboratorioDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.LaboratorioDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.CitaLaboratorioLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
 import java.util.ArrayList;
@@ -109,8 +110,13 @@ public class CitaLaboratorioResource {
         return listaCitasLab;
     }
 
-   
-    
+   @GET
+   @Path ("{CitaLaboratorioId:\\d+}/laboratorio")
+   public LaboratorioDTO getLaboratorioFromCita (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
+   {
+
+       return new LaboratorioDTO(citaLogic.getLaboratorioFromCita(CitaLaboratorioId)); 
+   }
     @DELETE
     @Path("{CitaLaboratorioId:\\d+}")
     public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException

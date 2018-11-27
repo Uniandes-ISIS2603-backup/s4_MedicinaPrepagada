@@ -63,7 +63,7 @@ public class CitaLaboratorioDTO implements Serializable {
             this.id = pCitaLaboratorioEntity.getId();
             this.comentarios = pCitaLaboratorioEntity.getComentarios();
             this.especialidad= pCitaLaboratorioEntity.getEspecialidad();
-            this.fecha=pCitaLaboratorioEntity.getDate();
+            this.fecha=pCitaLaboratorioEntity.getFecha();
             this.recomendaciones=pCitaLaboratorioEntity.getRecomendaciones();
             if(pCitaLaboratorioEntity.getPaciente() != null){
                 this.paciente = new PacienteDTO(pCitaLaboratorioEntity.getPaciente());
@@ -86,7 +86,7 @@ public class CitaLaboratorioDTO implements Serializable {
 
         citaLabEntity.setId(this.getId());
         citaLabEntity.setComentarios(this.comentarios);
-        citaLabEntity.setDate(this.fecha);
+        citaLabEntity.setFecha(this.fecha);
         citaLabEntity.setRecomendaciones(this.recomendaciones);
         citaLabEntity.setEspecialidad(this.especialidad);
         if(this.paciente != null){
@@ -119,7 +119,7 @@ public class CitaLaboratorioDTO implements Serializable {
      * Asigna la fecha de la cita
      * @param pFecha 
      */
-    public void setDate (Date pFecha)
+    public void setFecha (Date pFecha)
     {
         this.fecha = pFecha;
     }
@@ -127,7 +127,7 @@ public class CitaLaboratorioDTO implements Serializable {
      * Recibe la fecha de la cita
      * @return fecha
      */
-    public Date getDate ()
+    public Date getFecha ()
     {
          return this.fecha;
     }
@@ -208,7 +208,7 @@ public class CitaLaboratorioDTO implements Serializable {
      * Recibe el laboratorio donde se llevarà a cabo la cita
      * @return laboratorio
      */
-    public LaboratorioDTO getLab()
+    public LaboratorioDTO getLaboratorio()
     {
         return this.laboratorio;
     }
