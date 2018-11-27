@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.test.persistence;
 
+import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.TarjetaCreditoPersistence;
 import java.util.ArrayList;
@@ -93,6 +94,8 @@ public class TarjetaCreditoPersistenceTest {
         int i = 0;
         while(i<3){
             TarjetaCreditoEntity entity = factory.manufacturePojo(TarjetaCreditoEntity.class);
+            PacienteEntity paciente = factory.manufacturePojo(PacienteEntity.class);
+            entity.setPaciente(paciente);
             em.persist(entity);
             data.add(entity);
             i++;
