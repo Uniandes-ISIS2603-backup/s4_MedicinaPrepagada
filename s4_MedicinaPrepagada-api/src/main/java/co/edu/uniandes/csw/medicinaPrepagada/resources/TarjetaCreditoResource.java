@@ -64,7 +64,7 @@ public class TarjetaCreditoResource {
      */
     @DELETE
     @Path("{tarjetascreditoId: \\d+}")
-    public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId)throws WebApplicationException{
+    public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
         try {
             tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
         } catch (BusinessLogicException ex) {
@@ -79,7 +79,7 @@ public class TarjetaCreditoResource {
      */
     @GET
     @Path("{tarjetascreditoId: \\d+}")
-    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId) throws WebApplicationException {
+    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId)  {
         try {
             TarjetaCreditoEntity entity = tarjetaCreditoLogic.getTarjetaCredito(tarjetascreditoId);
             return new TarjetaCreditoDTO(entity);

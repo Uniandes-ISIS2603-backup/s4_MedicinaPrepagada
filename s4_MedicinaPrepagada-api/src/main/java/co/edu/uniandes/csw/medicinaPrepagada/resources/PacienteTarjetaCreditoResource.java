@@ -65,7 +65,7 @@ public class PacienteTarjetaCreditoResource {
      */
     @POST
     @Path("{pacienteId: \\d+}/tarjetascredito")
-    public TarjetaCreditoDTO agregarTarjetaAPaciente(@PathParam("pacienteId") Long pacienteId, TarjetaCreditoDTO tarjetaCreditoDTO)throws WebApplicationException{
+    public TarjetaCreditoDTO agregarTarjetaAPaciente(@PathParam("pacienteId") Long pacienteId, TarjetaCreditoDTO tarjetaCreditoDTO){
         try{
             tarjetaLogic.createTarjetaCredito(tarjetaCreditoDTO.toEntity());
             pacienteLogic.agregarTarjetaCreditoAPaciente(pacienteId, tarjetaCreditoDTO.toEntity());

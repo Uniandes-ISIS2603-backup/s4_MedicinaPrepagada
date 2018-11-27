@@ -61,7 +61,7 @@ public class PacienteResource {
      * Error de lógica que se genera cuando ya existe el paciente.
      */
     @POST
-    public PacienteDTO createPaciente(PacienteDetailDTO paciente) throws WebApplicationException
+    public PacienteDTO createPaciente(PacienteDetailDTO paciente) 
     {
        PacienteEntity entity = paciente.toEntity();
        PacienteEntity nuevaEntity;
@@ -82,7 +82,7 @@ public class PacienteResource {
      */
     @DELETE
     @Path("{pacientesId: \\d+}")
-    public void deletePaciente(@PathParam("pacientesId") Long pacientesId)throws WebApplicationException{
+    public void deletePaciente(@PathParam("pacientesId") Long pacientesId){
         try {
             pacienteLogic.deletePaciente(pacientesId);
         } catch (BusinessLogicException ex) {
@@ -140,7 +140,7 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d+}/citaslaboratorio")
-    public List<CitaLaboratorioDTO> darCitasLaboratorioPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
+    public List<CitaLaboratorioDTO> darCitasLaboratorioPaciente(@PathParam("pacienteId") Long pacienteId){
         List<CitaLaboratorioDTO> rta = new LinkedList<>();
         try{
              List<CitaLaboratorioEntity> lista = pacienteLogic.darCitasLaboratorio(pacienteId);
@@ -162,7 +162,7 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d+}/facturas")
-    public List<FacturaDTO> darFacturasPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
+    public List<FacturaDTO> darFacturasPaciente(@PathParam("pacienteId") Long pacienteId){
         List<FacturaDTO> rta = new LinkedList<>();
         try{
             List<FacturaEntity> lista = pacienteLogic.darFacturasPaciente(pacienteId);
@@ -183,7 +183,7 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d++}/citasmedicas")
-    public List<CitaMedicaDTO> darCitasMedicasPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
+    public List<CitaMedicaDTO> darCitasMedicasPaciente(@PathParam("pacienteId") Long pacienteId){
         List<CitaMedicaDTO> rta = new LinkedList<>();
         List<CitaMedicaEntity> lista;
         try {
