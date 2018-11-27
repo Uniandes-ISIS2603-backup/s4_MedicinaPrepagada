@@ -72,8 +72,12 @@ public class PacienteLogic {
      * @param id: el id a buscar
      * @return: un Paciente con el id dado por param
      */
-    public PacienteEntity getPaciente(Long id){
-        return persistence.find(id);
+    public PacienteEntity getPaciente(Long id) throws BusinessLogicException{
+        PacienteEntity pac = persistence.find(id);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente con el id dado no existe");
+        }
+        return pac;
     }
     
     /**
@@ -124,8 +128,11 @@ public class PacienteLogic {
      * elimina un paciente con el id dado por parametro
      * @param id: el id del paciente que se desea eliminar
      */
-    public void deletePaciente(Long id){
+    public void deletePaciente(Long id) throws BusinessLogicException{
         PacienteEntity pac = persistence.find(id);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente con el id dado no existe");
+        }
         List<HistoriaClinicaEntity> historiasClinicas = pac.getHistoriasClinicas();
         for(HistoriaClinicaEntity hist: historiasClinicas){
             hist.setPaciente(null);
@@ -146,8 +153,12 @@ public class PacienteLogic {
      * @param idPaciente: id del paciente
      * @return lista de tarjetas de credito del paciente
      */
-    public List<TarjetaCreditoEntity> getTarjetasCreditoPaciente(Long idPaciente){
-        return persistence.find(idPaciente).getTarjetasCredito();
+    public List<TarjetaCreditoEntity> getTarjetasCreditoPaciente(Long idPaciente) throws BusinessLogicException{
+        PacienteEntity pac = persistence.find(idPaciente);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente con el id dado no existe");
+        }
+        return pac.getTarjetasCredito();
     }
     
     /**
@@ -156,8 +167,11 @@ public class PacienteLogic {
      * @param tarjeta: entity de la tarjeta que se le asocia al paciente
      * @return tarjeta creada
      */
-    public TarjetaCreditoEntity agregarTarjetaCreditoAPaciente(Long idPaciente, TarjetaCreditoEntity tarjeta){
+    public TarjetaCreditoEntity agregarTarjetaCreditoAPaciente(Long idPaciente, TarjetaCreditoEntity tarjeta) throws BusinessLogicException{
         PacienteEntity ent = persistence.find(idPaciente);
+        if(ent == null){
+            throw new BusinessLogicException("No existe el paciente");
+        }
         ent.getTarjetasCredito().add(tarjeta);
         persistence.update(ent);
         tarjeta.setPaciente(ent);
@@ -171,8 +185,12 @@ public class PacienteLogic {
      * @return 
      * @return: lista con todas las citas laboratorio de un paciente
      */
-    public List<CitaLaboratorioEntity> darCitasLaboratorio(Long idPaciente){
-        return persistence.find(idPaciente).getCitasLaboratorio();
+    public List<CitaLaboratorioEntity> darCitasLaboratorio(Long idPaciente) throws BusinessLogicException{
+        PacienteEntity pac = persistence.find(idPaciente);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente con el id dado no existe");
+        }
+        return pac.getCitasLaboratorio();
     }
     
     /**
@@ -180,8 +198,12 @@ public class PacienteLogic {
      * @param idPaciente: id del paciente
      * @return lista de todas las facturas de un paciente
      */
-    public List<FacturaEntity> darFacturasPaciente(Long idPaciente){
-        return persistence.find(idPaciente).getFacturas();
+    public List<FacturaEntity> darFacturasPaciente(Long idPaciente) throws BusinessLogicException{
+        PacienteEntity pac = persistence.find(idPaciente);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente no existe");
+        }
+        return pac.getFacturas();
     }
     
     /**
@@ -189,8 +211,12 @@ public class PacienteLogic {
      * @param idPaciente: id del paciente
      * @return una lista con todas las citas medicas
      */
-    public List<CitaMedicaEntity> darCitasMedicas(Long idPaciente){
-        return persistence.find(idPaciente).getCitasMedicas();
+    public List<CitaMedicaEntity> darCitasMedicas(Long idPaciente) throws BusinessLogicException{
+        PacienteEntity pac =  persistence.find(idPaciente);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente con el id dado no existe");
+        }
+        return pac.getCitasMedicas();
     }
     
     /**
@@ -198,8 +224,12 @@ public class PacienteLogic {
      * @param idPaciente: id del paciente
      * @return una lista con todas las historias clinicas del paciente
      */
-    public List<HistoriaClinicaEntity> darHistoriasClinicas(Long idPaciente){
-        return persistence.find(idPaciente).getHistoriasClinicas();
+    public List<HistoriaClinicaEntity> darHistoriasClinicas(Long idPaciente) throws BusinessLogicException{
+        PacienteEntity pac = persistence.find(idPaciente);
+        if(pac == null){
+            throw new BusinessLogicException("El paciente no existe");
+        }
+        return pac.getHistoriasClinicas();
     }
     
 

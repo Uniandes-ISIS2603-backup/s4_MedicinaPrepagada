@@ -84,8 +84,12 @@ public class TarjetaCreditoLogic {
      * @param id: el id corespondiente a la tarjetaDeCredito
      * @return la tarjeta de credito buscada
      */
-    public TarjetaCreditoEntity getTarjetaCredito(Long id){
-        return persistence.find(id);
+    public TarjetaCreditoEntity getTarjetaCredito(Long id) throws BusinessLogicException{
+        TarjetaCreditoEntity tarj =  persistence.find(id);
+        if(tarj == null){
+            throw new BusinessLogicException("La tarjeta de credito con el id dado no existe");
+        }
+        return tarj;
     }
     
     /**
@@ -100,7 +104,10 @@ public class TarjetaCreditoLogic {
      * Borra una tarjeta de credito
      * @param id de la tarjeta que se desea eliminar
      */
-    public void deleteTarjetaCredito(Long id){
+    public void deleteTarjetaCredito(Long id) throws BusinessLogicException{
+        if(persistence.find(id) == null){
+            throw new BusinessLogicException("La tarjeta de credito con el id dado no existe");
+        }
         persistence.delete(id);
     }
     

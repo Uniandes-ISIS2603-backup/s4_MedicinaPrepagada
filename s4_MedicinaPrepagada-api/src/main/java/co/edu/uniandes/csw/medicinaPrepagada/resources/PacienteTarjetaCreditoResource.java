@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.TarjetaCreditoDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.TarjetaCreditoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.TarjetaCreditoEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -45,9 +45,14 @@ public class PacienteTarjetaCreditoResource {
     @Path("{pacienteId: \\d+}/tarjetascredito")
     public List<TarjetaCreditoDTO> getTarjetasCredito(@PathParam("pacienteId") Long pacienteId){
         List<TarjetaCreditoDTO> rta = new LinkedList<>();
-        List<TarjetaCreditoEntity> lista = pacienteLogic.getTarjetasCreditoPaciente(pacienteId);
+        try{
+            List<TarjetaCreditoEntity> lista = pacienteLogic.getTarjetasCreditoPaciente(pacienteId);
         for(TarjetaCreditoEntity ent: lista){
             rta.add(new TarjetaCreditoDTO(ent));
+        }
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
         }
         return rta;
     }
@@ -60,9 +65,14 @@ public class PacienteTarjetaCreditoResource {
      */
     @POST
     @Path("{pacienteId: \\d+}/tarjetascredito")
-    public TarjetaCreditoDTO agregarTarjetaAPaciente(@PathParam("pacienteId") Long pacienteId, TarjetaCreditoDTO tarjetaCreditoDTO) throws BusinessLogicException{
-        tarjetaLogic.createTarjetaCredito(tarjetaCreditoDTO.toEntity());
-        pacienteLogic.agregarTarjetaCreditoAPaciente(pacienteId, tarjetaCreditoDTO.toEntity());
+    public TarjetaCreditoDTO agregarTarjetaAPaciente(@PathParam("pacienteId") Long pacienteId, TarjetaCreditoDTO tarjetaCreditoDTO){
+        try{
+            tarjetaLogic.createTarjetaCredito(tarjetaCreditoDTO.toEntity());
+            pacienteLogic.agregarTarjetaCreditoAPaciente(pacienteId, tarjetaCreditoDTO.toEntity());
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
+        }
         return tarjetaCreditoDTO;
     }
     

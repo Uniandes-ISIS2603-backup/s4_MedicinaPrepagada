@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.dtos;
 
 import co.edu.uniandes.csw.medicinaPrepagada.entities.UsuarioEntity;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -37,7 +38,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 
  * @author MIGUELHOYOS
  */
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
     
     private String login;
     private String contrasena;
