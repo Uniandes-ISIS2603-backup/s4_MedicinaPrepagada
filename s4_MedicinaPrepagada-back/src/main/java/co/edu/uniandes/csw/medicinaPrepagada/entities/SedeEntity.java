@@ -76,7 +76,7 @@ public class SedeEntity implements Serializable
      */
     private String correo;
 
-    
+    private String imagen;
   
     /**
      * Obtiene el id de la sede
@@ -227,7 +227,24 @@ public class SedeEntity implements Serializable
        return this.correo;
    }
     
-    
+   
+    /**
+     * Pone la imagen de la sedeEntity
+     * @param pImagen 
+     */
+    public void setImagen (String pImagen)
+   {
+       this.imagen = pImagen;
+   }
+   
+    /**
+     * Recibe el nombre del sedeEntity
+     * @return string del nombre
+     */
+   public String getImagen  ()
+   {
+       return this.imagen;
+   }
 
     /**
      * Obtiene los consultorios de la sedeEntity
@@ -264,7 +281,11 @@ public class SedeEntity implements Serializable
     
     
     
-    
+    /**
+     * Metodo para comparar los objetos
+     * @param obj
+     * @return un booleano true si son iguales
+     */
     
     
     @Override
