@@ -30,10 +30,10 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PodamStrategyValue(DateStrategy.class)
-    private Date fecha;  
+    /**@Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @PodamStrategyValue(DateStrategy.class)*/
+    private String fecha;  
     
     private String descripcionDiagnostico; 
     private String alergias; 
@@ -58,7 +58,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @return atributo fecha.
      */
     
-    public Date getFecha() 
+    public String getFecha() 
     {
         return fecha;
     }
@@ -68,7 +68,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
      * @param fecha nuevo valor del atributo
      */
     
-    public void setFecha(Date fecha ) 
+    public void setFecha(String fecha ) 
     {
         this.fecha = fecha; 
     }
