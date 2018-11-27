@@ -105,7 +105,7 @@ public class PacienteLogic {
         
         List<CitaMedicaEntity> oldCitasMedicas = oldEntity.getCitasMedicas();
         List<CitaMedicaEntity> newCitasMedicas = pacienteEntity.getCitasMedicas();
-        if(newCitasMedicas != null || !newCitasMedicas.isEmpty()){
+        if(!newCitasMedicas.isEmpty()){
             for (CitaMedicaEntity ent : oldCitasMedicas) {
             for (CitaMedicaEntity ent2 : newCitasMedicas) {
                 if(ent.getId() != ent2.getId() && ent.getFecha().compareTo(ent2.getFecha()) == 0){
@@ -202,18 +202,7 @@ public class PacienteLogic {
         return persistence.find(idPaciente).getHistoriasClinicas();
     }
     
-    /**
-     * le asigna una tarjeta de credito a un paciente
-     * @param pacienteId: id del paciente
-     * @param tarjeta entidad de tarjeta que se le va  aagregar al paciente
-     */
-    public void asignarTarjetaAPaciente(Long pacienteId, TarjetaCreditoEntity tarjeta){
-        PacienteEntity pac = persistence.find(pacienteId);
-        pac.getTarjetasCredito().add(tarjeta);
-        tarjeta.setPaciente(pac);
-        persistence.update(pac);
-        tarjetaPersistence.update(tarjeta);
-    }
+
     
     public boolean validarReglasComunes(PacienteEntity pacienteEntity)throws BusinessLogicException{
 
