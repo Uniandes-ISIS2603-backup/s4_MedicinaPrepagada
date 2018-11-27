@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.resources;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaLaboratorioDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.CitaMedicaDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.FacturaDTO;
-import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.PacienteDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.PacienteLogic;
@@ -82,8 +82,12 @@ public class PacienteResource {
      */
     @DELETE
     @Path("{pacientesId: \\d+}")
-    public void deletePaciente(@PathParam("pacientesId") Long pacientesId){
-        pacienteLogic.deletePaciente(pacientesId);
+    public void deletePaciente(@PathParam("pacientesId") Long pacientesId)throws WebApplicationException{
+        try {
+            pacienteLogic.deletePaciente(pacientesId);
+        } catch (BusinessLogicException ex) {
+            throw new WebApplicationException(ex.getMessage() + "404");
+        }
     }
     
     /**
@@ -94,8 +98,13 @@ public class PacienteResource {
     @GET
     @Path("{pacientesId: \\d+}")
     public PacienteDetailDTO getPaciente(@PathParam("pacientesId") Long pacientesId){
+        try{
         PacienteEntity entity = pacienteLogic.getPaciente(pacientesId);
         return new PacienteDetailDTO(entity);
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
+        }
     }
     
     /**
@@ -131,12 +140,18 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d+}/citaslaboratorio")
-    public List<CitaLaboratorioDTO> darCitasLaboratorioPaciente(@PathParam("pacienteId") Long pacienteId){
+    public List<CitaLaboratorioDTO> darCitasLaboratorioPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
         List<CitaLaboratorioDTO> rta = new LinkedList<>();
-        List<CitaLaboratorioEntity> lista = pacienteLogic.darCitasLaboratorio(pacienteId);
+        try{
+             List<CitaLaboratorioEntity> lista = pacienteLogic.darCitasLaboratorio(pacienteId);
         for(CitaLaboratorioEntity ent: lista){
             rta.add(new CitaLaboratorioDTO(ent));
         }
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
+        }
+       
         return rta;
     }
     
@@ -147,11 +162,16 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d+}/facturas")
-    public List<FacturaDTO> darFacturasPaciente(@PathParam("pacienteId") Long pacienteId){
+    public List<FacturaDTO> darFacturasPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
         List<FacturaDTO> rta = new LinkedList<>();
-        List<FacturaEntity> lista = pacienteLogic.darFacturasPaciente(pacienteId);
+        try{
+            List<FacturaEntity> lista = pacienteLogic.darFacturasPaciente(pacienteId);
         for(FacturaEntity ent :lista){
             rta.add(new FacturaDTO(ent));
+        }
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
         }
         return rta;
     }
@@ -163,11 +183,16 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d++}/citasmedicas")
-    public List<CitaMedicaDTO> darCitasMedicasPaciente(@PathParam("pacienteId") Long pacienteId){
+    public List<CitaMedicaDTO> darCitasMedicasPaciente(@PathParam("pacienteId") Long pacienteId)throws WebApplicationException{
         List<CitaMedicaDTO> rta = new LinkedList<>();
-        List<CitaMedicaEntity> lista = pacienteLogic.darCitasMedicas(pacienteId);
-        for(CitaMedicaEntity ent : lista){
+        List<CitaMedicaEntity> lista;
+        try {
+            lista = pacienteLogic.darCitasMedicas(pacienteId);
+            for(CitaMedicaEntity ent : lista){
             rta.add(new CitaMedicaDTO(ent));
+        }
+        } catch (Exception ex) {
+            throw new WebApplicationException(ex.getMessage() + "404");
         }
         return rta;
     }
@@ -179,11 +204,16 @@ public class PacienteResource {
      */
     @GET
     @Path("{pacienteId: \\d++}/historiasclinicas")
-    public List<HistoriaClinicaDTO> darHistoriasClinicasPaciente(@PathParam("pacienteId") Long pacienteId){
-        List<HistoriaClinicaDTO> rta = new LinkedList<>();
+    public List<HistoriaClinicaDetailDTO> darHistoriasClinicasPaciente(@PathParam("pacienteId") Long pacienteId){
+        List<HistoriaClinicaDetailDTO> rta = new LinkedList<>();
+        try{
         List<HistoriaClinicaEntity> lista = pacienteLogic.darHistoriasClinicas(pacienteId);
         for(HistoriaClinicaEntity ent : lista){
-            rta.add(new HistoriaClinicaDTO(ent));
+            rta.add(new HistoriaClinicaDetailDTO(ent));
+        }
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
         }
         return rta;
     }

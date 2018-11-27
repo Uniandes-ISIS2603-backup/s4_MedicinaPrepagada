@@ -20,6 +20,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -63,8 +64,12 @@ public class TarjetaCreditoResource {
      */
     @DELETE
     @Path("{tarjetascreditoId: \\d+}")
-    public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-        tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
+    public void deleteTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId)throws WebApplicationException{
+        try {
+            tarjetaCreditoLogic.deleteTarjetaCredito(tarjetascreditoId);
+        } catch (BusinessLogicException ex) {
+            throw new WebApplicationException(ex.getMessage() + "404");
+        }
     }
     
      /**
@@ -74,9 +79,13 @@ public class TarjetaCreditoResource {
      */
     @GET
     @Path("{tarjetascreditoId: \\d+}")
-    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId){
-        TarjetaCreditoEntity entity = tarjetaCreditoLogic.getTarjetaCredito(tarjetascreditoId);
-        return new TarjetaCreditoDTO(entity);
+    public TarjetaCreditoDTO getTarjetaCredito(@PathParam("tarjetascreditoId") Long tarjetascreditoId) throws WebApplicationException {
+        try {
+            TarjetaCreditoEntity entity = tarjetaCreditoLogic.getTarjetaCredito(tarjetascreditoId);
+            return new TarjetaCreditoDTO(entity);
+        } catch (BusinessLogicException ex) {
+            throw new WebApplicationException(ex.getMessage() + "404");
+        }
     }
     
      /**
