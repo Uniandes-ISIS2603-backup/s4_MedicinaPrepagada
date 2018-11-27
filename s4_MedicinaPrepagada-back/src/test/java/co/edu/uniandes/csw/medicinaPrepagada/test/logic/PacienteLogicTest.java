@@ -102,8 +102,8 @@ public class PacienteLogicTest {
         }
         data.get(1).setFechaNacimiento("19/02/1995");
         em.merge(data.get(1));
-
-       
+        
+     
     }
     
     /**
@@ -157,7 +157,6 @@ public class PacienteLogicTest {
      * Prueba para actualizar un Paciente.
      */
     @Test
-   
     public void updatePacienteTest() throws BusinessLogicException {
         PacienteEntity entity = data.get(1);
         PacienteEntity pojoEntity = factory.manufacturePojo(PacienteEntity.class);
@@ -188,7 +187,7 @@ public class PacienteLogicTest {
         PacienteEntity delet = em.find(PacienteEntity.class, entity.getId());
         Assert.assertNull(delet);
     }
-    
+        
     /**
      * Prueba para crear un paciente con un login reptido
      * @throws BusinessLogicException 

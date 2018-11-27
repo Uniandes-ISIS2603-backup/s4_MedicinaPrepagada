@@ -29,7 +29,7 @@ public class PacienteEntity extends UsuarioEntity implements Serializable{
     private List<FacturaEntity> facturas;
     
     @PodamExclude
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TarjetaCreditoEntity> tarjetasCredito;
     
     @PodamExclude    

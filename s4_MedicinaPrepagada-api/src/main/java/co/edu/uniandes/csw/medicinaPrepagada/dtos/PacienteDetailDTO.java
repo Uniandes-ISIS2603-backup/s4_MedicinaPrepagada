@@ -93,11 +93,17 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
                    citasLaboratorio.add(new CitaLaboratorioDTO(citaLab));
                }
            }
+           else{
+               this.citasLaboratorio = new LinkedList<>();
+           }
            if(pacienteEntity.getFacturas() != null){
                facturas = new LinkedList<>();
                for(FacturaEntity fact: pacienteEntity.getFacturas()){
                    facturas.add(new FacturaDTO(fact));
                }
+           }
+           else{
+               this.facturas = new LinkedList<FacturaDTO>();
            }
            if(pacienteEntity.getTarjetasCredito() != null){
                tarjetasCredito = new LinkedList<>();
@@ -105,17 +111,26 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
                    tarjetasCredito.add(new TarjetaCreditoDTO(tarj));
                }
            }
+           else{
+               this.tarjetasCredito = new LinkedList<>();
+           }
            if(pacienteEntity.getCitasMedicas() != null){
                citasMedicas = new LinkedList<>();
                for(CitaMedicaEntity med:pacienteEntity.getCitasMedicas()){
                   citasMedicas.add(new CitaMedicaDTO(med));
                }
            }
+           else{
+               this.citasMedicas = new LinkedList<>();
+           }
            if(pacienteEntity.getHistoriasClinicas() != null){
                historiasClinicas = new LinkedList<>();
                for(HistoriaClinicaEntity his : pacienteEntity.getHistoriasClinicas()){
                    historiasClinicas.add(new HistoriaClinicaDTO(his));
                }
+           }
+           else{
+               this.historiasClinicas = new LinkedList<>();
            }
         }
     }
@@ -137,12 +152,18 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
          }
          pacienteEntity.setCitasLaboratorio(citL);
      }
+     else{
+         pacienteEntity.setCitasLaboratorio(new LinkedList<>());
+     }
      if(citasMedicas != null){
          List<CitaMedicaEntity> citMeds = new LinkedList<>();
          for(CitaMedicaDTO citM:citasMedicas ){
              citMeds.add(citM.toEntity());
          }
          pacienteEntity.setCitasMedicas(citMeds);
+     }
+     else{
+         pacienteEntity.setCitasMedicas(new LinkedList<>());
      }
      if(facturas != null){
         List<FacturaEntity> facts = new LinkedList<>();
@@ -151,6 +172,9 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
         }
         pacienteEntity.setFacturas(facts);
      }
+     else{
+         pacienteEntity.setFacturas(new LinkedList<>());
+     }
      if(historiasClinicas != null){
          List<HistoriaClinicaEntity> histoClin = new LinkedList<>();
          for(HistoriaClinicaDTO hist:historiasClinicas){
@@ -158,12 +182,18 @@ public class PacienteDetailDTO extends PacienteDTO implements Serializable{
          }
          pacienteEntity.setHistoriasClinicas(histoClin);
      }
+     else{
+         pacienteEntity.setHistoriasClinicas(new LinkedList<>());
+     }
      if(tarjetasCredito != null){
          List<TarjetaCreditoEntity> tarjetas = new LinkedList<>();
          for(TarjetaCreditoDTO tarjeta:tarjetasCredito){
              tarjetas.add(tarjeta.toEntity());
          }
          pacienteEntity.setTarjetasCredito(tarjetas);
+     }
+     else{
+         pacienteEntity.setTarjetasCredito(new LinkedList<>());
      }
      return pacienteEntity;
 

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class TarjetaCreditoEntity implements Serializable{
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private PacienteEntity paciente;
     
     @Id
