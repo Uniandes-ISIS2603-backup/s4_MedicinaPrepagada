@@ -27,8 +27,8 @@ import javax.ws.rs.WebApplicationException;
  * @farmacia ISIS2603
  * @version 1.0
  */
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+
+@Path("/farmacias")
 public class FarmaciaMedicamentosResource {
 
     private static final Logger LOGGER = Logger.getLogger(FarmaciaMedicamentosResource.class.getName());
@@ -49,7 +49,7 @@ public class FarmaciaMedicamentosResource {
      * Error de lógica que se genera cuando no se encuentra el medicamento.
      */
     @POST
-    @Path("{medicamentosId: \\d+}")
+    @Path("{farmaciasId: \\d+}/medicamentos/{medicamentosId: \\d+}")
     public MedicamentoDetailDTO addMedicamento(@PathParam("farmaciasId") Long farmaciasId, @PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource addMedicamento: input: farmaciasId {0} , medicamentosId {1}", new Object[]{farmaciasId, medicamentosId});
         if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
@@ -61,69 +61,6 @@ public class FarmaciaMedicamentosResource {
     }
 
     /**
-     * Busca y devuelve todos los medicamentos que existen en una farmacia.
-     *
-     * @param farmaciasId El ID de la farmacia del cual se buscan los medicamentos
-     * @return JSONArray {@link MedicamentoDetailDTO} - Los medicamentos encontrados en el
-     * autor. Si no hay ninguno retorna una lista vacía.
-     */
-    @GET
-    public List<MedicamentoDetailDTO> getMedicamentos(@PathParam("farmaciasId") Long farmaciasId) {
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource getMedicamentos: input: {0}", farmaciasId);
-        List<MedicamentoDetailDTO> lista = medicamentosListEntity2DTO(farmaciaMedicamentoLogic.getMedicamentos(farmaciasId));
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource getMedicamentos: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
-     * Busca y devuelve el medicamento con el ID recibido en la URL, relativo a un
-     * autor.
-     *
-     * @param farmaciasId El ID de la farmacia del cual se busca el medicamento
-     * @param medicamentosId El ID del medicamento que se busca
-     * @return {@link MedicamentoDetailDTO} - El medicamento encontrado en la farmacia.
-     * @throws co.edu.uniandes.csw.medicamentostore.exceptions.BusinessLogicException
-     * si el medicamento no está asociado al autor
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el medicamento.
-     */
-    @GET
-    @Path("{medicamentosId: \\d+}")
-    public MedicamentoDetailDTO getMedicamento(@PathParam("farmaciasId") Long farmaciasId, @PathParam("medicamentosId") Long medicamentosId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource getMedicamento: input: farmaciasId {0} , medicamentosId {1}", new Object[]{farmaciasId, medicamentosId});
-        if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
-            throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
-        }
-        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(farmaciaMedicamentoLogic.getMedicamento(farmaciasId, medicamentosId));
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource getMedicamento: output: {0}", detailDTO);
-        return detailDTO;
-    }
-
-    /**
-     * Actualiza la lista de medicamentos de una farmacia con la lista que se recibe en el
-     * cuerpo
-     *
-     * @param farmaciasId El ID de la farmacia al cual se le va a asociar el medicamento
-     * @param medicamentos JSONArray {@link MedicamentoDetailDTO} - La lista de medicamentos que se
-     * desea guardar.
-     * @return JSONArray {@link MedicamentoDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el medicamento.
-     */
-    @PUT
-    public List<MedicamentoDetailDTO> replaceMedicamentos(@PathParam("farmaciasId") Long farmaciasId, List<MedicamentoDetailDTO> medicamentos) {
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource replaceMedicamentos: input: farmaciasId {0} , medicamentos {1}", new Object[]{farmaciasId, medicamentos.toString()});
-        for (MedicamentoDetailDTO medicamento : medicamentos) {
-            if (medicamentoLogic.getMedicamento(medicamento.getId()) == null) {
-                throw new WebApplicationException("El recurso /medicamentos/" + medicamento.getId() + " no existe.", 404);
-            }
-        }
-        List<MedicamentoDetailDTO> lista = medicamentosListEntity2DTO(farmaciaMedicamentoLogic.replaceMedicamentos(farmaciasId, medicamentosListDTO2Entity(medicamentos)));
-        LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource replaceMedicamentos: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
      * Elimina la conexión entre el medicamento y e autor recibidos en la URL.
      *
      * @param farmaciasId El ID de la farmacia al cual se le va a desasociar el medicamento
@@ -132,7 +69,7 @@ public class FarmaciaMedicamentosResource {
      * Error de lógica que se genera cuando no se encuentra el medicamento.
      */
     @DELETE
-    @Path("{medicamentosId: \\d+}")
+    @Path("{farmaciasId: \\d+}/medicamentos/{medicamentosId: \\d+}")
     public void removeMedicamento(@PathParam("farmaciasId") Long farmaciasId, @PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "FarmaciaMedicamentosResource deleteMedicamento: input: farmaciasId {0} , medicamentosId {1}", new Object[]{farmaciasId, medicamentosId});
         if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
