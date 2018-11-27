@@ -20,10 +20,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -35,6 +35,7 @@ import javax.ws.rs.WebApplicationException;
  * @author ncobos
  */
 
+@Path("/medicamentos")
 public class MedicamentoOrdenesMedicasResource {
     
     private static final Logger LOGGER = Logger.getLogger(MedicamentoOrdenesMedicasResource.class.getName());
@@ -55,7 +56,7 @@ public class MedicamentoOrdenesMedicasResource {
      * Error de lógica que se genera cuando no se encuentra el ordenMedica.
      */
     @POST
-    @Path("{ordenMedicasId: \\d+}")
+    @Path("{medicamentosId: \\d+}/ordenesMedicas/{ordenMedicasId: \\d+}")
     public OrdenMedicaDetailDTO addOrdenMedica(@PathParam("medicamentosId") Long medicamentosId, @PathParam("ordenMedicasId") Long ordenMedicasId) {
         LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource addOrdenMedica: input: medicamentosId {0} , ordenMedicasId {1}", new Object[]{medicamentosId, ordenMedicasId});
         if (ordenMedicaLogic.getOrdenMedica(ordenMedicasId) == null) {
