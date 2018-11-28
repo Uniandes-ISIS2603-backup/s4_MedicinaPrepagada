@@ -75,7 +75,13 @@ public class MedicamentoFarmaciasResource {
     @Path("{medicamentosId: \\d+}/farmacias")
     public List<FarmaciaDetailDTO> getFarmacias(@PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource getFarmacias: input: {0}", medicamentosId);
-        List<FarmaciaDetailDTO> lista = farmaciasListEntity2DTO(medicamentoFarmaciaLogic.getFarmacias(medicamentosId));
+        List<FarmaciaDetailDTO> lista;
+        try{
+            lista= farmaciasListEntity2DTO(medicamentoFarmaciaLogic.getFarmacias(medicamentosId));
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
+        }
         LOGGER.log(Level.INFO, "MedicamentoFarmaciasResource getFarmacias: output: {0}", lista.toString());
         return lista;
     }

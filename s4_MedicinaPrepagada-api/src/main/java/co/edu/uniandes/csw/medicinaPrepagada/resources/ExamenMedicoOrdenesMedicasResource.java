@@ -24,6 +24,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -34,6 +35,10 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author ncobos
  */
+@Path("examenesMedicos")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class ExamenMedicoOrdenesMedicasResource {
     
     
@@ -67,69 +72,6 @@ public class ExamenMedicoOrdenesMedicasResource {
     }
 
     /**
-     * Busca y devuelve todos los ordenMedicas que existen en una examenMedico.
-     *
-     * @param examenMedicosId El ID de la examenMedico del cual se buscan los ordenMedicas
-     * @return JSONArray {@link OrdenMedicaDetailDTO} - Los ordenMedicas encontrados en el
-     * autor. Si no hay ninguno retorna una lista vacía.
-     */
-    @GET
-    public List<OrdenMedicaDetailDTO> getOrdenMedicas(@PathParam("examenMedicosId") Long examenMedicosId) {
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource getOrdenMedicas: input: {0}", examenMedicosId);
-        List<OrdenMedicaDetailDTO> lista = ordenMedicasListEntity2DTO(examenMedicoOrdenMedicaLogic.getOrdenMedicas(examenMedicosId));
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource getOrdenMedicas: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
-     * Busca y devuelve el ordenMedica con el ID recibido en la URL, relativo a un
-     * autor.
-     *
-     * @param examenMedicosId El ID de la examenMedico del cual se busca el ordenMedica
-     * @param ordenMedicasId El ID del ordenMedica que se busca
-     * @return {@link OrdenMedicaDetailDTO} - El ordenMedica encontrado en la examenMedico.
-     * @throws co.edu.uniandes.csw.ordenMedicastore.exceptions.BusinessLogicException
-     * si el ordenMedica no está asociado al autor
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el ordenMedica.
-     */
-    @GET
-    @Path("{ordenMedicasId: \\d+}")
-    public OrdenMedicaDetailDTO getOrdenMedica(@PathParam("examenMedicosId") Long examenMedicosId, @PathParam("ordenMedicasId") Long ordenMedicasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource getOrdenMedica: input: examenMedicosId {0} , ordenMedicasId {1}", new Object[]{examenMedicosId, ordenMedicasId});
-        if (ordenMedicaLogic.getOrdenMedica(ordenMedicasId) == null) {
-            throw new WebApplicationException("El recurso /ordenMedicas/" + ordenMedicasId + " no existe.", 404);
-        }
-        OrdenMedicaDetailDTO detailDTO = new OrdenMedicaDetailDTO(examenMedicoOrdenMedicaLogic.getOrdenMedica(examenMedicosId, ordenMedicasId));
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource getOrdenMedica: output: {0}", detailDTO);
-        return detailDTO;
-    }
-
-    /**
-     * Actualiza la lista de ordenMedicas de una examenMedico con la lista que se recibe en el
-     * cuerpo
-     *
-     * @param examenMedicosId El ID de la examenMedico al cual se le va a asociar el ordenMedica
-     * @param ordenMedicas JSONArray {@link OrdenMedicaDetailDTO} - La lista de ordenMedicas que se
-     * desea guardar.
-     * @return JSONArray {@link OrdenMedicaDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el ordenMedica.
-     */
-    @PUT
-    public List<OrdenMedicaDetailDTO> replaceOrdenMedicas(@PathParam("examenMedicosId") Long examenMedicosId, List<OrdenMedicaDetailDTO> ordenMedicas) {
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource replaceOrdenMedicas: input: examenMedicosId {0} , ordenMedicas {1}", new Object[]{examenMedicosId, ordenMedicas.toString()});
-        for (OrdenMedicaDetailDTO ordenMedica : ordenMedicas) {
-            if (ordenMedicaLogic.getOrdenMedica(ordenMedica.getId()) == null) {
-                throw new WebApplicationException("El recurso /ordenMedicas/" + ordenMedica.getId() + " no existe.", 404);
-            }
-        }
-        List<OrdenMedicaDetailDTO> lista = ordenMedicasListEntity2DTO(examenMedicoOrdenMedicaLogic.replaceOrdenMedicas(examenMedicosId, ordenMedicasListDTO2Entity(ordenMedicas)));
-        LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource replaceOrdenMedicas: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
      * Elimina la conexión entre el ordenMedica y e autor recibidos en la URL.
      *
      * @param examenMedicosId El ID de la examenMedico al cual se le va a desasociar el ordenMedica
@@ -138,7 +80,7 @@ public class ExamenMedicoOrdenesMedicasResource {
      * Error de lógica que se genera cuando no se encuentra el ordenMedica.
      */
     @DELETE
-    @Path("{ordenMedicasId: \\d+}")
+    @Path("{examenMedicosId: \\d+}/ordenesMedicas/{ordenMedicasId: \\d+}")
     public void removeOrdenMedica(@PathParam("examenMedicosId") Long examenMedicosId, @PathParam("ordenMedicasId") Long ordenMedicasId) {
         LOGGER.log(Level.INFO, "ExamenMedicoOrdenMedicasResource deleteOrdenMedica: input: examenMedicosId {0} , ordenMedicasId {1}", new Object[]{examenMedicosId, ordenMedicasId});
         if (ordenMedicaLogic.getOrdenMedica(ordenMedicasId) == null) {

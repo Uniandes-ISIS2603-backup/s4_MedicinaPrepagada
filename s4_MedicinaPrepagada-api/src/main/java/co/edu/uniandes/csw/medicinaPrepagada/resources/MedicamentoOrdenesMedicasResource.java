@@ -36,6 +36,9 @@ import javax.ws.rs.WebApplicationException;
  */
 
 @Path("/medicamentos")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class MedicamentoOrdenesMedicasResource {
     
     private static final Logger LOGGER = Logger.getLogger(MedicamentoOrdenesMedicasResource.class.getName());
@@ -67,69 +70,7 @@ public class MedicamentoOrdenesMedicasResource {
         return detailDTO;
     }
 
-    /**
-     * Busca y devuelve todos los ordenMedicas que existen en una medicamento.
-     *
-     * @param medicamentosId El ID de la medicamento del cual se buscan los ordenMedicas
-     * @return JSONArray {@link OrdenMedicaDetailDTO} - Los ordenMedicas encontrados en el
-     * autor. Si no hay ninguno retorna una lista vacía.
-     */
-    @GET
-    public List<OrdenMedicaDetailDTO> getOrdenMedicas(@PathParam("medicamentosId") Long medicamentosId) {
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource getOrdenMedicas: input: {0}", medicamentosId);
-        List<OrdenMedicaDetailDTO> lista = ordenMedicasListEntity2DTO(medicamentoOrdenMedicaLogic.getOrdenMedicas(medicamentosId));
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource getOrdenMedicas: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
-     * Busca y devuelve el ordenMedica con el ID recibido en la URL, relativo a un
-     * autor.
-     *
-     * @param medicamentosId El ID de la medicamento del cual se busca el ordenMedica
-     * @param ordenMedicasId El ID del ordenMedica que se busca
-     * @return {@link OrdenMedicaDetailDTO} - El ordenMedica encontrado en la medicamento.
-     * @throws co.edu.uniandes.csw.ordenMedicastore.exceptions.BusinessLogicException
-     * si el ordenMedica no está asociado al autor
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el ordenMedica.
-     */
-    @GET
-    @Path("{ordenMedicasId: \\d+}")
-    public OrdenMedicaDetailDTO getOrdenMedica(@PathParam("medicamentosId") Long medicamentosId, @PathParam("ordenMedicasId") Long ordenMedicasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource getOrdenMedica: input: medicamentosId {0} , ordenMedicasId {1}", new Object[]{medicamentosId, ordenMedicasId});
-        if (ordenMedicaLogic.getOrdenMedica(ordenMedicasId) == null) {
-            throw new WebApplicationException("El recurso /ordenMedicas/" + ordenMedicasId + " no existe.", 404);
-        }
-        OrdenMedicaDetailDTO detailDTO = new OrdenMedicaDetailDTO(medicamentoOrdenMedicaLogic.getOrdenMedica(medicamentosId, ordenMedicasId));
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource getOrdenMedica: output: {0}", detailDTO);
-        return detailDTO;
-    }
-
-    /**
-     * Actualiza la lista de ordenMedicas de una medicamento con la lista que se recibe en el
-     * cuerpo
-     *
-     * @param medicamentosId El ID de la medicamento al cual se le va a asociar el ordenMedica
-     * @param ordenMedicas JSONArray {@link OrdenMedicaDetailDTO} - La lista de ordenMedicas que se
-     * desea guardar.
-     * @return JSONArray {@link OrdenMedicaDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el ordenMedica.
-     */
-    @PUT
-    public List<OrdenMedicaDetailDTO> replaceOrdenMedicas(@PathParam("medicamentosId") Long medicamentosId, List<OrdenMedicaDetailDTO> ordenMedicas) {
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource replaceOrdenMedicas: input: medicamentosId {0} , ordenMedicas {1}", new Object[]{medicamentosId, ordenMedicas.toString()});
-        for (OrdenMedicaDetailDTO ordenMedica : ordenMedicas) {
-            if (ordenMedicaLogic.getOrdenMedica(ordenMedica.getId()) == null) {
-                throw new WebApplicationException("El recurso /ordenMedicas/" + ordenMedica.getId() + " no existe.", 404);
-            }
-        }
-        List<OrdenMedicaDetailDTO> lista = ordenMedicasListEntity2DTO(medicamentoOrdenMedicaLogic.replaceOrdenMedicas(medicamentosId, ordenMedicasListDTO2Entity(ordenMedicas)));
-        LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource replaceOrdenMedicas: output: {0}", lista.toString());
-        return lista;
-    }
-
+    
     /**
      * Elimina la conexión entre el ordenMedica y e autor recibidos en la URL.
      *
@@ -139,7 +80,7 @@ public class MedicamentoOrdenesMedicasResource {
      * Error de lógica que se genera cuando no se encuentra el ordenMedica.
      */
     @DELETE
-    @Path("{ordenMedicasId: \\d+}")
+    @Path("{medicamentosId: \\d+}/ordenesMedicas/{ordenMedicasId: \\d+}")
     public void removeOrdenMedica(@PathParam("medicamentosId") Long medicamentosId, @PathParam("ordenMedicasId") Long ordenMedicasId) {
         LOGGER.log(Level.INFO, "MedicamentoOrdenMedicasResource deleteOrdenMedica: input: medicamentosId {0} , ordenMedicasId {1}", new Object[]{medicamentosId, ordenMedicasId});
         if (ordenMedicaLogic.getOrdenMedica(ordenMedicasId) == null) {
