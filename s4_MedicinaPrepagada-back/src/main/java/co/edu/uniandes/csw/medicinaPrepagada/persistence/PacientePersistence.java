@@ -83,8 +83,6 @@ public class PacientePersistence {
         }
         catch(NoResultException e2){
             return false;
-        }
-        
-        
+        }  
     }
 }
