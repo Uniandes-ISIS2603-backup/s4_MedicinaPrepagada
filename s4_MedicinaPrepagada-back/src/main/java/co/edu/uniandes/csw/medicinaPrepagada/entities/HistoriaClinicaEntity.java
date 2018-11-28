@@ -44,7 +44,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     private String operaciones; 
     
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable=true)
     private PacienteEntity paciente; 
     

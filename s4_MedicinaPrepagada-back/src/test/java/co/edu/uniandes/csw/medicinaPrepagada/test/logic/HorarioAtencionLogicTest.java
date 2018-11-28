@@ -208,8 +208,8 @@ public class HorarioAtencionLogicTest
         newEntity.setConsultorio(data.get(0).getConsultorio());
         newEntity.setMedico(data.get(0).getMedico());
         
-       Date incio = new Date (1538312400000L);
-       Date fin = new Date (1538319600000L);
+       Date incio = new Date (1543590009000L);
+       Date fin = new Date (1543591209000L);
        newEntity.setFechaInicio(incio);
        newEntity.setFechaFin(fin);
         
@@ -492,8 +492,8 @@ public class HorarioAtencionLogicTest
          pojoEntity.setId(entity.getId());
         pojoEntity.setConsultorio(data.get(3).getConsultorio());
         pojoEntity.setMedico(data.get(3).getMedico());
-        pojoEntity.setFechaInicio(new Date (1539694800000L));
-        pojoEntity.setFechaFin(new Date(1539702000000L));
+        pojoEntity.setFechaInicio(new Date (1543590009000L));
+        pojoEntity.setFechaFin(new Date(1543591209000L));
 
         horarioAtencionLogic.updateHorarioAtencion(pojoEntity.getId(), pojoEntity);
 

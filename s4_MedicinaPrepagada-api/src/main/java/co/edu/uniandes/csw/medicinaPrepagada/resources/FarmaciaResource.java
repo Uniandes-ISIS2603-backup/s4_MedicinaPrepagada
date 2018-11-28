@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import co.edu.uniandes.csw.medicinaPrepagada.dtos.FarmaciaDTO;
+import co.edu.uniandes.csw.medicinaPrepagada.dtos.FarmaciaDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.FarmaciaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.FarmaciaEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
@@ -72,9 +73,9 @@ public class FarmaciaResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<FarmaciaDTO> getFarmacias() {
+    public List<FarmaciaDetailDTO> getFarmacias() {
         LOGGER.info("FarmaciaResource getFarmacias: input: void");
-        List<FarmaciaDTO> listaFarmacias = listEntity2DetailDTO(farmaciaLogic.getFarmacias());
+        List<FarmaciaDetailDTO> listaFarmacias = listEntity2DetailDTO(farmaciaLogic.getFarmacias());
         LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias);
         return listaFarmacias;
     }
@@ -90,13 +91,13 @@ public class FarmaciaResource {
      */
     @GET
     @Path("{farmaciasId: \\d+}")
-    public FarmaciaDTO getFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws WebApplicationException {
+    public FarmaciaDetailDTO getFarmacia(@PathParam("farmaciasId") Long farmaciasId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: input: {0}", farmaciasId);
         FarmaciaEntity farmaciaEntity = farmaciaLogic.getFarmacia(farmaciasId);
         if (farmaciaEntity == null) {
             throw new WebApplicationException("El recurso /farmacias/" + farmaciasId + " no existe.", 404);
         }
-        FarmaciaDTO detailDTO = new FarmaciaDTO(farmaciaEntity);
+        FarmaciaDetailDTO detailDTO = new FarmaciaDetailDTO(farmaciaEntity);
         LOGGER.log(Level.INFO, "FarmaciaResource getFarmacia: output: {0}", detailDTO);
         return detailDTO;
     }
@@ -159,10 +160,10 @@ public class FarmaciaResource {
      * que vamos a convertir a DTO.
      * @return la lista de farmacias en forma DTO (json)
      */
-    private List<FarmaciaDTO> listEntity2DetailDTO(List<FarmaciaEntity> entityList) {
-        List<FarmaciaDTO> list = new ArrayList<>();
+    private List<FarmaciaDetailDTO> listEntity2DetailDTO(List<FarmaciaEntity> entityList) {
+        List<FarmaciaDetailDTO> list = new ArrayList<>();
         for (FarmaciaEntity entity : entityList) {
-            list.add(new FarmaciaDTO(entity));
+            list.add(new FarmaciaDetailDTO(entity));
         }
         return list;
     }

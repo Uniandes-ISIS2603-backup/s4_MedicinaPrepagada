@@ -16,7 +16,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,6 +33,7 @@ import javax.ws.rs.WebApplicationException;
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Path("/laboratorios")
 public class LaboratorioExamensResource {
 
     private static final Logger LOGGER = Logger.getLogger(LaboratorioExamensResource.class.getName());
@@ -54,7 +54,7 @@ public class LaboratorioExamensResource {
      * Error de lógica que se genera cuando no se encuentra el examen.
      */
     @POST
-    @Path("{examensId: \\d+}")
+    @Path("{laboratoriosId: \\d+}/examenesMedicos/{examensId: \\d+}")
     public ExamenMedicoDetailDTO addExamen(@PathParam("laboratoriosId") Long laboratoriosId, @PathParam("examensId") Long examensId) {
         LOGGER.log(Level.INFO, "LaboratorioExamensResource addExamen: input: laboratoriosId {0} , examensId {1}", new Object[]{laboratoriosId, examensId});
         if (examenLogic.getExamenMedico(examensId) == null) {
@@ -73,6 +73,8 @@ public class LaboratorioExamensResource {
      * autor. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+        @Path("{laboratoriosId: \\d+}/examenesMedicos")
+
     public List<ExamenMedicoDetailDTO> getExamens(@PathParam("laboratoriosId") Long laboratoriosId) {
         LOGGER.log(Level.INFO, "LaboratorioExamensResource getExamens: input: {0}", laboratoriosId);
         List<ExamenMedicoDetailDTO> lista = examensListEntity2DTO(laboratorioExamenLogic.getExamens(laboratoriosId));
@@ -93,7 +95,7 @@ public class LaboratorioExamensResource {
      * Error de lógica que se genera cuando no se encuentra el examen.
      */
     @GET
-    @Path("{examensId: \\d+}")
+    @Path("{laboratoriosId: \\d+}/examenesMedicos/{examensId: \\d+}")
     public ExamenMedicoDetailDTO getExamen(@PathParam("laboratoriosId") Long laboratoriosId, @PathParam("examensId") Long examensId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "LaboratorioExamensResource getExamen: input: laboratoriosId {0} , examensId {1}", new Object[]{laboratoriosId, examensId});
         if (examenLogic.getExamenMedico(examensId) == null) {
@@ -103,31 +105,7 @@ public class LaboratorioExamensResource {
         LOGGER.log(Level.INFO, "LaboratorioExamensResource getExamen: output: {0}", detailDTO);
         return detailDTO;
     }
-
-    /**
-     * Actualiza la lista de examens de una laboratorio con la lista que se recibe en el
-     * cuerpo
-     *
-     * @param laboratoriosId El ID de la laboratorio al cual se le va a asociar el examen
-     * @param examens JSONArray {@link ExamenMedicoDetailDTO} - La lista de examens que se
-     * desea guardar.
-     * @return JSONArray {@link ExamenMedicoDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el examen.
-     */
-    @PUT
-    public List<ExamenMedicoDetailDTO> replaceExamens(@PathParam("laboratoriosId") Long laboratoriosId, List<ExamenMedicoDetailDTO> examens) {
-        LOGGER.log(Level.INFO, "LaboratorioExamensResource replaceExamens: input: laboratoriosId {0} , examens {1}", new Object[]{laboratoriosId, examens.toString()});
-        for (ExamenMedicoDetailDTO examen : examens) {
-            if (examenLogic.getExamenMedico(examen.getId()) == null) {
-                throw new WebApplicationException("El recurso /examens/" + examen.getId() + " no existe.", 404);
-            }
-        }
-        List<ExamenMedicoDetailDTO> lista = examensListEntity2DTO(laboratorioExamenLogic.replaceExamens(laboratoriosId, examensListDTO2Entity(examens)));
-        LOGGER.log(Level.INFO, "LaboratorioExamensResource replaceExamens: output: {0}", lista.toString());
-        return lista;
-    }
-
+    
     /**
      * Elimina la conexión entre el examen y e autor recibidos en la URL.
      *
@@ -137,7 +115,7 @@ public class LaboratorioExamensResource {
      * Error de lógica que se genera cuando no se encuentra el examen.
      */
     @DELETE
-    @Path("{examensId: \\d+}")
+    @Path("{laboratoriosId: \\d+}/examenesMedicos/{examensId: \\d+}")
     public void removeExamen(@PathParam("laboratoriosId") Long laboratoriosId, @PathParam("examensId") Long examensId) {
         LOGGER.log(Level.INFO, "LaboratorioExamensResource deleteExamen: input: laboratoriosId {0} , examensId {1}", new Object[]{laboratoriosId, examensId});
         if (examenLogic.getExamenMedico(examensId) == null) {

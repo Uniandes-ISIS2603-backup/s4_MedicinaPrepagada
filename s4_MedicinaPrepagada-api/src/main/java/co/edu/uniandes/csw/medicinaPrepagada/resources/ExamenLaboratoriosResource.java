@@ -15,7 +15,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -75,7 +74,13 @@ public class ExamenLaboratoriosResource {
     @Path("{examensId: \\d+}/laboratorios")
     public List<LaboratorioDetailDTO> getLaboratorios(@PathParam("examensId") Long examensId) {
         LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorios: input: {0}", examensId);
-        List<LaboratorioDetailDTO> lista = laboratoriosListEntity2DTO(examenLaboratorioLogic.getLaboratorios(examensId));
+        List<LaboratorioDetailDTO> lista;
+        try{
+            lista= laboratoriosListEntity2DTO(examenLaboratorioLogic.getLaboratorios(examensId));
+        }
+        catch(Exception e){
+            throw new WebApplicationException(e.getMessage() + "404");
+        }
         LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorios: output: {0}", lista.toString());
         return lista;
     }

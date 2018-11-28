@@ -30,8 +30,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author ncobos
  */
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Path("/ordenesMedicas")
 public class OrdenMedicaExamenMedicoResource {
     private static final Logger LOGGER = Logger.getLogger(OrdenMedicaExamenMedicoResource.class.getName());
 
@@ -70,6 +69,7 @@ public class OrdenMedicaExamenMedicoResource {
      * ordenMedica. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+    @Path("{ordenMedicasId: \\d+}/examenes")
     public List<ExamenMedicoDetailDTO> getExamenMedicos(@PathParam("ordenMedicasId") Long ordenMedicasId) {
         LOGGER.log(Level.INFO, "OrdenMedicaExamenMedicosResource getExamenMedicos: input: {0}", ordenMedicasId);
         List<ExamenMedicoDetailDTO> lista = examenMedicosListEntity2DTO(ordenMedicaExamenMedicoLogic.getExamenesMedicos(ordenMedicasId));
@@ -133,7 +133,7 @@ public class OrdenMedicaExamenMedicoResource {
      * Error de lógica que se genera cuando no se encuentra la examenMedico.
      */
     @DELETE
-    @Path("{examenMedicosId: \\d+}")
+    @Path("{ordenMedicasId: \\d+}/examenesMedicos/{examenMedicosId: \\d+}")
     public void removeExamenMedico(@PathParam("ordenMedicasId") Long ordenMedicasId, @PathParam("examenMedicosId") Long examenMedicosId) {
         LOGGER.log(Level.INFO, "OrdenMedicaExamenMedicosResource removeExamenMedico: input: ordenMedicasId {0} , examenMedicosId {1}", new Object[]{ordenMedicasId, examenMedicosId});
         if (examenMedicoLogic.getExamenMedico(examenMedicosId) == null) {
