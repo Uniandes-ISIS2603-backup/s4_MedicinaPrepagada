@@ -123,7 +123,8 @@ public class ConsultorioLogic
     public ConsultorioEntity updateConsultorio(Long sedeId, ConsultorioEntity consultorioEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el consultorio con id = {0}", consultorioEntity.getId());
-        
+                LOGGER.log(Level.INFO, "Estoy en logica "+ sedeId);
+
         ConsultorioEntity pConsultorioOld = persistence.find(sedeId, consultorioEntity.getId());
         consultorioEntity.setSede(persistenceSede.find(sedeId));
         //Verifica que la consultorio que se intenta modificar exista

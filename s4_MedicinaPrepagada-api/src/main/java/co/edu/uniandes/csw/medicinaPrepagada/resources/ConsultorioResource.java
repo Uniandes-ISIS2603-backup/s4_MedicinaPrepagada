@@ -130,13 +130,14 @@ public class ConsultorioResource
     @Path("{consultorioId: \\d+}")
     public ConsultorioDTO updateConsultorio(@PathParam("sedeId") Long sedeId, @PathParam("consultorioId") Long pConsultorioId, ConsultorioDetailDTO pConsultorio) throws WebApplicationException, BusinessLogicException 
     {
+         LOGGER.log(Level.INFO, "Estoy en recurso "+ sedeId);
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: input: id:{0} , consultorio: {1}", new Object[]{pConsultorioId, pConsultorio.toString()});
         pConsultorio.setId(pConsultorioId);
         if (consultorioLogic.getConsultorio(sedeId, pConsultorioId) == null) 
         {
             throw new WebApplicationException("El recurso /consultorio/ que desea actualizar" + pConsultorioId + " no existe.", 404);
         }
-        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO(consultorioLogic.updateConsultorio(pConsultorioId, pConsultorio.toEntity()));
+        ConsultorioDetailDTO detailDTO = new ConsultorioDetailDTO(consultorioLogic.updateConsultorio(sedeId, pConsultorio.toEntity()));
         LOGGER.log(Level.INFO, "ConsultorioResource updateConsultorio: output: {0}", detailDTO.toString());
         return detailDTO;
 
