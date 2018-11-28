@@ -88,7 +88,7 @@ public class LaboratorioResource {
     
     @GET
     @Path("{LaboratorioId:\\d+}")
-    public LaboratorioDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
+    public LaboratorioDetailDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
     {
         LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input:  {0}", LaboratorioId);
         LaboratorioEntity labEntity = labLogic.getLab(LaboratorioId);
@@ -102,18 +102,18 @@ public class LaboratorioResource {
     }
     
     @GET
-    public List<LaboratorioDTO> getLaboratorios ()
+    public List<LaboratorioDetailDTO> getLaboratorios ()
     {
         LOGGER.info("LaboratorioResource getLaboratorios: input: void");
-        List<LaboratorioDTO> listaLabs = listEntityDetailDTO(labLogic.getLabs()) ;
+        List<LaboratorioDetailDTO> listaLabs = listEntityDetailDTO(labLogic.getLabs()) ;
         LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitasLaboratorio: output: {0}", listaLabs.toString());
         return listaLabs;
     }
     
     
-     private List<LaboratorioDTO> listEntityDetailDTO(List<LaboratorioEntity> entityList)
+     private List<LaboratorioDetailDTO> listEntityDetailDTO(List<LaboratorioEntity> entityList)
     {
-        List<LaboratorioDTO> list = new ArrayList<>();
+        List<LaboratorioDetailDTO> list = new ArrayList<>();
          for (LaboratorioEntity entity : entityList) 
         {
             list.add(new LaboratorioDetailDTO(entity));
