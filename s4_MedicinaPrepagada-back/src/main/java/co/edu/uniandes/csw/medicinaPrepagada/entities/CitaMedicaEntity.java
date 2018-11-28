@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +34,7 @@ public class CitaMedicaEntity implements Serializable{
     private String comentarios;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable=true)
     private PacienteEntity pacienteAAtender;
     

@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class FacturaEntity implements Serializable{
     private Long id;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable=true)
     private PacienteEntity paciente;
     

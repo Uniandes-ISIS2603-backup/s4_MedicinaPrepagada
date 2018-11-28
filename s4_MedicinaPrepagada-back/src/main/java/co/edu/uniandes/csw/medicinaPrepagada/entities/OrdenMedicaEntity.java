@@ -5,21 +5,14 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
-import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -34,7 +27,7 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
     private String comentarios; 
     private String validaHasta; 
     
-    @ManyToOne//(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
  //   @PodamExclude
