@@ -23,7 +23,7 @@ delete from FarmaciaEntity;
 delete from ExamenMedicoEntity;
 delete from LaboratorioEntity;
 delete from PACIENTEENTITY;
-
+delete from USUARIOENTITY;
 
 
 insert into EspecialidadEntity (nombre) values ('Endocrinologia');
@@ -69,23 +69,36 @@ insert into ConsultorioEntity (id, edificio, noficina, sede_id , especialidad_no
 values (700, 'Adios' , 20, 300, 'Endocrinologia');
 
 
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(1,1234321, 'a.torres','pwrrito', 'Paciente', 'PacienteEntity');
 
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(2, 65432346, 'n.novoa','perrro23', 'Paciente', 'PacienteEntity');
 
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(3, 2345678, 'p.perex', 'luna', 'Paciente', 'PacienteEntity');
 
-INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(1,1234564,'Alfredo Torres Figueroa','Cra 18#124-80','21/11/1997','Compensar','atorres123@gmail.com',3102454978,'ale2C','a.torres','Paciente');
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(4, 4567654, 'm.las', 'primeramor', 'Paciente', 'PacienteEntity');
 
-INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(2,1234789,'Nicolas Novoa Arciniegas','Cra 21#70-90','31/10/1997','Coomeva','nsnovos@gmial.com',3014394958,'perrito','n.nov','Paciente');
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(5, 678987654, 'c.montoya', 'mpra', 'Paciente', 'PacienteEntity');
 
-INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(3,1272039,'pepito Perez Moreno','Cll 64#13-90','19/02/1998','Coomeva','pperezs@gmial.com',2154530,'perrito2','peerex','Paciente');
+INSERT INTO PACIENTEENTITY (ID,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO) 
+values(1,'Alfredo Torres Figueroa','Cra 18#124-80','21/11/1997','Compensar','atorres123@gmail.com',3102454978);
 
-INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(4,127789686,'Mario Laserna Alv','Cra 57#70-90','08/10/1965','Coomeva','ml@gmial.com',2768916,'givvu7897','mhhkgg','Paciente');
+ INSERT INTO PACIENTEENTITY (ID,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO)
+ values(2,'Nicolas Novoa Arciniegas','Cra 21#70-90','31/10/1997','Coomeva','nsnovos@gmial.com',3014394958);
+ 
+ INSERT INTO PACIENTEENTITY (ID,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO)
+ values(3,'pepito Perez Moreno','Cll 64#13-90','19/02/1998','Coomeva','pperezs@gmial.com',2154530);
+ 
+ INSERT INTO PACIENTEENTITY (ID,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO)
+ values(4,'Mario Laserna Alv','Cra 57#70-90','08/10/1965','Coomeva','ml@gmial.com',2768916);
+ 
+ INSERT INTO PACIENTEENTITY (ID,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO)
+ values(5,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cmp@gmial.com',6050505);
 
-INSERT INTO PACIENTEENTITY (ID,DOCUMENTOIDENTIDAD,NOMBRE,DIRECCION,FECHANACIMIENTO,EPS,MAIL,NUMEROCONTACTO,CONTRASENA,LOGIN,TIPOUSUARIO)
-values(5,1739221,'Carlos Montoya Ruge','Cra 57#70-69','20/10/1965','Coomeva','cmp@gmial.com',6050505,'4792342ied','cmpg','Paciente');
 
 
 
@@ -102,42 +115,49 @@ insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fech
 insert into TARJETACREDITOENTITY (numero, nombreEnTarjeta, codigoseguridad, fechaExpiracion, franquicia,paciente_id) values (5602235051148099, 'Lucas Jenik', 849, '23/76', 'bankcard',5);
 
 
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(6,12345, 'megaJulito984','JuliTo98', 'Medico', 'MedicoEntity');
 
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(7,3148739, 'superArmunx','megaMan847', 'Medico', 'MedicoEntity');
 
-insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (100, 'JuliTo98', 12345, 'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'megaJulito984', 'Julio Alberto' , 98739279, 'basico', 'Endocrinologia' );
+INSERT INTO USUARIOENTITY (ID, DOCUMENTOIDENTIDAD, LOGIN,CONTRASENA, TIPOUSUARIO, DTYPE)
+values(8,7981239, 'megadoctor','megadoc', 'Medico', 'MedicoEntity');
 
-insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (200, 'megaMan847', 3148739, 'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99908673, 'basico', 'Cardiologia' );
+insert into MEDICOENTITY (id, correo, descripcion, documentomedico, firma, nombre, telefono, ESPECIALIDAD_NOMBRE  )
+values (6,  'eljulito@gmail.com', 'mal medico', 7878493, 'mifirmauno', 'Julio Alberto' , 98739279, 'Endocrinologia' );
 
-insert into MEDICOENTITY (id, contrasena, documentoIdentidad, correo, descripcion, documentomedico, firma, login, nombre, telefono, tipousuario, ESPECIALIDAD_NOMBRE  )
-values (300, 'megaMan847', 7981239, 'andrux@hotmail.com', 'super medico', 89955593, 'mifirmados', 'superArmunx', 'Andres Lleras' , 99988673, 'basico', 'Cardiologia' );
+insert into MEDICOENTITY (id, correo, descripcion, documentomedico, firma,  nombre, telefono,  ESPECIALIDAD_NOMBRE  )
+values (7,   'andrux@hotmail.com', 'super medico', 89998493, 'mifirmados',  'Andres Lleras' , 99908673,  'Cardiologia' );
 
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (100, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',700 ,100 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (200, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',300 ,200 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (300, '2018-09-22 08:00:00' , '2018-09-22 10:00:00',700 ,100 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (400, '2018-09-22 08:00:00' , '2018-09-22 11:00:00',300 ,200 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,100 );
-
-insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,200 );
+insert into MEDICOENTITY (id, correo, descripcion, documentomedico, firma,  nombre, telefono,  ESPECIALIDAD_NOMBRE  )
+values (8,   'andrux@hotmail.com', 'super medico', 89955593, 'mifirmados',  'Andres Lleras' , 99988673, 'Cardiologia' );
 
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (700, '2018-10-22 10:00:00' , '2018-10-22 08:00:00',300 ,200 );
+values (100, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',700 ,6 );
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
-values (800, '2018-11-20 08:00:00' , '2018-11-20 10:00:00',700 ,100 );
+values (200, '2018-09-20 08:00:00' , '2018-09-20 10:00:00',300 ,7);
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (300, '2018-09-22 08:00:00' , '2018-09-22 10:00:00',700 ,6 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (400, '2018-09-22 08:00:00' , '2018-09-22 11:00:00',300 ,7);
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (500, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',700 ,8 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (600, '2018-09-23 08:00:00' , '2018-09-23 10:00:00',300 ,8 );
+
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (700, '2018-10-22 10:00:00' , '2018-10-22 08:00:00',300 ,7 );
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (800, '2018-11-20 08:00:00' , '2018-11-20 10:00:00',700 ,6 );
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
 values (2000, '2018-10-22 08:00:00','Excelente cita médica', 1, 700 );
@@ -153,16 +173,19 @@ values (2003, '2018-10-22 09:00:00','Excelente cita médica', 4, 700 );
 
 
 
-insert into AdministradorEntity (id,login, contrasena, tipoUsuario)
-values(100,'Carlos12', 'carlitos12', 'Administrador'); 
-insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
-values(200, 'Esteban', 'esteban12', 'Administrador'); 
-insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
-values(300, 'Perdo24', 'pedrito12', 'Paciente'); 
-insert into AdministradorEntity (id, login, contrasena, tipoUsuario)
-values(400 , 'Laura1', 'laurita56', 'Paciente'); 
+insert into USUARIOENTITY (id,login, contrasena, tipoUsuario,DTYPE )
+values(9,'Carlos12', 'carlitos12', 'Administrador', 'AdministradorEntity'); 
+insert into USUARIOENTITY (id, login, contrasena, tipoUsuario, DTYPE)
+values(10, 'Esteban', 'esteban12', 'Administrador','AdministradorEntity'); 
+insert into USUARIOENTITY (id, login, contrasena, tipoUsuario, DTYPE)
+values(11, 'Perdo24', 'pedrito12', 'Administrador','AdministradorEntity'); 
+insert into USUARIOENTITY (id, login, contrasena, tipoUsuario, DTYPE)
+values(12 , 'Laura1', 'laurita56', 'Administrador','AdministradorEntity'); 
 
-
+INSERT INTO ADMINISTRADORENTITY (ID) VALUES (9);
+INSERT INTO ADMINISTRADORENTITY (ID) VALUES (10);
+INSERT INTO ADMINISTRADORENTITY (ID) VALUES (11);
+INSERT INTO ADMINISTRADORENTITY (ID) VALUES (12);
 
 
 
@@ -242,6 +265,7 @@ insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (10000
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (100002, 'Rayos X', 12000, 'Es preferible no estar en estado de embarazo');
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (100003, 'Ecografia', 140000, 'Venir con ropa ligera');
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (100004, 'Examen de orina', 15000, 'Venir en ayunas');
+
 
 
 
