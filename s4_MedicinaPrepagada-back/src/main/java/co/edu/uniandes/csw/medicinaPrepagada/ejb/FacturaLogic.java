@@ -10,10 +10,9 @@ import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.FacturaPersistence;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -101,7 +100,7 @@ public class FacturaLogic {
         {
             throw new BusinessLogicException("No se puede cambiar el concepto");
         }
-        if(facturaEntity.getIdCliente()!=(facVieja.getIdCliente()))
+        if(!Objects.equals(facturaEntity.getIdCliente(), facVieja.getIdCliente()))
         {
             throw new BusinessLogicException("No se puede cambiar el id cliente");
         }
