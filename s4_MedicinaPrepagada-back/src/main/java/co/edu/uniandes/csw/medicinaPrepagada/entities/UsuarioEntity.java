@@ -6,13 +6,16 @@
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
 import java.io.Serializable;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  *clase que representa un usuario
  * @author MIGUELHOYOS
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioEntity extends BaseEntity implements Serializable{
 
 

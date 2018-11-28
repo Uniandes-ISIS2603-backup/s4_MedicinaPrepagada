@@ -146,7 +146,7 @@ public class PacienteLogicTest {
      * Prueba para consultar un Paciente.
      */
     @Test
-    public void getPacienteTest() {
+    public void getPacienteTest() throws BusinessLogicException {
         PacienteEntity entity = data.get(0);
         PacienteEntity resultEntity = pacienteLogic.getPaciente(entity.getId());
         Assert.assertNotNull(resultEntity);
@@ -181,7 +181,7 @@ public class PacienteLogicTest {
      * prueba para eliminar un paciente
      */
     @Test
-    public void deletePacienteTest(){
+    public void deletePacienteTest() throws BusinessLogicException{
         PacienteEntity entity = data.get(0);
         pacienteLogic.deletePaciente(entity.getId());
         PacienteEntity delet = em.find(PacienteEntity.class, entity.getId());

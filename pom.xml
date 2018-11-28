@@ -10,7 +10,10 @@
     <packaging>pom</packaging>
     <name>s4_medisistemas</name>
  
-    <modules></modules>
+    <modules>
+        <module>s4_MedicinaPrepagada-back</module>
+        <module>s4_MedicinaPrepagada-api</module>
+    </modules>
     
     <repositories>
         <repository>

@@ -128,7 +128,7 @@ public class TarjetaCreditoLogicTest {
      * prueba para eliminar una tarjeta
      */
     @Test
-    public void deleteTarjetaCreditoTest(){
+    public void deleteTarjetaCreditoTest() throws BusinessLogicException{
         TarjetaCreditoEntity entity = data.get(0);
         tarjetaCreditoLogic.deleteTarjetaCredito(entity.getNumero());
         TarjetaCreditoEntity deleted = em.find(TarjetaCreditoEntity.class, entity.getNumero());
@@ -157,7 +157,7 @@ public class TarjetaCreditoLogicTest {
      * test para obtener una tarjeta de credito
      */
     @Test
-    public void getTarjetaCreditoTest(){
+    public void getTarjetaCreditoTest() throws BusinessLogicException{
        TarjetaCreditoEntity ent = data.get(0);
        TarjetaCreditoEntity result = tarjetaCreditoLogic.getTarjetaCredito(ent.getNumero());
        Assert.assertNotNull(result);

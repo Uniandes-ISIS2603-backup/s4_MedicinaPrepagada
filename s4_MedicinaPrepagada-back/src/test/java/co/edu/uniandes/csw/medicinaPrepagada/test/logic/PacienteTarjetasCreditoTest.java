@@ -117,7 +117,7 @@ public class PacienteTarjetasCreditoTest {
      * prueba para obtener las tarjetas de un paciente
      */
     @Test
-    public void getTarjetasTest(){
+    public void getTarjetasTest() throws BusinessLogicException{
         List<TarjetaCreditoEntity> tarjetas = data.get(0).getTarjetasCredito();
         List<TarjetaCreditoEntity> foundTarjetas = pacienteLogic.getTarjetasCreditoPaciente(data.get(0).getId());
         Assert.assertEquals(tarjetas.size(), foundTarjetas.size());
