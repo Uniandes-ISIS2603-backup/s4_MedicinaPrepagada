@@ -4,21 +4,18 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.MedicamentoDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.FarmaciaMedicamentoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicamentoLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.MedicamentoEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -29,6 +26,9 @@ import javax.ws.rs.WebApplicationException;
  */
 
 @Path("/farmacias")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class FarmaciaMedicamentosResource {
 
     private static final Logger LOGGER = Logger.getLogger(FarmaciaMedicamentosResource.class.getName());
