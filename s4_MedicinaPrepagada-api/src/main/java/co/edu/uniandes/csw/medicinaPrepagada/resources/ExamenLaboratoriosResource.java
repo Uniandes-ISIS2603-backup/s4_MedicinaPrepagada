@@ -59,7 +59,7 @@ public class ExamenLaboratoriosResource {
             throw new WebApplicationException("El recurso /laboratorios/" + laboratoriosId + " no existe.", 404);
         }
         LaboratorioDetailDTO detailDTO = new LaboratorioDetailDTO(examenLaboratorioLogic.addLaboratorio(examensId, laboratoriosId));
-        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource addLaboratorio: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource addLaboratorio: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -81,7 +81,7 @@ public class ExamenLaboratoriosResource {
         catch(Exception e){
             throw new WebApplicationException(e.getMessage() + "404");
         }
-        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorios: output: {0}", lista.toString());
+        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorios: output: {0}", lista);
         return lista;
     }
 
@@ -103,7 +103,7 @@ public class ExamenLaboratoriosResource {
             throw new WebApplicationException("El recurso /laboratorios/" + laboratoriosId + " no existe.", 404);
         }
         LaboratorioDetailDTO detailDTO = new LaboratorioDetailDTO(examenLaboratorioLogic.getLaboratorio(examensId, laboratoriosId));
-        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorio: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "ExamenLaboratoriosResource getLaboratorio: output: {0}", detailDTO);
         return detailDTO;
     }
 

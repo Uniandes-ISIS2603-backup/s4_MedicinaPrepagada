@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -30,8 +31,10 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author ncobos
  */
+@Path("/ordenesMedicas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@RequestScoped
 public class OrdenMedicaMedicamentosResource {
     
  private static final Logger LOGGER = Logger.getLogger(OrdenMedicaMedicamentosResource.class.getName());
@@ -52,7 +55,7 @@ public class OrdenMedicaMedicamentosResource {
      * Error de lógica que se genera cuando no se encuentra la medicamento.
      */
     @POST
-    @Path("{medicamentosId: \\d+}")
+    @Path("{ordenMedicasId: \\d+}/medicamentos/{medicamentosId: \\d+}")
     public MedicamentoDetailDTO addMedicamento(@PathParam("ordenMedicasId") Long ordenMedicasId, @PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource addMedicamento: input: ordenMedicasId {0} , medicamentosId {1}", new Object[]{ordenMedicasId, medicamentosId});
         if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
@@ -71,57 +74,11 @@ public class OrdenMedicaMedicamentosResource {
      * ordenMedica. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+    @Path("{ordenMedicasId: \\d+}/medicamentos")
     public List<MedicamentoDetailDTO> getMedicamentos(@PathParam("ordenMedicasId") Long ordenMedicasId) {
         LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource getMedicamentos: input: {0}", ordenMedicasId);
         List<MedicamentoDetailDTO> lista = medicamentosListEntity2DTO(ordenMedicaMedicamentoLogic.getMedicamentos(ordenMedicasId));
         LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource getMedicamentos: output: {0}", lista.toString());
-        return lista;
-    }
-
-    /**
-     * Busca y devuelve la medicamento con el ID recibido en la URL, relativo a un
-     * ordenMedica.
-     *
-     * @param medicamentosId El ID de la medicamento que se busca
-     * @param ordenMedicasId El ID del ordenMedica del cual se busca la medicamento
-     * @return {@link MedicamentoDetailDTO} - El autor encontrado en el ordenMedica.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
-     * Error de lógica que se genera cuando no se encuentra la medicamento.
-     */
-    @GET
-    @Path("{medicamentosId: \\d+}")
-    public MedicamentoDetailDTO getMedicamento(@PathParam("ordenMedicasId") Long ordenMedicasId, @PathParam("medicamentosId") Long medicamentosId) {
-        LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource getMedicamento: input: ordenMedicasId {0} , medicamentosId {1}", new Object[]{ordenMedicasId, medicamentosId});
-        if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
-            throw new WebApplicationException("El recurso /medicamentos/" + medicamentosId + " no existe.", 404);
-        }
-        MedicamentoDetailDTO detailDTO = new MedicamentoDetailDTO(ordenMedicaMedicamentoLogic.getMedicamento(ordenMedicasId, medicamentosId));
-        LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource getMedicamento: output: {0}", detailDTO.toString());
-        return detailDTO;
-    }
-
-    /**
-     * Actualiza la lista de autores de un ordenMedica con la lista que se recibe en
-     * el cuerpo.
-     *
-     * @param ordenMedicasId El ID del ordenMedica al cual se le va a asociar la lista de
-     * autores
-     * @param medicamentos JSONArray {@link MedicamentoDetailDTO} - La lista de autores
-     * que se desea guardar.
-     * @return JSONArray {@link MedicamentoDetailDTO} - La lista actualizada.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
-     * Error de lógica que se genera cuando no se encuentra la medicamento.
-     */
-    @PUT
-    public List<MedicamentoDetailDTO> replaceMedicamentos(@PathParam("ordenMedicasId") Long ordenMedicasId, List<MedicamentoDetailDTO> medicamentos) {
-        LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource replaceMedicamentos: input: ordenMedicasId {0} , medicamentos {1}", new Object[]{ordenMedicasId, medicamentos.toString()});
-        for (MedicamentoDetailDTO medicamento : medicamentos) {
-            if (medicamentoLogic.getMedicamento(medicamento.getId()) == null) {
-                throw new WebApplicationException("El recurso /medicamentos/" + medicamento.getId() + " no existe.", 404);
-            }
-        }
-        List<MedicamentoDetailDTO> lista = medicamentosListEntity2DTO(ordenMedicaMedicamentoLogic.replaceMedicamentos(ordenMedicasId, medicamentosListDTO2Entity(medicamentos)));
-        LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource replaceMedicamentos: output:{0}", lista.toString());
         return lista;
     }
 
@@ -134,7 +91,7 @@ public class OrdenMedicaMedicamentosResource {
      * Error de lógica que se genera cuando no se encuentra la medicamento.
      */
     @DELETE
-    @Path("{medicamentosId: \\d+}")
+    @Path("{ordenMedicasId: \\d+}/medicamentos/{medicamentosId: \\d+}")
     public void removeMedicamento(@PathParam("ordenMedicasId") Long ordenMedicasId, @PathParam("medicamentosId") Long medicamentosId) {
         LOGGER.log(Level.INFO, "OrdenMedicaMedicamentosResource removeMedicamento: input: ordenMedicasId {0} , medicamentosId {1}", new Object[]{ordenMedicasId, medicamentosId});
         if (medicamentoLogic.getMedicamento(medicamentosId) == null) {
