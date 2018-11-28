@@ -255,10 +255,10 @@ insert into MedicamentoEntity(id, nombre, cantidad, descripcion, elaboradoPor, c
 insert into MedicamentoEntity(id, nombre, cantidad, descripcion, elaboradoPor, costo) values (100004, 'Ibuprofeno', '800 mg', 'No usar durante el embarazo', 'MK', 17000);
 
 
-insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100001, 'Farmatodo', 'Calle 30 # 45-67', 2345678, -72.03, 4.05, 'servicio@farmatodo.com');
-insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100002, 'Cruz Verde', 'Calle 20 # 35-77', 1245678, -72.05, 4.08, 'servicio@cruzverde.com');
-insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100003, 'Drogas la Rebaja', 'Calle 36 # 65-17', 2347878, -72.13, 4.15, 'servicio@rebaja.com');
-insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100004, 'Drogueria Alemana', 'Calle 56 # 15-17', 2437878, -72.11, 4.16, 'servicio@alemana.com');
+insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100001, 'Farmatodo Country', 'Carrera 16 # 82-52', 7469000, -74.056601, 4.668483, 'servicio@farmatodo.com');
+insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100002, 'Cruz Verde Chicó', 'Calle 97 # 23-60', 4924860, -74.056877, 4.685343, 'servicio@cruzverde.com');
+insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100003, 'Drogas la Rebaja Alhambra', 'Calle 116 # 53-20', 3135687580, -74.063303, 4.701122, 'servicio@rebaja.com');
+insert into FarmaciaEntity(id, nombre, ubicacion, telefono, longitud, latitud, correo) values (100004, 'Drogueria Alemana Unicentro', 'Carrera 15 # 122-9', 3002086, -74.042984, 4.701233, 'servicio@alemana.com');
 
 
 insert into ExamenMedicoEntity(id, nombre, costo, recomendaciones) values (100001, 'Biopsia', 120000, 'Venir con acompanante');
