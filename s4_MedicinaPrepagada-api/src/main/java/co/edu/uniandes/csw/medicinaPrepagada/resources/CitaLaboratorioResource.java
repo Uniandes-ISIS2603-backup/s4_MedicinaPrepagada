@@ -70,7 +70,7 @@ public class CitaLaboratorioResource {
      /**
      * Busca la CitaLaboratorio con el id asociado recibido en la URL y la devuelve.
      *
-     * @param CitaLaboratorioId Identificador de la CitaLaboratorio que se esta buscando.
+     * @param pCitaLaboratorioId Identificador de la CitaLaboratorio que se esta buscando.
      * Este debe ser una cadena de dígitos.
      * @return JSON {@link CitaLaboratorioDTO} - La CitaLabroatorio buscada
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
@@ -79,17 +79,17 @@ public class CitaLaboratorioResource {
     
     @GET
     @Path("{CitaLaboratorioId: \\d+}")
-    public CitaLaboratorioDTO getCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId ) throws WebApplicationException
+    public CitaLaboratorioDTO getCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long pCitaLaboratorioId ) 
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: input: {0}", CitaLaboratorioId);
-        CitaLaboratorioEntity entity = citaLogic.getCita(CitaLaboratorioId);
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: input: {0}", pCitaLaboratorioId);
+        CitaLaboratorioEntity entity = citaLogic.getCita(pCitaLaboratorioId);
         if(entity == null)
         {
-            throw new WebApplicationException("El recurso /citaLaboratorio/" + CitaLaboratorioId + " no existe .", 404);
+            throw new WebApplicationException("El recurso /citaLaboratorio/" + pCitaLaboratorioId + " no existe .", 404);
         }
         
         CitaLaboratorioDTO citaLabDTO = new CitaLaboratorioDTO(entity);
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: output: {0}", citaLabDTO.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitaLaboratorio: output: {0}", citaLabDTO);
         return citaLabDTO;
     }
     
