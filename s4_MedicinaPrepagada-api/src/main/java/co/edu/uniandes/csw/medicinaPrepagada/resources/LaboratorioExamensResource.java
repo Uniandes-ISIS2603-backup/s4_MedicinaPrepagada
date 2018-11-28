@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -31,9 +32,10 @@ import javax.ws.rs.WebApplicationException;
  * @laboratorio ISIS2603
  * @version 1.0
  */
+@Path("/laboratorios")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/laboratorios")
+@RequestScoped
 public class LaboratorioExamensResource {
 
     private static final Logger LOGGER = Logger.getLogger(LaboratorioExamensResource.class.getName());
