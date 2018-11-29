@@ -32,16 +32,16 @@ insert into EspecialidadEntity (nombre) values ('Cardiologia');
 
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo, imagen) 
-values (100, 'super sede 1', 'Calle 153 # 15 - 13', 2, 'Super buena sede', 4.69, -74.2, 98999423, 'pepito12@hotmail.com','https://i.imgur.com/SmcOZHf.jpg' );
+values (100, 'Fundacion Santafe', 'Calle 153 # 15 - 13', 2, 'Super buena sede', 4.67, -74.05, 98999423, 'pepito12@hotmail.com','https://i.imgur.com/SmcOZHf.jpg' );
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo, imagen)
-values (200, 'super sede 2', 'Calle 133 # 90 - 01', 1, 'Super buena sede mega', 4.68, -74.06, 98761233, 'pepitoJav@hotmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
+values (200, 'Country ', 'Calle 133 # 90 - 01', 1, 'Super buena sede mega', 4.60, -73.06, 98761233, 'pepitoJav@hotmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo, imagen) 
-values (300, 'super sede 3', 'Calle 53 # 14 - 12', 2, 'Super buena sede superx2', 2.1, -69.4, 98065423, 'pepitoSuperman@gmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
+values (300, 'Valle dle Lili', 'Calle 53 # 14 - 12', 2, 'Super buena sede superx2', 4.1, -71.4, 98065423, 'pepitoSuperman@gmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
 
 insert into SedeEntity (id, nombre, direccion, tipoSede, descripcion, latitud, longitud, telefono, correo,imagen ) 
-values (400, 'super sede 4', 'Calle 111 # 44 - 21', 1, 'Super buena sede superx2 megax', 2.8, -70.8, 98975423, 'pepitoSupermanSantafe@gmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
+values (400, 'La reina Sofia', 'Calle 111 # 44 - 21', 1, 'Super buena sede superx2 megax', 3.9, -73.05, 98975423, 'pepitoSupermanSantafe@gmail.com', 'https://i.imgur.com/SmcOZHf.jpg' );
 
 
 
@@ -158,6 +158,16 @@ values (700, '2018-10-22 10:00:00' , '2018-10-22 08:00:00',300 ,7 );
 
 insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
 values (800, '2018-11-20 08:00:00' , '2018-11-20 10:00:00',700 ,6 );
+
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (900, '2018-12-23 08:00:00' , '2018-12-23 10:00:00',300 ,8 );
+
+
+insert into HORARIOATENCIONENTITY (id, fechafin,fechainicio, CONSULTORIO_ID, MEDICO_ID )
+values (901, '2018-12-23 08:00:00' , '2018-12-23 10:00:00',300 ,6 );
+
+
 
 insert into CitaMedicaEntity (id, fecha, comentarios, PACIENTEAATENDER_ID, HORARIOATENCIONASIGNADO_ID )
 values (2000, '2018-10-22 08:00:00','Excelente cita médica', 1, 700 );
