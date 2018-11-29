@@ -68,10 +68,10 @@ public class AdministradorResource
      */
     
     @GET
-    public List<AdministradorDTO> getAdministradores() 
+    public List<AdministradorDetailDTO> getAdministradores() 
     {
         LOGGER.info("AdministradorResource getAdministradores: input: void");
-        List<AdministradorDTO> listaAdministradores = listEntity2DetailDTO(admiLogic.getAdministradores());
+        List<AdministradorDetailDTO> listaAdministradores = listEntity2DetailDTO(admiLogic.getAdministradores());
         LOGGER.log(Level.INFO, "AdministradorResource getAdministradores: output: {0}", listaAdministradores);
         return listaAdministradores;
     }
@@ -150,9 +150,9 @@ public class AdministradorResource
 
     }
     
-    private List<AdministradorDTO> listEntity2DetailDTO(List<AdministradorEntity> entityList) 
+    private List<AdministradorDetailDTO> listEntity2DetailDTO(List<AdministradorEntity> entityList) 
     { 
-        List<AdministradorDTO> list = new ArrayList<>();
+        List<AdministradorDetailDTO> list = new ArrayList<>();
         
         for(AdministradorEntity entity : entityList) 
         {

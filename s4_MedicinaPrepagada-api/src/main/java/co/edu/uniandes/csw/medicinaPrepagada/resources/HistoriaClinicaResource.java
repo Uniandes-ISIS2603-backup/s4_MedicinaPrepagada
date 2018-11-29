@@ -134,6 +134,10 @@ public class HistoriaClinicaResource
     public HistoriaClinicaDTO updateHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
+        HistoriaClinicaEntity hist = histLogic.getHistoriaClinica(histClinicaId);
+        if(hist == null){
+            throw new WebApplicationException("No existe la historia clinica", 404);
+        }
         pHistoria.setId(histClinicaId);
         HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO( histLogic.updateHistoriaClinica(histClinicaId, pHistoria.toEntity()));        
         LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto);

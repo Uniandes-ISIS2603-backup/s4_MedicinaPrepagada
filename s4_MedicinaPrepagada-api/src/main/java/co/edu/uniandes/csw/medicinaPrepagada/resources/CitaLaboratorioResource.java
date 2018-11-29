@@ -112,35 +112,35 @@ public class CitaLaboratorioResource {
 
    @GET
    @Path ("{CitaLaboratorioId:\\d+}/laboratorio")
-   public LaboratorioDTO getLaboratorioFromCita (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
+   public LaboratorioDTO getLaboratorioFromCita (@PathParam ("CitaLaboratorioId") Long pCitaLaboratorioId) throws BusinessLogicException
    {
 
-       return new LaboratorioDTO(citaLogic.getLaboratorioFromCita(CitaLaboratorioId)); 
+       return new LaboratorioDTO(citaLogic.getLaboratorioFromCita(pCitaLaboratorioId)); 
    }
     @DELETE
     @Path("{CitaLaboratorioId:\\d+}")
-    public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId) throws BusinessLogicException
+    public void deleteCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long pCitaLaboratorioId) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioDTO deleteCitaLaboratorio:input: {0}", CitaLaboratorioId);
-        if (citaLogic.getCita(CitaLaboratorioId) == null) 
+        LOGGER.log(Level.INFO, "CitaLaboratorioDTO deleteCitaLaboratorio:input: {0}", pCitaLaboratorioId);
+        if (citaLogic.getCita(pCitaLaboratorioId) == null) 
         {
-            throw new WebApplicationException("El recurso /citaLaboratorio/ que desea eliminar" + CitaLaboratorioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /citaLaboratorio/ que desea eliminar" + pCitaLaboratorioId + " no existe.", 404);
         }
-        citaLogic.deleteCitaLab(CitaLaboratorioId);
+        citaLogic.deleteCitaLab(pCitaLaboratorioId);
         LOGGER.info("CitaLaboratorioDTO deleteCitaLaboratorio: output: void");
     }
     
     @PUT
     @Path("{CitaLaboratorioId:\\d+}")
-    public CitaLaboratorioDTO updateCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long CitaLaboratorioId, CitaLaboratorioDTO pCitaD) throws BusinessLogicException,WebApplicationException
+    public CitaLaboratorioDTO updateCitaLaboratorio (@PathParam ("CitaLaboratorioId") Long pCitaLaboratorioId, CitaLaboratorioDTO pCitaD) throws BusinessLogicException,WebApplicationException
     {
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource modificarCitaLaboratorio: input: {0}, citaLaboratorio {1}", new Object[]{CitaLaboratorioId, pCitaD.toString()});
-        pCitaD.setId(CitaLaboratorioId);
-        if (citaLogic.getCita(CitaLaboratorioId) == null)
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource modificarCitaLaboratorio: input: {0}, citaLaboratorio {1}", new Object[]{pCitaLaboratorioId, pCitaD.toString()});
+        pCitaD.setId(pCitaLaboratorioId);
+        if (citaLogic.getCita(pCitaLaboratorioId) == null)
         {
-            throw new WebApplicationException("El recurso /citaLaboratorio/ que quiere editar con id" + CitaLaboratorioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /citaLaboratorio/ que quiere editar con id" + pCitaLaboratorioId + " no existe.", 404);
         }
-        CitaLaboratorioDTO nuevoDTO = new CitaLaboratorioDTO(citaLogic.updateCitaLaboratorio(CitaLaboratorioId, pCitaD.toEntity()));
+        CitaLaboratorioDTO nuevoDTO = new CitaLaboratorioDTO(citaLogic.updateCitaLaboratorio(pCitaLaboratorioId, pCitaD.toEntity()));
         LOGGER.log(Level.INFO,"CitaLaboratorioResource modificarCitaLaboratorio: output: {0}", nuevoDTO.toString());
         
         return nuevoDTO;

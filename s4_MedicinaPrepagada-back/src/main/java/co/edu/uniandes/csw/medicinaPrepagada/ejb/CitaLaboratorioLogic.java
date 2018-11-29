@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.CitaLaboratorioPersistence;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;

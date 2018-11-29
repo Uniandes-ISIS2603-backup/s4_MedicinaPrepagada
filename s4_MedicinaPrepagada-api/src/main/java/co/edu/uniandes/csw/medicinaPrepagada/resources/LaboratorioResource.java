@@ -45,42 +45,42 @@ public class LaboratorioResource {
     private LaboratorioLogic labLogic;
     
     @POST
-    public LaboratorioDTO createLaboratorio (LaboratorioDTO Laboratorio) throws BusinessLogicException, WebApplicationException
+    public LaboratorioDTO createLaboratorio (LaboratorioDTO pLaboratorio) throws BusinessLogicException, WebApplicationException
     {
-        LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: input: {0}", Laboratorio.toString());
+        LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: input: {0}", pLaboratorio);
         
-        LaboratorioDTO nuevoLab = new LaboratorioDTO(labLogic.createLaboratorio(Laboratorio.toEntity()));
+        LaboratorioDTO nuevoLab = new LaboratorioDTO(labLogic.createLaboratorio(pLaboratorio.toEntity()));
        
-        LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: output: {0}", nuevoLab.toString());
+        LOGGER.log(Level.INFO, "LaboratorioDTO createLaboratorio: output: {0}", nuevoLab);
         
         return nuevoLab;
     }
     
     @DELETE
     @Path("{LaboratorioId:\\d+}")
-    public void deleteLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId) throws BusinessLogicException, WebApplicationException
+    public void deleteLaboratorio (@PathParam ("LaboratorioId") Long pLaboratorioId) throws BusinessLogicException, WebApplicationException
     {
-        LOGGER.log(Level.INFO, "LaboratorioDTO deleteLaboratorio: input : {0}", LaboratorioId);
-        if (labLogic.getLab(LaboratorioId) == null) 
+        LOGGER.log(Level.INFO, "LaboratorioDTO deleteLaboratorio: input : {0}", pLaboratorioId);
+        if (labLogic.getLab(pLaboratorioId) == null) 
         {
-            throw new WebApplicationException("El recurso /laboratorio/ que desea eliminar" + LaboratorioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /laboratorio/ que desea eliminar" + pLaboratorioId + " no existe.", 404);
         }
-        labLogic.deleteLaboratorio(LaboratorioId);
+        labLogic.deleteLaboratorio(pLaboratorioId);
         
         LOGGER.info("LaboratorioDTO deleteLaboratorio: output:void");
     }
     
     @PUT
     @Path("{LaboratorioId:\\d+}")
-    public LaboratorioDTO updateLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId, LaboratorioDetailDTO pLab) throws BusinessLogicException, WebApplicationException
+    public LaboratorioDTO updateLaboratorio (@PathParam ("LaboratorioId") Long pLaboratorioId, LaboratorioDetailDTO pLab) throws BusinessLogicException, WebApplicationException
     {
-        LOGGER.log(Level.INFO, "LaboratorioResource modificarLaboratorio: input: {0}", LaboratorioId);
-        pLab.setId(LaboratorioId);
-        if (labLogic.getLab(LaboratorioId) == null)
+        LOGGER.log(Level.INFO, "LaboratorioResource modificarLaboratorio: input: {0}", pLaboratorioId);
+        pLab.setId(pLaboratorioId);
+        if (labLogic.getLab(pLaboratorioId) == null)
         {
-            throw new WebApplicationException("El recurso /laboratorio/ que quiere editar con id" + LaboratorioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /laboratorio/ que quiere editar con id" + pLaboratorioId + " no existe.", 404);
         }
-        LaboratorioDetailDTO detailDTO = new LaboratorioDetailDTO(labLogic.updateLaboratorio(LaboratorioId, pLab.toEntity()));
+        LaboratorioDetailDTO detailDTO = new LaboratorioDetailDTO(labLogic.updateLaboratorio(pLaboratorioId, pLab.toEntity()));
         LOGGER.log(Level.INFO,"LaboratorioResource modificarLaboratorio: output:  {0}", detailDTO.toString());
         
         return detailDTO;
@@ -88,13 +88,13 @@ public class LaboratorioResource {
     
     @GET
     @Path("{LaboratorioId:\\d+}")
-    public LaboratorioDetailDTO getLaboratorio (@PathParam ("LaboratorioId") Long LaboratorioId)
+    public LaboratorioDetailDTO getLaboratorio (@PathParam ("LaboratorioId") Long pLaboratorioId)
     {
-        LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input:  {0}", LaboratorioId);
-        LaboratorioEntity labEntity = labLogic.getLab(LaboratorioId);
+        LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: input:  {0}", pLaboratorioId);
+        LaboratorioEntity labEntity = labLogic.getLab(pLaboratorioId);
         if (labEntity == null) 
         {
-            throw new WebApplicationException("El recurso /laboratorio/" + LaboratorioId + " no existe .", 404);
+            throw new WebApplicationException("El recurso /laboratorio/" + pLaboratorioId + " no existe .", 404);
         }
         LaboratorioDetailDTO detailDTO = new LaboratorioDetailDTO(labEntity);
         LOGGER.log(Level.INFO, "LaboratorioResource getLaboratorio: output: {0}", detailDTO.toString());
@@ -109,7 +109,7 @@ public class LaboratorioResource {
         if(listaLabs == null){
             throw new WebApplicationException("no existen laboratorios", 404);
         }
-        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitasLaboratorio: output: {0}", listaLabs.toString());
+        LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitasLaboratorio: output: {0}", listaLabs);
         return listaLabs;
     }
     

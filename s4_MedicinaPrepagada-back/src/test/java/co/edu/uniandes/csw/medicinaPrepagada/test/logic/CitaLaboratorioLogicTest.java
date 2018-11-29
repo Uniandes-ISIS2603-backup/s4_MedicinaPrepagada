@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.medicinaPrepagada.test.logic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.CitaLaboratorioLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.CitaLaboratorioEntity;
+import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 
 //import co.edu.uniandes.csw.medicinaPrepagada.entities.LaboratorioEntity;
 //import co.edu.uniandes.csw.medicinaPrepagada.entities.PacienteEntity;
@@ -130,6 +131,17 @@ public class CitaLaboratorioLogicTest
             }
             Assert.assertTrue(found);
         }
+    }
+    
+    @Test
+    public void getLaboratorioFromCita()
+    {
+        CitaLaboratorioEntity entity = citaLabList.get(0);
+        LaboratorioEntity labEntity = factory.manufacturePojo(LaboratorioEntity.class);
+        entity.setLaboratorio(labEntity);
+        citaLabLogic.getLaboratorioFromCita(entity.getId());
+        
+        Assert.assertNotNull(labEntity);
     }
     
     @Test
