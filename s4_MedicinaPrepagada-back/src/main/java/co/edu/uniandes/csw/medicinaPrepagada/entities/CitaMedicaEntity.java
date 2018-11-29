@@ -39,7 +39,7 @@ public class CitaMedicaEntity implements Serializable{
     private PacienteEntity pacienteAAtender;
     
     @PodamExclude
-    @ManyToOne//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)//(mappedBy = "citaMedica", fetch=FetchType.EAGER)
     private HorarioAtencionEntity horarioAtencionAsignado;
 
 
