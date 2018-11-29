@@ -39,11 +39,11 @@ public class FacturaResource {
     @Inject
     private FacturaLogic facturaLogic;
     @POST
-     public FacturaDTO createFactura (FacturaDTO Factura) throws BusinessLogicException
+     public FacturaDTO createFactura (FacturaDTO pFactura) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "FacturaDTO createFactura: input: {0}", Factura.toString());
+        LOGGER.log(Level.INFO, "FacturaDTO createFactura: input: {0}", pFactura.toString());
         
-        FacturaDTO nuevaFactura = new FacturaDTO(facturaLogic.createFactura(Factura.toEntity()));
+        FacturaDTO nuevaFactura = new FacturaDTO(facturaLogic.createFactura(pFactura.toEntity()));
         
         LOGGER.log(Level.INFO, "FacturaDTO createFactura: output: {0}", nuevaFactura.toString());
         
@@ -52,13 +52,13 @@ public class FacturaResource {
     
     @GET
     @Path("{FacturaId:\\d+}")
-    public FacturaDTO getFactura (@PathParam ("FacturaId") Long FacturaId) throws WebApplicationException
+    public FacturaDTO getFactura (@PathParam ("FacturaId") Long pFacturaId) throws WebApplicationException
     {
-         LOGGER.log(Level.INFO, "FacturaResource getFactura: input: {0}", FacturaId);
-        FacturaEntity entity = facturaLogic.getFactura(FacturaId);
+         LOGGER.log(Level.INFO, "FacturaResource getFactura: input: {0}", pFacturaId);
+        FacturaEntity entity = facturaLogic.getFactura(pFacturaId);
         if(entity == null)
         {
-            throw new WebApplicationException("El recurso /factura/" + FacturaId + " no existe .", 404);
+            throw new WebApplicationException("El recurso /factura/" + pFacturaId + " no existe .", 404);
         }
         
         FacturaDTO factDTO = new FacturaDTO(entity);

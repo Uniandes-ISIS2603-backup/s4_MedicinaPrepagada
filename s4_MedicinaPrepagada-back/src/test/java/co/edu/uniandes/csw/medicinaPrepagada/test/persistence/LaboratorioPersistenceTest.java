@@ -155,4 +155,43 @@ public class LaboratorioPersistenceTest {
         Assert.assertEquals(newEntity.getTelefono(), entityResp.getTelefono());
    
     } 
+    /**
+     * Prueba para consultar un lab por nombre.
+     */
+    @Test
+    public void findLaboratorioByNombreTest() {
+        LaboratorioEntity entity = data.get(0);
+        LaboratorioEntity newEntity = laboratorioPersistence.findByNombre(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+       
+        Assert.assertEquals(entity.getTelefono(), newEntity.getTelefono());
+     
+        Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
+        Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
+     
+
+    
+    }
+    /**
+     * Prueba para consultar un lab por direccion.
+     */
+    @Test
+    public void findLaboratorioByDireccionTest() {
+        LaboratorioEntity entity = data.get(0);
+        LaboratorioEntity newEntity = laboratorioPersistence.findByDireccion(entity.getDireccion());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+       
+        Assert.assertEquals(entity.getTelefono(), newEntity.getTelefono());
+     
+        Assert.assertEquals(entity.getLatitud(), newEntity.getLatitud(),0);
+        Assert.assertEquals(entity.getLongitud(), newEntity.getLongitud(),0);
+     
+
+    
+    }
+    
 }
