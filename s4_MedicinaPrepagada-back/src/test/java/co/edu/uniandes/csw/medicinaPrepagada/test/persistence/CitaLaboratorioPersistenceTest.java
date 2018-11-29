@@ -57,6 +57,9 @@ public class CitaLaboratorioPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest() {
         try {
@@ -75,10 +78,18 @@ public class CitaLaboratorioPersistenceTest {
         }
     }
     
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    
     private void clearData() {
         em.createQuery("delete from CitaLaboratorioEntity").executeUpdate();
     }
     
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -88,6 +99,10 @@ public class CitaLaboratorioPersistenceTest {
             data.add(entity);
         }
     }
+    
+    /**
+     * Prueba para crear una cita lab
+     */
     
     @Test
     public void createCitaLaboratorioTest() {
@@ -100,16 +115,24 @@ public class CitaLaboratorioPersistenceTest {
         CitaLaboratorioEntity entity = em.find(CitaLaboratorioEntity.class, result.getId());
         
         Assert.assertEquals(newEntity.getEspecialidad(), entity.getEspecialidad());
+        Assert.assertEquals(newEntity.getComentarios(), entity.getComentarios());
+        Assert.assertEquals(newEntity.getRecomendaciones(),entity.getRecomendaciones());
     }
     
+    /**
+     * Prueba para eliminar una cita lab
+     */
     @Test
-    public void deleteEditorialTest() {
+    public void deleteCitaLaboratorioTest() {
         CitaLaboratorioEntity entity = data.get(0);
         citaLaboratorioPersistence.delete(entity.getId());
         CitaLaboratorioEntity deleted = em.find(CitaLaboratorioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
+    /**
+     * Prueba para obtener todas las citas lab
+     */
     @Test
     public void getAllCitaLaboratorioTest() {
         List<CitaLaboratorioEntity> list = citaLaboratorioPersistence.findAll();
@@ -125,6 +148,9 @@ public class CitaLaboratorioPersistenceTest {
         }
     }
     
+    /**
+     * Prueba para obtener una cita especifica
+     */
      @Test
     public void getCitaLaboratorioTest() {
         CitaLaboratorioEntity entity = data.get(0);
@@ -134,6 +160,9 @@ public class CitaLaboratorioPersistenceTest {
         Assert.assertEquals(entity.getEspecialidad(), newEntity.getEspecialidad());
     }
     
+    /**
+     * Prueba para actualizar una citalab
+     */
     @Test
     public void updateCitaLaboratorioTest() {
         CitaLaboratorioEntity entity = data.get(0);

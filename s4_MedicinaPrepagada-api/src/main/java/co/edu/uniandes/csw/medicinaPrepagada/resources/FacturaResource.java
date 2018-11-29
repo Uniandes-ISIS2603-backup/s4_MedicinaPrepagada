@@ -77,7 +77,9 @@ public class FacturaResource {
     
     @PUT
     @Path("{FacturaId:\\d+}")
-    public FacturaDTO updateFactura(FacturaDTO factura) throws BusinessLogicException{
+    public FacturaDTO updateFactura(FacturaDTO factura) throws BusinessLogicException, WebApplicationException
+    {
+        
         FacturaEntity entityAct = facturaLogic.updateFactura(factura.toEntity().getId(),factura.toEntity());
         return new FacturaDTO(entityAct);
     }
