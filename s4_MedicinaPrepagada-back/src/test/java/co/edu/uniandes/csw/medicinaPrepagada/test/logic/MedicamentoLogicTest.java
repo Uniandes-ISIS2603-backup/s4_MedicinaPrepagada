@@ -253,9 +253,9 @@ public class MedicamentoLogicTest {
     public void crearMedicamentoConDescripcionInvalida() throws BusinessLogicException{
         MedicamentoEntity newEntity = factory.manufacturePojo(MedicamentoEntity.class);
         newEntity.setElaboradoPor("Glaxo Smith Kline");
-        newEntity.setDescripcion("12345678");
+        newEntity.setDescripcion("12345678ñ");
         newEntity.setCosto(15000);
-        newEntity.setCantidad("20 mg");
+        newEntity.setCantidad("20 m");
         
         medicamentoLogic.createMedicamento(newEntity);
     }
@@ -273,7 +273,7 @@ public class MedicamentoLogicTest {
         pojoEntity.setElaboradoPor("Glaxo Smith Kline");
         pojoEntity.setDescripcion("12345");
         pojoEntity.setCosto(10000);
-        pojoEntity.setCantidad("20 mg");
+        pojoEntity.setCantidad("20 m");
         
         medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
     }
@@ -288,7 +288,7 @@ public class MedicamentoLogicTest {
         newEntity.setElaboradoPor("123456");
         newEntity.setDescripcion("Tomar agua");
         newEntity.setCosto(15000);
-        newEntity.setCantidad("20 mg");
+        newEntity.setCantidad("20 m");
         
         medicamentoLogic.createMedicamento(newEntity);
     }
@@ -303,10 +303,10 @@ public class MedicamentoLogicTest {
         MedicamentoEntity pojoEntity = factory.manufacturePojo(MedicamentoEntity.class);
         pojoEntity.setId(entity.getId());
         pojoEntity.setNombre(entity.getNombre());
-        pojoEntity.setElaboradoPor("12345");
+        pojoEntity.setElaboradoPor("1");
         pojoEntity.setDescripcion("Tomar mucha agua");
         pojoEntity.setCosto(10000);
-        pojoEntity.setCantidad("20 mg");
+        pojoEntity.setCantidad("20 m");
         
         medicamentoLogic.updateMedicamento(entity.getId(), pojoEntity);
     }
