@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.medicinaPrepagada.entities;
 
-import co.edu.uniandes.csw.medicinaPrepagada.podam.DateStrategy;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,11 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -33,21 +27,28 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     /**@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @PodamStrategyValue(DateStrategy.class)*/
+    //Fecha de la historia clinica
     private String fecha;  
-    
+    // diagnostico de la historia clinica
     private String descripcionDiagnostico; 
-    private String alergias; 
+    //Alergias de la historia clinica
+    private String alergias;
+    // Peso de la historia clinica
     private Double peso; 
+    //Estatura de la historia clinica
     private Double estatura; 
+    //Fuma o no 
     private boolean fuma; 
-    private boolean bebe; 
+    //Bebe o no bebe
+    private boolean bebe;
+    //Operaciones de la historia clinica
     private String operaciones; 
     
-    
+    //Paciente de la historia clinica
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable=true)
     private PacienteEntity paciente; 
-    
+    // ordenes medicas de la historia clinica
     @PodamExclude
     @OneToMany(mappedBy = "historias",fetch=FetchType.LAZY)
     private List<OrdenMedicaEntity> ordenesMedicas;

@@ -22,11 +22,15 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class OrdenMedicaEntity extends BaseEntity implements Serializable
 {
+    //Firma del medico de la orden medica
     private String firmaMedico; 
+    //Fecha de expecidicon de la orden medica
     private String fechaExpedicion; 
+    //Comentarios de la orden medica
     private String comentarios; 
+    //Fecha hasta la que es valida de la orden medica
     private String validaHasta; 
-    
+    //Historia clinica de la orden medica
     @ManyToOne(cascade = CascadeType.PERSIST)
     private HistoriaClinicaEntity historias; 
     
@@ -34,10 +38,12 @@ public class OrdenMedicaEntity extends BaseEntity implements Serializable
  //   @OneToMany
  //   private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
     
+    //Medicamentos de la orden medica
     @PodamExclude
     @ManyToMany 
     private List<MedicamentoEntity> medicamentos = new ArrayList<MedicamentoEntity>();
     
+    //Examenes medicos de la orden medica
     @PodamExclude
     @ManyToMany
     private List<ExamenMedicoEntity> examenesMedicos = new ArrayList<ExamenMedicoEntity>();
