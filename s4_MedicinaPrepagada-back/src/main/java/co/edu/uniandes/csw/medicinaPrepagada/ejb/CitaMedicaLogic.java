@@ -14,7 +14,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.persistence.HorarioAtencionPersiste
 import co.edu.uniandes.csw.medicinaPrepagada.persistence.PacientePersistence;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
