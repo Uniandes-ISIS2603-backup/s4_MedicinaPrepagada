@@ -14,35 +14,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- *
+ *Representacion de una cita de laboratorio en la base de datos
  * @author Santiago Rojas
  */
 @Entity
 public class CitaLaboratorioEntity  implements Serializable
 {
+    //Id de la cita de laboratorio
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    // laboratorio de de la cita de laboratorio
     @PodamExclude
     @ManyToOne (cascade = CascadeType.PERSIST)
     private LaboratorioEntity laboratorio;
-    
+    // Paciente de la cita de laboratorio
     @PodamExclude
     @ManyToOne (cascade = CascadeType.PERSIST)
     private PacienteEntity paciente;
     
-    
+    //Fecha de la cita de laboratorio
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
     
+    //Especialidad de la cita de laboratorio
     private String especialidad;
+    //comentarios de la cita de laboratorio
     private String comentarios;
+    //recomendaciones de la cita de laboratorio
     private String recomendaciones;
     
     
@@ -173,7 +177,11 @@ public class CitaLaboratorioEntity  implements Serializable
     }
     
     
-    
+    /**
+     * Se usa para comparar dos citas de laboratorio
+     * @param obj
+     * @return true si son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -21,13 +21,20 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class FarmaciaEntity extends BaseEntity implements Serializable  {
     
+    //Nombre de la famacia
     private String nombre;
+    //Ubicacion de la famacia
     private String ubicacion;
+    //Telefono de la famacia
     private Long telefono;
+    //Latitud de la famacia
     private double latitud;
+    //Longitud de la famacia
     private double longitud;
+    //Correo de la famacia
     private String correo;
     
+    //Medicamentos de la famacia
     @PodamExclude
     @ManyToMany(mappedBy = "farmacias")
     private List<MedicamentoEntity> medicamentos = new ArrayList<>(); 
