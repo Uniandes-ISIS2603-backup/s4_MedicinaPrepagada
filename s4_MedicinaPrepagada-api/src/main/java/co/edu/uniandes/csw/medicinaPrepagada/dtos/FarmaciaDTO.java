@@ -16,8 +16,8 @@ public class FarmaciaDTO implements Serializable {
     private String nombre;
     private String ubicacion;
     private Long telefono;
-    private double latitud;
-    private double longitud;
+    private Double latitud;
+    private Double longitud;
     private String correo;
     
     

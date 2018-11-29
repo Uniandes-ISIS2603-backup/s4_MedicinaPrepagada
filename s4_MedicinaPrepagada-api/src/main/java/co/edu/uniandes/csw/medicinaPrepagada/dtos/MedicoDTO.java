@@ -17,15 +17,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class MedicoDTO extends UsuarioDTO implements Serializable{
     
-    private long idMedico;
+    private Long idMedico;
     
     private String nombre;
     
-    private int telefono;
+    private Integer telefono;
     
     private String correo;
     
-    private int documentoMedico;
+    private Integer documentoMedico;
     
     private String firma;
     

@@ -16,7 +16,7 @@ public class MedicamentoDTO implements Serializable {
     private String nombre;
     private String cantidad;
     private String descripcion;
-    private double costo;
+    private Double costo;
     private String elaboradoPor;
     
     

@@ -36,6 +36,10 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
         super(admiEntity);
     }
     
+    public AdministradorEntity toEntity(){
+        AdministradorEntity admin = super.toEntity();
+        return admin;
+    }
     
      @Override
     public String toString(){

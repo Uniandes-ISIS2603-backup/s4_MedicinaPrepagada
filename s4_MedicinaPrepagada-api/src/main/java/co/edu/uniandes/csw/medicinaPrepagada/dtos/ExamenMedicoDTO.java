@@ -14,7 +14,7 @@ public class ExamenMedicoDTO implements Serializable {
     
     private Long id;
     private String nombre;
-    private double costo;
+    private Double costo;
     private String recomendaciones;
     
     
