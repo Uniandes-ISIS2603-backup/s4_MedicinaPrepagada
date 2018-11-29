@@ -47,8 +47,13 @@ public class CitaMedicaDTO implements Serializable
         citaMedicaEntity.setId(this.getIdCitaMedica());
         citaMedicaEntity.setFecha(this.getFecha());
         citaMedicaEntity.setComentarios(this.getComentarios());
-        citaMedicaEntity.setHorarioAtencionAsignado(this.horarioAtencionAsignado.toEntity());
-        citaMedicaEntity.setPacienteAAtender(this.pacienteAAtender.toEntity());
+        if(this.horarioAtencionAsignado != null){
+            citaMedicaEntity.setHorarioAtencionAsignado(this.horarioAtencionAsignado.toEntity());
+        }
+        if(this.pacienteAAtender != null){
+            citaMedicaEntity.setPacienteAAtender(this.pacienteAAtender.toEntity());
+        }
+        
  
         return citaMedicaEntity;
     }

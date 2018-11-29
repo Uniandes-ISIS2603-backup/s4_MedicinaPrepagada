@@ -55,9 +55,10 @@ public class CitaMedicaResource
      * Error de lógica que se genera cuando ya existe la CitaMedica.
      */
     @POST
-    public CitaMedicaDTO createCitaMedica(CitaMedicaDTO citaMedica) throws BusinessLogicException {
+    @Path("{PacienteId: \\d+}/{horarioId: \\d+}")
+    public CitaMedicaDTO createCitaMedica(@PathParam("PacienteId") Long pacienteId,@PathParam("horarioId")Long horarioId ,CitaMedicaDTO citaMedica) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: input: {0}", citaMedica.toString());
-        CitaMedicaDTO citaMedicaDTO = new CitaMedicaDTO(citaMedicaLogic.createCitaMedica(citaMedica.toEntity()));
+        CitaMedicaDTO citaMedicaDTO = new CitaMedicaDTO(citaMedicaLogic.crearCita(citaMedica.toEntity(), pacienteId, horarioId));
         LOGGER.log(Level.INFO, "CitaMedicaResource createCitaMedica: output: {0}", citaMedicaDTO.toString());
         return citaMedicaDTO;
     }
