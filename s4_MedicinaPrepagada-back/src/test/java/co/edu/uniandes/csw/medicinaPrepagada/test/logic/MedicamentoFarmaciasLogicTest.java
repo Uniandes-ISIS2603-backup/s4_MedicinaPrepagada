@@ -29,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * Pruebas de la lógica entre el recurso Medicamento y Farmacia
  * @autor ncobos
  */
     @RunWith(Arquillian.class)
@@ -159,7 +159,7 @@ public class MedicamentoFarmaciasLogicTest {
     }
 
     /**
-     * Prueba para cpnsultar un libro de un autor.
+     * Prueba para consultar una farmacia de un medicamento.
      *
      * @throws co.edu.uniandes.csw.farmaciastore.exceptions.BusinessLogicException
      */
