@@ -21,16 +21,18 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ExamenMedicoEntity extends BaseEntity implements Serializable  {
     
-    
+    //Nombre del examen medico
     private String nombre;
+    //Costo  del examen medico
     private double costo;
+    //Recomendaciones  del examen medico
     private String recomendaciones;
     
-    
+    //Laboratorios  del examen medico
     @PodamExclude
     @ManyToMany 
     private List<LaboratorioEntity> laboratorios = new ArrayList<LaboratorioEntity>();
-    
+    //Ordenes medicas  del examen medico
     @PodamExclude
     @ManyToMany(mappedBy = "examenesMedicos")
     private List<OrdenMedicaEntity> ordenes = new ArrayList<>(); 

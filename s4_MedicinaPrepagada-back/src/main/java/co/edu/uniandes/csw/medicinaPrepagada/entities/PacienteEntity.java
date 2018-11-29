@@ -20,32 +20,62 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class PacienteEntity extends UsuarioEntity implements Serializable{
     
+    /**
+     * Citas de laboratio del paciente
+     */
     @PodamExclude    
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CitaLaboratorioEntity> citasLaboratorio;
     
+    /**
+     * Facturas del paciente
+     */
     @PodamExclude  
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<FacturaEntity> facturas;
-    
+    /**
+     * Tarjetas de credito del paciente
+     */
     @PodamExclude
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TarjetaCreditoEntity> tarjetasCredito;
-    
+    /**
+     * citas medicas del paciente
+     */
     @PodamExclude    
     @OneToMany(mappedBy = "pacienteAAtender", fetch = FetchType.LAZY)
     private List<CitaMedicaEntity> citasMedicas;
-   
+   /**
+    * Historias clinicas del paciente
+    */
     @PodamExclude    
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
     private List<HistoriaClinicaEntity> historiasClinicas;
  
-
+    
+    /**
+     * Nombre del paciente
+     */
     private String nombre;
+    /**
+     * Fecha de nacimiento del paciente
+     */
     private String fechaNacimiento;
+    /**
+     * Direccion del paciente
+     */
     private String direccion;
+    /**
+     * Numero de contacto del paciente
+     */
     private Long numeroContacto;
+    /**
+     * Mail del paciente
+     */
     private String mail;
+    /**
+     * eps del paciente
+     */
     private String eps;
 
     /**

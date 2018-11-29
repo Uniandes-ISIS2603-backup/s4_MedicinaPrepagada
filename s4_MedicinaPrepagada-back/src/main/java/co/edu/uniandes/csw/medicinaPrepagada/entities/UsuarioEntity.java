@@ -20,10 +20,21 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
 
 
     
-    
+    /**
+     * Docuento de identidad del usuario
+     */
     private Long documentoIdentidad;
+    /**
+     * log in del usuario
+     */
     private String login;
+    /**
+     * Constraseña  del usuario
+    */
     private String contrasena;
+    /**
+     * Tipo de usuario 
+     */
     private String tipoUsuario;
     
 
