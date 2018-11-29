@@ -79,7 +79,10 @@ public class FacturaResource {
     @Path("{FacturaId:\\d+}")
     public FacturaDTO updateFactura(FacturaDTO factura) throws BusinessLogicException, WebApplicationException
     {
-        
+        FacturaEntity fact = facturaLogic.getFactura(factura.getIdFactura());
+        if(fact == null){
+            throw new BusinessLogicException("La factura no existe 404");
+        }
         FacturaEntity entityAct = facturaLogic.updateFactura(factura.toEntity().getId(),factura.toEntity());
         return new FacturaDTO(entityAct);
     }

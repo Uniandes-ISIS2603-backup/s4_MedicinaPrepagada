@@ -76,6 +76,9 @@ public class FarmaciaResource {
     public List<FarmaciaDetailDTO> getFarmacias() {
         LOGGER.info("FarmaciaResource getFarmacias: input: void");
         List<FarmaciaDetailDTO> listaFarmacias = listEntity2DetailDTO(farmaciaLogic.getFarmacias());
+        if(listaFarmacias == null){
+            throw new WebApplicationException("No hay farmacias", 404);
+        }
         LOGGER.log(Level.INFO, "FarmaciaResource getFarmacias: output: {0}", listaFarmacias);
         return listaFarmacias;
     }
