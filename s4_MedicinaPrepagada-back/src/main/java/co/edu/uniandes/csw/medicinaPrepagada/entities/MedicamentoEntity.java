@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -21,17 +20,22 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class MedicamentoEntity extends BaseEntity implements Serializable {
-    
+   
+    //Nombre del medicamento
    private String nombre;
+   // Cantidad  del medicamento
     private String cantidad;
+    // Descripcion  del medicamento
     private String descripcion;
+    // costo  del medicamento
     private Double costo;
+    // quien elaborao  del medicamento
     private String elaboradoPor;
-    
+    //Lista de farmacias  del medicamento
     @PodamExclude
     @ManyToMany 
     private List<FarmaciaEntity> farmacias = new ArrayList<FarmaciaEntity>();
-    
+    //ORdenes medicas  del medicamento
     @PodamExclude
     @ManyToMany(mappedBy = "medicamentos")
     private List<OrdenMedicaEntity> ordenes = new ArrayList<>(); 

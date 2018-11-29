@@ -9,7 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 
 /**
- *
+ *Clase que representa un administrador 
  * @author ni.ramirez10
  */
 

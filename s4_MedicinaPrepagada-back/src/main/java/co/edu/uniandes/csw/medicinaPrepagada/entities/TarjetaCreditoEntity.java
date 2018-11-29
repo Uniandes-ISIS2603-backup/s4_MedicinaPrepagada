@@ -18,15 +18,32 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class TarjetaCreditoEntity implements Serializable{
-
+    
+    /**
+     * Paciente de la tarjeta de credito
+     */
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PacienteEntity paciente;
-    
+    /**
+     * Id de la tarjeta de credito
+     */
     @Id
     private Long numero;
+    /**
+     * Nombre de la tarjeta de credito
+     */
     private String nombreEnTarjeta;
+    /**
+     * Fecha de expiracion de la tarjeta de credito
+     */
     private String fechaExpiracion;
+    /**
+     * Franquicia de la tarjeta de credito
+     */
     private String franquicia;
+    /**
+     * codigo de seguridad de la tarjeta de credito
+     */
     private Integer codigoSeguridad;
 
     /**
