@@ -71,9 +71,9 @@ public class MedicoResource {
      * la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<MedicoDTO> getMedicos() {
+    public List<MedicoDetailDTO> getMedicos() {
         LOGGER.info("MedicoResource getMedicos: input: void");
-        List<MedicoDTO> listaMedicos = listEntity2DetailDTO(medicoLogic.getMedicos()); //Paramtero List<MedicoEntity> entityList
+        List<MedicoDetailDTO> listaMedicos = listEntity2DetailDTO(medicoLogic.getMedicos()); //Paramtero List<MedicoEntity> entityList
         LOGGER.log(Level.INFO, "MedicoResource getMedicos: output: {0}", listaMedicos.toString());
         return listaMedicos;
     }
@@ -89,13 +89,13 @@ public class MedicoResource {
      */
     @GET
     @Path("{medicosId: \\d+}")
-    public MedicoDTO getMedico(@PathParam("medicosId") Long medicosId) throws WebApplicationException {
+    public MedicoDetailDTO getMedico(@PathParam("medicosId") Long medicosId) throws WebApplicationException {
         LOGGER.log(Level.INFO, "MedicoResource getMedico: input: {0}", medicosId);
         MedicoEntity medicoEntity = medicoLogic.getMedico(medicosId);
         if (medicoEntity == null) {
             throw new WebApplicationException("El recurso /medicos/" + medicosId + " no existe.", 404);
         }
-        MedicoDTO detailDTO = new MedicoDetailDTO(medicoEntity);
+        MedicoDetailDTO detailDTO = new MedicoDetailDTO(medicoEntity);
         LOGGER.log(Level.INFO, "MedicoResource getMedico: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -156,10 +156,10 @@ public class MedicoResource {
      * que vamos a convertir a DTO.
      * @return la lista de editoriales en forma DTO (json)
      */
-    private List<MedicoDTO> listEntity2DetailDTO(List<MedicoEntity> entityList){
-        List<MedicoDTO> list = new ArrayList<>();
+    private List<MedicoDetailDTO> listEntity2DetailDTO(List<MedicoEntity> entityList){
+        List<MedicoDetailDTO> list = new ArrayList<>();
         for (MedicoEntity entity : entityList) {
-            list.add(new MedicoDTO(entity));
+            list.add(new MedicoDetailDTO(entity));
         }
         return list;
     }

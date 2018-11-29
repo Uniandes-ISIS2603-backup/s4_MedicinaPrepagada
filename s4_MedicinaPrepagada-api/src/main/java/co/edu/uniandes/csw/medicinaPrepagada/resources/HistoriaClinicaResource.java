@@ -68,10 +68,10 @@ public class HistoriaClinicaResource
      */
     
     @GET
-    public List<HistoriaClinicaDTO> getHistoriasClinicas() 
+    public List<HistoriaClinicaDetailDTO> getHistoriasClinicas() 
     {
         LOGGER.info("HistoriaClinicaResource getHistoriasClinicas: input: void");
-        List<HistoriaClinicaDTO> listaHistoriasClinicas = listEntity2DetailDTO(histLogic.getHistoriasClinicas());
+        List<HistoriaClinicaDetailDTO> listaHistoriasClinicas = listEntity2DetailDTO(histLogic.getHistoriasClinicas());
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriasClinicas: output: {0}", listaHistoriasClinicas);
         return listaHistoriasClinicas;
     }
@@ -84,7 +84,7 @@ public class HistoriaClinicaResource
     
     @GET
     @Path("{historiaClinicaId: \\d+}")
-    public HistoriaClinicaDTO getHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws WebApplicationException
+    public HistoriaClinicaDetailDTO getHistoriaClinica(@PathParam("historiaClinicaId") Long histClinicaId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: input: {0}", histClinicaId);
         HistoriaClinicaEntity histClinEntity = histLogic.getHistoriaClinica(histClinicaId);
@@ -94,7 +94,7 @@ public class HistoriaClinicaResource
             throw new WebApplicationException("El recurso /historiClinica/" + histClinicaId + mensaje, 404);
         }
         
-        HistoriaClinicaDTO histClinDetailDTO = new HistoriaClinicaDTO(histClinEntity);
+        HistoriaClinicaDetailDTO histClinDetailDTO = new HistoriaClinicaDetailDTO(histClinEntity);
         LOGGER.log(Level.INFO, "HistoriaClinicaResource getHistoriaClinica: output: {0}", histClinDetailDTO);
         return histClinDetailDTO;
     }
@@ -134,6 +134,10 @@ public class HistoriaClinicaResource
     public HistoriaClinicaDTO updateHistoriaClinica(@PathParam ("historiaClinicaId") Long histClinicaId, HistoriaClinicaDetailDTO pHistoria) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "HistoriaClinicaResource modificarHistoriaClinica: input:(0)", histClinicaId);
+        HistoriaClinicaEntity hist = histLogic.getHistoriaClinica(histClinicaId);
+        if(hist == null){
+            throw new WebApplicationException("No existe la historia clinica", 404);
+        }
         pHistoria.setId(histClinicaId);
         HistoriaClinicaDetailDTO modificarDetailDto = new HistoriaClinicaDetailDTO( histLogic.updateHistoriaClinica(histClinicaId, pHistoria.toEntity()));        
         LOGGER.log(Level.INFO,"HistoriaClinicaResource modificarHistoriaClinica: output: (0)", modificarDetailDto);
@@ -147,9 +151,9 @@ public class HistoriaClinicaResource
      * @return Lista de AuthorDetailDTO convertida.
      */
     
-    private List<HistoriaClinicaDTO> listEntity2DetailDTO(List<HistoriaClinicaEntity> entityList) 
+    private List<HistoriaClinicaDetailDTO> listEntity2DetailDTO(List<HistoriaClinicaEntity> entityList) 
     { 
-        List<HistoriaClinicaDTO> list = new ArrayList<>();
+        List<HistoriaClinicaDetailDTO> list = new ArrayList<>();
         
         for(HistoriaClinicaEntity entity : entityList)
         {

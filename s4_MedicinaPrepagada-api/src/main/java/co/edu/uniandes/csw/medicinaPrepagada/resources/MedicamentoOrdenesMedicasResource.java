@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.medicinaPrepagada.dtos.OrdenMedicaDetailDTO;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.MedicamentoOrdenMedicaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.ejb.OrdenMedicaLogic;
 import co.edu.uniandes.csw.medicinaPrepagada.entities.OrdenMedicaEntity;
-import co.edu.uniandes.csw.medicinaPrepagada.exceptions.BusinessLogicException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;

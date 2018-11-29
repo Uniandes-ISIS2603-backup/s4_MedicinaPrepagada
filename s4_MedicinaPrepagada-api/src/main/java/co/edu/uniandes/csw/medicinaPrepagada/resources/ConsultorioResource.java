@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -76,10 +75,10 @@ public class ConsultorioResource
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<ConsultorioDTO> getConsultorios(@PathParam("sedeId") Long sedeId)
+    public List<ConsultorioDetailDTO> getConsultorios(@PathParam("sedeId") Long sedeId)
     {
         LOGGER.info("ConsultorioResource getConsultorios: input: void");
-        List<ConsultorioDTO> listaConsultorios = listEntity2DetailDTO(consultorioLogic.getConsultorios(sedeId));
+        List<ConsultorioDetailDTO> listaConsultorios = listEntity2DetailDTO(consultorioLogic.getConsultorios(sedeId));
         LOGGER.log(Level.INFO, "ConsultorioResource getConsultorios: output: {0}", listaConsultorios.toString());
         return listaConsultorios;
     }
@@ -181,9 +180,9 @@ public class ConsultorioResource
      * que vamos a convertir a DTO.
      * @return la lista de consultorio en forma DTO (json)
      */
-    private List<ConsultorioDTO> listEntity2DetailDTO(List<ConsultorioEntity> entityList) 
+    private List<ConsultorioDetailDTO> listEntity2DetailDTO(List<ConsultorioEntity> entityList) 
     {
-        List<ConsultorioDTO> list = new ArrayList<>();
+        List<ConsultorioDetailDTO> list = new ArrayList<>();
         for (ConsultorioEntity entity : entityList) 
         {
             list.add(new ConsultorioDetailDTO(entity));

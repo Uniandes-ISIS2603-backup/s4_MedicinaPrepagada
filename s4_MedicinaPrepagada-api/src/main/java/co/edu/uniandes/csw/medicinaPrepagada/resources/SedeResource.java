@@ -79,10 +79,10 @@ public class SedeResource
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<SedeDTO> getSedes()
+    public List<SedeDetailDTO> getSedes()
     {
         LOGGER.info("SedeResource getSedes: input: void");
-        List<SedeDTO> listaSedes = listEntity2DetailDTO(sedeLogic.getSedes());
+        List<SedeDetailDTO> listaSedes = listEntity2DetailDTO(sedeLogic.getSedes());
         LOGGER.log(Level.INFO, "SedeResource getSedes: output: {0}", listaSedes.toString());
         return listaSedes;
     }
@@ -200,9 +200,9 @@ public class SedeResource
      * que vamos a convertir a DTO.
      * @return la lista de sede en forma DTO (json)
      */
-    private List<SedeDTO> listEntity2DetailDTO(List<SedeEntity> entityList) 
+    private List<SedeDetailDTO> listEntity2DetailDTO(List<SedeEntity> entityList) 
     {
-        List<SedeDTO> list = new ArrayList<>();
+        List<SedeDetailDTO> list = new ArrayList<>();
         for (SedeEntity entity : entityList) 
         {
             list.add(new SedeDetailDTO(entity));
