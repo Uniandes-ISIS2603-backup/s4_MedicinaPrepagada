@@ -31,7 +31,7 @@ public class FacturaDTO implements Serializable{
     /**
      * Valor de la factura
      */
-    private int valor;
+    private Integer valor;
     /**
      * Concepto de la factura
      */
@@ -39,7 +39,7 @@ public class FacturaDTO implements Serializable{
     /**
      * Estado de la factura, pagado o no pagado
      */
-    private boolean pagada;
+    private Boolean pagada;
     
     private PacienteDTO paciente;
     
@@ -196,4 +196,14 @@ public class FacturaDTO implements Serializable{
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
+    public PacienteDTO getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(PacienteDTO paciente) {
+        this.paciente = paciente;
+    }
+    
+    
 }

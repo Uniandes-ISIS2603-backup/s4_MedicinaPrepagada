@@ -24,8 +24,8 @@ public class HistoriaClinicaDTO implements Serializable
     private String alergias; 
     private Double peso; 
     private Double estatura; 
-    private boolean fuma; 
-    private boolean bebe; 
+    private Boolean fuma; 
+    private Boolean bebe; 
     private String operaciones; 
     
     

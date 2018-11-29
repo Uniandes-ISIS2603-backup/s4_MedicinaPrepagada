@@ -39,11 +39,11 @@ public class LaboratorioDTO implements Serializable {
     /**
      * Latitud del laboratorio
      */
-    private double latitud;
+    private Double latitud;
     /**
      * Longitud del laboratorio
      */
-    private double longitud;
+    private Double longitud;
     
     
     
