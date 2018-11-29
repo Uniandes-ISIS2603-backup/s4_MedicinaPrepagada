@@ -54,10 +54,10 @@ public class OrdenMedicaResource
      */
     
     @POST
-    public OrdenMedicaDTO createOrdenMedica(OrdenMedicaDTO ordenMedica) throws BusinessLogicException 
+    public OrdenMedicaDetailDTO createOrdenMedica(OrdenMedicaDTO ordenMedica) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: input: {0}", ordenMedica);
-        OrdenMedicaDTO nuevaOrdenMedicaDTO = new OrdenMedicaDTO(ordenLogic.createOrdenMedica(ordenMedica.toEntity()));
+        OrdenMedicaDetailDTO nuevaOrdenMedicaDTO = new OrdenMedicaDetailDTO(ordenLogic.createOrdenMedica(ordenMedica.toEntity()));
         LOGGER.log(Level.INFO, "OrdenMedicaResource createOrdenMedica: output: {0}", nuevaOrdenMedicaDTO);
         return nuevaOrdenMedicaDTO;
     }
@@ -69,10 +69,10 @@ public class OrdenMedicaResource
      */
     
     @GET
-    public List<OrdenMedicaDTO> getOrdenesMedicas() 
+    public List<OrdenMedicaDetailDTO> getOrdenesMedicas() 
     {
         LOGGER.info("OrdenMedicaResource getOrdenesMedicas: input: void");
-        List<OrdenMedicaDTO> listaOrdenesMedicas = listEntity2DetailDTO(ordenLogic.getOrdenesMedicas());
+        List<OrdenMedicaDetailDTO> listaOrdenesMedicas = listEntity2DetailDTO(ordenLogic.getOrdenesMedicas());
         LOGGER.log(Level.INFO, "OrdenMedicaResource getOrdenesMedicas: output: {0}", listaOrdenesMedicas);
         return listaOrdenesMedicas;
     }
@@ -148,9 +148,9 @@ public class OrdenMedicaResource
     }
        
     
-     private List<OrdenMedicaDTO> listEntity2DetailDTO( List<OrdenMedicaEntity> entityList) 
+     private List<OrdenMedicaDetailDTO> listEntity2DetailDTO( List<OrdenMedicaEntity> entityList) 
     { 
-        List<OrdenMedicaDTO> list = new ArrayList<>();
+        List<OrdenMedicaDetailDTO> list = new ArrayList<>();
         
         for(OrdenMedicaEntity entity : entityList)
         {

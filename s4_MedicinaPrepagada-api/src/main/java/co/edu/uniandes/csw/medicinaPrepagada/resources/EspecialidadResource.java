@@ -113,7 +113,10 @@ public class EspecialidadResource {
     @Path("{especialidadsId: [a-zA-Z][a-zA-Z]*}")
     public EspecialidadDTO updateEspecialidad(@PathParam("especialidadsId") String especialidadsId, EspecialidadDTO especialidad) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "EspecialidadResource updateEspecialidad: input: id:{0} , Especialidad: {1}", new Object[]{especialidadsId, especialidad.toString()});
-       
+       EspecialidadEntity espe = especialidadLogic.getEspecialidad(especialidadsId);
+       if(espe == null){
+           throw new WebApplicationException("El recurso no existe", 404);
+       }
         EspecialidadDTO detailDTO = new EspecialidadDTO(especialidadLogic.updateEspecialidad(especialidadsId, especialidad.toEntity()));
         LOGGER.log(Level.INFO, "EspecialidadResource updateEspecialidad: output: {0}", detailDTO.toString());
         return detailDTO;

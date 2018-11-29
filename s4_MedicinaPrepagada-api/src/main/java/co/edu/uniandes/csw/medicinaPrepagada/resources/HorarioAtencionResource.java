@@ -83,10 +83,10 @@ public class HorarioAtencionResource
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<HorarioAtencionDTO> getHorariosAtencion()
+    public List<HorarioAtencionDetailDTO> getHorariosAtencion()
     {
         LOGGER.info("HorarioAtencionResource getHorariosAtencion: input: void");
-        List<HorarioAtencionDTO> listaHorariosAtencion = listEntity2DetailDTO(horarioAtencionLogic.getHorarioAtencions());
+        List<HorarioAtencionDetailDTO> listaHorariosAtencion = listEntity2DetailDTO(horarioAtencionLogic.getHorarioAtencions());
         LOGGER.log(Level.INFO, "HorarioAtencionResource getHorariosAtencion: output: {0}", listaHorariosAtencion.toString());
         return listaHorariosAtencion;
     }
@@ -180,9 +180,9 @@ public class HorarioAtencionResource
      * que vamos a convertir a DTO.
      * @return la lista de horarios de atencion en forma DTO (json)
      */
-    private List<HorarioAtencionDTO> listEntity2DetailDTO(List<HorarioAtencionEntity> entityList) 
+    private List<HorarioAtencionDetailDTO> listEntity2DetailDTO(List<HorarioAtencionEntity> entityList) 
     {
-        List<HorarioAtencionDTO> list = new ArrayList<>();
+        List<HorarioAtencionDetailDTO> list = new ArrayList<>();
         for (HorarioAtencionEntity entity : entityList) 
         {
             list.add(new HorarioAtencionDetailDTO(entity));

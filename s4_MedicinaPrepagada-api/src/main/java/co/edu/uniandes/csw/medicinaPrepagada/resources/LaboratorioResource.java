@@ -106,6 +106,9 @@ public class LaboratorioResource {
     {
         LOGGER.info("LaboratorioResource getLaboratorios: input: void");
         List<LaboratorioDetailDTO> listaLabs = listEntityDetailDTO(labLogic.getLabs()) ;
+        if(listaLabs == null){
+            throw new WebApplicationException("no existen laboratorios", 404);
+        }
         LOGGER.log(Level.INFO, "CitaLaboratorioResource getCitasLaboratorio: output: {0}", listaLabs);
         return listaLabs;
     }
